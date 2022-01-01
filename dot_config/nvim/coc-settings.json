@@ -1,0 +1,8 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "svelte"
+  ],
+  "svelte.enable-ts-plugin": true
+}
