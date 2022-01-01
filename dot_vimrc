@@ -1,6 +1,9 @@
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 "autocmd FileType htmldjango setlocal ts=2 sts=2 sw=2 expandtab
 
+"automatically apply chezmoi on edit
+autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path "%"
+
 call plug#begin('~/.vim/plugged')
 
 if has('nvim')
