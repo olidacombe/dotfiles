@@ -104,7 +104,7 @@ plugins=(
 	npm
 	nvm
 	pip
-	rustup
+	rust
 	salt
 	terraform
 	vagrant
@@ -113,8 +113,6 @@ plugins=(
 	git
 	tmux
 	vi-mode
-	zsh-autosuggestions
-	zsh-z
 )
 
 source $ZSH/oh-my-zsh.sh
