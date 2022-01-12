@@ -20,6 +20,7 @@ Plug 'evanleck/vim-svelte'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'jvirtanen/vim-hcl'
 Plug 'kana/vim-textobj-user'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'mattn/emmet-vim'
