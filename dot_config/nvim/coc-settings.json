@@ -2,7 +2,8 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "markdown",
-    "svelte"
+    "svelte",
+    "typescript"
   ],
   "svelte.enable-ts-plugin": true
 }
