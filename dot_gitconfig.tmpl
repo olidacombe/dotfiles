@@ -1,0 +1,36 @@
+[http]
+	postBuffer = 524288000
+	maxRequestBuffer = 100M
+[user]
+	signingKey = {{ .gpgSigningKey }}
+	name = Oli Dacombe
+	email = {{ .email }}
+[commit]
+	gpgSign = true
+[alias]
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+[gpg]
+	program = gpg
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    side-by-side = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default

@@ -18,6 +18,7 @@ Plug 'coachshea/vim-textobj-markdown'
 "Plug 'dense-analysis/ale'
 Plug 'evanleck/vim-svelte'
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'jeetsukumaran/vim-indentwise'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jvirtanen/vim-hcl'

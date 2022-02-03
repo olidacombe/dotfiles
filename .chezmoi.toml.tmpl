@@ -1,0 +1,6 @@
+{{- $email := promptString "email" -}}
+{{- $gpgSigningKey := promptString "GPG Signing Key" -}}
+
+[data]
+    email = {{ $email | quote }}
+    gpgSigningKey = {{ $gpgSigningKey | quote }}
