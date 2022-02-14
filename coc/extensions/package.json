@@ -2,6 +2,7 @@
   "dependencies": {
     "coc-prettier": ">=1.1.25",
     "coc-svelte": ">=0.4.1",
+    "coc-toml": ">=1.1.0",
     "coc-tsserver": ">=1.9.5"
   }
 }
