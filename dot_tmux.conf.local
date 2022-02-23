@@ -411,5 +411,5 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 # # /!\ do not remove the previous line
 
 # quickly shuffle windows
-bind-key -n C-S-H swap-window -t -1\; select-window -t -1
-bind-key -n C-S-L swap-window -t +1\; select-window -t +1
+bind-key -r H swap-window -t -1 \; select-window -t -1
+bind-key -r L swap-window -t +1 \; select-window -t +1
