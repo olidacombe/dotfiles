@@ -9,12 +9,14 @@ export EDITOR=nvim
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="$PATH:/usr/local/go/bin:${HOME}/bc/infrastructure/scripts:/usr/local/opt/influxdb@1/bin:${HOME}/bin:$(go env GOPATH)/bin"
+export PATH="$PATH:/usr/local/go/bin:${HOME}/bc/infrastructure/scripts:/usr/local/opt/influxdb@1/bin:${HOME}/bin:$(go env GOPATH)/bin:${HOME}/Library/Python/3.9/bin"
 
 SRE_SCRIPTS="${HOME}/bc/sre/sre-scripts"
 if [ -d "$SRE_SCRIPTS" ]; then
 	export PATH="${PATH}:$SRE_SCRIPTS"
 fi
+
+export GEM_HOME="$HOME/.gem"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/odacombe/.oh-my-zsh"
@@ -163,6 +165,8 @@ if [ -f '/Users/odacombe/lib/google-cloud-sdk/completion.zsh.inc' ]; then . '/Us
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+if [ -f "${HOME}/.zephyrrc" ]; then . "${HOME}/.zephyrrc"; fi
 
 if [ -e /Users/odacombe/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/odacombe/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
