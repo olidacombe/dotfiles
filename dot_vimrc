@@ -49,6 +49,7 @@ Plug 'codechips/coc-svelte', {'do': 'npm install'}
 Plug 'coachshea/vim-textobj-markdown'
 "Plug 'dense-analysis/ale'
 Plug 'evanleck/vim-svelte'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'honza/vim-snippets'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'jeetsukumaran/vim-indentwise'
