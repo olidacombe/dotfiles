@@ -45,6 +45,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'cespare/vim-toml'
 Plug 'Chiel92/vim-autoformat'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'codechips/coc-svelte', {'do': 'npm install'}
 Plug 'coachshea/vim-textobj-markdown'
 "Plug 'dense-analysis/ale'
@@ -91,6 +92,14 @@ let g:prettier#autoformat_require_pragma = 0
 
 " Global pynvim interpreter so venvs don't always complain
 let g:python3_host_prog = '/usr/local/bin/python3'
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <M-Left> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-Down> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-Up> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
+"nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
 set exrc
 set secure
