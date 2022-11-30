@@ -153,7 +153,7 @@ fi
 
 alias alpinism='docker run --privileged=true -v $(pwd):/summit -it alpine'
 alias code="open -a 'Visual Studio Code'"
-alias gcob='git branch | fzf | xargs git checkout'
+alias gcob='git branch -a | fzf | xargs git checkout'
 alias vi="nvim"
 alias vim="nvim"
 
