@@ -40,6 +40,15 @@ if has('nvim')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   "Plug 'nvim-telescope/telescope.nvim'
+
+  " Icons
+  Plug 'nvim-tree/nvim-web-devicons'
+
+  " LUA Utils (required by various other)
+  Plug 'nvim-lua/plenary.nvim'
+
+  " Diffview
+  Plug 'sindrets/diffview.nvim'
 endif
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'

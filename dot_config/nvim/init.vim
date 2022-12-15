@@ -107,4 +107,10 @@ cmp.setup({
 })
 EOF
 
+" Rust format on save
 autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
+
+lua <<EOF
+-- setup diffview
+require("diffview").setup()
+EOF
