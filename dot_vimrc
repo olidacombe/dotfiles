@@ -40,6 +40,9 @@ if has('nvim')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   "Plug 'nvim-telescope/telescope.nvim'
+  
+  " Colours
+  Plug 'marko-cerovac/material.nvim'
 
   " Icons
   Plug 'nvim-tree/nvim-web-devicons'

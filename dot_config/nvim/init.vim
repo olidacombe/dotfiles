@@ -111,6 +111,16 @@ EOF
 autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
 
 lua <<EOF
+-- colours
+vim.g.material_style = "deep ocean"
+vim.cmd 'colorscheme material'
+
+require('material').setup({
+    disable = {
+        background = true, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
+    },
+})
+
 -- setup diffview
 require("diffview").setup()
 EOF
