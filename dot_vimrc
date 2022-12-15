@@ -47,6 +47,9 @@ if has('nvim')
   " Icons
   Plug 'nvim-tree/nvim-web-devicons'
 
+  " Status line
+  Plug 'nvim-lualine/lualine.nvim'
+
   " LUA Utils (required by various other)
   Plug 'nvim-lua/plenary.nvim'
 

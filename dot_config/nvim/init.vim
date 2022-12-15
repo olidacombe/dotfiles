@@ -121,6 +121,10 @@ require('material').setup({
     },
 })
 
+-- status line
+require('lualine').setup()
+
 -- setup diffview
 require("diffview").setup()
+vim.opt.fillchars:append('diff:╱')
 EOF
