@@ -108,7 +108,7 @@ let g:prettier#autoformat_require_pragma = 0
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Syntax highlighting inside markdown fenced code blocks
-let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'rust', 'vim']
+let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'rust', 'vim', 'yaml']
 
 set exrc
 set secure
