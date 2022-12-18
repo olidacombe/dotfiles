@@ -1,5 +1,10 @@
+vim.g.mapleader = " "
+
 -- Quick jump to netrw
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+-- Quick diffview
+vim.keymap.set("n", "<leader>dv", vim.cmd.DiffviewOpen)
 
 -- Slide visual selections around
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

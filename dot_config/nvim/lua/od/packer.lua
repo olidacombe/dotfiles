@@ -1,6 +1,15 @@
 vim.cmd.packadd("packer.nvim")
 
 return require('packer').startup(function(use)
+
+  -- DiffView
+  use { 'sindrets/diffview.nvim',
+    requires = {
+      {'nvim-lua/plenary.nvim'},
+      {'nvim-tree/nvim-web-devicons'},
+    }
+  }
+
   -- Fugitive
   use('tpope/vim-fugitive')
 
