@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>pv", function()
-	vim.cmd "Ex"
+	vim.cmd("Ex")
 end)
