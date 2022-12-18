@@ -1,3 +1,3 @@
-print("well hello there")
+require("od")
 
 vim.cmd "autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path \"%\""
