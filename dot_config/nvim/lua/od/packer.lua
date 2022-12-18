@@ -4,10 +4,10 @@ return require('packer').startup(function(use)
 
   -- DiffView
   use { 'sindrets/diffview.nvim',
-    requires = {
-      {'nvim-lua/plenary.nvim'},
-      {'nvim-tree/nvim-web-devicons'},
-    }
+      requires = {
+          {'nvim-lua/plenary.nvim'},
+          {'nvim-tree/nvim-web-devicons'},
+      }
   }
 
   -- Fugitive
