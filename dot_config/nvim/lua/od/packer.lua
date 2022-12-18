@@ -39,6 +39,9 @@ return require('packer').startup(function(use)
 	  }
   }
 
+  -- NERD Commenter
+  use 'preservim/nerdcommenter'
+
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
