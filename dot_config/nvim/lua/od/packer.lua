@@ -1,6 +1,9 @@
 vim.cmd.packadd("packer.nvim")
 
 return require('packer').startup(function(use)
+  -- Fugitive
+  use('tpope/vim-fugitive')
+
   -- Harpoon
   use('theprimeagen/harpoon')
 
