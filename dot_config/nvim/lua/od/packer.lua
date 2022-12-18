@@ -39,6 +39,12 @@ return require('packer').startup(function(use)
 	  }
   }
 
+  -- LUALine
+  use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
+
   -- NERD Commenter
   use 'preservim/nerdcommenter'
 
