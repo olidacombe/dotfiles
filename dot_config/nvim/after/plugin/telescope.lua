@@ -1,12 +1,15 @@
--- TODO which-key
+local register_normal = require("od.which-key").register_normal
 local builtin = require('telescope.builtin')
--- find "files"
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
--- find "repo"
-vim.keymap.set('n', '<leader>fr', builtin.git_files, {})
--- find "grep"
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
--- find "buffer"
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
--- find "help"
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+register_normal({
+    f = {
+        name = "Fuzzy Find",
+        {
+            f = { builtin.find_files, "Files" },
+            r = { builtin.git_files, "Files<=Repo" },
+            g = { builtin.live_grep, "Grep" },
+            b = { builtin.buffers, "Buffer" },
+            h = { builtin.help_tags, "Help" },
+        }
+    }
+})
