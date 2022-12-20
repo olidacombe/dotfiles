@@ -10,6 +10,9 @@ return require('packer').startup(function(use)
         }
     }
 
+    -- editorconfig.org
+    use('editorconfig/editorconfig-vim')
+
     -- Fugitive
     use('tpope/vim-fugitive')
 

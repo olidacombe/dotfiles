@@ -18,8 +18,6 @@ Sync plugins:
 
 # TODO
 
-+ [vim-test](https://github.com/vim-test/vim-test)
-+ editorconfig.org
 + wilder.nvim ?
 + which-key.nvim ?
 + [fzf](https://github.com/junegunn/fzf.vim) ?
