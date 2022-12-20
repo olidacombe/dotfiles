@@ -1,3 +1,4 @@
+-- TODO which-key
 local builtin = require('telescope.builtin')
 -- find "files"
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})

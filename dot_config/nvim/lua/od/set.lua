@@ -20,6 +20,9 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
+-- wait 300ms for a mapped sequence to complete
+vim.opt.tm = 300
+
 -- never let the cursor be less than 8 lines from the bottom
 -- unless you're at the end of the file
 vim.opt.scrolloff = 8

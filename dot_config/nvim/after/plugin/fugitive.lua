@@ -1,6 +1,3 @@
--- Git status
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-
 -- Tool up the fugitive buffers - props to [ThePrimeagen](https://github.com/ThePrimeagen/init.lua/blob/master/after/plugin/fugitive.lua)
 local Od_Fugitive = vim.api.nvim_create_augroup("Od_Fugitive", {})
 
@@ -14,7 +11,7 @@ autocmd("BufWinEnter", {
         end
 
         local bufnr = vim.api.nvim_get_current_buf()
-        local opts = {buffer = bufnr, remap = false}
+        local opts = { buffer = bufnr, remap = false }
         vim.keymap.set("n", "<leader>p", function()
             vim.cmd.Git('push')
         end, opts)

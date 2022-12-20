@@ -93,4 +93,7 @@ return require('packer').startup(function(use)
     -- vim-test
     use('vim-test/vim-test')
 
+    -- WhichKey
+    use('folke/which-key.nvim')
+
 end)
