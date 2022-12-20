@@ -77,6 +77,9 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  -- Tmux pane navigation integration
+  use('christoomey/vim-tmux-navigator')
+
   -- Treesitter
   use('nvim-treesitter/nvim-treesitter', {run = 'TSUpdate'})
   use('nvim-treesitter/playground')
