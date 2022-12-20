@@ -19,8 +19,9 @@ Sync plugins:
 # TODO
 
 + editorconfig.org
-+ wilder.nvi
++ wilder.nvim
 + which-key.nvim
++ [fzf](https://github.com/junegunn/fzf.vim)
 + Seamless tmux/vim pane navigation
 + Take away manual bits (e.g. [nix-darwin](https://github.com/LnL7/nix-darwin) away dependencies)
 
