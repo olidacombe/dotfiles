@@ -19,3 +19,7 @@ vim.keymap.set("v", "<leader>r", 'y:%s/<C-r>"/')
 
 -- Make current file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- Tab Nav
+vim.keymap.set("n", "<Tab>", ":tabn<CR>")
+vim.keymap.set("n", "<S-Tab>", ":tabp<CR>")
