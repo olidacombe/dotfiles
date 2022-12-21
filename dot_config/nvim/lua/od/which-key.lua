@@ -1,3 +1,4 @@
+require "od.remap"
 whichkey = require "which-key"
 
 local wk = {}
