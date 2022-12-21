@@ -1,4 +1,4 @@
-register_normal = require("od.which-key").register_normal
+register_nv = require("od.which-key").register_nv
 
 local mappings = {
     h = {
@@ -8,4 +8,4 @@ local mappings = {
     },
 }
 
-register_normal(mappings)
+register_nv(mappings)
