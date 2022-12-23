@@ -7,7 +7,11 @@ register_normal({
         {
             f = { builtin.find_files, "Files" },
             r = { builtin.git_files, "Files<=Repo" },
-            g = { builtin.live_grep, "Grep" },
+            G = { builtin.live_grep, "Grep" },
+            g = { function() builtin.grep_string({
+                    shorten_path = true, word_match = "-w", only_sort_text = true, search = ''
+                })
+            end, '"Rg - ish"' },
             b = { builtin.buffers, "Buffer" },
             h = { builtin.help_tags, "Help" },
         }
