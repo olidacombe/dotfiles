@@ -27,7 +27,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 
 local block_comment_head = function(index)
     return f(function(arg)
-        return string.rep("-", string.len(arg[1][1]) + 6)
+        return string.rep("#", string.len(arg[1][1]) + 4)
     end, { index })
 end
 
@@ -36,7 +36,7 @@ ls.add_snippets(nil, {
         -- Block comment
         s("bc", fmt([[
             {}
-            -- {} --
+            # {} #
             {}
         ]], { block_comment_head(1), i(1), block_comment_head(1) }))
     },
