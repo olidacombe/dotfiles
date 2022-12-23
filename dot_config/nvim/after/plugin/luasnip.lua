@@ -25,7 +25,21 @@ end)
 local c, i, f, s, t = ls.choice_node, ls.insert_node, ls.function_node, ls.s, ls.text_node
 local fmt = require("luasnip.extras.fmt").fmt
 
+local block_comment_head = function(index)
+    return f(function(arg)
+        return string.rep("-", string.len(arg[1][1]) + 6)
+    end, { index })
+end
+
 ls.add_snippets(nil, {
+    all = {
+        -- Block comment
+        s("bc", fmt([[
+            {}
+            -- {} --
+            {}
+        ]], { block_comment_head(1), i(1), block_comment_head(1) }))
+    },
     rust = {
         -- Adding test module
         s(
