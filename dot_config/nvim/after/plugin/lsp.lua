@@ -2,6 +2,15 @@ local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
 
+lsp.setup_nvim_cmp({
+    experimental = {
+        -- allow autocomplete typeahead feel
+        ghost_text = true,
+        -- use next-gen menu
+        native_menu = false,
+    }
+})
+
 lsp.ensure_installed({
     'tsserver',
     'eslint',
