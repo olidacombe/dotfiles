@@ -1,4 +1,7 @@
 local ls = require("luasnip")
+local extras = require("luasnip.extras")
+
+ls.config.set_config({ update_events = 'TextChanged,TextChangedI' })
 
 -- set snip expansion/jump next key
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
@@ -21,6 +24,13 @@ vim.keymap.set("i", "<c-l>", function()
     end
 end)
 
+-- easy reload during development
+vim.keymap.set("n", "<leader><leader>s", function()
+    -- TODO, something less brutal?
+    ls.cleanup()
+    -- TODO, something less "roundabout"?
+    vim.cmd.source(vim.api.nvim_get_runtime_file("after/plugin/luasnip.lua"))
+end)
 
 local c, i, f, s, t = ls.choice_node, ls.insert_node, ls.function_node, ls.s, ls.text_node
 local fmt = require("luasnip.extras.fmt").fmt
@@ -31,6 +41,7 @@ local block_comment_head = function(index)
     end, { index })
 end
 
+
 ls.add_snippets(nil, {
     all = {
         -- Block comment
@@ -38,7 +49,8 @@ ls.add_snippets(nil, {
             {}
             # {} #
             {}
-        ]], { block_comment_head(1), i(1), block_comment_head(1) }))
+        ]], { block_comment_head(1), i(1), block_comment_head(1) })),
+        s("oi", fmt("{} == {}", { i(1), extras.rep(1) }))
     },
     rust = {
         -- Adding test module

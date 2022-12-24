@@ -1,9 +1,9 @@
 require "od.remap"
-whichkey = require "which-key"
+local whichkey = require "which-key"
 
 local wk = {}
 
-function get_opts(mode, prefix)
+local function get_opts(mode, prefix)
     local opts = {
         mode = mode,
         prefix = prefix,
@@ -15,7 +15,7 @@ function get_opts(mode, prefix)
     return opts
 end
 
-function register(mappings, mode, prefix)
+local function register(mappings, mode, prefix)
     local opts = get_opts(mode, prefix)
     whichkey.register(mappings, opts)
 end
