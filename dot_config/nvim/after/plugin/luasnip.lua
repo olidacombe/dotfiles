@@ -57,18 +57,40 @@ ls.add_snippets(nil, {
         s(
             { trig = "modtest", docstring = "Add test module" },
             fmt([[
-            #[cfg(test)]
-            mod test {{
-            {}
-
+                #[cfg(test)]
+                mod test {{
                 {}
-            }}
-        ]]   , {
+
+                    {}
+                }}
+            ]], {
                 c(1, { t "    use super::*;", t "" }),
                 i(0),
             })
-        )
+        ),
+        -- Adding test
+        s(
+            { trig = "fntest", docstring = "Add test" },
+            fmt([[
+                #[test]
+                fn {}() {}{{
+                    {}{}
+                }}
+            ]], {
+                i(1), c(2, {
+                    t "",
+                    t "-> Result<()> "
+                }), i(0),
+                f(function(arg)
+                    if string.find(arg[1][1], "Result") == nil then
+                        return ""
+                    end
+                    return { "", "    Ok(())" }
+                end, { 2 })
+            }
+            ))
     },
+
     sh = {
         -- Basic bash preamble
         s("bash", fmt("#!/usr/bin/env bash\n\nset -euo pipefail\n\n\n", {})),
