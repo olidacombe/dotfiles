@@ -68,5 +68,9 @@ ls.add_snippets(nil, {
                 i(0),
             })
         )
-    }
+    },
+    sh = {
+        -- Basic bash preamble
+        s("bash", fmt("#!/usr/bin/env bash\n\nset -euo pipefail\n\n\n", {})),
+    },
 })
