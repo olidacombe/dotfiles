@@ -29,7 +29,7 @@ vim.keymap.set("n", "<leader><leader>s", function()
     -- TODO, something less brutal?
     ls.cleanup()
     -- TODO, something less "roundabout"?
-    vim.cmd.source(vim.api.nvim_get_runtime_file("after/plugin/luasnip.lua"))
+    vim.cmd.source(vim.api.nvim_get_runtime_file("after/plugin/luasnip.lua", true)[1])
 end)
 
 local c, i, f, s, t = ls.choice_node, ls.insert_node, ls.function_node, ls.s, ls.text_node
@@ -41,21 +41,21 @@ local block_comment_head = function(index)
     end, { index })
 end
 
-
 ls.add_snippets(nil, {
     all = {
         -- Block comment
-        s("bc", fmt([[
+        s({ trig = "bc", docstring = "Block Comment (#-only currently)" }, fmt([[
             {}
             # {} #
             {}
         ]], { block_comment_head(1), i(1), block_comment_head(1) })),
+        -- Just a test thing
         s("oi", fmt("{} == {}", { i(1), extras.rep(1) }))
     },
     rust = {
         -- Adding test module
         s(
-            "modtest",
+            { trig = "modtest", docstring = "Add test module" },
             fmt([[
             #[cfg(test)]
             mod test {{
