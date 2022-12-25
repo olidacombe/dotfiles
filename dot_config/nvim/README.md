@@ -16,6 +16,10 @@ Sync plugins:
 :PackerSync
 ```
 
+# Font
+
+I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](https://github.com/romkatv/powerlevel10k#fonts) you'll probably want the [NerdFonts version](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode).
+
 # TODO
 
 + [lspkind](https://github.com/onsails/lspkind.nvim)
