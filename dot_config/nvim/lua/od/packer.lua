@@ -16,6 +16,9 @@ return require('packer').startup(function(use)
     -- Fugitive
     use('tpope/vim-fugitive')
 
+    -- GitSigns
+    use('lewis6991/gitsigns.nvim')
+
     -- Harpoon
     use('theprimeagen/harpoon')
 
