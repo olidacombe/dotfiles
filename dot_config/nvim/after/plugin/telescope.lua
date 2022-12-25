@@ -1,5 +1,6 @@
 local register_normal = require("od.which-key").register_normal
-local builtin = require('telescope.builtin')
+local telescope = require("telescope")
+local builtin = require("telescope.builtin")
 
 register_normal({
     f = {
@@ -17,3 +18,5 @@ register_normal({
         }
     }
 })
+
+telescope.load_extension('harpoon')

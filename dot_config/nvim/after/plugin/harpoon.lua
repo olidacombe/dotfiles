@@ -6,6 +6,7 @@ register_normal = require("od.which-key").register_normal
 local mappings = {
     a = { mark.add_file, "Harpoon Mark" },
     e = { ui.toggle_quick_menu, "Harpoon List" },
+    E = { ":Telescope harpoon marks<CR>", "Harpoon Telescope" },
 }
 mappings["1"] = { function() ui.nav_file(1) end, "(Harpoon)" }
 mappings["2"] = { function() ui.nav_file(2) end, "(Harpoon)" }
