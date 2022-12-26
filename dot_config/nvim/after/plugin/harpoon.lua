@@ -5,8 +5,19 @@ register_normal = require("od.which-key").register_normal
 
 local mappings = {
     a = { mark.add_file, "Harpoon Mark" },
-    e = { ui.toggle_quick_menu, "Harpoon List" },
-    E = { ":Telescope harpoon marks<CR>", "Harpoon Telescope" },
+    e = { ":Telescope harpoon marks<CR>", "Harpoon Telescope" },
+    E = { ui.toggle_quick_menu, "Harpoon List" },
+    X = { function()
+        vim.ui.input({
+            prompt = "Command: ",
+        }, function(input)
+            if input then
+                vim.api.nvim_command(":X " .. input)
+            else
+                print "Command cancelled"
+            end
+        end)
+    end, "Execute in Terminal" },
 }
 mappings["1"] = { function() ui.nav_file(1) end, "(Harpoon)" }
 mappings["2"] = { function() ui.nav_file(2) end, "(Harpoon)" }
@@ -19,3 +30,6 @@ mappings["8"] = { function() ui.nav_file(8) end, "(Harpoon)" }
 mappings["9"] = { function() ui.nav_file(9) end, "(Harpoon)" }
 
 register_normal(mappings)
+
+-- Switch back from terminal
+vim.keymap.set("t", "<C-x>", "<C-\\><C-n>:e #<CR>")

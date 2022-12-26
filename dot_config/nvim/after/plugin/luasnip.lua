@@ -30,7 +30,9 @@ vim.keymap.set("n", "<leader><leader>s", function()
     ls.cleanup()
     -- TODO, something less "roundabout"?
     vim.cmd.source(vim.api.nvim_get_runtime_file("after/plugin/luasnip.lua", true)[1])
-end)
+end, {
+    desc = "Reload Luasnips"
+})
 
 local c, i, f, s, t = ls.choice_node, ls.insert_node, ls.function_node, ls.s, ls.text_node
 local fmt = require("luasnip.extras.fmt").fmt

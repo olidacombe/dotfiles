@@ -27,8 +27,8 @@ vim.api.nvim_create_user_command(
         local win = vim.api.nvim_get_current_win()
         local line = vim.api.nvim_win_get_cursor(win)[1]
         --local line = vim.api.nvim_get_current_line()
-        require("od.terraform").plan(function(out)
-            vim.api.nvim_buf_set_lines(buf, line, line, false, out)
+        require("od.terraform").plan(function(lines)
+            vim.api.nvim_buf_set_lines(buf, line, line, false, lines)
         end)
     end, { desc = "Read output of `terraform plan` into buffer" }
 )

@@ -16,8 +16,9 @@ local yank_to_clipboard = { "\"+y", "Yank to Clipboard" }
 local mappings = {
     b = {
         name = "Buffer",
-        c = { "<Cmd>bd!<Cr>", "Close current buffer" },
-        D = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
+        b = { "<cmd>e #<CR>", "Back" },
+        c = { "<Cmd>bd!<CR>", "Close current buffer" },
+        D = { "<Cmd>%bd|e#|bd#<CR>", "Delete all buffers" },
     },
     p = {
         name = "Project",
