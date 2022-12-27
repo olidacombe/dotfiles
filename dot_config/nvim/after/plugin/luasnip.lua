@@ -57,9 +57,9 @@ ls.add_snippets(nil, {
     lua = {
         -- Require with same name
         s({ trig = "req", docstring = "Require with same name" },
-            fmt('local {} = require("{}")', { f(function(args)
+            fmt('local {} = require("{}")\n{}', { f(function(args)
                 return (args[1][1] or ""):match("[^.]*$") or ""
-            end, { 1 }), i(1) })
+            end, { 1 }), i(1), i(0) })
         ),
     },
     rust = {
