@@ -22,6 +22,9 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 
 # TODO
 
++ [toggleterm](https://github.com/akinsho/toggleterm.nvim)
++ A `figlet` et al plugin
++ A markdown link snippet
 + [lspkind](https://github.com/onsails/lspkind.nvim)
 + [fzf](https://github.com/junegunn/fzf.vim) ?
 + Take away manual bits (e.g. [nix-darwin](https://github.com/LnL7/nix-darwin) away dependencies)
