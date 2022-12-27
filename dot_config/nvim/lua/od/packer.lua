@@ -1,6 +1,8 @@
 vim.cmd.packadd("packer.nvim")
 
 return require('packer').startup(function(use)
+    -- Comment.nvim
+    use("numToStr/Comment.nvim")
 
     -- DiffView
     use { 'sindrets/diffview.nvim',
