@@ -63,9 +63,6 @@ return require('packer').startup(function(use)
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
 
-    -- NERD Commenter
-    use 'preservim/nerdcommenter'
-
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
