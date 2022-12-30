@@ -1,7 +1,7 @@
-whichkey = require "which-key"
-wk = require "od.which-key"
+local whichkey = require "which-key"
+local wk = require "od.which-key"
 
-conf = {
+local conf = {
     window = {
         border = "single", -- none, single, double, shadow
         position = "bottom", -- bottom, top
