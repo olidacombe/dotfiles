@@ -61,6 +61,19 @@ ls.add_snippets(nil, {
                 return (args[1][1] or ""):match("[^.]*$") or ""
             end, { 1 }), i(1), i(0) })
         ),
+        -- OOP Boilerplate
+        s({ trig = "class", docstring = "Class boilerplate" },
+            fmt([[
+                local {} = {{}}
+
+                function {}:new(o)
+                    o = o or {{}}
+                    setmetatable(o, self)
+                    self.__index = self
+                    return o
+                end
+            ]], { i(1), extras.rep(1), })
+        ),
     },
     rust = {
         -- Adding test module
