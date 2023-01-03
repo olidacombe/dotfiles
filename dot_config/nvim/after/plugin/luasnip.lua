@@ -55,12 +55,6 @@ ls.add_snippets(nil, {
         s("oi", fmt("{} == {}", { i(1), extras.rep(1) }))
     },
     lua = {
-        -- Require with same name
-        s({ trig = "req", docstring = "Require with same name" },
-            fmt('local {} = require("{}")\n{}', { f(function(args)
-                return (args[1][1] or ""):match("[^.]*$") or ""
-            end, { 1 }), i(1), i(0) })
-        ),
         -- OOP Boilerplate
         s({ trig = "class", docstring = "Class boilerplate" },
             fmt([[
@@ -73,6 +67,20 @@ ls.add_snippets(nil, {
                     return o
                 end
             ]], { i(1), extras.rep(1), })
+        ),
+        -- Module boilerplate
+        s({ trig = "mod", docstring = "Start a module file" },
+            fmt([[
+                local M = {{}}
+
+                return M
+            ]], {})
+        ),
+        -- Require with same name
+        s({ trig = "req", docstring = "Require with same name" },
+            fmt('local {} = require("{}")\n{}', { f(function(args)
+                return (args[1][1] or ""):match("[^.]*$") or ""
+            end, { 1 }), i(1), i(0) })
         ),
     },
     rust = {
