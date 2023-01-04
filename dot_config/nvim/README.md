@@ -23,8 +23,6 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 # TODO
 
 + [toggleterm](https://github.com/akinsho/toggleterm.nvim)
-+ A `figlet` et al plugin
-+ switch to [comment.nvim](https://github.com/numToStr/Comment.nvim)
 + A markdown link snippet
 + [lspkind](https://github.com/onsails/lspkind.nvim)
 + [fzf](https://github.com/junegunn/fzf.vim) ?

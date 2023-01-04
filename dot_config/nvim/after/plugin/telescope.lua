@@ -16,7 +16,7 @@ register_normal({
             b = { builtin.buffers, "Buffer" },
             h = { builtin.help_tags, "Help" },
         }
-    }
+    },
 })
 
 telescope.load_extension('harpoon')

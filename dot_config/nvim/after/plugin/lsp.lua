@@ -1,4 +1,5 @@
 local lsp = require('lsp-zero')
+local telescope = require("telescope.builtin")
 
 lsp.preset('recommended')
 
@@ -38,6 +39,7 @@ lsp.on_attach(function(client, bufnr)
     end
 
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gr", telescope.lsp_references, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
     vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
