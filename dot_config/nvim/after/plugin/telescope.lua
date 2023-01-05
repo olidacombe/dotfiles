@@ -3,6 +3,10 @@ local telescope = require("telescope")
 local builtin = require("telescope.builtin")
 
 register_normal({
+    d = {
+        name = "Document",
+        s = { builtin.lsp_document_symbols, "Symbols" },
+    },
     f = {
         name = "Fuzzy Find",
         {
@@ -13,9 +17,15 @@ register_normal({
                     shorten_path = true, word_match = "-w", only_sort_text = true, search = ''
                 })
             end, '"Rg - ish"' },
-            b = { builtin.buffers, "Buffer" },
+            b = { builtin.current_buffer_fuzzy_find, "Within buffer" },
+            B = { builtin.buffers, "Buffers" },
             h = { builtin.help_tags, "Help" },
         }
+    },
+    k = { builtin.keymaps, "Keymaps" },
+    w = {
+        name = "Workspace",
+        s = { builtin.lsp_workspace_symbols, "Symbols" },
     },
 })
 
