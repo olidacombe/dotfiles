@@ -20,10 +20,6 @@ local mappings = {
         c = { "<Cmd>bd!<CR>", "Close current buffer" },
         D = { "<Cmd>%bd|e#|bd#<CR>", "Delete all buffers" },
     },
-    p = {
-        name = "Project",
-        v = { "<cmd>Ex<CR>", "View (netrw)" }
-    },
     x = { "<cmd>!chmod +x %<CR>", "Make Executable" },
     -- Yank to "+
     y = yank_to_clipboard,

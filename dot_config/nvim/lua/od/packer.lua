@@ -104,6 +104,15 @@ return require('packer').startup(function(use)
     -- Undotree
     use('mbbill/undotree')
 
+    -- nvim-tree
+    use {
+        'nvim-tree/nvim-tree.lua',
+        -- requires = {
+        --   'nvim-tree/nvim-web-devicons', -- optional, for file icons
+        -- },
+        tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    }
+
     -- vim-test
     use('vim-test/vim-test')
 

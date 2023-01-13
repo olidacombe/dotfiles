@@ -1,3 +1,8 @@
+-- disable netrw at the very start of your init.lua
+-- see https://github.com/nvim-tree/nvim-tree.lua#setup
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.g.mapleader = " "
 
 vim.opt.nu = true
