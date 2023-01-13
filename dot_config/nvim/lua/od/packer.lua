@@ -27,6 +27,12 @@ return require('packer').startup(function(use)
     -- GitSigns
     use('lewis6991/gitsigns.nvim')
 
+    -- Gruvbox Colourscheme
+    use('ellisonleao/gruvbox.nvim')
+
+    -- Kanagawa Colourscheme
+    use('rebelot/kanagawa.nvim')
+
     -- Harpoon
     use('theprimeagen/harpoon')
 
@@ -100,6 +106,9 @@ return require('packer').startup(function(use)
 
     -- vim-test
     use('vim-test/vim-test')
+
+    -- TokyoNight Colourscheme
+    use('folke/tokyonight.nvim')
 
     -- WhichKey
     use('folke/which-key.nvim')
