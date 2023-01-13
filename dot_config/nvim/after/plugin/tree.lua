@@ -3,7 +3,16 @@ local wk = require("od.which-key")
 require("nvim-tree").setup({
     update_focused_file = {
         enable = true
-    }
+    },
+    view = {
+        mappings = {
+            custom_only = false,
+            list = {
+                -- allow tab to fall through to my default
+                { key = "<Tab>", action = "" },
+            },
+        },
+    },
 })
 
 wk.register_normal({
