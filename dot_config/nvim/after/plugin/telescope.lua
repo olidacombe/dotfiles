@@ -29,4 +29,12 @@ register_normal({
     },
 })
 
+telescope.setup({
+    pickers = {
+        colorscheme = {
+            enable_preview = true
+        }
+    }
+})
+
 telescope.load_extension('harpoon')
