@@ -10,6 +10,8 @@ require("nvim-tree").setup({
             list = {
                 -- allow tab to fall through to my default
                 { key = "<Tab>", action = "" },
+                -- use + as inverse of - (dir_up)
+                { key = "+", action = "cd" },
             },
         },
     },
