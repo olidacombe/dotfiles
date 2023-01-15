@@ -1,4 +1,14 @@
 require 'nvim-treesitter.configs'.setup {
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "<CR>",
+            node_incremental = "<CR>",
+            scope_incremental = "<S-CR>",
+            node_decremental = "<BS>",
+        },
+    },
+
     -- A list of parser names, or "all"
     ensure_installed = { "c", "help", "javascript", "lua", "rust", "typescript" },
 
