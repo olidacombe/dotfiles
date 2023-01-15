@@ -1,6 +1,9 @@
 vim.cmd.packadd("packer.nvim")
 
 return require('packer').startup(function(use)
+    -- Pretty-up folds!
+    use('anuvyklack/pretty-fold.nvim')
+
     -- Comment.nvim
     use("numToStr/Comment.nvim")
 
