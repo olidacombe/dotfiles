@@ -93,6 +93,11 @@ return require('packer').startup(function(use)
         end
     })
 
+    use {
+        "SmiteshP/nvim-navic",
+        requires = "neovim/nvim-lspconfig"
+    }
+
     -- Telescope for fuzzy finding
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',

@@ -38,6 +38,12 @@ lsp.on_attach(function(client, bufnr)
         return
     end
 
+    -- Try to init the window bar context
+    if client.server_capabilities.documentSymbolProvider then
+        local navic = require "nvim-navic"
+        navic.attach(client, bufnr)
+    end
+
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "gr", telescope.lsp_references, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)

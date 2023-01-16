@@ -1,1 +1,87 @@
-require('lualine').setup()
+local winbar = require("config.winbar")
+
+require('lualine').setup({
+    extensions = {},
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { "filename" },
+        lualine_x = { "location" },
+        lualine_y = {},
+        lualine_z = {}
+    },
+    inactive_winbar = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+    },
+    options = {
+        always_divide_middle = true,
+        component_separators = {
+            left = "",
+            right = ""
+        },
+        disabled_filetypes = {
+            statusline = {},
+            winbar = {
+                "help",
+                "startify",
+                "dashboard",
+                "packer",
+                "neogitstatus",
+                "NvimTree",
+                "Trouble",
+                "alpha",
+                "lir",
+                "Outline",
+                "spectre_panel",
+                "toggleterm",
+            },
+        },
+        globalstatus = true,
+        icons_enabled = true,
+        ignore_focus = {},
+        refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000
+        },
+        section_separators = {
+            left = "",
+            right = ""
+        },
+        theme = "auto"
+    },
+    sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_c = { "filename" },
+        lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_y = { "progress" },
+        lualine_z = { "location" }
+    },
+    tabline = {
+        lualine_a = { { 'tabs',
+            -- mode 1 shows tab names
+            mode = 1,
+            fmt = function(name, context)
+                -- Show + if buffer is modified in tab
+                local buflist = vim.fn.tabpagebuflist(context.tabnr)
+                local winnr = vim.fn.tabpagewinnr(context.tabnr)
+                local bufnr = buflist[winnr]
+                local mod = vim.fn.getbufvar(bufnr, '&mod')
+
+                return name .. (mod == 1 and '' or '')
+            end
+        } },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = { winbar.get_winbar },
+        lualine_y = {},
+        lualine_z = {},
+    },
+    winbar = {},
+})
