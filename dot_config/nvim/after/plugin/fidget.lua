@@ -1,3 +1,10 @@
 local fidget = require("fidget")
 
-fidget.setup({})
+fidget.setup({
+    text = {
+        commenced = "省",
+        completed = "﫠",
+        done = "",
+        spinner = "dots_snake",
+    },
+})
