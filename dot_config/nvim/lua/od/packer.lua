@@ -49,6 +49,9 @@ return require('packer').startup(function(use)
         end
     }
 
+    -- LSP status UI
+    use('j-hui/fidget.nvim')
+
     -- [LSP](https://github.com/VonHeikemen/lsp-zero.nvim)
     use {
         'VonHeikemen/lsp-zero.nvim',
