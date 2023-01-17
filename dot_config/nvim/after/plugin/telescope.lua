@@ -1,6 +1,7 @@
 local register_normal = require("od.which-key").register_normal
-local telescope = require("telescope")
+local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
+local telescope = require("telescope")
 
 register_normal({
     d = {
@@ -20,6 +21,7 @@ register_normal({
             b = { builtin.current_buffer_fuzzy_find, "Within buffer" },
             B = { builtin.buffers, "Buffers" },
             h = { builtin.help_tags, "Help" },
+            q = { builtin.quickfix, "Quickfix" },
         }
     },
     k = { builtin.keymaps, "Keymaps" },
@@ -30,11 +32,23 @@ register_normal({
 })
 
 telescope.setup({
+    defaults = {
+        mappings = {
+            i = {
+                ["<C-w>"] = actions.send_selected_to_qflist,
+                ["<C-q>"] = actions.send_to_qflist,
+            },
+            n = {
+                ["<C-w>"] = actions.send_selected_to_qflist,
+                ["<C-q>"] = actions.send_to_qflist,
+            },
+        },
+    },
     pickers = {
         colorscheme = {
             enable_preview = true
         }
-    }
+    },
 })
 
 telescope.load_extension('harpoon')
