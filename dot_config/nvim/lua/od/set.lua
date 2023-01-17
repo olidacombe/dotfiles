@@ -32,4 +32,4 @@ vim.opt.tm = 300
 -- unless you're at the end of the file
 vim.opt.scrolloff = 8
 
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = nil
