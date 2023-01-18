@@ -1,9 +1,6 @@
 vim.cmd.packadd("packer.nvim")
 
 return require('packer').startup(function(use)
-    -- Pretty-up folds!
-    use('anuvyklack/pretty-fold.nvim')
-
     -- Comment.nvim
     use("numToStr/Comment.nvim")
 
@@ -51,6 +48,9 @@ return require('packer').startup(function(use)
 
     -- LSP status UI
     use('j-hui/fidget.nvim')
+
+    -- UFO nice folding
+    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
 
     -- [LSP](https://github.com/VonHeikemen/lsp-zero.nvim)
     use {

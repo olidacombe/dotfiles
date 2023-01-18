@@ -31,7 +31,7 @@ lsp.configure('sumneko_lua', {
     }
 })
 
-lsp.on_attach(function(client, bufnr)
+local on_attach = function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
     if client.name == "eslint" then
@@ -61,13 +61,27 @@ lsp.on_attach(function(client, bufnr)
 
     local autocmd = vim.api.nvim_create_autocmd
     -- Format on save
-    autocmd({"BufWritePre"}, {
+    autocmd({ "BufWritePre" }, {
         group = Od_Lsp,
         pattern = "*",
         callback = function(ev)
             vim.lsp.buf.format()
         end,
     })
-end)
+end
+
+lsp.on_attach(on_attach)
+
+-- extend default capabilities with those required by ufo
+local base_caps = require('cmp_nvim_lsp').default_capabilities()
+local folding_caps = vim.lsp.protocol.make_client_capabilities()
+folding_caps.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+local capabilities = vim.tbl_deep_extend('force', base_caps, folding_caps)
+lsp.set_server_config({
+    capabilities = capabilities
+})
 
 lsp.setup()

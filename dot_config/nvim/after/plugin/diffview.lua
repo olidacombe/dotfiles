@@ -1,4 +1,4 @@
-register_normal = require("od.which-key").register_normal
+local register_normal = require("od.which-key").register_normal
 local actions = require("diffview.actions")
 
 require("diffview").setup({

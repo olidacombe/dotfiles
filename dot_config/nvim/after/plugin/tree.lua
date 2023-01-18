@@ -1,4 +1,6 @@
 local wk = require("od.which-key")
+local collapse_all = require("nvim-tree.actions.tree-modifiers.collapse-all").fn
+local expand_all = require("nvim-tree.actions.tree-modifiers.expand-all").fn
 
 require("nvim-tree").setup({
     update_focused_file = {
@@ -12,6 +14,12 @@ require("nvim-tree").setup({
                 { key = "<Tab>", action = "" },
                 -- use + as inverse of - (dir_up)
                 { key = "+", action = "cd" },
+                { key = "zM", action = "Collapse", action_cb = function(node)
+                    collapse_all()
+                end },
+                { key = "zR", action = "Expand", action_cb = function(node)
+                    expand_all(node)
+                end },
             },
         },
     },
@@ -21,14 +29,4 @@ wk.register_normal({
     w = {
         b = { "<cmd>NvimTreeToggle<CR>", "Browser" },
     },
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "NvimTree",
-    callback = function()
-        vim.schedule(function()
-            -- collapse all a-la-folding
-            vim.keymap.set("n", "zM", "<cmd>NvimTreeCollapse<cr>")
-        end)
-    end,
 })
