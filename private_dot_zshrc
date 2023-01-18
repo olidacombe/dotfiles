@@ -155,6 +155,9 @@ fi
 alias alpinism='docker run --privileged=true -v $(pwd):/summit -it alpine'
 alias code="open -a 'Visual Studio Code'"
 alias gcob='git branch -a | fzf | xargs git checkout'
+alias gpsh='git push origin HEAD'
+alias gupstr='git branch {--set-upstream-to=origin/,}$(git branch --show-current)'
+alias gpl='git pull'
 alias ghprcp='gh pr view --json url | jq -r .url | pbcopy'
 alias vi="nvim"
 alias vim="nvim"
