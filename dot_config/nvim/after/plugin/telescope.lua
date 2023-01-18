@@ -1,5 +1,6 @@
 local register_normal = require("od.which-key").register_normal
 local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
 local builtin = require("telescope.builtin")
 local telescope = require("telescope")
 
@@ -31,16 +32,29 @@ register_normal({
     },
 })
 
+local has_selections = function(prompt_bufnr)
+    -- return true if any selections have been made
+    local picker = action_state.get_current_picker(prompt_bufnr)
+    local selections = picker:get_multi_selection()
+    return (#selections > 0)
+end
+
+local send_to_qflist = function(prompt_bufnr, mode, target)
+    -- send selections or whole filtered list when none have been made
+    if has_selections(prompt_bufnr) then
+        return actions.send_selected_to_qflist(prompt_bufnr, mode, target)
+    end
+    return actions.send_to_qflist(prompt_bufnr, mode, target)
+end
+
 telescope.setup({
     defaults = {
         mappings = {
             i = {
-                ["<C-w>"] = actions.send_selected_to_qflist,
-                ["<C-q>"] = actions.send_to_qflist,
+                ["<C-q>"] = send_to_qflist,
             },
             n = {
-                ["<C-w>"] = actions.send_selected_to_qflist,
-                ["<C-q>"] = actions.send_to_qflist,
+                ["<C-q>"] = send_to_qflist,
             },
         },
     },

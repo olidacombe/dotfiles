@@ -18,4 +18,8 @@ vim.keymap.set("n", "<Down>", "zj")
 -- vim.keymap.set("n", "<S-Up>", "[z")
 -- vim.keymap.set("n", "<S-Down>", "]z")
 
+-- Quickfix Nav - too much?
+vim.keymap.set("n", "`", ":cp<CR>")
+vim.keymap.set("n", '"', ":cn<CR>")
+
 -- All else has moved to `which-key.lua`

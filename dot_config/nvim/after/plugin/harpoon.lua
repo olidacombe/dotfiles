@@ -5,8 +5,8 @@ local register_normal = require("od.which-key").register_normal
 
 local mappings = {
     a = { mark.add_file, "Harpoon Mark" },
-    e = { ":Telescope harpoon marks<CR>", "Harpoon Telescope" },
-    E = { ui.toggle_quick_menu, "Harpoon List" },
+    e = { ui.toggle_quick_menu, "Harpoon List" },
+    E = { ":Telescope harpoon marks<CR>", "Harpoon Telescope" },
     X = { function()
         vim.ui.input({
             prompt = "Command: ",
