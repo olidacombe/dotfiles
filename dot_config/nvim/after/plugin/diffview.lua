@@ -1,4 +1,5 @@
 register_normal = require("od.which-key").register_normal
+local actions = require("diffview.actions")
 
 require("diffview").setup({
     view = {
@@ -15,6 +16,10 @@ require("diffview").setup({
         default = {
             -- Config for changed files, and staged files in diff views.
             layout = "diff2_horizontal",
+        },
+        keymaps = {
+            { "n", "<C-g>", actions.prev_conflict, { desc = "In the merge-tool: jump to the previous conflict" } },
+            { "n", "<C-c>", actions.next_conflict, { desc = "In the merge-tool: jump to the next conflict" } },
         },
         merge_tool = {
             -- Config for conflicted files in diff views during a merge or rebase.
