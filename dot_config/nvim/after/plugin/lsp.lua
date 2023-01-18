@@ -2,6 +2,7 @@ local lsp = require('lsp-zero')
 local telescope = require("telescope.builtin")
 
 lsp.preset('recommended')
+lsp.nvim_workspace()
 
 lsp.setup_nvim_cmp({
     experimental = {
@@ -60,10 +61,12 @@ lsp.on_attach(function(client, bufnr)
 
     local autocmd = vim.api.nvim_create_autocmd
     -- Format on save
-    autocmd("BufWritePre", {
+    autocmd({"BufWritePre"}, {
         group = Od_Lsp,
         pattern = "*",
-        callback = vim.lsp.buf.formatting_sync
+        callback = function(ev)
+            vim.lsp.buf.format()
+        end,
     })
 end)
 
