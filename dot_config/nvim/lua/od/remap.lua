@@ -8,15 +8,56 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<Tab>", ":tabn<CR>")
 vim.keymap.set("n", "<S-Tab>", ":tabp<CR>")
 
--- Fold Nav
-vim.keymap.set("n", "<Left>", "zc")
-vim.keymap.set("n", "<Right>", "zo")
-vim.keymap.set("n", "<leader><Left>", "zC")
-vim.keymap.set("n", "<leader><Right>", "zO")
+--  _______    _     _    _______
+-- (_______)  | |   | |  (_______)
+--  _____ ___ | | __| |   _     _ _____ _   _
+-- |  ___) _ \| |/ _  |  | |   | (____ | | | |
+-- | |  | |_| | ( (_| |  | |   | / ___ |\ V /
+-- |_|   \___/ \_)____|  |_|   |_\_____| \_/
+--
+local get_current_line = function()
+    return vim.api.nvim_win_get_cursor(0)[1]
+end
+
+local is_folded_at = function(line)
+    return vim.fn.foldclosed(line) ~= -1
+end
+
+local next_closed_fold = function(jk)
+    local current_line = get_current_line()
+    repeat
+        local last_line = current_line
+        vim.cmd("normal z" .. jk)
+        current_line = get_current_line()
+        if is_folded_at(current_line) then
+            return
+        end
+    until (current_line == last_line)
+end
+
+local up_fold = function()
+    local line = get_current_line()
+    vim.cmd("normal [z")
+    if line == get_current_line() then
+        vim.cmd("normal zk")
+    end
+end
+
+vim.keymap.set("n", "<Right>", function()
+    if is_folded_at(get_current_line()) then
+        return vim.cmd("normal zo")
+    end
+    next_closed_fold('j')
+end)
+
+vim.keymap.set("n", "<Left>", function()
+    if is_folded_at(get_current_line()) then
+        return up_fold()
+    end
+    vim.cmd("normal zc")
+end)
 vim.keymap.set("n", "<Up>", "zk")
 vim.keymap.set("n", "<Down>", "zj")
--- vim.keymap.set("n", "<S-Up>", "[z")
--- vim.keymap.set("n", "<S-Down>", "]z")
 
 
 -- Quickfix Nav
