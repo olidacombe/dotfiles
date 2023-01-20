@@ -1,5 +1,5 @@
-whichkey = require "which-key"
-register_normal = require("od.which-key").register_normal
+local whichkey = require "which-key"
+local register_normal = require("od.which-key").register_normal
 
 -- Tool up the fugitive buffers - props to [ThePrimeagen](https://github.com/ThePrimeagen/init.lua/blob/master/after/plugin/fugitive.lua)
 local Od_Fugitive = vim.api.nvim_create_augroup("Od_Fugitive", {})
