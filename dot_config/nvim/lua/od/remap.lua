@@ -43,6 +43,11 @@ local up_fold = function()
     end
 end
 
+local is_in_fold = function()
+    local line = get_current_line()
+    return vim.fn.foldlevel(line) ~= 0
+end
+
 vim.keymap.set("n", "<Right>", function()
     if is_folded_at(get_current_line()) then
         return vim.cmd("normal zo")
@@ -51,10 +56,13 @@ vim.keymap.set("n", "<Right>", function()
 end)
 
 vim.keymap.set("n", "<Left>", function()
-    if is_folded_at(get_current_line()) then
+    local l = get_current_line()
+    if is_folded_at(l) then
         return up_fold()
     end
-    vim.cmd("normal zc")
+    if is_in_fold(l) then
+        vim.cmd("normal zc")
+    end
 end)
 vim.keymap.set("n", "<Up>", "zk")
 vim.keymap.set("n", "<Down>", "zj")
