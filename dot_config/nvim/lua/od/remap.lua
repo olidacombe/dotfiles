@@ -68,7 +68,11 @@ vim.keymap.set("n", "<Up>", "zk")
 vim.keymap.set("n", "<Down>", "zj")
 
 
--- Quickfix Nav
+-- Quickcycle Nav
+local quickcycle = require("od.quickcycle")
+
+vim.keymap.set("n", "©", quickcycle.mode_prev)
+vim.keymap.set("n", "ç", quickcycle.mode_next)
 vim.keymap.set("n", "<C-g>", ":cp<CR>")
 vim.keymap.set("n", '<C-c>', ":cn<CR>")
 
