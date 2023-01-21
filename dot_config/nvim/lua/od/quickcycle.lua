@@ -31,10 +31,27 @@ function Modes:dec()
     self.current = v
 end
 
+local cycle_action = function(action)
+    local t = type(action)
+    if t == "function" then return action() end
+    if t == "string" then vim.cmd(action) end
+end
+
+function Modes:next()
+    cycle_action(self.current.next)
+end
+
+function Modes:prev()
+    cycle_action(self.current.prev)
+end
+
 local modes = Modes:new({
-    "diagnostic",
-    "harpoon",
-    "quickfix",
+    { "diagnostic",
+        next = "normal ]d", prev = "normal [d" },
+    { "harpoon",
+        next = require("harpoon.ui").nav_next, prev = require("harpoon.ui").nav_prev },
+    { "quickfix",
+        next = ":cn", prev = ":cp" }
 })
 
 M.mode_next = function()
@@ -48,15 +65,15 @@ M.mode_prev = function()
 end
 
 M.next = function()
-    -- TODO
+    modes:next()
 end
 
 M.prev = function()
-    -- TODO
+    modes:prev()
 end
 
 M.get_current = function()
-    return modes.current
+    return modes.current[1]
 end
 
 return M
