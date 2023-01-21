@@ -22,6 +22,15 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 
 # TODO
 
+## Quickcycle "modes"
+
+I am loving `<C-g>`, `<C-c>` for quicklist cycling.  I'd like to use the same for `[d`, `]d`, `harpoon` prev/next etc.
+So basically keep a `quickcycle_mode` global somewhere which provides variants for these keys, and show the mode in the `luabar`.
+Could get fancy and have it refuse to enter a mode without context (e.g. if quickfix list is empty).  Or have it "notice"
+when, say, the quickfix list gets new entries and auto-switch mode.
+
+> Could prev/next the modes with `<leader>'`/`<leader>,`
+
 + [toggleterm](https://github.com/akinsho/toggleterm.nvim)
 + A markdown link snippet
 + [lspkind](https://github.com/onsails/lspkind.nvim)
