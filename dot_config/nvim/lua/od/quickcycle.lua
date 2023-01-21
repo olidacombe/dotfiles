@@ -34,7 +34,7 @@ end
 local cycle_action = function(action)
     local t = type(action)
     if t == "function" then return action() end
-    if t == "string" then vim.cmd(action) end
+    if t == "string" then pcall(vim.cmd, action) end
 end
 
 function Modes:next()

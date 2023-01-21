@@ -43,8 +43,7 @@ local up_fold = function()
     end
 end
 
-local is_in_fold = function()
-    local line = get_current_line()
+local is_in_fold = function(line)
     return vim.fn.foldlevel(line) ~= 0
 end
 
