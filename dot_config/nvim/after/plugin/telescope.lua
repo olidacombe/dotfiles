@@ -25,6 +25,9 @@ register_normal({
             q = { builtin.quickfix, "Quickfix" },
         }
     },
+    g = {
+        b = { builtin.git_branches, "Branch" },
+    },
     k = { builtin.keymaps, "Keymaps" },
     w = {
         name = "Workspace",

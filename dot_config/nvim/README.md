@@ -31,6 +31,12 @@ when, say, the quickfix list gets new entries and auto-switch mode.
 
 > Could prev/next the modes with `<leader>'`/`<leader>,`
 
+## Tree Nav
+
+I like what I've done with folding nav, use exactly the same in the tree
+
+## Small Things to Try Out
+
 + [toggleterm](https://github.com/akinsho/toggleterm.nvim)
 + A markdown link snippet
 + [lspkind](https://github.com/onsails/lspkind.nvim)
