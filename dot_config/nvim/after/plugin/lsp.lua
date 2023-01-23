@@ -25,7 +25,7 @@ lsp.configure('sumneko_lua', {
     settings = {
         Lua = {
             diagnostics = {
-                globals = { 'vim' }
+                globals = { 'vim', 'P', }
             }
         }
     }
@@ -64,7 +64,7 @@ local on_attach = function(client, bufnr)
     autocmd({ "BufWritePre" }, {
         group = Od_Lsp,
         pattern = "*",
-        callback = function(ev)
+        callback = function()
             vim.lsp.buf.format()
         end,
     })

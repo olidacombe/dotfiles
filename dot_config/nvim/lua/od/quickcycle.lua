@@ -1,3 +1,26 @@
+--                    ___                       ___           ___
+--      ___          /__/\        ___          /  /\         /__/|
+--     /  /\         \  \:\      /  /\        /  /:/        |  |:|
+--    /  /::\         \  \:\    /  /:/       /  /:/         |  |:|
+--   /  /:/\:\    ___  \  \:\  /__/::\      /  /:/  ___   __|  |:|
+--  /  /:/~/::\  /__/\  \__\:\ \__\/\:\__  /__/:/  /  /\ /__/\_|:|____
+-- /__/:/ /:/\:\ \  \:\ /  /:/    \  \:\/\ \  \:\ /  /:/ \  \:\/:::::/
+-- \  \:\/:/__\/  \  \:\  /:/      \__\::/  \  \:\  /:/   \  \::/~~~~
+--  \  \::/        \  \:\/:/       /__/:/    \  \:\/:/     \  \:\
+--   \__\/          \  \::/        \__\/      \  \::/       \  \:\
+--                   \__\/                     \__\/         \__\/
+--      ___                       ___                         ___
+--     /  /\          ___        /  /\                       /  /\
+--    /  /:/         /__/|      /  /:/                      /  /:/_
+--   /  /:/         |  |:|     /  /:/       ___     ___    /  /:/ /\
+--  /  /:/  ___     |  |:|    /  /:/  ___  /__/\   /  /\  /  /:/ /:/_
+-- /__/:/  /  /\  __|__|:|   /__/:/  /  /\ \  \:\ /  /:/ /__/:/ /:/ /\
+-- \  \:\ /  /:/ /__/::::\   \  \:\ /  /:/  \  \:\  /:/  \  \:\/:/ /:/
+--  \  \:\  /:/     ~\~~\:\   \  \:\  /:/    \  \:\/:/    \  \::/ /:/
+--   \  \:\/:/        \  \:\   \  \:\/:/      \  \::/      \  \:\/:/
+--    \  \::/          \__\/    \  \::/        \__\/        \  \::/
+--     \__\/                     \__\/                       \__\/
+--
 local M = {}
 
 local Modes = {}
@@ -7,12 +30,25 @@ function Modes:new(modes)
     local i, current = next(modes)
     local o = {
         modes = modes,
+        -- A stack of modes which might get
+        -- pushed to for, say, a filetype
+        -- augroup
+        stack = { modes },
         i = i,
         current = current,
     }
     setmetatable(o, self)
     self.__index = self
     return o
+end
+
+function Modes:push(modes)
+    -- self.modes = modes
+    -- self.stack:insert(modes)
+end
+
+function Modes:pop()
+    -- self.modes = self.stack:remove()
 end
 
 function Modes:inc()
@@ -48,6 +84,8 @@ end
 local modes = Modes:new({
     { "diagnostic",
         next = "normal ]d", prev = "normal [d" },
+    { "change",
+        next = "normal ]c", prev = "normal [c" },
     { "harpoon",
         next = require("harpoon.ui").nav_next, prev = require("harpoon.ui").nav_prev },
     { "quickfix",
