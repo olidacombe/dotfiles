@@ -33,6 +33,9 @@ return require('packer').startup(function(use)
     -- Kanagawa Colourscheme
     use('rebelot/kanagawa.nvim')
 
+    -- Nordic Colourscheme
+    use('AlexvZyl/nordic.nvim')
+
     -- Harpoon
     use('theprimeagen/harpoon')
 

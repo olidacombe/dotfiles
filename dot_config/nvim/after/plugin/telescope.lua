@@ -12,6 +12,7 @@ register_normal({
     f = {
         name = "Fuzzy Find",
         {
+            C = { builtin.colorscheme, "Colourscheme" },
             f = { builtin.find_files, "Files" },
             r = { builtin.git_files, "Files<=Repo" },
             G = { builtin.live_grep, "Grep" },
