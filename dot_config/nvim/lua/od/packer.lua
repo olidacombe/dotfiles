@@ -21,6 +21,9 @@ return require('packer').startup(function(use)
     -- editorconfig.org
     use('editorconfig/editorconfig-vim')
 
+    -- Neodev
+    use 'folke/neodev.nvim'
+
     -- Fugitive
     use('tpope/vim-fugitive')
 

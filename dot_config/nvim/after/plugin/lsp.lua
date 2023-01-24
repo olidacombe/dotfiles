@@ -84,4 +84,6 @@ lsp.set_server_config({
     capabilities = capabilities
 })
 
+-- configure neodev before lsp
+require("neodev").setup()
 lsp.setup()
