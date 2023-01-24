@@ -3,6 +3,8 @@ local actions = require("diffview.actions")
 local quickcycle = require("od.quickcycle")
 
 local quickcycle_mappings = quickcycle.new({
+    { "change",
+        next = "normal ]c", prev = "normal [c" },
     { "conflict",
         next = "normal ]x", prev = "normal [x" },
 })
