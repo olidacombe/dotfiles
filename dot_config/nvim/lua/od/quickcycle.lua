@@ -30,25 +30,12 @@ function Modes:new(modes)
     local i, current = next(modes)
     local o = {
         modes = modes,
-        -- A stack of modes which might get
-        -- pushed to for, say, a filetype
-        -- augroup
-        stack = { modes },
         i = i,
         current = current,
     }
     setmetatable(o, self)
     self.__index = self
     return o
-end
-
-function Modes:push(modes)
-    -- self.modes = modes
-    -- self.stack:insert(modes)
-end
-
-function Modes:pop()
-    -- self.modes = self.stack:remove()
 end
 
 function Modes:inc()
@@ -81,37 +68,78 @@ function Modes:prev()
     cycle_action(self.current.prev)
 end
 
-local modes = Modes:new({
-    { "diagnostic",
-        next = "normal ]d", prev = "normal [d" },
-    { "change",
-        next = "normal ]c", prev = "normal [c" },
-    { "harpoon",
-        next = require("harpoon.ui").nav_next, prev = require("harpoon.ui").nav_prev },
-    { "quickfix",
-        next = ":cn", prev = ":cp" }
-})
+-- A stack of modes which might get
+-- pushed to for, say, a filetype
+-- augroup
+local Stack = {}
+
+function Stack:new(modes)
+    local o = {
+        top = modes,
+        stack = { modes },
+    }
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
+
+function Stack:push(modes)
+    self.top = modes
+    table.insert(self.stack, modes)
+end
+
+function Stack:pop()
+    table.remove(self.stack)
+    self.top = self.stack[#self.stack]
+end
+
+local stack = Stack:new(
+    Modes:new({
+        { "diagnostic",
+            next = "normal ]d", prev = "normal [d" },
+        { "change",
+            next = "normal ]c", prev = "normal [c" },
+        { "harpoon",
+            next = require("harpoon.ui").nav_next, prev = require("harpoon.ui").nav_prev },
+        { "quickfix",
+            next = ":cn", prev = ":cp" }
+    })
+)
+
+M.new = function(modes)
+    return Modes:new(modes)
+end
 
 M.mode_next = function()
-    modes:inc()
+    stack.top:inc()
     require('lualine').refresh()
 end
 
 M.mode_prev = function()
-    modes:dec()
+    stack.top:dec()
+    require('lualine').refresh()
+end
+
+M.push = function(modes)
+    stack:push(modes)
+    require('lualine').refresh()
+end
+
+M.pop = function()
+    stack:pop()
     require('lualine').refresh()
 end
 
 M.next = function()
-    modes:next()
+    stack.top:next()
 end
 
 M.prev = function()
-    modes:prev()
+    stack.top:prev()
 end
 
 M.get_current = function()
-    return modes.current[1]
+    return stack.top.current[1]
 end
 
 return M

@@ -1,5 +1,11 @@
 local register_normal = require("od.which-key").register_normal
 local actions = require("diffview.actions")
+local quickcycle = require("od.quickcycle")
+
+local quickcycle_mappings = quickcycle.new({
+    { "conflict",
+        next = "normal ]x", prev = "normal [x" },
+})
 
 require("diffview").setup({
     view = {
@@ -30,6 +36,12 @@ require("diffview").setup({
             -- Config for changed files in file history views.
             layout = "diff2_horizontal",
         },
+    },
+    hooks = {
+        view_enter = function()
+            quickcycle.push(quickcycle_mappings)
+        end,
+        view_leave = quickcycle.pop
     },
 })
 -- try to get a nice fill and fail
