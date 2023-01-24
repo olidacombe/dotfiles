@@ -33,7 +33,7 @@ mappings = {
     -- Replace selection everywhere
     r = { 'y:%s/<C-r>"/', "Replace Everywhere" },
     -- Yank to "+
-    y = yank_to_clipboard,
+    Y = yank_to_clipboard,
 }
 
 wk.register_visual(mappings)
