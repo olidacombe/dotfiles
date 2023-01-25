@@ -4,21 +4,21 @@ local extras = require("luasnip.extras")
 ls.config.set_config({ update_events = 'TextChanged,TextChangedI' })
 
 -- set snip expansion/jump next key
-vim.keymap.set({ "i", "s" }, "<c-k>", function()
+vim.keymap.set({ "i", "s" }, "<c-c>", function()
     if ls.expand_or_jumpable() then
         ls.expand_or_jump()
     end
 end, { silent = true })
 
 -- set jump back key
-vim.keymap.set({ "i", "s" }, "<c-j>", function()
+vim.keymap.set({ "i", "s" }, "<c-g>", function()
     if ls.jumpable(-1) then
         ls.jump(-1)
     end
 end, { silent = true })
 
 -- set choice_node selection key
-vim.keymap.set("i", "<c-l>", function()
+vim.keymap.set("i", "<c-n>", function()
     if ls.choice_active() then
         ls.change_choice(1)
     end
@@ -37,23 +37,7 @@ end, {
 local c, i, f, s, t = ls.choice_node, ls.insert_node, ls.function_node, ls.s, ls.text_node
 local fmt = require("luasnip.extras.fmt").fmt
 
-local block_comment_head = function(index)
-    return f(function(arg)
-        return string.rep("#", string.len(arg[1][1]) + 4)
-    end, { index })
-end
-
 ls.add_snippets(nil, {
-    all = {
-        -- Block comment
-        s({ trig = "bc", docstring = "Block Comment (#-only currently)" }, fmt([[
-            {}
-            # {} #
-            {}
-        ]], { block_comment_head(1), i(1), block_comment_head(1) })),
-        -- Just a test thing
-        s("oi", fmt("{} == {}", { i(1), extras.rep(1) }))
-    },
     lua = {
         -- OOP Boilerplate
         s({ trig = "class", docstring = "Class boilerplate" },
@@ -101,7 +85,7 @@ ls.add_snippets(nil, {
         ),
         -- Adding test
         s(
-            { trig = "fntest", docstring = "Add test" },
+            { trig = "test", docstring = "Add test" },
             fmt([[
                 #[test]
                 fn {}() {}{{

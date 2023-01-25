@@ -1,6 +1,8 @@
 local wilder = require('wilder')
 wilder.setup({
     modes = { ':', '/', '?' },
+    accept_key = '<c-c>',
+    reject_key = '<c-g>',
 })
 
 wilder.set_option('renderer', wilder.popupmenu_renderer({
