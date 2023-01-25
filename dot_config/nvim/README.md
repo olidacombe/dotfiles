@@ -23,7 +23,6 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 
 ## TODO
 
-+ Push files to harpoon direct from tree mapping
 + A mapping which take a line like `use('bla/whatever.nvim')` and takes you to the git repo in your browser
 
 
