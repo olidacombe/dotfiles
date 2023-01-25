@@ -106,6 +106,9 @@ require("nvim-tree").setup({
         mappings = {
             custom_only = false,
             list = {
+                { key = "<leader>a", action = " Harpoon", action_cb = function(node)
+                    require("harpoon.mark").add_file(node.absolute_path)
+                end },
                 -- allow tab to fall through to my default
                 { key = "<Tab>", action = "" },
                 { key = "<Left>", action = "close_node" },
