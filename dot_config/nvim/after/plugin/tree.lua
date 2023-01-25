@@ -25,8 +25,39 @@ next_sibling = function(node, closed)
     return next_sibling(node.parent)
 end
 
-local next_dir
-next_dir = function(node, closed)
+local last_child_or_self
+last_child_or_self = function(node)
+    if node.type ~= "directory" then return node end
+    if not node.open then return node end
+    local children = node.nodes
+    if #children == 0 then return node end
+    for i = #children, 1, -1 do
+        local child = children[i]
+        if child.type == "directory" then return last_child_or_self(child) end
+    end
+    return node
+end
+
+local prev_sibling
+prev_sibling = function(node, closed)
+    if not node or not node.parent then return end
+    closed = closed or false
+    local siblings = node.parent.nodes
+    local s = #siblings
+    repeat
+        if siblings[s] == node then break end
+        s = s - 1
+        -- We sort of don't need to iterate all the way to the end here,
+        -- if we reach one before the end here and haven't matched then
+        -- we already know there's no next sibling.
+    until (s == 0)
+    for i = s - 1, 1, -1 do
+        if siblings[i].type == "directory" then return last_child_or_self(siblings[i]) end
+    end
+    return node.parent
+end
+
+local next_dir = function(node, closed)
     if not node then return end
     closed = closed or false
     if node.type == "directory" and node.open then
@@ -37,8 +68,16 @@ next_dir = function(node, closed)
     return next_sibling(node, closed)
 end
 
-local down_action
-down_action = function(node)
+local prev_dir = function(node, closed)
+    if not node then return end
+    return prev_sibling(node, closed)
+end
+
+local up_action = function(node)
+    focus_node(prev_dir(node))
+end
+
+local down_action = function(node)
     focus_node(next_dir(node))
 end
 
@@ -69,11 +108,8 @@ require("nvim-tree").setup({
                 -- allow tab to fall through to my default
                 { key = "<Tab>", action = "" },
                 { key = "<Left>", action = "close_node" },
-                { key = "∂", action = "node debug", action_cb = function(node)
-                    P(node)
-                end },
-                { key = "<Down>", action = "next_sibling", action_cb = down_action },
-                { key = "<Up>", action = "prev_sibling" },
+                { key = "<Down>", action = " Dir", action_cb = down_action },
+                { key = "<Up>", action = " Dir", action_cb = up_action },
                 { key = "<Right>", action = "Expand", action_cb = right_action },
                 -- use + as inverse of - (dir_up)
                 { key = "+", action = "cd" },
