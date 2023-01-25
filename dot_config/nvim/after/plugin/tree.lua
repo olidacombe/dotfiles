@@ -1,5 +1,6 @@
 local wk = require("od.which-key")
 local Api = require "nvim-tree.api"
+local quickcycle = require("od.quickcycle")
 
 local focus_node = function(node)
     if not node then return end
@@ -124,4 +125,45 @@ wk.register_normal({
     w = {
         b = { "<cmd>NvimTreeToggle<CR>", "Browser" },
     },
+})
+
+--               _____      ______                     ______
+-- ______ ____  ____(_)________  /____________  __________  /____
+-- _  __ `/  / / /_  /_  ___/_  //_/  ___/_  / / /  ___/_  /_  _ \
+-- / /_/ // /_/ /_  / / /__ _  ,<  / /__ _  /_/ // /__ _  / /  __/
+-- \__, / \__,_/ /_/  \___/ /_/|_| \___/ _\__, / \___/ /_/  \___/
+--   /_/                                 /____/
+--
+local quickcycle_mappings = quickcycle.new({
+    { "diag", next = "normal ]e", prev = "normal [e" },
+    { "change", next = "normal ]c", prev = "normal [c" },
+})
+
+local tree_buffers = {}
+
+local od_tree = vim.api.nvim_create_augroup("Od_Tree", {})
+
+local autocmd = vim.api.nvim_create_autocmd
+autocmd("BufEnter", {
+    group = od_tree,
+    pattern = "*",
+    callback = function()
+        if vim.bo.ft ~= "NvimTree" then return end
+        local bufnr = vim.api.nvim_get_current_buf()
+        if tree_buffers[bufnr] then return end
+        tree_buffers[bufnr] = true
+        quickcycle.push(quickcycle_mappings)
+    end
+})
+
+autocmd("BufLeave", {
+    group = od_tree,
+    pattern = "*",
+    callback = function()
+        if vim.bo.ft ~= "NvimTree" then return end
+        local bufnr = vim.api.nvim_get_current_buf()
+        if not tree_buffers[bufnr] then return end
+        tree_buffers[bufnr] = nil
+        quickcycle.pop()
+    end
 })

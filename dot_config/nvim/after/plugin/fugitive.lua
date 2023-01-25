@@ -12,13 +12,25 @@ local fugitive_buffers = {}
 local Od_Fugitive = vim.api.nvim_create_augroup("Od_Fugitive", {})
 
 local autocmd = vim.api.nvim_create_autocmd
+autocmd("BufEnter", {
+    group = Od_Fugitive,
+    pattern = "*",
+    callback = function()
+        if vim.bo.ft ~= "fugitive" then return end
+
+        local bufnr = vim.api.nvim_get_current_buf()
+
+        if fugitive_buffers[bufnr] then return end
+        fugitive_buffers[bufnr] = true
+        quickcycle.push(fugitive_quickcycle_mappings)
+    end
+})
+
 autocmd("BufWinEnter", {
     group = Od_Fugitive,
     pattern = "*",
     callback = function()
-        if vim.bo.ft ~= "fugitive" then
-            return
-        end
+        if vim.bo.ft ~= "fugitive" then return end
 
         local bufnr = vim.api.nvim_get_current_buf()
 
@@ -49,22 +61,16 @@ autocmd("BufWinEnter", {
         }
 
         whichkey.register(mappings, opts)
-
-
-        fugitive_buffers[bufnr] = true
-        quickcycle.push(fugitive_quickcycle_mappings)
     end,
 })
 
-autocmd("BufWinLeave", {
+autocmd("BufLeave", {
     group = Od_Fugitive,
     pattern = "*",
     callback = function()
-        if vim.bo.ft ~= "fugitive" then
-            return
-        end
-
+        if vim.bo.ft ~= "fugitive" then return end
         local bufnr = vim.api.nvim_get_current_buf()
+        if not fugitive_buffers[bufnr] then return end
         fugitive_buffers[bufnr] = nil
         quickcycle.pop()
     end
