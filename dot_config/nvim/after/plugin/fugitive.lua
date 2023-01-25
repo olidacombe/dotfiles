@@ -1,5 +1,12 @@
 local whichkey = require "which-key"
 local register_normal = require("od.which-key").register_normal
+local quickcycle = require("od.quickcycle")
+
+local fugitive_quickcycle_mappings = quickcycle.new({
+    { "change", next = "normal ]/=", prev = "normal [/=" },
+})
+
+local fugitive_buffers = {}
 
 -- Tool up the fugitive buffers - props to [ThePrimeagen](https://github.com/ThePrimeagen/init.lua/blob/master/after/plugin/fugitive.lua)
 local Od_Fugitive = vim.api.nvim_create_augroup("Od_Fugitive", {})
@@ -43,7 +50,24 @@ autocmd("BufWinEnter", {
 
         whichkey.register(mappings, opts)
 
+
+        fugitive_buffers[bufnr] = true
+        quickcycle.push(fugitive_quickcycle_mappings)
     end,
+})
+
+autocmd("BufWinLeave", {
+    group = Od_Fugitive,
+    pattern = "*",
+    callback = function()
+        if vim.bo.ft ~= "fugitive" then
+            return
+        end
+
+        local bufnr = vim.api.nvim_get_current_buf()
+        fugitive_buffers[bufnr] = nil
+        quickcycle.pop()
+    end
 })
 
 -- Global mappings

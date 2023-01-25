@@ -21,6 +21,12 @@ Sync plugins:
 I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](https://github.com/romkatv/powerlevel10k#fonts) you'll probably want the [NerdFonts version](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode).
 
 
+## TODO
+
++ Push files to harpoon direct from tree mapping
++ A mapping which take a line like `use('bla/whatever.nvim')` and takes you to the git repo in your browser
+
+
 ## Small Things to Try Out
 
 + [toggleterm](https://github.com/akinsho/toggleterm.nvim)

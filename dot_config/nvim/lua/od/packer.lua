@@ -24,6 +24,12 @@ return require('packer').startup(function(use)
     -- Neodev
     use 'folke/neodev.nvim'
 
+    -- ____ ___  ____ _    _ ____ _  _
+    -- |__| |__] |  | |    | [__  |__|
+    -- |  | |__] |__| |___ | ___] |  |
+    --
+    use('tpope/vim-abolish')
+
     -- Fugitive
     use('tpope/vim-fugitive')
 
