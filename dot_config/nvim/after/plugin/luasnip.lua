@@ -67,6 +67,31 @@ ls.add_snippets(nil, {
             end, { 1 }), i(1), i(0) })
         ),
     },
+    python = {
+        -- raycast script
+        s({ trig = "raycast", docstring = "Raycast Script " },
+            fmt([[
+              #!/usr/bin/env python3
+
+              # Required parameters:
+              # @raycast.schemaVersion 1
+              # @raycast.title {}
+              # @raycast.mode {}
+              
+              # Optional parameters:
+              # @raycast.icon 🤖
+              
+              # Documentation:
+              # @raycast.description {}
+
+              {}
+            ]], {
+                i(1), -- title
+                c(2, { t "compact", t "silent", t "fullOutput", t "inline" }), -- mode
+                i(3), --description
+                i(0)
+            }))
+    },
     rust = {
         -- Adding test module
         s(

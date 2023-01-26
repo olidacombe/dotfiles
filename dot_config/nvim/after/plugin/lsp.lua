@@ -14,10 +14,11 @@ lsp.setup_nvim_cmp({
 })
 
 lsp.ensure_installed({
-    'tsserver',
     'eslint',
+    'pyright',
+    'rust_analyzer',
     'sumneko_lua',
-    'rust_analyzer'
+    'tsserver',
 })
 
 -- Fix Undefined global 'vim'
