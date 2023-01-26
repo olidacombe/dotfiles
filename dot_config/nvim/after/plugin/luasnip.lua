@@ -1,5 +1,6 @@
 local ls = require("luasnip")
 local extras = require("luasnip.extras")
+local sn = ls.snippet_node
 
 ls.config.set_config({ update_events = 'TextChanged,TextChangedI' })
 
@@ -18,7 +19,7 @@ vim.keymap.set({ "i", "s" }, "<c-g>", function()
 end, { silent = true })
 
 -- set choice_node selection key
-vim.keymap.set("i", "<c-n>", function()
+vim.keymap.set({ "i", "s" }, "<c-n>", function()
     if ls.choice_active() then
         ls.change_choice(1)
     end
@@ -80,15 +81,25 @@ ls.add_snippets(nil, {
               
               # Optional parameters:
               # @raycast.icon 🤖
+              # @raycast.packageName{}
+              # @raycast.needsConfirmation {}
+              {}
               
               # Documentation:
               # @raycast.description {}
+              # @raycast.author {}
+              # @raycast.authorURL{}
 
               {}
             ]], {
                 i(1), -- title
                 c(2, { t "compact", t "silent", t "fullOutput", t "inline" }), -- mode
-                i(3), --description
+                c(3, { t "", sn(nil, { t " ", i(1, "pkg") }) }), -- package name
+                c(4, { t "false", t "true" }), -- needs confirmation
+                c(5, { t "", t '# @raycast.argument1 { "type": "text", "placeholder": "Placeholder" }' }), -- argument boilerplate
+                i(6), --description
+                c(7, { t "Oli Dacombe", i(nil, "Author") }),
+                c(8, { t "", sn(nil, { t " https://", i(1, "example.com") }) }), -- author URL
                 i(0)
             }))
     },
