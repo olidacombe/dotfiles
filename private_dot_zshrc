@@ -161,6 +161,7 @@ alias gpl='git pull'
 alias ghprcp='gh pr view --json url | jq -r .url | pbcopy'
 alias vi="nvim"
 alias vim="nvim"
+alias tmkill='tmux list-sessions | fzf -m | awk -F: "{ print \$1 }" | while read sess; do tmux kill-session -t "$sess"; done'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

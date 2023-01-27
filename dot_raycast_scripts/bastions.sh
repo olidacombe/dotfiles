@@ -3,7 +3,7 @@
 # Required parameters:
 # @raycast.schemaVersion 1
 # @raycast.title bastions
-# @raycast.mode compact
+# @raycast.mode silent
 
 # Optional parameters:
 # @raycast.icon 🤖
@@ -21,4 +21,11 @@ set -euo pipefail
 APP='Terminal'
 SESSION='basties'
 
-osascript -e "tell app \"${APP}\" to do script \"tmux switch-client -t basties\""
+osascript << EOF
+tell app "${APP}" 
+    activate
+end tell
+tell app "${APP}" 
+    do script "tmux switch-client -t ${SESSION}"
+end tell
+EOF
