@@ -26,6 +26,10 @@ local mappings = {
     Y = { "\"+Y", "Yank line to Clipboard" },
 }
 
+mappings["<leader>"] = {
+    g = { ":echo resolve(expand('%:p'))<cr>", "Show full path" }
+}
+
 wk.register_normal(mappings)
 
 -- Visual Mode mappings
