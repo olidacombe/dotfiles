@@ -24,6 +24,7 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 ## TODO
 
 + A mapping which take a line like `use('bla/whatever.nvim')` and takes you to the git repo in your browser
++ reinstate a tree preview mapping (like what I think `<Tab>` previously did) - see the file while keeping focus on the tree buffer
 
 
 ## Small Things to Try Out
