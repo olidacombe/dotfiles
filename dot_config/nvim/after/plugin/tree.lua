@@ -111,14 +111,17 @@ require("nvim-tree").setup({
                 end },
                 -- allow tab to fall through to my default
                 { key = "<Tab>", action = "" },
+                -- preview alternative (since we nuke <Tab> above)
+                { key = "<cr>", action = "preview" },
+                -- fold-like motions
                 { key = "<Left>", action = "close_node" },
                 { key = "<Down>", action = " Dir", action_cb = down_action },
                 { key = "<Up>", action = " Dir", action_cb = up_action },
                 { key = "<Right>", action = "Expand", action_cb = right_action },
-                -- use + as inverse of - (dir_up)
-                { key = "+", action = "cd" },
                 { key = "zM", action = "Collapse all", action_cb = Api.tree.collapse_all },
                 { key = "zR", action = "Expand all", action_cb = Api.tree.expand_all },
+                -- use + as inverse of - (dir_up)
+                { key = "+", action = "cd" },
             },
         },
     },
