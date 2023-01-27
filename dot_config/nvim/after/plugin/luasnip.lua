@@ -38,6 +38,38 @@ end, {
 local c, i, f, s, t = ls.choice_node, ls.insert_node, ls.function_node, ls.s, ls.text_node
 local fmt = require("luasnip.extras.fmt").fmt
 
+local raycast_preamble = [[
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title {}
+# @raycast.mode {}
+
+# Optional parameters:
+# @raycast.icon 🤖
+# @raycast.packageName{}
+# @raycast.needsConfirmation {}
+{}
+
+# Documentation:
+# @raycast.description {}
+# @raycast.author {}
+# @raycast.authorURL{}
+]]
+
+local raycast_preamble_nodes = function()
+    return {
+        i(1), -- title
+        c(2, { t "compact", t "silent", t "fullOutput", t "inline" }), -- mode
+        c(3, { t "", sn(nil, { t " ", i(1, "pkg") }) }), -- package name
+        c(4, { t "false", t "true" }), -- needs confirmation
+        c(5, { t "", t '# @raycast.argument1 { "type": "text", "placeholder": "Placeholder" }' }), -- argument boilerplate
+        i(6), --description
+        c(7, { t "Oli Dacombe", i(nil, "Author") }),
+        c(8, { t "", sn(nil, { t " https://", i(1, "example.com") }) }), -- author URL
+        i(0)
+    }
+end
+
 ls.add_snippets(nil, {
     lua = {
         -- OOP Boilerplate
@@ -71,37 +103,8 @@ ls.add_snippets(nil, {
     python = {
         -- raycast script
         s({ trig = "raycast", docstring = "Raycast Script " },
-            fmt([[
-              #!/usr/bin/env python3
-
-              # Required parameters:
-              # @raycast.schemaVersion 1
-              # @raycast.title {}
-              # @raycast.mode {}
-              
-              # Optional parameters:
-              # @raycast.icon 🤖
-              # @raycast.packageName{}
-              # @raycast.needsConfirmation {}
-              {}
-              
-              # Documentation:
-              # @raycast.description {}
-              # @raycast.author {}
-              # @raycast.authorURL{}
-
-              {}
-            ]], {
-                i(1), -- title
-                c(2, { t "compact", t "silent", t "fullOutput", t "inline" }), -- mode
-                c(3, { t "", sn(nil, { t " ", i(1, "pkg") }) }), -- package name
-                c(4, { t "false", t "true" }), -- needs confirmation
-                c(5, { t "", t '# @raycast.argument1 { "type": "text", "placeholder": "Placeholder" }' }), -- argument boilerplate
-                i(6), --description
-                c(7, { t "Oli Dacombe", i(nil, "Author") }),
-                c(8, { t "", sn(nil, { t " https://", i(1, "example.com") }) }), -- author URL
-                i(0)
-            }))
+            fmt("#!/usr/bin/env python\n\n" .. raycast_preamble .. "\n\n{}", raycast_preamble_nodes())
+        )
     },
     rust = {
         -- Adding test module
@@ -141,9 +144,12 @@ ls.add_snippets(nil, {
             }
             ))
     },
-
     sh = {
         -- Basic bash preamble
         s("bash", fmt("#!/usr/bin/env bash\n\nset -euo pipefail\n\n\n", {})),
+        -- raycast script
+        s({ trig = "raycast", docstring = "Raycast Script 󱆃" },
+            fmt("#!/usr/bin/env bash\n\n" .. raycast_preamble .. "\nset -euo pipefail\n\n{}", raycast_preamble_nodes())
+        ),
     },
 })
