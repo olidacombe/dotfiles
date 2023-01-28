@@ -60,6 +60,23 @@ return require('packer').startup(function(use)
     -- Nordic Colourscheme
     use('AlexvZyl/nordic.nvim')
 
+    -- Neotest
+    use("nvim-neotest/neotest-plenary")
+    use {
+        "nvim-neotest/neotest",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "antoinemadec/FixCursorHold.nvim",
+            "nvim-neotest/neotest-go",
+            "haydenmeade/neotest-jest",
+            "nvim-neotest/neotest-python",
+            "nvim-neotest/neotest-plenary",
+            "rouge8/neotest-rust",
+            "nvim-neotest/neotest-vim-test",
+        }
+    }
+
     -- Harpoon
     use('theprimeagen/harpoon')
 
@@ -148,9 +165,6 @@ return require('packer').startup(function(use)
         -- },
         tag = 'nightly' -- optional, updated every week. (see issue #1193)
     }
-
-    -- vim-test
-    use('vim-test/vim-test')
 
     -- TokyoNight Colourscheme
     use('folke/tokyonight.nvim')

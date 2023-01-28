@@ -28,7 +28,7 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 
 ## Small Things to Try Out
 
-+ [toggleterm](https://github.com/akinsho/toggleterm.nvim)
++ [toggleterm](https://github.com/akinsho/toggleterm.nvim) or [bufterm.nvim](https://github.com/boltlessengineer/bufterm.nvim)
 + A markdown link snippet
 + [lspkind](https://github.com/onsails/lspkind.nvim)
 + [fzf](https://github.com/junegunn/fzf.vim) ?

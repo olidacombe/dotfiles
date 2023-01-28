@@ -86,5 +86,7 @@ lsp.set_server_config({
 })
 
 -- configure neodev before lsp
-require("neodev").setup()
+require("neodev").setup({
+    library = { plugins = { "neotest" }, types = true },
+})
 lsp.setup()
