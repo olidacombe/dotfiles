@@ -82,25 +82,19 @@ return require('packer').startup(function(use)
     -- https://alpha2phi.medium.com/neovim-for-beginners-debugging-using-dap-44626a767f57 was handy
     use {
         "mfussenegger/nvim-dap",
-        opt = true,
-        event = "BufReadPre",
-        module = { "dap" },
-        wants = { "nvim-dap-virtual-text", "nvim-dap-ui", "nvim-dap-python", "which-key.nvim" },
+        -- opt = true,
+        -- event = "BufReadPre",
+        -- module = { "dap" },
+        -- wants = { "nvim-dap-virtual-text", "nvim-dap-ui", "nvim-dap-python", "which-key.nvim" },
         requires = {
             "theHamsta/nvim-dap-virtual-text",
             "rcarriga/nvim-dap-ui",
-            "mfussenegger/nvim-dap-python",
+            -- "mfussenegger/nvim-dap-python",
             "nvim-telescope/telescope-dap.nvim",
-            { "leoluz/nvim-dap-go", module = "dap-go" },
-            { "jbyuki/one-small-step-for-vimkind", module = "osv" },
+            -- { "leoluz/nvim-dap-go", module = "dap-go" },
+            -- { "jbyuki/one-small-step-for-vimkind", module = "osv" },
         },
-        config = function()
-            require("config.dap").setup()
-        end,
     }
-
-    -- rust-tools.nvim (for debugging)
-    use 'simrat39/rust-tools.nvim'
 
     -- Harpoon
     use('theprimeagen/harpoon')
@@ -200,7 +194,7 @@ return require('packer').startup(function(use)
     -- wilder.nvim
     use('gelguy/wilder.nvim')
 
-    -- Install tools like `codelldb` with Mason
+    -- Install tools via Mason which aren't LSP servers
     use('WhoIsSethDaniel/mason-tool-installer.nvim')
 
 end)
