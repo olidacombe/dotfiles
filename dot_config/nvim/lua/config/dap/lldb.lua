@@ -7,10 +7,10 @@ M.setup = function()
 
     dap.adapters.lldb = {
         type = 'server',
-        port = '13000',
+        port = "${port}",
         executable = {
             command = mason_root_dir .. "/bin/codelldb",
-            args = { '--port', '13000' },
+            args = { '--port', "${port}" },
         },
     }
 end
