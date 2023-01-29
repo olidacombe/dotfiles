@@ -16,6 +16,11 @@ Sync plugins:
 :PackerSync
 ```
 
+See where mappings come from (all prefixed with `<leader>` in this example):
+```
+:verbose nmap <leader>
+``
+
 # Font
 
 I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](https://github.com/romkatv/powerlevel10k#fonts) you'll probably want the [NerdFonts version](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode).
@@ -23,6 +28,7 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 
 ## TODO
 
++ Quickcycle mapping for `DiffviewFiles` (instead of `<(S)-Tab>`)
 + A mapping which take a line like `use('bla/whatever.nvim')` and takes you to the git repo in your browser
 
 

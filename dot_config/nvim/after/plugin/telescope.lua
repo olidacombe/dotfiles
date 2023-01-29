@@ -5,10 +5,6 @@ local builtin = require("telescope.builtin")
 local telescope = require("telescope")
 
 register_normal({
-    d = {
-        name = "Document",
-        s = { builtin.lsp_document_symbols, "Symbols" },
-    },
     f = {
         name = "Fuzzy Find",
         {
@@ -23,6 +19,8 @@ register_normal({
             b = { builtin.current_buffer_fuzzy_find, "Within buffer" },
             B = { builtin.buffers, "Buffers" },
             h = { builtin.help_tags, "Help" },
+            s = { builtin.lsp_document_symbols, "Symbols" },
+            S = { builtin.lsp_workspace_symbols, "Symbols" },
             q = { builtin.quickfix, "Quickfix" },
         }
     },
@@ -30,10 +28,6 @@ register_normal({
         b = { builtin.git_branches, "Branch" },
     },
     k = { builtin.keymaps, "Keymaps" },
-    w = {
-        name = "Workspace",
-        s = { builtin.lsp_workspace_symbols, "Symbols" },
-    },
 })
 
 local has_selections = function(prompt_bufnr)
