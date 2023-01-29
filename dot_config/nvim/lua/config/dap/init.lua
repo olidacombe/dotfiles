@@ -1,9 +1,30 @@
 local M = {}
 
 local function configure()
-    -- previoulsy called DAPIntsall setup, but now that's a mess
-    -- and I have a suspicion Mason.nvim might now take care of it?
-    -- https://github.com/Pocco81/dap-buddy.nvim/issues/71#issuecomment-1176926702
+    local dap_breakpoint = {
+        error = {
+            text = "🟥",
+            texthl = "LspDiagnosticsSignError",
+            linehl = "",
+            numhl = "",
+        },
+        rejected = {
+            text = "",
+            texthl = "LspDiagnosticsSignHint",
+            linehl = "",
+            numhl = "",
+        },
+        stopped = {
+            text = "⭐️",
+            texthl = "LspDiagnosticsSignInformation",
+            linehl = "DiagnosticUnderlineInfo",
+            numhl = "LspDiagnosticsSignInformation",
+        },
+    }
+
+    vim.fn.sign_define("DapBreakpoint", dap_breakpoint.error)
+    vim.fn.sign_define("DapStopped", dap_breakpoint.stopped)
+    vim.fn.sign_define("DapBreakpointRejected", dap_breakpoint.rejected)
 end
 
 local function configure_exts()
