@@ -9,6 +9,13 @@ local quickcycle_mappings = quickcycle.new({
         next = "normal ]x", prev = "normal [x" },
 })
 
+local file_panel_common_mappings = {
+    { "n", "<C-g>", actions.select_prev_entry, { desc = "Next" } },
+    { "n", "<C-c>", actions.select_next_entry, { desc = "Prev" } },
+    ["<tab>"] = false,
+    ["<s-tab>"] = false,
+}
+
 require("diffview").setup({
     view = {
         -- Configure the layout and behavior of different types of views.
@@ -42,12 +49,8 @@ require("diffview").setup({
         view_leave = quickcycle.pop
     },
     keymaps = {
-        file_panel = {
-            { "n", "<C-g>", actions.select_prev_entry, { desc = "Next" } },
-            { "n", "<C-c>", actions.select_next_entry, { desc = "Prev" } },
-            ["<tab>"] = false,
-            ["<s-tab>"] = false,
-        },
+        file_panel = file_panel_common_mappings,
+        file_history_panel = file_panel_common_mappings,
     },
 })
 -- try to get a nice fill and fail
@@ -57,6 +60,7 @@ require("diffview").setup({
 local mappings = {
     g = {
         D = { "<cmd>DiffviewOpen<CR>", "Diff" },
+        h = { "<cmd>DiffviewFileHistory %<CR>", "File History" },
     }
 }
 
