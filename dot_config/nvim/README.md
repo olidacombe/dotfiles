@@ -28,7 +28,6 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 
 ## TODO
 
-+ Quickcycle mapping for `DiffviewFiles` (instead of `<(S)-Tab>`)
 + A mapping which take a line like `use('bla/whatever.nvim')` and takes you to the git repo in your browser
 
 
