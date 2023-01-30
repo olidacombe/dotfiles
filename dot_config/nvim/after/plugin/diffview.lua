@@ -25,10 +25,6 @@ require("diffview").setup({
             -- Config for changed files, and staged files in diff views.
             layout = "diff2_horizontal",
         },
-        keymaps = {
-            { "n", "<C-g>", actions.prev_conflict, { desc = "In the merge-tool: jump to the previous conflict" } },
-            { "n", "<C-c>", actions.next_conflict, { desc = "In the merge-tool: jump to the next conflict" } },
-        },
         merge_tool = {
             -- Config for conflicted files in diff views during a merge or rebase.
             layout = "diff3_mixed",
@@ -44,6 +40,14 @@ require("diffview").setup({
             quickcycle.push(quickcycle_mappings)
         end,
         view_leave = quickcycle.pop
+    },
+    keymaps = {
+        file_panel = {
+            { "n", "<C-g>", actions.select_prev_entry, { desc = "Next" } },
+            { "n", "<C-c>", actions.select_next_entry, { desc = "Prev" } },
+            ["<tab>"] = false,
+            ["<s-tab>"] = false,
+        },
     },
 })
 -- try to get a nice fill and fail
