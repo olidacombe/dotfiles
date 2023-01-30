@@ -62,7 +62,7 @@ return require('packer').startup(function(use)
 
     -- Neotest
     use("nvim-neotest/neotest-plenary")
-    use {
+    use({
         "nvim-neotest/neotest",
         requires = {
             "nvim-lua/plenary.nvim",
@@ -73,10 +73,11 @@ return require('packer').startup(function(use)
             "nvim-neotest/neotest-python",
             "nvim-neotest/neotest-plenary",
             -- "rouge8/neotest-rust",
-            { "MarkEmmons/neotest-rust", { tag = "feature/dap-support" } }, -- temp until https://github.com/rouge8/neotest-rust/pull/19
+            -- temp(1) until https://github.com/rouge8/neotest-rust/pull/19
+            { "MarkEmmons/neotest-rust", branch = "feature/dap-support" },
             "nvim-neotest/neotest-vim-test",
         }
-    }
+    })
 
     -- Debugging
     -- https://alpha2phi.medium.com/neovim-for-beginners-debugging-using-dap-44626a767f57 was handy
