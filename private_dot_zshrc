@@ -161,6 +161,13 @@ alias gpl='git pull'
 alias ghprcp='gh pr view --json url | jq -r .url | pbcopy'
 alias vi="nvim"
 alias vim="nvim"
+#  ____  __.__.__  .__                       
+# |    |/ _|__|  | |  |   ___________  ______
+# |      < |  |  | |  | _/ __ \_  __ \/  ___/
+# |    |  \|  |  |_|  |_\  ___/|  | \/\___ \ 
+# |____|__ \__|____/____/\___  >__|  /____  >
+#         \/                 \/           \/ 
+alias dkill="docker ps | sed -e '1d' | fzf -m | awk '{ print \$1 }' | xargs docker kill"
 alias tmkill='tmux list-sessions | fzf -m | awk -F: "{ print \$1 }" | while read sess; do tmux kill-session -t "$sess"; done'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

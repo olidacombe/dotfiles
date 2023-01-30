@@ -19,8 +19,8 @@ register_normal({
             b = { builtin.current_buffer_fuzzy_find, "Within buffer" },
             B = { builtin.buffers, "Buffers" },
             h = { builtin.help_tags, "Help" },
-            s = { builtin.lsp_document_symbols, "Symbols" },
-            S = { builtin.lsp_workspace_symbols, "Symbols" },
+            s = { builtin.lsp_document_symbols, "Document Symbols" },
+            S = { builtin.lsp_workspace_symbols, "Workspace Symbols" },
             q = { builtin.quickfix, "Quickfix" },
         }
     },
