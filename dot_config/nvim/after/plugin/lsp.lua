@@ -15,9 +15,12 @@ lsp.setup_nvim_cmp({
 
 lsp.ensure_installed({
     'eslint',
+    'graphql',
     'pyright',
     'rust_analyzer',
     'sumneko_lua',
+    'svelte',
+    'tailwindcss',
     'tsserver',
 })
 
@@ -31,6 +34,19 @@ lsp.configure('sumneko_lua', {
         }
     }
 })
+
+lsp.configure('svelte', {
+    settings = {
+        svelte = {
+            ['enable-ts-plugin'] = true
+        }
+    }
+})
+
+-- TODO why is `tsserver` not attaching?
+-- lsp.configure('tsserver', {
+--     filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
+-- })
 
 local on_attach = function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
