@@ -26,6 +26,6 @@ tell app "${APP}"
     activate
 end tell
 tell app "${APP}" 
-    do script "tmux switch-client -t ${SESSION}"
+    do script "$(dirname "$0")/tmux-switch.sh \"$SESSION\""
 end tell
 EOF
