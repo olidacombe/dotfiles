@@ -43,16 +43,11 @@ lsp.configure('svelte', {
     }
 })
 
--- TODO why is `tsserver` not attaching?
--- lsp.configure('tsserver', {
---     filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
--- })
-
 local on_attach = function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
     if client.name == "eslint" then
-        vim.cmd.LspStop('eslint')
+        client.stop()
         return
     end
 
