@@ -147,6 +147,8 @@ ls.add_snippets(nil, {
     sh = {
         -- Basic bash preamble
         s("bash", fmt("#!/usr/bin/env bash\n\nset -euo pipefail\n\n\n", {})),
+        -- check if executable in path
+        s("isexe", fmt("command -v {} &> /dev/null {}", { i(1), i(0) })),
         -- raycast script
         s({ trig = "raycast", docstring = "Raycast Script 󱆃" },
             fmt("#!/usr/bin/env bash\n\n" .. raycast_preamble .. "\nset -euo pipefail\n\n{}", raycast_preamble_nodes())

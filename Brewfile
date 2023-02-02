@@ -45,7 +45,7 @@ brew "lolcat"
 brew "luarocks"
 brew "moreutils"
 brew "mysql-client"
-brew "neovim", link: false
+brew "neovim", args: ["HEAD"]
 brew "nghttp2"
 brew "ninja"
 brew "nmap"
@@ -97,7 +97,7 @@ brew "hashicorp/tap/terraform", link: false
 brew "yt-dlp/taps/yt-dlp"
 cask "bloomrpc"
 cask "font-fira-code"
-cask "gcc-arm-embedded"
+# cask "gcc-arm-embedded"
 cask "insomnia"
 cask "key-codes"
 cask "openscad"
