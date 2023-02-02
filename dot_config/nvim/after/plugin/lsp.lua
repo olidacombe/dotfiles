@@ -22,6 +22,7 @@ lsp.ensure_installed({
     'svelte',
     'tailwindcss',
     'tsserver',
+    'yamlls',
 })
 
 -- Fix Undefined global 'vim'
