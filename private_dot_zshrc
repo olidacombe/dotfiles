@@ -184,6 +184,8 @@ export NVM_DIR="$HOME/.nvm"
 
 if [ -f "${HOME}/.zephyrrc" ]; then . "${HOME}/.zephyrrc"; fi
 
+if [ -f "${HOME}/export-esp.sh" ]; then . "${HOME}/export-esp.sh"; fi
+
 if [ -e /Users/odacombe/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/odacombe/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
