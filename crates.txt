@@ -1,0 +1,24 @@
+cargo-audit
+cargo-binstall
+cargo-edit
+cargo-espflash
+cargo-expand
+cargo-generate
+cargo-insta # snapshot testing 😎
+cargo-mutants
+cargo-nextest
+cargo-pio
+cargo-readme
+cargo-udeps
+cargo-watch
+cargo-workspaces
+cross
+espflash
+espmonitor
+espup
+git-delta
+ldproxy
+lemmeknow
+stylua
+tauri-cli
+watchexec-cli

@@ -7,17 +7,17 @@ local mappings = {
     a = { mark.add_file, "Harpoon Mark" },
     e = { ui.toggle_quick_menu, "Harpoon List" },
     E = { ":Telescope harpoon marks<CR>", "Harpoon Telescope" },
-    X = { function()
-        vim.ui.input({
-            prompt = "Command: ",
-        }, function(input)
-            if input then
-                vim.api.nvim_command(":X " .. input)
-            else
-                print "Command cancelled"
-            end
-        end)
-    end, "Execute in Terminal" },
+    -- X = { function()
+    --     vim.ui.input({
+    --         prompt = "Command: ",
+    --     }, function(input)
+    --         if input then
+    --             vim.api.nvim_command(":X " .. input)
+    --         else
+    --             print "Command cancelled"
+    --         end
+    --     end)
+    -- end, "Execute in Terminal" },
 }
 
 register_normal(mappings)
