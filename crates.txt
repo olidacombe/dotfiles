@@ -13,11 +13,11 @@ cargo-udeps
 cargo-watch
 cargo-workspaces
 cross
-espflash
-espmonitor
+#espflash
+#espmonitor
 espup
 git-delta
-ldproxy
+#ldproxy
 lemmeknow
 stylua
 tauri-cli
