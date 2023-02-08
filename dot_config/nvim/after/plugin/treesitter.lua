@@ -48,3 +48,15 @@ vim.api.nvim_create_autocmd("CmdwinEnter", {
     group = "cmdwin_treesitter",
     desc = "Disable treesitter's incremental selection in Command-line window",
 })
+
+-- ___  _    ____ _ _ ____ ____ ____ _  _ __ _ ___
+-- |--' |___ |--|  Y  |__, |--< [__] |__| | \| |__>
+--
+require "nvim-treesitter.configs".setup {
+    query_linter = {
+        enable = true,
+        use_virtual_text = true,
+        lint_events = { "BufWrite", "CursorHold" },
+    },
+}
+vim.keymap.set("n", "<leader>S", "<cmd>TSPlaygroundToggle<cr>", { desc = "Treesitter Playground" })

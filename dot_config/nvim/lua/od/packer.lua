@@ -4,11 +4,25 @@ return require('packer').startup(function(use)
     -- Comment.nvim
     use("numToStr/Comment.nvim")
 
+    --
+    --  @@@@@@   @@@@@@@
+    -- @@@@@@@@  @@@@@@@@
+    -- @@!  @@@  @@!  @@@
+    -- !@!  @!@  !@!  @!@
+    -- @!@  !@!  @!@  !@!
+    -- !@!  !!!  !@!  !!!
+    -- !!:  !!!  !!:  !!!
+    -- :!:  !:!  :!:  !:!
+    -- ::::: ::   :::: ::
+    --  : :  :   :: :  :
+    --
     -- Commentalist local dev
     use({
         "~/od/commentalist.nvim/",
         requires = "numToStr/Comment.nvim",
     })
+    -- Makemapper local dev
+    use({ "~/od/makemapper.nvim/", requires = "nvim-treesitter/nvim-treesitter" })
 
     -- DiffView
     use { 'sindrets/diffview.nvim',
