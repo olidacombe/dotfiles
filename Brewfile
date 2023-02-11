@@ -95,6 +95,7 @@ brew "youtube-dl"
 brew "yq"
 brew "hashicorp/tap/terraform", link: false
 brew "yt-dlp/taps/yt-dlp"
+cask "android-sdk"
 cask "bloomrpc"
 cask "font-fira-code"
 # cask "gcc-arm-embedded"
