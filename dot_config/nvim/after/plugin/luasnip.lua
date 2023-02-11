@@ -90,8 +90,10 @@ ls.add_snippets(nil, {
             fmt([[
                 local M = {{}}
 
+                {}
+
                 return M
-            ]], {})
+            ]], { i(0) })
         ),
         -- Require with same name
         s({ trig = "req", docstring = "Require with same name" },

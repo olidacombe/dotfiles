@@ -22,6 +22,7 @@ register_normal({
             b = { builtin.current_buffer_fuzzy_find, "Within buffer" },
             B = { builtin.buffers, "Buffers" },
             h = { builtin.help_tags, "Help" },
+            m = { "<cmd>Telescope makemapper<cr>", "Make Targets" },
             s = { builtin.lsp_document_symbols, "Document Symbols" },
             S = { builtin.lsp_workspace_symbols, "Workspace Symbols" },
             q = { builtin.quickfix, "Quickfix" },
@@ -67,3 +68,4 @@ telescope.setup({
 })
 
 telescope.load_extension('harpoon')
+telescope.load_extension('makemapper')

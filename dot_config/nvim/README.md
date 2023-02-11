@@ -19,7 +19,7 @@ Sync plugins:
 See where mappings come from (all prefixed with `<leader>` in this example):
 ```
 :verbose nmap <leader>
-``
+```
 
 # Font
 
@@ -28,6 +28,7 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 
 ## TODO
 
++ Fix `q:` editing :thinking: - definitely looks `statuscolumn`-related
 + A "make mappings" plugin.  Basically if your `Makefile` implements a special (overridable) target like `__nvim_mappings`, then the plugin will call this target to get the necessary info to create mappings under a (overridable) prefix.
 + `n,v` mapping to execute line/selection, maybe in a floating term or whatever
 + A mapping which take a line like `use('bla/whatever.nvim')` and takes you to the git repo in your browser
