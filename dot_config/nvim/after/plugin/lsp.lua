@@ -18,7 +18,7 @@ lsp.ensure_installed({
     'graphql',
     'pyright',
     'rust_analyzer',
-    'sumneko_lua',
+    'lua_ls',
     'svelte',
     'tailwindcss',
     'tsserver',
@@ -26,7 +26,7 @@ lsp.ensure_installed({
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
     settings = {
         Lua = {
             diagnostics = {

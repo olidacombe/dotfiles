@@ -1,8 +1,25 @@
-vim.cmd.packadd("packer.nvim")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
 
-return require('packer').startup(function(use)
+local opts = {
+    dev = {
+        path = "~/od",
+    },
+}
+
+local plugins = {
     -- Comment.nvim
-    use("numToStr/Comment.nvim")
+    "numToStr/Comment.nvim",
 
     --
     --  @@@@@@   @@@@@@@
@@ -17,41 +34,46 @@ return require('packer').startup(function(use)
     --  : :  :   :: :  :
     --
     -- Commentalist local dev
-    use({
-        "~/od/commentalist.nvim/",
-        requires = "numToStr/Comment.nvim",
-    })
+    {
+        "olidacombe/commentalist.nvim",
+        dependencies = "numToStr/Comment.nvim",
+        dev = true,
+    },
     -- Makemapper local dev
-    use({ "~/od/makemapper.nvim/", requires = "nvim-treesitter/nvim-treesitter" })
+    {
+        "olidacombe/makemapper.nvim",
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        dev = true,
+    },
 
     -- DiffView
-    use { 'sindrets/diffview.nvim',
-        requires = {
+    { 'sindrets/diffview.nvim',
+        dependencies = {
             { 'nvim-lua/plenary.nvim' },
             { 'nvim-tree/nvim-web-devicons' },
         }
-    }
+    },
 
     -- editorconfig.org
-    use('editorconfig/editorconfig-vim')
+    'editorconfig/editorconfig-vim',
 
     -- Neodev
-    use 'folke/neodev.nvim'
+    'folke/neodev.nvim',
 
     -- ____ ___  ____ _    _ ____ _  _
     -- |__| |__] |  | |    | [__  |__|
     -- |  | |__] |__| |___ | ___] |  |
     --
-    use('tpope/vim-abolish')
+    'tpope/vim-abolish',
 
     -- Fugitive
-    use('tpope/vim-fugitive')
+    'tpope/vim-fugitive',
 
     -- GitSigns
-    use('lewis6991/gitsigns.nvim')
+    'lewis6991/gitsigns.nvim',
 
     -- Surround
-    use({ 'kylechui/nvim-surround', tag = "*" })
+    { 'kylechui/nvim-surround', version = "*" },
 
     -- =======================================================================
     -- =======================     ==========  ===============================
@@ -66,19 +88,19 @@ return require('packer').startup(function(use)
     -- =======================================================================
 
     -- Gruvbox Colourscheme
-    use('ellisonleao/gruvbox.nvim')
+    'ellisonleao/gruvbox.nvim',
 
     -- Kanagawa Colourscheme
-    use('rebelot/kanagawa.nvim')
+    'rebelot/kanagawa.nvim',
 
     -- Nordic Colourscheme
-    use('AlexvZyl/nordic.nvim')
+    'AlexvZyl/nordic.nvim',
 
     -- Neotest
-    use("nvim-neotest/neotest-plenary")
-    use({
+    "nvim-neotest/neotest-plenary",
+    {
         "nvim-neotest/neotest",
-        requires = {
+        dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "antoinemadec/FixCursorHold.nvim",
@@ -91,17 +113,17 @@ return require('packer').startup(function(use)
             { "MarkEmmons/neotest-rust", branch = "feature/dap-support" },
             "nvim-neotest/neotest-vim-test",
         }
-    })
+    },
 
     -- Debugging
     -- https://alpha2phi.medium.com/neovim-for-beginners-debugging-using-dap-44626a767f57 was handy
-    use {
+    {
         "mfussenegger/nvim-dap",
         -- opt = true,
         -- event = "BufReadPre",
         -- module = { "dap" },
         -- wants = { "nvim-dap-virtual-text", "nvim-dap-ui", "nvim-dap-python", "which-key.nvim" },
-        requires = {
+        dependencies = {
             "theHamsta/nvim-dap-virtual-text",
             "rcarriga/nvim-dap-ui",
             -- "mfussenegger/nvim-dap-python",
@@ -109,27 +131,27 @@ return require('packer').startup(function(use)
             -- { "leoluz/nvim-dap-go", module = "dap-go" },
             -- { "jbyuki/one-small-step-for-vimkind", module = "osv" },
         },
-    }
+    },
 
     -- Harpoon
-    use('theprimeagen/harpoon')
+    'theprimeagen/harpoon',
 
     -- Hop
-    use {
+    {
         'phaazon/hop.nvim',
         branch = 'v2',
-    }
+    },
 
     -- LSP status UI
-    use('j-hui/fidget.nvim')
+    'j-hui/fidget.nvim',
 
     -- UFO nice folding
-    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+    { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
 
     -- [LSP](https://github.com/VonHeikemen/lsp-zero.nvim)
-    use {
+    {
         'VonHeikemen/lsp-zero.nvim',
-        requires = {
+        dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },
             { 'williamboman/mason.nvim' },
@@ -147,65 +169,64 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
         }
-    }
+    },
 
     -- LUALine
-    use {
+    {
         'nvim-lualine/lualine.nvim',
-        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-    }
-
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+        dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
+    },
 
     -- Rose Pine colour scheme
-    use({
+    {
         'rose-pine/neovim',
         as = 'rose-pine',
-    })
+    },
 
-    use {
+    {
         "SmiteshP/nvim-navic",
-        requires = "neovim/nvim-lspconfig"
-    }
+        dependencies = "neovim/nvim-lspconfig"
+    },
 
     -- Telescope for fuzzy finding
-    use {
+    {
         'nvim-telescope/telescope.nvim', --tag = '0.1.0',
         -- or                            , branch = '0.1.x',
         branch = '0.1.x', -- got me past https://github.com/nvim-telescope/telescope.nvim/issues/2192
-        requires = { { 'nvim-lua/plenary.nvim' } }
-    }
+        dependencies = { { 'nvim-lua/plenary.nvim' } }
+    },
 
     -- Tmux pane navigation integration
-    use('christoomey/vim-tmux-navigator')
+    'christoomey/vim-tmux-navigator',
 
     -- Treesitter
-    use('nvim-treesitter/nvim-treesitter', { run = 'TSUpdate' })
-    use('nvim-treesitter/playground')
+    { 'nvim-treesitter/nvim-treesitter', build = 'TSUpdate' },
+    'nvim-treesitter/playground',
 
     -- Undotree
-    use('mbbill/undotree')
+    'mbbill/undotree',
 
     -- nvim-tree
-    use {
+    {
         'nvim-tree/nvim-tree.lua',
-        -- requires = {
+        -- dependencies = {
         --   'nvim-tree/nvim-web-devicons', -- optional, for file icons
         -- },
         tag = 'nightly' -- optional, updated every week. (see issue #1193)
-    }
+    },
 
     -- TokyoNight Colourscheme
-    use('folke/tokyonight.nvim')
+    'folke/tokyonight.nvim',
 
     -- WhichKey
-    use('folke/which-key.nvim')
+    'folke/which-key.nvim',
 
     -- wilder.nvim
-    use('gelguy/wilder.nvim')
+    'gelguy/wilder.nvim',
 
     -- Install tools via Mason which aren't LSP servers
-    use('WhoIsSethDaniel/mason-tool-installer.nvim')
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
 
-end)
+}
+
+return require('lazy').setup(plugins, opts)

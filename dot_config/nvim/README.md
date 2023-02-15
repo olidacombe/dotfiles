@@ -1,20 +1,6 @@
 # Notes
 
-## Manual Install Steps
-
-+ Install [packer.nvim](https://github.com/wbthomason/packer.nvim)
-
 ## Tips
-
-Source current file:
-```
-:so
-```
-
-Sync plugins:
-```
-:PackerSync
-```
 
 See where mappings come from (all prefixed with `<leader>` in this example):
 ```

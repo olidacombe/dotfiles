@@ -2,7 +2,7 @@
 require("od.set")
 
 require("od.globals")
-require("od.packer")
+require("od.lazy")
 require("od.remap")
 require("od.terminal")
 require("od.terraform")
