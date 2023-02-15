@@ -152,6 +152,16 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#                        __          __    ___      
+#                       /\ \        /\ \__/\_ \     
+#   ___      __   _ __  \_\ \    ___\ \ ,_\//\ \    
+# /' _ `\  /'__`\/\`'__\/'_` \  /'___\ \ \/ \ \ \   
+# /\ \/\ \/\  __/\ \ \//\ \L\ \/\ \__/\ \ \_ \_\ \_ 
+# \ \_\ \_\ \____\\ \_\\ \___,_\ \____\\ \__\/\____\
+#  \/_/\/_/\/____/ \/_/ \/__,_ /\/____/ \/__/\/____/
+#                                                   
+#                                                   
+alias docker="lima nerdctl"
 alias alpinism='docker run --privileged=true -v $(pwd):/summit -it alpine'
 alias code="open -a 'Visual Studio Code'"
 alias gcob='git branch -a | fzf | xargs git checkout'

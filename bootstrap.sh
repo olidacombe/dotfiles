@@ -61,4 +61,18 @@ PACKER_DIR="${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim"
 [[ -d "$PACKER_DIR" ]] || \
     git clone --depth 1 https://github.com/wbthomason/packer.nvim "$PACKER_DIR"
 
-
+#  __________ 
+# < firebase >
+#  ---------- 
+#   \            .    .     .   
+#    \      .  . .     `  ,     
+#     \    .; .  : .' :  :  : . 
+#      \   i..`: i` i.i.,i  i . 
+#       \   `,--.|i |i|ii|ii|i: 
+#            UooU\.'@@@@@@`.||' 
+#            \__/(@@@@@@@@@@)'  
+#                 (@@@@@@@@)    
+#                 `YY~~~~YY'    
+#                  ||    ||     
+#
+command -v firebase &> /dev/null && echo firebase found || curl -sL firebase.tools | bash

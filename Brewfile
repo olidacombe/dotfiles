@@ -41,10 +41,15 @@ brew "imagemagick"
 brew "influxdb@1"
 brew "jinja2-cli"
 brew "kcat"
+brew "kdoctor"
+# linux vms on mac
+brew "lima"
 brew "lolcat"
 brew "luarocks"
 brew "moreutils"
 brew "mysql-client"
+# ng docker-like cli for mac
+#brew "nerdctl"
 brew "neovim", args: ["HEAD"]
 brew "nghttp2"
 brew "ninja"
