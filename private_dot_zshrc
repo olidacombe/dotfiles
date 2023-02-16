@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -10,6 +12,10 @@ export EDITOR=nvim
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="$PATH:/usr/local/go/bin:${HOME}/bc/infrastructure/scripts:/usr/local/opt/influxdb@1/bin:${HOME}/bin:$(go env GOPATH)/bin:${HOME}/Library/Python/3.9/bin"
+
+if [ -d "${HOME}/.local/bin" ]; then
+    export PATH="${PATH}:${HOME}/.local/bin"
+fi
 
 SRE_SCRIPTS="${HOME}/bc/sre/sre-scripts"
 if [ -d "$SRE_SCRIPTS" ]; then

@@ -13,8 +13,8 @@ end, { silent = true })
 
 -- set jump back key
 vim.keymap.set({ "i", "s" }, "<c-g>", function()
-    if ls.jumpable(-1) then
-        ls.jump(-1)
+    if ls.jumpable( -1) then
+        ls.jump( -1)
     end
 end, { silent = true })
 
@@ -69,6 +69,26 @@ local raycast_preamble_nodes = function()
         i(0)
     }
 end
+
+local sh_snips = {
+    -- Basic bash preamble
+    s("bash", fmt("#!/usr/bin/env bash\n\nset -euo pipefail\n\n\n", {})),
+    -- check if executable in path
+    s("isexe", fmt("command -v {} &> /dev/null {}", { i(1), i(0) })),
+    -- raycast script
+    s({ trig = "raycast", docstring = "Raycast Script 󱆃" },
+        fmt("#!/usr/bin/env bash\n\n" .. raycast_preamble .. "\nset -euo pipefail\n\n{}", raycast_preamble_nodes())
+    ),
+    -- add dir to path
+    s({ trig = "path", docstring = "Add dir to $PATH" },
+        fmt([[
+                if [ -d "{}" ]; then
+                    export PATH="${{PATH}}:{}"
+                fi
+                {}
+            ]], { i(1), extras.rep(1), i(0) })
+    ),
+}
 
 ls.add_snippets(nil, {
     lua = {
@@ -134,9 +154,9 @@ ls.add_snippets(nil, {
                 }}
             ]], {
                 i(1), c(2, {
-                    t "",
-                    t "-> Result<()> "
-                }), i(0),
+                t "",
+                t "-> Result<()> "
+            }), i(0),
                 f(function(arg)
                     if string.find(arg[1][1], "Result") == nil then
                         return ""
@@ -146,14 +166,6 @@ ls.add_snippets(nil, {
             }
             ))
     },
-    sh = {
-        -- Basic bash preamble
-        s("bash", fmt("#!/usr/bin/env bash\n\nset -euo pipefail\n\n\n", {})),
-        -- check if executable in path
-        s("isexe", fmt("command -v {} &> /dev/null {}", { i(1), i(0) })),
-        -- raycast script
-        s({ trig = "raycast", docstring = "Raycast Script 󱆃" },
-            fmt("#!/usr/bin/env bash\n\n" .. raycast_preamble .. "\nset -euo pipefail\n\n{}", raycast_preamble_nodes())
-        ),
-    },
+    sh = sh_snips,
+    zsh = sh_snips,
 })
