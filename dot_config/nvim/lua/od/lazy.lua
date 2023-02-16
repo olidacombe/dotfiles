@@ -156,7 +156,7 @@ local plugins = {
     'j-hui/fidget.nvim',
 
     -- UFO nice folding
-    { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
+    { 'kevinhwang91/nvim-ufo',  dependencies = 'kevinhwang91/promise-async' },
 
     -- [LSP](https://github.com/VonHeikemen/lsp-zero.nvim)
     {
@@ -210,8 +210,11 @@ local plugins = {
     'christoomey/vim-tmux-navigator',
 
     -- Treesitter
-    { 'nvim-treesitter/nvim-treesitter', build = 'TSUpdate' },
-    'nvim-treesitter/playground',
+    {
+        'nvim-treesitter/nvim-treesitter',
+        build = ':TSUpdate',
+    },
+    { 'nvim-treesitter/playground' },
 
     -- Undotree
     'mbbill/undotree',
@@ -232,7 +235,7 @@ local plugins = {
     'folke/which-key.nvim',
 
     -- wilder.nvim
-    'gelguy/wilder.nvim',
+    { 'gelguy/wilder.nvim',        build = ":UpdateRemotePlugins" },
 
     -- Install tools via Mason which aren't LSP servers
     'WhoIsSethDaniel/mason-tool-installer.nvim',
