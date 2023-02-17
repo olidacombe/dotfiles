@@ -20,6 +20,10 @@ local mappings = {
         c = { "<Cmd>bd!<CR>", "Close current buffer" },
         D = { "<Cmd>%bd|e#|bd#<CR>", "Delete all buffers" },
     },
+    g = {
+        name = "Git",
+        r = { "<cmd>! gh repo view --web<cr>", "-> Repo" },
+    },
     x = { "<cmd>!chmod +x %<CR>", "Make Executable" },
     -- Yank to "+
     y = yank_to_clipboard,
