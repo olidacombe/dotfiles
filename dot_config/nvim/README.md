@@ -14,28 +14,8 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 
 ## TODO
 
-+ Fix `q:` editing :thinking: - definitely looks `statuscolumn`-related
-+ A "make mappings" plugin.  Basically if your `Makefile` implements a special (overridable) target like `__nvim_mappings`, then the plugin will call this target to get the necessary info to create mappings under a (overridable) prefix.
 + `n,v` mapping to execute line/selection, maybe in a floating term or whatever
 + A mapping which take a line like `use('bla/whatever.nvim')` and takes you to the git repo in your browser
-
-### Make Mappings
-
-E.g. if `make  __nmim_mappings` returns:
-
-```json
-{
-    "b": "build",
-    "c": "clean"
-}
-```
-
-Then normal-mode mappings are created (assuming the default prefix for the plugin is `<leader>m`):
-
-+ `<leader>mb` -> `:make build`
-+ `<leader>mc` -> `:make clean`
-
-And we could document some annotation mechanism for auto-populating this special target (like with self-documenting make targets)
 
 
 ## Small Things to Try Out

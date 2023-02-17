@@ -1,3 +1,12 @@
+local ignored_fts = { "vim" }
+
+local group = vim.api.nvim_create_augroup("StatusCol", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = ignored_fts,
+    group = group,
+    command = "set statuscolumn="
+})
+
 -- if _G.StatusColumn then
 --     return
 -- end

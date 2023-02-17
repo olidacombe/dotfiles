@@ -24,7 +24,8 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
-vim.opt.statuscolumn = '%=%{v:lnum == line(".") ? v:lnum : v:relnum}%s%#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? "" : "") : " " }%*'
+vim.opt.statuscolumn =
+'%=%{v:lnum == line(".") ? v:lnum : v:relnum}%s%#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? "" : "") : " " }%*'
 
 -- wait 300ms for a mapped sequence to complete
 vim.opt.tm = 300
