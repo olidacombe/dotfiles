@@ -87,21 +87,24 @@ local plugins = {
     -- =======================     ====   ===  ===   ====    ==  ========   ==
     -- =======================================================================
 
-    -- Gruvbox Colourscheme
-    'ellisonleao/gruvbox.nvim',
-
-    -- Kanagawa Colourscheme
-    {
-        'rebelot/kanagawa.nvim',
+    -- Catpuccin Colourscheme
+    { "catppuccin/nvim",
+        name = "catppuccin",
         lazy = false, -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
             -- load the colorscheme here
-            vim.cmd.colorscheme("kanagawa")
+            vim.cmd.colorscheme("catppuccin-mocha")
             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
             vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
         end,
     },
+
+    -- Gruvbox Colourscheme
+    'ellisonleao/gruvbox.nvim',
+
+    -- Kanagawa Colourscheme
+    { 'rebelot/kanagawa.nvim', },
 
     -- Nordic Colourscheme
     'AlexvZyl/nordic.nvim',
@@ -156,7 +159,7 @@ local plugins = {
     'j-hui/fidget.nvim',
 
     -- UFO nice folding
-    { 'kevinhwang91/nvim-ufo',  dependencies = 'kevinhwang91/promise-async' },
+    { 'kevinhwang91/nvim-ufo',     dependencies = 'kevinhwang91/promise-async' },
 
     -- [LSP](https://github.com/VonHeikemen/lsp-zero.nvim)
     {
@@ -235,7 +238,7 @@ local plugins = {
     'folke/which-key.nvim',
 
     -- wilder.nvim
-    { 'gelguy/wilder.nvim',        build = ":UpdateRemotePlugins" },
+    { 'gelguy/wilder.nvim', build = ":UpdateRemotePlugins" },
 
     -- Install tools via Mason which aren't LSP servers
     'WhoIsSethDaniel/mason-tool-installer.nvim',
