@@ -1,4 +1,6 @@
-require "makemapper".setup()
+require "makemapper".setup({
+    -- runner = "harpoon_tmux"
+})
 
 require("which-key").register({
     m = { name = "make" }
