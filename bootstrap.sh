@@ -2,8 +2,35 @@
 
 set -euo pipefail
 
+GH_USER=olidacombe
+
 command -v brew &> /dev/null && echo homebrew found || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-command -v chezmoi &> /dev/null && echo chezmoi found || sh -c "$(curl -fsLS get.chezmoi.io)"
+command -v gpg &> /dev/null && echo gpg found || brew install gpg2
+export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
+[ -z "$GPG_KEYS" ] && gpg --full-generate-key && export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
+echo "$GPG_KEYS"
+
+function quit() {
+        echo "$*"
+        exit 0
+}
+
+function err() {
+        echo "$*"
+        exit 1
+}
+
+if [ command -v chezmoi &> /dev/null ]; then
+        echo chezmoi found
+else
+        GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
+        [ -z "$GET_CHEZMOI" ] && err "error fetching \`chezmoi\` install script, if it's a cert trust error, consider \`brew install curl\` first?"
+
+        sh -c "$GET_CHEZMOI" -- init --apply olidacombe || err "chezmoi install failed"
+fi
+
+echo "checking if we're in \`dotfiles\` working copy"
+git remote -v | grep "${GH_USER}/dotfiles" || quit "we're not, time to \`chezmoi cd\` and run again" && echo "we are, continuing"
 
 #  _______           _______ _________
 # (  ____ )|\     /|(  ____ \\__   __/
