@@ -21,7 +21,7 @@ function err() {
         exit 1
 }
 
-if [ command -v chezmoi &> /dev/null ]; then
+if command -v chezmoi &> /dev/null; then
         echo chezmoi found
 else
         GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
@@ -31,6 +31,9 @@ else
         sh -c "$GET_CHEZMOI" -- init --apply olidacombe || err "chezmoi install failed"
         quit "Ok, chezmoi installed, now spawn a new zsh shell and \`chozmoi cd\` before running again"
 fi
+
+echo running \`brew bundle\`
+brew bundle
 
 echo "checking if we're in \`dotfiles\` working copy"
 git remote -v | grep "${GH_USER}/dotfiles" || quit "we're not, time to \`chezmoi cd\` and run again" && echo "we are, continuing"
@@ -82,9 +85,6 @@ espup install
 # TODO work out hydrating templates so this will work
 # echo running \`chezmoi apply\`
 # chezmoi apply
-
-echo running \`brew bundle\`
-brew bundle
 
 #  __________ 
 # < firebase >
