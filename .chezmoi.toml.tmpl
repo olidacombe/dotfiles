@@ -3,4 +3,5 @@
 
 [data]
     email = {{ $email | quote }}
-    gpgSigningKey = {{ $gpgSigningKey | quote }}
+[data.gpg.signing]
+    key = {{ $gpgSigningKey | quote }}
