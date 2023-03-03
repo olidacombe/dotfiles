@@ -5,7 +5,8 @@ set -euo pipefail
 GH_USER=olidacombe
 
 command -v brew &> /dev/null && echo homebrew found || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-command -v gpg &> /dev/null && echo gpg found || brew install gpg2
+# helpful https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0
+command -v gpg &> /dev/null && echo gpg found || brew install gpg2 pinentry-mac
 export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
 [ -z "$GPG_KEYS" ] && gpg --full-generate-key && export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
 echo "$GPG_KEYS"
@@ -24,9 +25,11 @@ if [ command -v chezmoi &> /dev/null ]; then
         echo chezmoi found
 else
         GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
+        cd "$HOME"
         [ -z "$GET_CHEZMOI" ] && err "error fetching \`chezmoi\` install script, if it's a cert trust error, consider \`brew install curl\` first?"
 
         sh -c "$GET_CHEZMOI" -- init --apply olidacombe || err "chezmoi install failed"
+        quit "Ok, chezmoi installed, now spawn a new zsh shell and \`chozmoi cd\` before running again"
 fi
 
 echo "checking if we're in \`dotfiles\` working copy"
