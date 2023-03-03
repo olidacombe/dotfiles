@@ -1,3 +1,9 @@
+# Quickstart
+
+```zsh
+sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh)"
+```
+
 ## TODO
 
 + https://rycee.gitlab.io/home-manager/
