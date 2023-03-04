@@ -13,7 +13,7 @@ cargo-udeps
 cargo-watch
 cargo-workspaces
 cross
-dust
+du-dust
 #espflash
 #espmonitor
 espup
