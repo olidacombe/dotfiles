@@ -46,6 +46,7 @@ brew "kdoctor"
 brew "lima"
 brew "lolcat"
 brew "luarocks"
+brew "ubuntu/microk8s/microk8s"
 brew "moreutils"
 brew "mysql-client"
 # ng docker-like cli for mac
