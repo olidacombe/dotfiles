@@ -1,0 +1,3 @@
+aliases:
+    "l": "tsh login --proxy=gsrio.teleport.sh"
+    "dbadmin": "tsh login --proxy=gsrio.teleport.sh --auth=oktasaml --request-roles=dbadmin"

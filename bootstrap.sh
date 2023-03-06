@@ -35,6 +35,9 @@ fi
 echo running \`brew bundle\`
 brew bundle
 
+# Setup fzf a bit more
+# $(brew --prefix)/opt/fzf/install
+
 echo "checking if we're in \`dotfiles\` working copy"
 git remote -v | grep "${GH_USER}/dotfiles" || quit "we're not, time to \`chezmoi cd\` and run again" && echo "we are, continuing"
 
@@ -64,6 +67,9 @@ command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv
  #  This is SUPER GOOD: https://nickgerace.dev/post/how-to-manage-rust-tools-and-applications/
  #  get current list with `cargo install --list | rg -o "^\S*\S" > crates.txt`
 ( sed -e 's/#.*//' | awk NF | xargs cargo install ) < crates.txt
+
+# let's leave it here for the moment
+exit 0
 
 # Install ESP dev toolchain (`espup` installed above)
 #  _____  ___ ____  _   _ ____  

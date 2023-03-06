@@ -107,6 +107,8 @@ plugins=(
 	github
 	golang
 	ipfs
+    kubectl
+    kubectx
 	nmap
 	nomad
 	npm
@@ -177,6 +179,9 @@ alias gpsh='git push origin HEAD'
 alias gupstr='git branch {--set-upstream-to=origin/,}$(git branch --show-current)'
 alias gpl='git pull'
 alias ghprcp='gh pr view --json url | jq -r .url | pbcopy'
+alias kctx="kubetcx"
+alias kns="kubens"
+
 if command -v nvim &> /dev/null; then
         # life is worth living
         alias vi="nvim"
