@@ -8,6 +8,7 @@ tap "homebrew/core"
 tap "yt-dlp/taps"
 brew "act", args: ["HEAD"]
 brew "autoconf"
+brew "awscli"
 brew "python@3.10"
 brew "autojump"
 brew "automake"
