@@ -21,5 +21,3 @@ git-delta
 #ldproxy
 lemmeknow
 stylua
-tauri-cli
-watchexec-cli
