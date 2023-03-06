@@ -179,6 +179,8 @@ alias gpsh='git push origin HEAD'
 alias gupstr='git branch {--set-upstream-to=origin/,}$(git branch --show-current)'
 alias gpl='git pull'
 alias ghprcp='gh pr view --json url | jq -r .url | pbcopy'
+alias k="kubectl"
+complete -F __start_kubectl k
 alias kctx="kubetcx"
 alias kns="kubens"
 
