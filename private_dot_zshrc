@@ -9,17 +9,8 @@ fi
 
 export EDITOR=nvim
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="$PATH:/usr/local/go/bin:${HOME}/bc/infrastructure/scripts:/usr/local/opt/influxdb@1/bin:${HOME}/bin:$(go env GOPATH)/bin:${HOME}/Library/Python/3.9/bin"
-
 if [ -d "${HOME}/.local/bin" ]; then
     export PATH="${PATH}:${HOME}/.local/bin"
-fi
-
-SRE_SCRIPTS="${HOME}/bc/sre/sre-scripts"
-if [ -d "$SRE_SCRIPTS" ]; then
-	export PATH="${PATH}:$SRE_SCRIPTS"
 fi
 
 export GEM_HOME="$HOME/.gem"
@@ -174,6 +165,7 @@ if command -v lima &> /dev/null; then
         alias docker="lima nerdctl"
 fi
 alias alpinism='docker run --privileged=true -v $(pwd):/summit -it alpine'
+# alias aws='AWS_PROFILE=$(cat ~/.aws/__selected_profile__) aws'
 alias code="open -a 'Visual Studio Code'"
 alias gcob='git branch -a | fzf | xargs git checkout'
 alias gpsh='git push origin HEAD'
@@ -184,6 +176,7 @@ alias k="kubectl"
 complete -F __start_kubectl k
 alias kctx="kubetcx"
 alias kns="kubens"
+alias sed="gsed"
 
 if command -v nvim &> /dev/null; then
         # life is worth living
@@ -200,6 +193,10 @@ alias dkill="docker ps | sed -e '1d' | fzf -m | awk '{ print \$1 }' | xargs dock
 alias tmkill='tmux list-sessions | fzf -m | awk -F: "{ print \$1 }" | while read sess; do tmux kill-session -t "$sess"; done'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [ -d "${HOME}/scripts" ]; then
+    export PATH="${PATH}:${HOME}/scripts"
+fi
 
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
