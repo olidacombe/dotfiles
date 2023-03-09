@@ -47,7 +47,8 @@ local plugins = {
     },
 
     -- DiffView
-    { 'sindrets/diffview.nvim',
+    {
+        'sindrets/diffview.nvim',
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
             { 'nvim-tree/nvim-web-devicons' },
@@ -88,7 +89,8 @@ local plugins = {
     -- =======================================================================
 
     -- Catpuccin Colourscheme
-    { "catppuccin/nvim",
+    {
+        "catppuccin/nvim",
         name = "catppuccin",
     },
 
@@ -99,9 +101,10 @@ local plugins = {
     { 'rebelot/kanagawa.nvim', },
 
     -- Nordic Colourscheme
-    { 'AlexvZyl/nordic.nvim',
+    {
+        'AlexvZyl/nordic.nvim',
         name = "nordic",
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
             -- load the colorscheme here
@@ -206,8 +209,13 @@ local plugins = {
     {
         'nvim-telescope/telescope.nvim', --tag = '0.1.0',
         -- or                            , branch = '0.1.x',
-        branch = '0.1.x', -- got me past https://github.com/nvim-telescope/telescope.nvim/issues/2192
+        branch = '0.1.x',                -- got me past https://github.com/nvim-telescope/telescope.nvim/issues/2192
         dependencies = { { 'nvim-lua/plenary.nvim' } }
+    },
+    {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build =
+        'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
     },
 
     -- Tmux pane navigation integration

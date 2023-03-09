@@ -9,13 +9,15 @@ register_normal({
         name = "Fuzzy Find",
         {
             C = { builtin.colorscheme, "Colourscheme" },
-            f = { function() builtin.find_files({
+            f = { function()
+                builtin.find_files({
                     hidden = true
                 })
             end, "Files" },
             r = { function() builtin.git_files({ hidden = true }) end, "Files<=Repo" },
             G = { builtin.live_grep, "Grep" },
-            g = { function() builtin.grep_string({
+            g = { function()
+                builtin.grep_string({
                     shorten_path = true, word_match = "-w", only_sort_text = true, search = ''
                 })
             end, '"Rg - ish"' },
@@ -53,12 +55,21 @@ telescope.setup({
     defaults = {
         mappings = {
             i = {
-                ["<C-q>"] = send_to_qflist,
+                    ["<C-q>"] = send_to_qflist,
             },
             n = {
-                ["<C-q>"] = send_to_qflist,
+                    ["<C-q>"] = send_to_qflist,
             },
         },
+    },
+    extensions = {
+        fzf = {
+            fuzzy = true,                   -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
+        }
     },
     pickers = {
         colorscheme = {
@@ -67,5 +78,6 @@ telescope.setup({
     },
 })
 
+telescope.load_extension('fzf')
 telescope.load_extension('harpoon')
 telescope.load_extension('makemapper')
