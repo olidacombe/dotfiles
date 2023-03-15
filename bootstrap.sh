@@ -42,7 +42,7 @@ else
         quit "Ok, chezmoi installed, now spawn a new zsh shell and \`chozmoi cd\` before running again"
 fi
 
-if [ "$OS" == "$MACOS" ]; then
+if [ "$OS" = "$MACOS" ]; then
 	echo running \`brew bundle\`
 	brew bundle
 fi

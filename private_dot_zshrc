@@ -122,6 +122,11 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# Flux
+if command -v flux &> /dev/null; then
+    . <(flux completion zsh)
+fi
+
 # User configuration
 
 if [ -f "${HOME}/.zsh_secrets" ]; then
