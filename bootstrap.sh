@@ -3,10 +3,20 @@
 set -euo pipefail
 
 GH_USER=olidacombe
+LINUX="linux"
+MACOS="macos"
 
-command -v brew &> /dev/null && echo homebrew found || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if uname -a | grep -i linux; then
+	export INSTALLER="pacman -S"
+	export OS="$LINUX"
+else
+	command -v brew &> /dev/null && echo homebrew found || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	export INSTALLER="brew install"
+	export OS="$MACOS"
+fi
+
 # helpful https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0
-command -v gpg &> /dev/null && echo gpg found || brew install gpg2 pinentry-mac
+command -v gpg &> /dev/null && echo gpg found || $INSTALLER gpg2 pinentry-mac
 export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
 [ -z "$GPG_KEYS" ] && gpg --full-generate-key && export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
 echo "$GPG_KEYS"
@@ -32,8 +42,10 @@ else
         quit "Ok, chezmoi installed, now spawn a new zsh shell and \`chozmoi cd\` before running again"
 fi
 
-echo running \`brew bundle\`
-brew bundle
+if [ "$OS" == "$MACOS" ]; then
+	echo running \`brew bundle\`
+	brew bundle
+fi
 
 # Setup fzf a bit more
 # $(brew --prefix)/opt/fzf/install
