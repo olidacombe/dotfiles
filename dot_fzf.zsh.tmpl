@@ -1,5 +1,6 @@
 # Setup fzf
 # ---------
+{{ if eq .chezmoi.os "darwin" -}}
 if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
   PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
 fi
@@ -11,6 +12,15 @@ fi
 # Key bindings
 # ------------
 source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+{{ else if eq .chezmoi.os "linux" -}}
+# use custom fd command for fzf incl. showing hidden files by default
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+
+# source some shell plugins for fzf
+source ~/.local/share/fif/fif.plugin.sh
+# breaks zsh for some reason
+# source ~/.local/share/bash-fzf/bash-fzf.rc
+{{ end -}}
 
 FZF_BINDINGS="
   ${FZF_BINDINGS}
