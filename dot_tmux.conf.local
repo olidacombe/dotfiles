@@ -411,7 +411,7 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 # # /!\ do not remove the previous line
 
 bind r source-file ~/.tmux.conf
-bind-key -r f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
+bind-key -n ƒ run-shell "tmux neww ~/.local/scripts/tmux-sessionizer.sh"
 
 # quickly shuffle windows
 bind-key -n S-left swap-window -t -1 \; select-window -t -1
