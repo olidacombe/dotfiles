@@ -45,6 +45,7 @@ brew "git"
 brew "git-lfs"
 # we already install gpg2
 # brew "gnupg"
+brew "helm"
 brew "hexyl"
 brew "htop"
 brew "httpie"

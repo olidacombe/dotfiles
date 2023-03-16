@@ -15,6 +15,7 @@ register_normal({
                 })
             end, "Files" },
             r = { function() builtin.git_files({ hidden = true }) end, "Files<=Repo" },
+            R = { builtin.resume, "Resume" },
             G = { builtin.live_grep, "Grep" },
             g = { function()
                 builtin.grep_string({

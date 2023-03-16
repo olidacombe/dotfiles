@@ -4,13 +4,24 @@ set -euo pipefail
 
 SESSIONIZER_DIRS=(~/od)
 if [ -f ~/.sessionizer_dirs ]; then
-    export SESSIONIZER_DIRS=($(cat ~/.sessionizer_dirs))
+    # :'( only bash >= 4.4
+    # mapfile -t SESSIONIZER_DIRS < ~/.sessionizer_dirs
+    # export SESSIONIZER_DIRS
+    SESSIONIZER_DIRS=()
+    while IFS='' read -r line; do
+        SESSIONIZER_DIRS+=("$line");
+    done < ~/.sessionizer_dirs
+    export SESSIONIZER_DIRS
 fi
+
+get_git_repos() {
+    find "${SESSIONIZER_DIRS[@]/#\~/${HOME}}" -mindepth 1 -maxdepth 5 -name .terraform -prune -o -name .git -print0 | xargs -0 dirname
+}
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find "${SESSIONIZER_DIRS[@]/#\~/${HOME}}" -mindepth 1 -maxdepth 5 -type d | fzf)
+    selected=$(get_git_repos | fzf)
 fi
 
 if [[ -z $selected ]]; then
@@ -22,16 +33,16 @@ tmux_running=$(pgrep tmux)
 
 # if [[ -z "${TMUX+x}" ]] && [[ -z "$tmux_running" ]]; then
 if [[ -z "${TMUX+x}" ]] && [[ -z "$tmux_running" ]]; then
-    tmux new-session -s $selected_name -c $selected
+    tmux new-session -s "$selected_name" -c "$selected"
     exit 0
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
+if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+    tmux new-session -ds "$selected_name" -c "$selected"
 fi
 
 if [[ -z "${TMUX+x}" ]]; then
-    tmux attach -t $selected_name
+    tmux attach -t "$selected_name"
     exit 0
 fi
-tmux switch-client -t $selected_name
+tmux switch-client -t "$selected_name"
