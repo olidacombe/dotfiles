@@ -29,7 +29,7 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
+tmux_running=$(pgrep tmux || true)
 
 # if [[ -z "${TMUX+x}" ]] && [[ -z "$tmux_running" ]]; then
 if [[ -z "${TMUX+x}" ]] && [[ -z "$tmux_running" ]]; then
