@@ -208,6 +208,8 @@ fi
 # |____|__ \__|____/____/\___  >__|  /____  >
 #         \/                 \/           \/ 
 alias dkill="docker ps | sed -e '1d' | fzf -m | awk '{ print \$1 }' | xargs docker kill"
+# nuke multiple git branches
+alias grmb="git branch | grep -v '*' | fzf -m | xargs git branch -D"
 alias tmkill='tmux list-sessions | fzf -m | awk -F: "{ print \$1 }" | while read sess; do tmux kill-session -t "$sess"; done'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
