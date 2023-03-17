@@ -153,7 +153,11 @@ fi
 # ||__|||__|||__|||__|||__|||__|||__||
 # |/__\|/__\|/__\|/__\|/__\|/__\|/__\|
 #
+{{ if eq .chezmoi.os "darwin" -}}
 bindkey -s ƒ "~/.local/scripts/tmux-sessionizer.sh\n"
+{{ else if eq .chezmoi.os "linux" -}}
+bindkey -s "^[f" "~/.local/scripts/tmux-sessionizer.sh\n"
+{{ end -}}
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -188,7 +192,9 @@ alias k="kubectl"
 complete -F __start_kubectl k
 alias kctx="kubetcx"
 alias kns="kubens"
+{{ if eq .chezmoi.os "darwin" -}}
 alias sed="gsed"
+{{ end -}}
 
 if command -v nvim &> /dev/null; then
         # life is worth living
