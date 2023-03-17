@@ -167,5 +167,16 @@ ls.add_snippets(nil, {
             ))
     },
     sh = sh_snips,
+    template = {
+        s(
+            { trig = "osswitch", docstring = "OS-based switch-case" },
+            fmt([[
+                {{{{ if eq .chezmoi.os "darwin" -}}}}
+                {}
+                {{{{ else if eq .chezmoi.os "linux" -}}}}
+                {{{{ end -}}}}
+            ]], {i(0)})
+        ),
+    },
     zsh = sh_snips,
 })

@@ -1,5 +1,6 @@
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
+local os_cb = require("utils").os_cb
 
 local register_normal = require("od.which-key").register_normal
 
@@ -23,10 +24,21 @@ local mappings = {
 register_normal(mappings)
 
 -- easy quick-switches :D
-vim.keymap.set("n", "æ", function() ui.nav_file(1) end)
-vim.keymap.set("n", "≤", function() ui.nav_file(2) end)
-vim.keymap.set("n", "≥", function() ui.nav_file(3) end)
-vim.keymap.set("n", "π", function() ui.nav_file(4) end)
+os_cb({
+    linux = function()
+        vim.keymap.set("n", "<A-'>", function() ui.nav_file(1) end)
+        vim.keymap.set("n", "<A-,>", function() ui.nav_file(2) end)
+        vim.keymap.set("n", "<A-.>", function() ui.nav_file(3) end)
+        vim.keymap.set("n", "<A-p>", function() ui.nav_file(4) end)
+    end,
+    darwin = function()
+        vim.keymap.set("n", "æ", function() ui.nav_file(1) end)
+        vim.keymap.set("n", "≤", function() ui.nav_file(2) end)
+        vim.keymap.set("n", "≥", function() ui.nav_file(3) end)
+        vim.keymap.set("n", "π", function() ui.nav_file(4) end)
+    end,
+})
+
 
 -- Switch back from terminal
 vim.keymap.set("t", "<C-x>", "<C-\\><C-n>:e #<CR>")
