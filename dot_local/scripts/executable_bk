@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+BROWSER="${BROWSER:-"brave"}"
+
+url=$(buku -p -f4 --nostdin | fzf -m --reverse --preview "buku -p {1}" --preview-window=wrap | cut -f2)
+
+if [ -n "$url" ]; then
+    echo "$url" | xargs "$BROWSER"
+fi

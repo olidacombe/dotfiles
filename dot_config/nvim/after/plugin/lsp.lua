@@ -18,7 +18,7 @@ lsp.ensure_installed({
     'graphql',
     'pyright',
     'rust_analyzer',
-    'lua_ls',
+    -- 'lua_ls', -- sadly broken or arm
     'svelte',
     'tailwindcss',
     'tsserver',
