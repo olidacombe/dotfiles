@@ -19,5 +19,6 @@ du-dust
 espup
 git-delta
 #ldproxy
+jira-terminal
 lemmeknow
 stylua
