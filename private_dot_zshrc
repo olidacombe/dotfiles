@@ -137,6 +137,8 @@ fi
 # generate this file using `jira-terminal autocompletion --shell zsh > dot_jira_terminal.zsh`
 # [ -f ~/.jira_terminal.zsh ] && . ~/.jira_terminal.zsh
 [ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
+# pocket credentials for automation
+[ -f ~/.pocket ] && . ~/.pocket
 
 # User configuration
 
