@@ -140,6 +140,16 @@ if [ -f "${HOME}/.zsh_secrets" ]; then
 	. "${HOME}/.zsh_secrets"
 fi
 
+# keychain
+
+if [[ "$OS" = "Darwin" ]]; then
+    for KEY in "rsa" "ed25519"; do
+        if [ -f "${HOME}/id_${KEY}" ]; then
+            /usr/bin/ssh-add --apple-use-keychain "${HOME}/id_${KEY}" 2>/dev/null || true
+        fi
+    done
+fi
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
