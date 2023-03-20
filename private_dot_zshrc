@@ -208,6 +208,7 @@ alias ghprcp='gh pr view --json url | jq -r .url | pbcopy'
 alias k="kubectl"
 complete -F __start_kubectl k
 alias kctx="kubetcx"
+alias kj="kubectl get pods -A | sed '1d' | fzf | awk '{ print \$1,\$2 }' | read ns pod; kubectl exec -n \"\$ns\" -it \"\$pod\" -- /bin/sh"
 alias kns="kubens"
 if [[ "$OS" = "Darwin" ]]; then
     alias sed="gsed"
