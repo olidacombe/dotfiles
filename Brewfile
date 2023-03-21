@@ -1,3 +1,4 @@
+tap "1password/tap"
 tap "aws/tap"
 tap "equinix/homebrew-tap"
 tap "farmotive/k8s"
@@ -124,6 +125,7 @@ brew "yq"
 # leave this to tfenv
 # brew "hashicorp/tap/terraform", link: false
 brew "yt-dlp/taps/yt-dlp"
+cask "1password-cli"
 cask "android-sdk"
 cask "bloomrpc"
 cask "font-fira-code"
