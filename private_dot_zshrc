@@ -147,14 +147,15 @@ if [ -f "${HOME}/.zsh_secrets" ]; then
 fi
 
 # keychain
-
+SSH_ADD=ssh-add
 if [[ "$OS" = "Darwin" ]]; then
-    for KEY in "rsa" "ed25519"; do
-        if [ -f "${HOME}/id_${KEY}" ]; then
-            /usr/bin/ssh-add --apple-use-keychain "${HOME}/id_${KEY}" 2>/dev/null || true
-        fi
-    done
+    SSH_ADD=/usr/bin/ssh-add
 fi
+for KEY in "rsa" "ed25519"; do
+    if [ -f "${HOME}/id_${KEY}" ]; then
+        $SSH_ADD --apple-use-keychain "${HOME}/id_${KEY}" 2>/dev/null || true
+    fi
+done
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
