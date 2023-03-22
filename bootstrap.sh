@@ -6,6 +6,10 @@ GH_USER=olidacombe
 LINUX="linux"
 MACOS="macos"
 
+function strip_comment() {
+	sed -e 's/#.*//' "$1" | awk NF
+}
+
 function pac_install() {
 	sudo pacman -Sy --noconfirm "$@"
 }
@@ -46,11 +50,20 @@ else
         quit "Ok, chezmoi installed, now spawn a new zsh shell and \`chozmoi cd\` before running again"
 fi
 
+# required repos
+mkdir -p "${HOME}/od"
+pushd "${HOME}/od"
+for REPO in commentalist.nvim makemapper.nvim; do
+    [ -d "$REPO" ] || git clone "git@github.com:olidacombe/$REPO"
+done
+popd
+
 if [ "$OS" = "$MACOS" ]; then
 	echo running \`brew bundle\`
 	brew bundle
 elif [ -f "/etc/arch-release" ]; then
-	pac_install $( sed -e 's/#.*//' pacfile | awk NF )
+    pac_install $( strip_comment pacfile )
+    yay $( strip_comment yayfile )
 fi
 
 # Setup fzf a bit more
@@ -84,7 +97,11 @@ command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv
  #
  #  This is SUPER GOOD: https://nickgerace.dev/post/how-to-manage-rust-tools-and-applications/
  #  get current list with `cargo install --list | rg -o "^\S*\S" > crates.txt`
-( sed -e 's/#.*//' | awk NF | xargs cargo install ) < crates.txt
+strip_comment crates.txt | xargs cargo install
+
+# NPM
+. "${HOME}/.nvm/nvm.sh"
+command -v node &> /dev/null || nvm install node
 
 # let's leave it here for the moment
 exit 0

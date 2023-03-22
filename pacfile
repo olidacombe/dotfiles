@@ -1,3 +1,6 @@
 base-devel # like deb build-essentials
 btop
-neovim
+cmake
+fzf
+nvm
+tmux
