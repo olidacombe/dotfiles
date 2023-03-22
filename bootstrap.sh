@@ -6,8 +6,12 @@ GH_USER=olidacombe
 LINUX="linux"
 MACOS="macos"
 
+function pac_install() {
+	sudo pacman -Sy --noconfirm "$@"
+}
+
 if uname -a | grep -i linux; then
-	export INSTALLER="pacman -S"
+	export INSTALLER=pac_install
 	export OS="$LINUX"
 else
 	command -v brew &> /dev/null && echo homebrew found || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -45,6 +49,8 @@ fi
 if [ "$OS" = "$MACOS" ]; then
 	echo running \`brew bundle\`
 	brew bundle
+elif [ -f "/etc/arch-release" ]; then
+	pac_install $( sed -e 's/#.*//' pacfile | awk NF )
 fi
 
 # Setup fzf a bit more

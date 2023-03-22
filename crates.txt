@@ -14,7 +14,6 @@ cargo-watch
 cargo-workspaces
 cross
 du-dust
-#espflash
 #espmonitor
 espup
 git-delta
