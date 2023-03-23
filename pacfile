@@ -1,4 +1,5 @@
 base-devel # like deb build-essentials
+brave-browser
 btop
 cmake
 fzf
