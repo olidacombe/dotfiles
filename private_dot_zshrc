@@ -222,6 +222,7 @@ alias kns="kubens"
 if [[ "$OS" = "Darwin" ]]; then
     alias sed="gsed"
 fi
+alias tkl="tsh kube ls -fjson | jq -r '.[]|.kube_cluster_name' | fzf | xargs tsh kube login"
 
 if command -v nvim &> /dev/null; then
         # life is worth living
