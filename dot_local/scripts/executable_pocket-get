@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ENDPOINT="https://getpocket.com/v3/get"
+PAYLOAD="$(
+jq -c . <<-EOF
+{
+    "state": "all",
+    "consumer_key": "$POCKET_CONSUMER_KEY",
+    "access_token": "$POCKET_TOKEN"
+}
+EOF
+)"
+
+curl -X POST -H 'Content-Type: application/json' -d "$PAYLOAD" "$ENDPOINT"

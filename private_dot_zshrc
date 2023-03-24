@@ -250,6 +250,9 @@ if [ -d "${HOME}/scripts" ]; then
     export PATH="${PATH}:${HOME}/scripts"
 fi
 
+# sensitives
+[ -f "${HOME}/.local/sensitive.env" ] && . "${HOME}/.local/sensitive.env"
+
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
