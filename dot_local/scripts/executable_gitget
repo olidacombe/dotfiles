@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+REPO="$1"
+
+# default to github
+grep -c : > /dev/null <<< "$REPO" || REPO="github.com:${REPO}"
+
+
+IFS=: read -r host path <<< "$REPO"
+
+HOST_BASE="${host%.com}"
+BASE=$(dirname "$path")
+if [ -d "${HOME}/${HOST_BASE}/${path}" ]; then
+    echo "${HOME}/${HOST_BASE}/${path} already exists, exiting"
+    exit 0
+fi
+mkdir -p "${HOME}/${HOST_BASE}/${BASE}"
+cd "${HOME}/${HOST_BASE}/${BASE}"
+git clone "git@${host}:${path}"
