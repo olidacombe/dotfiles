@@ -236,7 +236,7 @@ fi
 # |    |  \|  |  |_|  |_\  ___/|  | \/\___ \ 
 # |____|__ \__|____/____/\___  >__|  /____  >
 #         \/                 \/           \/ 
-alias slay="ps -ef | fzf -m | awk '{ print \$2 }' | xargs kill"
+alias slay="ps -ef | sed -e 1d | fzf -m | awk '{ print \$2 }' | xargs kill"
 alias dkill="docker ps | sed -e '1d' | fzf -m | awk '{ print \$1 }' | xargs docker kill"
 # nuke multiple git branches
 alias grmb="git branch | grep -v '*' | fzf -m | xargs git branch -D"

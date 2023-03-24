@@ -9,12 +9,12 @@ register_normal({
         name = "Fuzzy Find",
         {
             C = { builtin.colorscheme, "Colourscheme" },
-            f = { function()
+            f = { function() builtin.git_files({ hidden = true }) end, "Files<=Repo" },
+            F = { function()
                 builtin.find_files({
                     hidden = true
                 })
             end, "Files" },
-            r = { function() builtin.git_files({ hidden = true }) end, "Files<=Repo" },
             R = { builtin.resume, "Resume" },
             G = { builtin.live_grep, "Grep" },
             g = { function()
