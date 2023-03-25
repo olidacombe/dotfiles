@@ -13,4 +13,4 @@ jq -c . <<-EOF
 EOF
 )"
 
-curl -X POST -H 'Content-Type: application/json' -d "$PAYLOAD" "$ENDPOINT"
+curl -sX POST -H 'Content-Type: application/json' -d "$PAYLOAD" "$ENDPOINT"

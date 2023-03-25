@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-BROWSER="${BROWSER:-"brave"}"
+BROWSER="${BROWSER:-"xdg-open"}"
 
-url=$(buku -p -f4 --nostdin | fzf -m --reverse --preview "buku -p {1}" --preview-window=wrap | cut -f2)
+BOOKMARKS="$(pocket-get | jq ".list | to_entries | map({id: .value.item_id, url: .value.resolved_url, title: .value.resolved_title})")"
 
-if [ -n "$url" ]; then
-    echo "$url" | xargs "$BROWSER"
+REPRS="$(jq -r ".[] | .title + \" \" + .url" <<< "$BOOKMARKS" | sed -e 's/^\s*//')"
+
+PAGE="$(fzf <<< "$REPRS" | awk '{ print $NF }')"
+
+if [ -n "$PAGE" ]; then
+    "$BROWSER" "$PAGE" 2>/dev/null
 fi
