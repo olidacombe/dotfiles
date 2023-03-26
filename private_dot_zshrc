@@ -181,7 +181,8 @@ done
 if [[ "$OS" = "Darwin" ]]; then
     bindkey -s ƒ "~/.local/scripts/tmux-sessionizer\n"
 elif [[ "$OS" = "Linux" ]]; then
-    bindkey -s "^[b" "~/.local/scripts/bk\n"
+    # this proved problematic
+    # bindkey -s "^[b" "~/.local/scripts/bk\n"
     bindkey -s "^[f" "~/.local/scripts/tmux-sessionizer\n"
 fi
 
