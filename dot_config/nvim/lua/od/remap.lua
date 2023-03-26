@@ -8,6 +8,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<Tab>", ":tabn<CR>")
 vim.keymap.set("n", "<S-Tab>", ":tabp<CR>")
 
+local os_cb = require('utils').os_cb
 --  _______    _     _    _______
 -- (_______)  | |   | |  (_______)
 --  _____ ___ | | __| |   _     _ _____ _   _
@@ -91,8 +92,16 @@ vim.keymap.set("n", "<Down>", "zj")
 --
 local quickcycle = require("od.quickcycle")
 
-vim.keymap.set("n", "©", quickcycle.mode_prev)
-vim.keymap.set("n", "ç", quickcycle.mode_next)
+os_cb({
+    linux = function()
+        vim.keymap.set("n", "<A-g>", quickcycle.mode_prev)
+        vim.keymap.set("n", "<A-c>", quickcycle.mode_next)
+    end,
+    darwin = function()
+        vim.keymap.set("n", "©", quickcycle.mode_prev)
+        vim.keymap.set("n", "ç", quickcycle.mode_next)
+    end,
+})
 vim.keymap.set("n", "<C-g>", quickcycle.prev)
 vim.keymap.set("n", '<C-c>', quickcycle.next)
 

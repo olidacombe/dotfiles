@@ -97,12 +97,12 @@ local stack = Stack:new(
     Modes:new({
         { "diag",
             next = "normal ]d", prev = "normal [d" },
+        { "qf",
+            next = ":cn", prev = ":cp" },
         { "change",
             next = "normal ]c", prev = "normal [c" },
-        { "hrpn",
-            next = require("harpoon.ui").nav_next, prev = require("harpoon.ui").nav_prev },
-        { "qf",
-            next = ":cn", prev = ":cp" }
+        -- { "hrpn",
+        --     next = require("harpoon.ui").nav_next, prev = require("harpoon.ui").nav_prev },
     })
 )
 

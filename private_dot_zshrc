@@ -179,9 +179,9 @@ done
 # |/__\|/__\|/__\|/__\|/__\|/__\|/__\|
 #
 if [[ "$OS" = "Darwin" ]]; then
-    bindkey -s ƒ "~/.local/scripts/tmux-sessionizer.sh\n"
+    bindkey -s ƒ "~/.local/scripts/tmux-sessionizer\n"
 elif [[ "$OS" = "Linux" ]]; then
-    bindkey -s "^[f" "~/.local/scripts/tmux-sessionizer.sh\n"
+    bindkey -s "^[f" "~/.local/scripts/tmux-sessionizer\n"
 fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -248,6 +248,10 @@ fi
 
 if [ -d "${HOME}/scripts" ]; then
     export PATH="${PATH}:${HOME}/scripts"
+fi
+
+if [ -d "${HOME}/android-studio/bin" ]; then
+    export PATH="${PATH}:${HOME}/android-studio/bin"
 fi
 
 # sensitives
