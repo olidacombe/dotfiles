@@ -414,6 +414,7 @@ bind r source-file ~/.tmux.conf
 {{ if eq .chezmoi.os "darwin" -}}
 bind-key -n ƒ run-shell "tmux neww ~/.local/scripts/tmux-sessionizer"
 {{ else if eq .chezmoi.os "linux" -}}
+bind-key -n 'M-b' run-shell "tmux neww ~/.local/scripts/bk"
 bind-key -n 'M-f' run-shell "tmux neww ~/.local/scripts/tmux-sessionizer"
 {{ end -}}
 
