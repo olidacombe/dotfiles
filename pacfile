@@ -12,6 +12,7 @@ nvm
 ponysay
 ripgrep
 tmux
+tree
 
 # zmk deps
 arm-none-eabi-gcc

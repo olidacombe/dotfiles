@@ -9,5 +9,5 @@ REPRS="$(jq -r ".[] | .title + \" \" + .url" <<< "$BOOKMARKS" | sed -e 's/^\s*//
 PAGE="$(fzf <<< "$REPRS" | awk '{ print $NF }')"
 
 if [ -n "$PAGE" ]; then
-    "$BROWSER" "$PAGE" 2>/dev/null &
+    "$BROWSER" "$PAGE" 2>/dev/null
 fi

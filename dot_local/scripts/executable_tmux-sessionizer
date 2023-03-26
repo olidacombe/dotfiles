@@ -6,7 +6,7 @@ SESSIONIZER_DIRS=(~/od)
 SESSIONIZER_DIRS_CONFIG="${HOME}/.config/sessionizer/dirs"
 if [ -f "$SESSIONIZER_DIRS_CONFIG" ]; then
     # :'( only bash >= 4.4
-    # mapfile -t SESSIONIZER_DIRS < ~/.sessionizer_dirs
+    # mapfile -t SESSIONIZER_DIRS < "$SESSIONIZER_DIRS_CONFIG"
     # export SESSIONIZER_DIRS
     SESSIONIZER_DIRS=()
     while IFS='' read -r line; do

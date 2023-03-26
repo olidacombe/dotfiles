@@ -3,6 +3,18 @@
 set -euo pipefail
 
 REPO="$1"
+REMAPS=(github/olidacombe:od)
+REMAPS_CONFIG="${HOME}/.config/gitget/remaps"
+if [ -f "$REMAPS_CONFIG" ]; then
+    # :'( only bash >= 4.4
+    # mapfile -t REMAPS < "$REMAPS_CONFIG"
+    # export REMAPS
+    REMAPS=()
+    while IFS='' read -r line; do
+        REMAPS+=("$line");
+    done < "$REMAPS_CONFIG"
+    export REMAPS
+fi
 
 # default to github
 grep -c : > /dev/null <<< "$REPO" || REPO="github.com:${REPO}"
@@ -11,11 +23,20 @@ grep -c : > /dev/null <<< "$REPO" || REPO="github.com:${REPO}"
 IFS=: read -r host path <<< "$REPO"
 
 HOST_BASE="${host%.com}"
-BASE=$(dirname "$path")
-if [ -d "${HOME}/${HOST_BASE}/${path}" ]; then
-    echo "${HOME}/${HOST_BASE}/${path} already exists, exiting"
+BASE="${HOST_BASE}/$(dirname "$path")/"
+for REMAP in "${REMAPS[@]}"; do
+    IFS=: read -r PATTERN SUBST <<< "$REMAP"
+    if grep -c "^$PATTERN/" <<< "$BASE"; then
+        TAIL="$( awk -F"^${PATTERN}/" '{ print $2 }' <<< "$BASE" )"
+        BASE="${SUBST}/${TAIL}"
+        break;
+    fi
+done
+TARGET="${HOME}/${BASE}/$(basename "$path")"
+if [ -d "$TARGET" ]; then
+    echo "$TARGET already exists, exiting"
     exit 0
 fi
-mkdir -p "${HOME}/${HOST_BASE}/${BASE}"
-cd "${HOME}/${HOST_BASE}/${BASE}"
+mkdir -p "${HOME}/${BASE}"
+cd "${HOME}/${BASE}"
 git clone "git@${host}:${path}"
