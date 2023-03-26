@@ -3,6 +3,7 @@ brave-browser
 btop
 cmake
 cowsay
+fd
 figlet
 fzf
 github-cli
