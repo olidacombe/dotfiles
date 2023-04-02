@@ -4,10 +4,18 @@ BROWSER="${BROWSER:-"xdg-open"}"
 
 BOOKMARKS="$(pocket-get | jq ".list | to_entries | map({id: .value.item_id, url: .value.resolved_url, title: .value.resolved_title})")"
 
-REPRS="$(jq -r ".[] | .title + \" \" + .url" <<< "$BOOKMARKS" | sed -e 's/^\s*//')"
-
-PAGE="$(fzf <<< "$REPRS" | awk '{ print $NF }')"
+PAGE=""
+if [ -n "${ROFI_INFO+x}" ]; then
+    PAGE="$ROFI_INFO"
+elif [ "${ROFI_RETV-x}" = "0"  ]; then
+    jq -r ".[] | .url + \" \" + .title" <<< "$BOOKMARKS" | while read URL TITLE; do
+        echo -en "${TITLE:-$URL}\0info\x1f${URL}\n"
+    done
+else
+    REPRS="$(jq -r ".[] | .title + \" \" + .url" <<< "$BOOKMARKS" | sed -e 's/^\s*//')"
+    PAGE="$(fzf <<< "$REPRS" | awk '{ print $NF }')"
+fi
 
 if [ -n "$PAGE" ]; then
-    "$BROWSER" "$PAGE" 2>/dev/null
+    coproc ( "$BROWSER" "$PAGE" > /dev/null 2>&1 )
 fi

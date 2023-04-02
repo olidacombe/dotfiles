@@ -3,11 +3,16 @@ brave-browser
 btop
 cmake
 cowsay
+docker
 fd
 figlet
 fzf
 github-cli
+helm
+jdk-openjdk
 keychain
+kubectl
+kubectx
 neofetch
 nvm
 ponysay
