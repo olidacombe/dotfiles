@@ -12,14 +12,6 @@ fi
 
 OS="$(uname)"
 
-if [ -d "${HOME}/.local/bin" ]; then
-    export PATH="${PATH}:${HOME}/.local/bin"
-fi
-
-if [ -d "${HOME}/.local/scripts" ]; then
-    export PATH="${PATH}:${HOME}/.local/scripts"
-fi
-
 export GEM_HOME="$HOME/.gem"
 
 # Path to your oh-my-zsh installation.
@@ -244,20 +236,12 @@ alias dkill="docker ps | sed -e '1d' | fzf -m | awk '{ print \$1 }' | xargs dock
 alias grmb="git branch | grep -v '*' | fzf -m | xargs git branch -D"
 alias tmkill='tmux list-sessions | fzf -m | awk -F: "{ print \$1 }" | while read sess; do tmux kill-session -t "$sess"; done'
 
-if [ -d "${HOME}/bin" ]; then
-    export PATH="${PATH}:${HOME}/bin"
+if [ -n "$(ls $HOME/.config/profile.d 2>/dev/null)" ]; then
+    for f in ${HOME}/.config/profile.d/*; do
+        source "$f"
+    done
 fi
 
-if [ -d "${HOME}/scripts" ]; then
-    export PATH="${PATH}:${HOME}/scripts"
-fi
-
-if [ -d "${HOME}/android-studio/bin" ]; then
-    export PATH="${PATH}:${HOME}/android-studio/bin"
-fi
-
-# sensitives
-[ -f "${HOME}/.local/sensitive.env" ] && . "${HOME}/.local/sensitive.env"
 
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh

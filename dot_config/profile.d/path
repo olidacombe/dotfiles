@@ -1,0 +1,19 @@
+if [ -d "${HOME}/.local/bin" ]; then
+    export PATH="${PATH}:${HOME}/.local/bin"
+fi
+
+if [ -d "${HOME}/.local/scripts" ]; then
+    export PATH="${PATH}:${HOME}/.local/scripts"
+fi
+
+if [ -d "${HOME}/bin" ]; then
+    export PATH="${PATH}:${HOME}/bin"
+fi
+
+if [ -d "${HOME}/scripts" ]; then
+    export PATH="${PATH}:${HOME}/scripts"
+fi
+
+if [ -d "${HOME}/android-studio/bin" ]; then
+    export PATH="${PATH}:${HOME}/android-studio/bin"
+fi
