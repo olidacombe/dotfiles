@@ -2,7 +2,7 @@
 
 BROWSER="${BROWSER:-"xdg-open"}"
 
-BOOKMARKS="$(pocket-get | jq ".list | to_entries | map({id: .value.item_id, url: .value.resolved_url, title: .value.resolved_title})")"
+BOOKMARKS="$(commache pocket-get | jq ".list | to_entries | map({id: .value.item_id, url: .value.resolved_url, title: .value.resolved_title})")"
 
 PAGE=""
 if [ -n "${ROFI_INFO+x}" ]; then

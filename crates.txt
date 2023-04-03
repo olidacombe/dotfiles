@@ -12,6 +12,7 @@ cargo-readme
 cargo-udeps
 cargo-watch
 cargo-workspaces
+commache
 cross
 du-dust
 #espmonitor
