@@ -187,18 +187,6 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#                        __          __    ___      
-#                       /\ \        /\ \__/\_ \     
-#   ___      __   _ __  \_\ \    ___\ \ ,_\//\ \    
-# /' _ `\  /'__`\/\`'__\/'_` \  /'___\ \ \/ \ \ \   
-# /\ \/\ \/\  __/\ \ \//\ \L\ \/\ \__/\ \ \_ \_\ \_ 
-# \ \_\ \_\ \____\\ \_\\ \___,_\ \____\\ \__\/\____\
-#  \/_/\/_/\/____/ \/_/ \/__,_ /\/____/ \/__/\/____/
-#                                                   
-#                                                   
-if command -v lima &> /dev/null; then
-        alias docker="lima nerdctl"
-fi
 alias alpinism='docker run --privileged=true -v $(pwd):/summit -it alpine'
 # alias aws='AWS_PROFILE=$(cat ~/.aws/__selected_profile__) aws'
 alias code="open -a 'Visual Studio Code'"

@@ -62,6 +62,7 @@ brew "kpoof"
 brew "kubectx"
 # linux vms on mac
 brew "lima"
+brew "logcli"
 brew "lolcat"
 brew "luarocks"
 brew "ubuntu/microk8s/microk8s"
