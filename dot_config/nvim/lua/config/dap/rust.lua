@@ -9,12 +9,25 @@ M.setup = function()
             type = 'lldb',
             request = 'launch',
             program = function()
+                vim.fn.jobstart('cargo build')
                 return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+            end,
+            args = function()
+                local args = {}
+                vim.ui.input({
+                        prompt = "Args: ",
+                    },
+                    function(input)
+                        if input then
+                            for arg in input:gmatch("%S+") do
+                                table.insert(args, arg)
+                            end
+                        end
+                    end)
+                return args
             end,
             cwd = '${workspaceFolder}',
             stopOnEntry = false,
-            args = {},
-
             -- 💀
             -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
             --
@@ -30,5 +43,18 @@ M.setup = function()
         },
     }
 end
+
+-- work on the above arg parser here - get quotes and escapes please
+-- local args = {}
+-- vim.ui.input({
+--     prompt = "oi: ",
+-- }, function(input)
+--     if input then
+--         for arg in input:gmatch("%S+") do
+--             table.insert(args, arg)
+--         end
+--     end
+-- end)
+-- P(args)
 
 return M
