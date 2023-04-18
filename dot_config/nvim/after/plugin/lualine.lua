@@ -21,7 +21,7 @@ require('lualine').setup({
     options = {
         always_divide_middle = true,
         component_separators = {
-            left = "", -- "",
+            left = "",  -- "",
             right = "", -- ""
         },
         disabled_filetypes = {
@@ -49,7 +49,7 @@ require('lualine').setup({
             winbar = 1000
         },
         section_separators = {
-            left = "", --"",
+            left = "",  --"",
             right = "", --""
         },
         theme = "auto"
@@ -59,7 +59,7 @@ require('lualine').setup({
         lualine_b = { "branch", "diff", "diagnostics", function()
             return "易" .. require("od.quickcycle").get_current()
         end },
-        lualine_c = { "filename" },
+        lualine_c = { { "filename", path = 1 } },
         lualine_x = { "encoding", "fileformat", "filetype" },
         lualine_y = { "progress" },
         lualine_z = { "location" }
@@ -67,12 +67,13 @@ require('lualine').setup({
     tabline = {
         -- nicer tab decor, e.g. https://github.com/alvarosevilla95/luatab.nvim +  OBVS
         -- or at least tone down the highlight...
-        lualine_a = { { 'tabs',
+        lualine_a = { {
+            'tabs',
             -- mode 1 shows tab names
             mode = 1,
             tabs_color = {
                 -- Same values as the general color option can be used here.
-                active = 'lualine_b_normal', -- Color for active tab.
+                active = 'lualine_b_normal',     -- Color for active tab.
                 inactive = 'lualine_c_inactive', -- Color for inactive tab.
             },
             fmt = function(name, context)
