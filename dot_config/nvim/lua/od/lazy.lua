@@ -61,6 +61,12 @@ local plugins = {
     -- Neodev
     'folke/neodev.nvim',
 
+    -- Gitlinker
+    {
+        'ruifm/gitlinker.nvim',
+        dependencies = 'nvim-lua/plenary.nvim',
+    },
+
     -- ____ ___  ____ _    _ ____ _  _
     -- |__| |__] |  | |    | [__  |__|
     -- |  | |__] |__| |___ | ___] |  |
