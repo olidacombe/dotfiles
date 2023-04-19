@@ -200,12 +200,10 @@ complete -F __start_jira-terminal jira
 alias k="kubectl"
 complete -F __start_kubectl k
 alias kctx="kubetcx"
-alias kj="kubectl get pods -A | sed '1d' | fzf | awk '{ print \$1,\$2 }' | read ns pod; kubectl exec -n \"\$ns\" -it \"\$pod\" -- /bin/sh"
 alias kns="kubens"
 if [[ "$OS" = "Darwin" ]]; then
     alias sed="gsed"
 fi
-alias tkl="tsh kube ls -fjson | jq -r '.[]|.kube_cluster_name' | fzf | xargs tsh kube login"
 
 if command -v nvim &> /dev/null; then
         # life is worth living

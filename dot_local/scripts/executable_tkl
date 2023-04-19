@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+#   __  __    __
+#  / /_/ /__ / /
+# / __/  '_// / 
+# \__/_/\_\/_/  
+#               
+#   - teleport kube login
+
+set -euo pipefail
+
+tsh kube ls -fjson \
+    | jq -r '.[]|.kube_cluster_name' \
+    | fzf \
+    | xargs tsh kube login

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+#  _      _                   
+# | |    (_)                  
+# | |  _  _ _   _ ____  ____  
+# | |_/ )| | | | |    \|  _ \ 
+# |  _ ( | | |_| | | | | |_| |
+# |_| \_)| |____/|_|_|_|  __/ 
+#      (__/            |_|    
+#    k8s pod jumper
+
+set -euo pipefail
+
+SELECTION="$(kubectl get pods -A \
+    | sed '1d' \
+    | fzf \
+    | awk '{ print $1,$2 }'
+)"
+
+read -r NS POD <<< "$SELECTION"
+
+kubectl exec -n "$NS" -it "$POD" -- /bin/sh
