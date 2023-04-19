@@ -3,17 +3,23 @@ local actions = require("diffview.actions")
 local quickcycle = require("od.quickcycle")
 
 local quickcycle_mappings = quickcycle.new({
-    { "change",
-        next = "normal ]c", prev = "normal [c" },
-    { "conflict",
-        next = "normal ]x", prev = "normal [x" },
+    {
+        "change",
+        next = "normal ]c",
+        prev = "normal [c"
+    },
+    {
+        "conflict",
+        next = "normal ]x",
+        prev = "normal [x"
+    },
 })
 
 local file_panel_common_mappings = {
     { "n", "<C-g>", actions.select_prev_entry, { desc = "Next" } },
     { "n", "<C-c>", actions.select_next_entry, { desc = "Prev" } },
-    ["<tab>"] = false,
-    ["<s-tab>"] = false,
+        ["<tab>"] = false,
+        ["<s-tab>"] = false,
 }
 
 require("diffview").setup({
