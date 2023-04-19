@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+AWS="${HOME}/.aws"
+CONF="${AWS}/config"
+
+if [ -z "${AWS_PROFILE+x}" ]; then
+    AWS_PROFILE="$(grep "^\[" "$CONF" | sed -e 's/.*profile\S*\(.*\)\]/\1/' | fzf | xargs)"
+fi
+
+echo Logging in to "$AWS_PROFILE"
+aws sso login --profile="$AWS_PROFILE"
