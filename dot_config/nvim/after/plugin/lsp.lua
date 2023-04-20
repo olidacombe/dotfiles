@@ -31,7 +31,12 @@ lsp.configure('lua_ls', {
         Lua = {
             diagnostics = {
                 globals = { 'vim', 'P', }
-            }
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file('', true),
+                checkThirdParty = false,
+            },
         }
     }
 })
@@ -39,7 +44,7 @@ lsp.configure('lua_ls', {
 lsp.configure('svelte', {
     settings = {
         svelte = {
-            ['enable-ts-plugin'] = true
+                ['enable-ts-plugin'] = true
         }
     }
 })
