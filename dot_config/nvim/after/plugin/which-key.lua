@@ -3,7 +3,7 @@ local wk = require "od.which-key"
 
 local conf = {
     window = {
-        border = "single", -- none, single, double, shadow
+        border = "single",   -- none, single, double, shadow
         position = "bottom", -- bottom, top
     },
 }
@@ -16,7 +16,6 @@ local yank_to_clipboard = { "\"+y", "Yank to Clipboard" }
 local mappings = {
     b = {
         name = "Buffer",
-        b = { "<cmd>e #<CR>", "Back" },
         c = { "<Cmd>bd!<CR>", "Close current buffer" },
         D = { "<Cmd>%bd|e#|bd#<CR>", "Delete all buffers" },
     },
