@@ -10,6 +10,7 @@ fzf
 github-cli
 helm
 jdk-openjdk
+jupyter-notebook
 keychain
 kubectl
 kubectx
