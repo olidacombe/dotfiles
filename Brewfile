@@ -40,7 +40,7 @@ brew "gnutls"
 brew "gpg2"
 brew "ffmpeg"
 brew "figlet"
-brew "fluxcd/tap/flux"
+brew "fluxcd/tap/flux@0.41" # pin below v2 for work
 brew "fswatch"
 brew "fzf"
 # brew "gcc"
