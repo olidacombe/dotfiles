@@ -18,4 +18,11 @@ DB="$(tsh db ls -fjson \
     | fzf)"
 
 tsh db login "$DB"
-tsh db connect --db-user="$DB_USER" "$DB"
+
+# proxy instead of connect if we have any arguments at all
+if [ $# -gt 0 ]; then
+    tsh proxy db "$DB"
+else
+    tsh db connect --db-user="$DB_USER" "$DB"
+fi
+
