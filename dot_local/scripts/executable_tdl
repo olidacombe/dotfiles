@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+#           _ _  
+#    _     | | | 
+#  _| |_ __| | | 
+# (_   _) _  | | 
+#   | |( (_| | | 
+#    \__)____|\_)
+#                
+#   - teleport database login
+
+set -euo pipefail
+
+DB_USER="${DB_USER:-"infra-team"}"
+
+DB="$(tsh db ls -fjson \
+    | jq -r '.[]|.metadata.name' \
+    | fzf)"
+
+tsh db login "$DB"
+tsh db connect --db-user="$DB_USER" "$DB"
