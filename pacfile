@@ -21,6 +21,8 @@ ripgrep
 strace
 tmux
 tree
+vim # provides xxd
+whois
 
 # zmk deps
 arm-none-eabi-gcc
