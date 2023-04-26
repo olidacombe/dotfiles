@@ -18,6 +18,7 @@ du-dust
 #espmonitor
 espup
 git-delta
+hardpass
 #ldproxy
 jira-terminal
 lemmeknow
