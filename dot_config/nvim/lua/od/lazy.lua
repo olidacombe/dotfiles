@@ -67,6 +67,9 @@ local plugins = {
         dependencies = 'nvim-lua/plenary.nvim',
     },
 
+    -- Dressing - pretty up the inputs
+    'stevearc/dressing.nvim',
+
     -- ____ ___  ____ _    _ ____ _  _
     -- |__| |__] |  | |    | [__  |__|
     -- |  | |__] |__| |___ | ___] |  |

@@ -22,6 +22,7 @@ local mappings = {
     g = {
         name = "Git",
         r = { "<cmd>! gh repo view --web<cr>", "-> Repo" },
+        C = { require('od.git').git_checkout_new_branch, "Create Branch" },
     },
     x = { "<cmd>!chmod +x %<CR>", "Make Executable" },
     -- Yank to "+
