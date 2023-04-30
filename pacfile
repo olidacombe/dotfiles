@@ -16,6 +16,7 @@ kubectl
 kubectx
 neofetch
 nvm
+openbsd-netcat
 ponysay
 ripgrep
 strace
