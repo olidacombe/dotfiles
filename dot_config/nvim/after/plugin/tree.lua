@@ -102,26 +102,33 @@ require("nvim-tree").setup({
     update_focused_file = {
         enable = true
     },
+    hijack_directories = {
+        enable = false
+    },
     view = {
         mappings = {
             custom_only = false,
             list = {
-                { key = "<leader>a", action = " Harpoon", action_cb = function(node)
-                    require("harpoon.mark").add_file(node.absolute_path)
-                end },
+                {
+                    key = "<leader>a",
+                    action = " Harpoon",
+                    action_cb = function(node)
+                        require("harpoon.mark").add_file(node.absolute_path)
+                    end
+                },
                 -- allow tab to fall through to my default
-                { key = "<Tab>", action = "" },
+                { key = "<Tab>",   action = "" },
                 -- preview alternative (since we nuke <Tab> above)
-                { key = "<cr>", action = "preview" },
+                { key = "<cr>",    action = "preview" },
                 -- fold-like motions
-                { key = "<Left>", action = "close_node" },
-                { key = "<Down>", action = " Dir", action_cb = down_action },
-                { key = "<Up>", action = " Dir", action_cb = up_action },
-                { key = "<Right>", action = "Expand", action_cb = right_action },
-                { key = "zM", action = "Collapse all", action_cb = Api.tree.collapse_all },
-                { key = "zR", action = "Expand all", action_cb = Api.tree.expand_all },
+                { key = "<Left>",  action = "close_node" },
+                { key = "<Down>",  action = " Dir",      action_cb = down_action },
+                { key = "<Up>",    action = " Dir",      action_cb = up_action },
+                { key = "<Right>", action = "Expand",       action_cb = right_action },
+                { key = "zM",      action = "Collapse all", action_cb = Api.tree.collapse_all },
+                { key = "zR",      action = "Expand all",   action_cb = Api.tree.expand_all },
                 -- use + as inverse of - (dir_up)
-                { key = "+", action = "cd" },
+                { key = "+",       action = "cd" },
             },
         },
     },
@@ -141,7 +148,7 @@ wk.register_normal({
 --   /_/                                 /____/
 --
 local quickcycle_mappings = quickcycle.new({
-    { "diag", next = "normal ]e", prev = "normal [e" },
+    { "diag",   next = "normal ]e", prev = "normal [e" },
     { "change", next = "normal ]c", prev = "normal [c" },
 })
 

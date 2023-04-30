@@ -70,6 +70,11 @@ local plugins = {
     -- Dressing - pretty up the inputs
     'stevearc/dressing.nvim',
 
+    {
+        'stevearc/oil.nvim',
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+
     -- ____ ___  ____ _    _ ____ _  _
     -- |__| |__] |  | |    | [__  |__|
     -- |  | |__] |__| |___ | ___] |  |
