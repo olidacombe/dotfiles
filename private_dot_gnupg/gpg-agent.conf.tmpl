@@ -1,6 +1,7 @@
 {{ if eq .chezmoi.os "darwin" -}}
 pinentry-program /opt/homebrew/bin/pinentry-mac
 {{ else if eq .chezmoi.os "linux" -}}
+allow-loopback-pinentry
 pinentry-program /usr/bin/pinentry
 {{ end -}}
 max-cache-ttl 60480000
