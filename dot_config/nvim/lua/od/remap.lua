@@ -105,4 +105,7 @@ os_cb({
 vim.keymap.set("n", "<C-g>", quickcycle.prev)
 vim.keymap.set("n", '<C-c>', quickcycle.next)
 
+-- Edit dir of current file
+vim.keymap.set("n", "<leader>-", "<cmd>e %:h<cr>")
+
 -- All else has moved to `which-key.lua`
