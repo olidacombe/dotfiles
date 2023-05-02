@@ -63,7 +63,7 @@ local plugins = {
         "imNel/monorepo.nvim",
         config = function()
             require("monorepo").setup({
-                silent = false,                     -- Supresses vim.notify messages
+                silent = true,                      -- Supresses vim.notify messages
                 autoload_telescope = false,         -- do this in after/telescope
                 data_path = vim.fn.stdpath("data"), -- Path that monorepo.json gets saved to
             })
