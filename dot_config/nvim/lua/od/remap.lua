@@ -106,6 +106,11 @@ vim.keymap.set("n", "<C-g>", quickcycle.prev)
 vim.keymap.set("n", '<C-c>', quickcycle.next)
 
 -- Edit dir of current file
-vim.keymap.set("n", "-", "<cmd>e %:h<cr>", { desc = "Edit current dir" })
+vim.keymap.set("n", "-", function()
+    local buf = vim.api.nvim_buf_get_name(0):gsub("^oil://", "")
+    if buf == "" then buf = vim.fn.getcwd() .. "/" end
+    local dir = buf:gsub("/[^/]*$", "")
+    vim.cmd("e " .. dir)
+end, { desc = "Edit current dir" })
 
 -- All else has moved to `which-key.lua`
