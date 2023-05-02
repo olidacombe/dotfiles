@@ -14,10 +14,12 @@ jupyter-notebook
 keychain
 kubectl
 kubectx
+luarocks
 neofetch
 nvm
 openbsd-netcat
 ponysay
+python-pipx
 ripgrep
 strace
 tmux
