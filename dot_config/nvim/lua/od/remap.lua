@@ -107,7 +107,7 @@ vim.keymap.set("n", '<C-c>', quickcycle.next)
 
 -- Edit dir of current file
 vim.keymap.set("n", "-", function()
-    local buf = vim.api.nvim_buf_get_name(0):gsub("^oil://", "")
+    local buf = require("od.buffer").current_path()
     if buf == "" then buf = vim.fn.getcwd() .. "/" end
     local dir = buf:gsub("/[^/]*$", "")
     vim.cmd("e " .. dir)
