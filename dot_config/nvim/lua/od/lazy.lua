@@ -58,6 +58,19 @@ local plugins = {
     -- editorconfig.org
     'editorconfig/editorconfig-vim',
 
+    -- monorepo
+    {
+        "imNel/monorepo.nvim",
+        config = function()
+            require("monorepo").setup({
+                silent = false,                     -- Supresses vim.notify messages
+                autoload_telescope = false,         -- do this in after/telescope
+                data_path = vim.fn.stdpath("data"), -- Path that monorepo.json gets saved to
+            })
+        end,
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    },
+
     -- Neodev
     'folke/neodev.nvim',
 

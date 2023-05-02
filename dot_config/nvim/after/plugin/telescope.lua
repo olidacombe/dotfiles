@@ -9,8 +9,8 @@ register_normal({
         name = "Fuzzy Find",
         {
             C = { builtin.colorscheme, "Colourscheme" },
-            f = { function() builtin.git_files({ hidden = true }) end, "Files<=Repo" },
-            F = { function()
+            F = { function() builtin.git_files({ hidden = true }) end, "Files<=Repo" },
+            f = { function()
                 builtin.find_files({
                     hidden = true
                 })
@@ -82,3 +82,4 @@ telescope.setup({
 telescope.load_extension('fzf')
 telescope.load_extension('harpoon')
 telescope.load_extension('makemapper')
+telescope.load_extension('monorepo')

@@ -1,0 +1,6 @@
+vim.keymap.set("n", "<leader>fp", function()
+    require("telescope").extensions.monorepo.monorepo()
+end, { desc = "monorepo project toggle" })
+vim.keymap.set("n", "<leader>p", function()
+    require("monorepo").toggle_project()
+end, { desc = "monorepo project" })
