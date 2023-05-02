@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+QUERY_COMMAND="githubfind"
+
+INITIAL_QUERY=""
+FZF_DEFAULT_COMMAND="$QUERY_COMMAND '$INITIAL_QUERY'" \
+  fzf --bind "change:reload:$QUERY_COMMAND {q} || true" \
+      --ansi --phony --query "$INITIAL_QUERY" \
+  | xargs gitget

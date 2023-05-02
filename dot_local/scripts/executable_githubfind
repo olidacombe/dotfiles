@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+MIN_QUERY_LENGTH="${MIN_QUERY_LENGTH:-3}"
+QUERY="${1:-""}"
+
+# don't try to query with a very short string
+[ "${#QUERY}" -lt "$MIN_QUERY_LENGTH" ] && exit 0
+
+gh api "/search/repositories?q=$QUERY" | jq -r ".items[] | .full_name + \" \" + .description"
