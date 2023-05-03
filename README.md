@@ -6,6 +6,7 @@ sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh
 
 ## TODO
 
++ `harpoon` maps for `oil` buffer quick file add
 + `titgrep` - grep but keep first (title) line
     - `bodgrep` - grep but unconditionally skip first line
 + sort out meta key in linux so I can have an easy life with shortcuts between OSs
