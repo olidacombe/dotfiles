@@ -54,6 +54,16 @@ function Modes:dec()
     self.current = v
 end
 
+function Modes:try_select(mode_name)
+    for i, mode in ipairs(self.modes) do
+        if mode[1] == mode_name then
+            self.i = i
+            self.current = mode
+            return
+        end
+    end
+end
+
 local cycle_action = function(action)
     local t = type(action)
     if t == "function" then return action() end
@@ -95,12 +105,21 @@ end
 
 local stack = Stack:new(
     Modes:new({
-        { "diag",
-            next = "normal ]d", prev = "normal [d" },
-        { "qf",
-            next = ":cn", prev = ":cp" },
-        { "change",
-            next = "normal ]c", prev = "normal [c" },
+        {
+            "diag",
+            next = "normal ]d",
+            prev = "normal [d"
+        },
+        {
+            "qf",
+            next = ":cn",
+            prev = ":cp"
+        },
+        {
+            "change",
+            next = "normal ]c",
+            prev = "normal [c"
+        },
         -- { "hrpn",
         --     next = require("harpoon.ui").nav_next, prev = require("harpoon.ui").nav_prev },
     })
@@ -140,6 +159,11 @@ end
 
 M.get_current = function()
     return stack.top.current[1]
+end
+
+M.try_select = function(mode_name)
+    stack.top:try_select(mode_name)
+    require('lualine').refresh()
 end
 
 return M
