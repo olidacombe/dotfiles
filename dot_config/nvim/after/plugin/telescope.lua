@@ -22,6 +22,7 @@ register_normal({
                     shorten_path = true, word_match = "-w", only_sort_text = true, search = ''
                 })
             end, '"Rg - ish"' },
+            k = { builtin.keymaps, "Keymaps" },
             b = { builtin.current_buffer_fuzzy_find, "Within buffer" },
             B = { builtin.buffers, "Buffers" },
             h = { builtin.help_tags, "Help" },
@@ -34,7 +35,6 @@ register_normal({
     g = {
         b = { builtin.git_branches, "Branch" },
     },
-    k = { builtin.keymaps, "Keymaps" },
 })
 
 local has_selections = function(prompt_bufnr)
