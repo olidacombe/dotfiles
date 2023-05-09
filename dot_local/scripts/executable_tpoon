@@ -43,8 +43,9 @@ function push() {
 function switch() {
     local IDX="$1"
     local SESSION_NAME="$(
-        sed -n "${IDX}p" < "$STACK"
+        sed "${IDX}q;d" "$STACK"
     )"
+    [[ -z "$SESSION_NAME" ]] && return
     tmux switch-client -t "$SESSION_NAME"
 }
 

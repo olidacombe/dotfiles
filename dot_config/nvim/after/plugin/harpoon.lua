@@ -30,7 +30,6 @@ os_cb({
         vim.keymap.set("n", "<A-o>", function() ui.nav_file(2) end)
         vim.keymap.set("n", "<A-e>", function() ui.nav_file(3) end)
         vim.keymap.set("n", "<A-u>", function() ui.nav_file(4) end)
-        vim.keymap.set("n", "<A-i>", function() ui.nav_file(5) end)
     end,
     darwin = function()
         vim.keymap.set("n", "æ", function() ui.nav_file(1) end)
