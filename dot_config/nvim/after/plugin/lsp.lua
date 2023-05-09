@@ -44,7 +44,7 @@ lsp.configure('lua_ls', {
 lsp.configure('svelte', {
     settings = {
         svelte = {
-                ['enable-ts-plugin'] = true
+            ['enable-ts-plugin'] = true
         }
     }
 })
@@ -107,3 +107,15 @@ require("neodev").setup({
     library = { plugins = { "neotest" }, types = true },
 })
 lsp.setup()
+
+local cmp = require('cmp')
+
+cmp.setup({
+    sources = {
+        { name = 'path' },
+        { name = 'nvim_lsp' },
+        { name = 'buffer',  keyword_length = 3 },
+        { name = 'luasnip', keyword_length = 2 },
+        { name = 'emoji' }
+    }
+})

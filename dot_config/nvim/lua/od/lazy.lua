@@ -203,6 +203,7 @@ local plugins = {
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },
             { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-emoji' },
             { 'hrsh7th/cmp-path' },
             { 'saadparwaiz1/cmp_luasnip' },
             { 'hrsh7th/cmp-nvim-lsp' },
@@ -277,6 +278,12 @@ local plugins = {
 
     -- Install tools via Mason which aren't LSP servers
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+
+    -- Icon picker
+    {
+        "ziontee113/icon-picker.nvim",
+        dependencies = { 'stevearc/dressing.nvim', 'nvim-telescope/telescope.nvim' }
+    },
 
 }
 
