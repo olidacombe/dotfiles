@@ -26,10 +26,10 @@ register_normal(mappings)
 -- easy quick-switches :D
 os_cb({
     linux = function()
-        vim.keymap.set("n", "<A-a>", function() ui.nav_file(1) end)
-        vim.keymap.set("n", "<A-o>", function() ui.nav_file(2) end)
-        vim.keymap.set("n", "<A-e>", function() ui.nav_file(3) end)
-        vim.keymap.set("n", "<A-u>", function() ui.nav_file(4) end)
+        vim.keymap.set("n", "<A-'>", function() ui.nav_file(1) end)
+        vim.keymap.set("n", "<A-,>", function() ui.nav_file(2) end)
+        vim.keymap.set("n", "<A-.>", function() ui.nav_file(3) end)
+        vim.keymap.set("n", "<A-p>", function() ui.nav_file(4) end)
     end,
     darwin = function()
         vim.keymap.set("n", "æ", function() ui.nav_file(1) end)
