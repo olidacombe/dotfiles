@@ -15,6 +15,7 @@ keychain
 kubectl
 kubectx
 luarocks
+moreutils
 neofetch
 nvm
 openbsd-netcat
