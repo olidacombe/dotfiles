@@ -1,0 +1,58 @@
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+if [ -z "${TMUX+x}" ]; then
+    echo Not in tmux
+    exit 1
+fi
+
+STACK="${HOME}/.local/tpoon"
+
+# make sure our stack exists
+touch "$STACK"
+
+function get_current_session() {
+    tmux ls | grep '(attached)$' | awk -F: '{ print $1 }'
+}
+
+# boot any non-existent sessions off the stack
+function clean_stack() {
+    declare -A SESSION_SET
+    tmux ls | awk -F: '{ print $1 }' | while read -r session; do
+        SESSION_SET[$session]="$session"
+    done
+    while read -r session; do
+        if [ -n "${SESSION_SET[$session]+x}" ]; then
+            echo "$session"
+        fi
+    done < "$STACK" | sponge "$STACK"
+}
+
+clean_stack
+
+function push() {
+    local NEW
+    NEW="$(get_current_session)"
+    while read -r session; do
+        [[ "$session" == "$NEW" ]] && return
+    done < "$STACK"
+    echo "$NEW" >> "$STACK"
+}
+
+function switch() {
+    local IDX="$1"
+    local SESSION_NAME="$(
+        sed -n "${IDX}p" < "$STACK"
+    )"
+    tmux switch-client -t "$SESSION_NAME"
+}
+
+case "$1" in
+    push)
+        push;;
+    edit)
+        "$EDITOR" "$STACK";;
+    *)
+        switch "$1";;
+esac
