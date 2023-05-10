@@ -30,12 +30,28 @@ lsp.configure('lua_ls', {
     settings = {
         Lua = {
             diagnostics = {
-                globals = { 'vim', 'P', }
+                globals = { 'vim', 'P', },
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
                 library = vim.api.nvim_get_runtime_file('', true),
                 checkThirdParty = false,
+            },
+        },
+    }
+})
+
+lsp.configure('yamlls', {
+    settings = {
+        yaml = {
+            schemaStore = {
+                url = "https://www.schemastore.org/api/json/catalog.json",
+                enable = true,
+            },
+            schemas = {
+                ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "*.yaml",
+                ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
+                    "ci/*.yml", ".gitlab-ci.yml" },
             },
         }
     }
