@@ -83,3 +83,18 @@ telescope.load_extension('fzf')
 telescope.load_extension('harpoon')
 telescope.load_extension('makemapper')
 telescope.load_extension('monorepo')
+
+-- temp fix for https://github.com/nvim-telescope/telescope.nvim/issues/2027
+local od_i2027 = vim.api.nvim_create_augroup("Od_i2027", { clear = true })
+vim.api.nvim_create_autocmd(
+-- Prevent entering buffers in insert mode.
+    "WinLeave",
+    {
+        group = od_i2027,
+        pattern = "*",
+        callback = function()
+            if vim.bo.ft == "TelescopePrompt" and vim.fn.mode() == "i" then
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "i", false)
+            end
+        end,
+    })
