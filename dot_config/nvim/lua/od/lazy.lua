@@ -55,6 +55,9 @@ local plugins = {
         }
     },
 
+    -- direnv
+    'direnv/direnv.vim',
+
     -- editorconfig.org
     'editorconfig/editorconfig-vim',
 
