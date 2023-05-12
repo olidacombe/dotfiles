@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SPEC="$1"
+
+NS="${NS:-default}"
+function k {
+    kubectl -n "$NS" "$@"
+}
+
+IFS=: read -r LOCAL_PORT ENDPOINT REMOTE_PORT <<< "$SPEC"
+
+POD_NAME="${USER//\./-}-debug--${ENDPOINT//\./-}--${REMOTE_PORT}"
+
+function cleanup {
+    k delete pod "$POD_NAME"
+}
+
+trap cleanup EXIT
+
+k run "$POD_NAME" \
+    --image=alpine/socat \
+    --port "$LOCAL_PORT" \
+    "tcp-listen:${LOCAL_PORT},fork,reuseaddr" \
+    "tcp-connect:${ENDPOINT}:${REMOTE_PORT}"
+k wait --for=condition=ready -n "$NS" pod "$POD_NAME"
+k port-forward "$POD_NAME" "${LOCAL_PORT}:${LOCAL_PORT}"

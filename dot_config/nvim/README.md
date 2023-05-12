@@ -14,6 +14,7 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 
 ## TODO
 
++ open monorepo project root when changing project?
 + show monorepo project in lualine
 + `n,v` mapping to execute line/selection, maybe in a floating term or whatever
 + A mapping which take a line like `use('bla/whatever.nvim')` and takes you to the git repo in your browser
