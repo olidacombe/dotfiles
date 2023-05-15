@@ -14,6 +14,8 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 
 ## TODO
 
++ fix oil keymap clashes with c-{h,j,k,l}
++ monorepo project sticky to tab?
 + open monorepo project root when changing project?
 + show monorepo project in lualine
 + `n,v` mapping to execute line/selection, maybe in a floating term or whatever

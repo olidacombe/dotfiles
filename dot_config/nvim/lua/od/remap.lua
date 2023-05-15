@@ -94,12 +94,12 @@ local quickcycle = require("od.quickcycle")
 
 os_cb({
     linux = function()
-        vim.keymap.set("n", "<C-A-g>", quickcycle.mode_prev)
-        vim.keymap.set("n", "<C-A-c>", quickcycle.mode_next)
+        vim.keymap.set("n", "<A-g>", quickcycle.mode_prev)
+        vim.keymap.set("n", "<A-c>", quickcycle.mode_next)
     end,
     darwin = function()
-        vim.keymap.set("n", "<C-©>", quickcycle.mode_prev)
-        vim.keymap.set("n", "<C-ç>", quickcycle.mode_next)
+        vim.keymap.set("n", "©", quickcycle.mode_prev)
+        vim.keymap.set("n", "ç", quickcycle.mode_next)
     end,
 })
 vim.keymap.set("n", "<C-g>", quickcycle.prev)
