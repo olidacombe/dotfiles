@@ -1,9 +1,10 @@
 local buffer = require("od.buffer")
+local monorepo = require("monorepo")
 
 vim.keymap.set("n", "<leader>fp", function()
     require("telescope").extensions.monorepo.monorepo()
 end, { desc = "monorepo project toggle" })
 vim.keymap.set("n", "<leader>p", function()
-    local path = buffer.current_path():gsub("^" .. vim.fn.getcwd(), ""):gsub("[^/]*$", "")
-    require("monorepo").toggle_project(path)
+    local path = buffer.current_path():gsub("^" .. monorepo.currentMonorepo, ""):gsub("[^/]*$", "")
+    monorepo.toggle_project(path)
 end, { desc = "monorepo project" })
