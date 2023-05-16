@@ -57,7 +57,7 @@ require('lualine').setup({
     sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics", function()
-            return "易" .. require("od.quickcycle").get_current()
+            return "⇕" .. require("od.quickcycle").get_current()
         end },
         lualine_c = { { "filename", path = 1 } },
         lualine_x = { "encoding", "fileformat", "filetype" },
