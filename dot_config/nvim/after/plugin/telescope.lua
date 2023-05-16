@@ -34,6 +34,7 @@ register_normal({
     },
     g = {
         b = { builtin.git_branches, "Branch" },
+        c = { builtin.git_commits, "Commits" },
     },
 })
 
@@ -56,10 +57,10 @@ telescope.setup({
     defaults = {
         mappings = {
             i = {
-                    ["<C-q>"] = send_to_qflist,
+                ["<C-q>"] = send_to_qflist,
             },
             n = {
-                    ["<C-q>"] = send_to_qflist,
+                ["<C-q>"] = send_to_qflist,
             },
         },
     },
