@@ -4,5 +4,5 @@ require("icon-picker").setup({
 
 local opts = { noremap = true, silent = true, desc = "icon" }
 
-vim.keymap.set("n", "<leader>i", "<cmd>IconPicker<cr>", opts)
+vim.keymap.set("n", "<leader>i", "<cmd>IconPickerNormal<cr>", opts)
 vim.keymap.set("i", "<c-i>", "<cmd>IconPickerInsert<cr>", opts)
