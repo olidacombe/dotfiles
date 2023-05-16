@@ -1,3 +1,4 @@
-export BOARD=nice_nano_v2
-export GNUARMEMB_TOOLCHAIN_PATH=/usr/local
-export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
+#export BOARD=nice_nano_v2
+export GNUARMEMB_TOOLCHAIN_PATH=/usr
+export ZEPHYR_TOOLCHAIN_VARIANT=cross-compile
+export CROSS_COMPILE="$(which arm-none-eabi-gcc | sed 's/gcc//g')"
