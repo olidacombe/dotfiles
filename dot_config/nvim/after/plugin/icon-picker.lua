@@ -2,8 +2,16 @@ require("icon-picker").setup({
     disable_legacy_commands = true
 })
 
+local os_cb = require('utils').os_cb
+
 local opts = { noremap = true, silent = true, desc = "icon" }
 
--- icoN mappings because c-i does some weird tab thing on macos 🤷
-vim.keymap.set("n", "<leader>n", "<cmd>IconPickerNormal<cr>", opts)
-vim.keymap.set("i", "<c-n>", "<cmd>IconPickerInsert<cr>", opts)
+vim.keymap.set("n", "<leader>i", "<cmd>IconPickerNormal<cr>", opts)
+os_cb({
+    linux = function()
+        vim.keymap.set("i", "<A-i>", "<cmd>IconPickerInsert<cr>", opts)
+    end,
+    darwin = function()
+        -- vim.keymap.set("i", "TODO", "<cmd>IconPickerInsert<cr>", opts)
+    end,
+})
