@@ -63,7 +63,7 @@ if [ "$OS" = "$MACOS" ]; then
 	brew bundle
 elif [ -f "/etc/arch-release" ]; then
     pac_install $( strip_comment pacfile )
-    y | yay -qS $( strip_comment yayfile ) <<< "A\nN\n"
+    yes | yay -qS $( strip_comment yayfile ) <<< "A\nN\n"
 fi
 
 # Setup fzf a bit more
