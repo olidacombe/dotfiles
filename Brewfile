@@ -18,6 +18,7 @@ brew "awscli"
 brew "python@3.10"
 brew "autojump"
 brew "automake"
+brew "bat" # cat with syntax highlighting 👌
 brew "bats-core"
 brew "glib"
 brew "boxes"
