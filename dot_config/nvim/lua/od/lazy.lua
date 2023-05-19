@@ -191,7 +191,7 @@ local plugins = {
     'j-hui/fidget.nvim',
 
     -- UFO nice folding
-    { 'kevinhwang91/nvim-ufo',     dependencies = 'kevinhwang91/promise-async' },
+    { 'kevinhwang91/nvim-ufo',           dependencies = 'kevinhwang91/promise-async' },
 
     -- [LSP](https://github.com/VonHeikemen/lsp-zero.nvim)
     {
@@ -223,6 +223,14 @@ local plugins = {
         dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
     },
 
+    --      _       _ _
+    --  ___| |     | | |_   _  __ _
+    -- |__ \ |_____| | | | | |/ _` |
+    -- / __/ |_____| | | |_| | | | |
+    -- \___|_|     |_|_|_.__/|_| |_|
+    --
+    { 'jose-elias-alvarez/null-ls.nvim', dependencies = { { 'nvim-lua/plenary.nvim' } } },
+
     -- Rose Pine colour scheme
     {
         'rose-pine/neovim',
@@ -232,6 +240,29 @@ local plugins = {
     {
         "SmiteshP/nvim-navic",
         dependencies = "neovim/nvim-lspconfig"
+    },
+
+    --                  ____   __ __  _____ ______
+    --                 |    \ |  T  T/ ___/|      T
+    --                 |  D  )|  |  (   \_ |      |
+    --                 |    / |  |  |\__  Tl_j  l_j
+    --                 |    \ |  :  |/  \ |  |  |
+    --                 |  .  Yl     |\    |  |  |
+    --                 l__j\_j \__,_j \___j  l__j
+    --
+    --  ______   ___    ___   _      _____
+    -- |      T /   \  /   \ | T    / ___/
+    -- |      |Y     YY     Y| |   (   \_
+    -- l_j  l_j|  O  ||  O  || l___ \__  T
+    --   |  |  |     ||     ||     T/  \ |
+    --   |  |  l     !l     !|     |\    |
+    --   l__j   \___/  \___/ l_____j \___j
+    --
+    'simrat39/rust-tools.nvim',
+    {
+        'saecki/crates.nvim',
+        tag = 'v0.3.0',
+        dependencies = { { 'nvim-lua/plenary.nvim' } },
     },
 
     -- Telescope for fuzzy finding
@@ -276,7 +307,7 @@ local plugins = {
     'folke/which-key.nvim',
 
     -- wilder.nvim
-    { 'gelguy/wilder.nvim', build = ":UpdateRemotePlugins" },
+    { 'gelguy/wilder.nvim',        build = ":UpdateRemotePlugins" },
 
     -- Install tools via Mason which aren't LSP servers
     'WhoIsSethDaniel/mason-tool-installer.nvim',
