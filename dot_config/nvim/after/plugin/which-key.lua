@@ -21,6 +21,7 @@ local mappings = {
     },
     g = {
         name = "Git",
+        p = { "<cmd>Git pull<cr>", "﬇ pull" },
         r = { "<cmd>! gh repo view --web<cr>", "-> Repo" },
         C = { require('od.git').git_checkout_new_branch, "Create Branch" },
     },
