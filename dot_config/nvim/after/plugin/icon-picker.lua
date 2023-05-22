@@ -12,7 +12,6 @@ os_cb({
         vim.keymap.set("i", "<A-i>", "<cmd>IconPickerInsert<cr>", opts)
     end,
     darwin = function()
-        -- gross, requires enter after :'(
-        vim.keymap.set("i", "^", "<cmd>IconPickerInsert<cr>", opts)
+        -- vim.keymap.set("i", "^", "<cmd>IconPickerInsert<cr>", opts)
     end,
 })
