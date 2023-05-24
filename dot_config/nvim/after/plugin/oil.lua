@@ -19,6 +19,6 @@ require("oil").setup({
     silence_disclaimer = true,
     skip_confirm_for_simple_edits = false,
     view_options = {
-        show_hidden = false,
-    }
+        show_hidden = true,
+    },
 })
