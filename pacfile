@@ -3,7 +3,9 @@ brave-browser
 btop
 cmake
 cowsay
+direnv
 docker
+docker-buildx
 fd
 figlet
 fzf
