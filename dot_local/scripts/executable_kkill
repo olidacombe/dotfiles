@@ -24,4 +24,4 @@ SELECTION="$(kubectl get pods -A \
 
 read -r NS POD <<< "$SELECTION"
 
-kubectl delete -n "$NS" "$POD"
+kubectl delete -n "$NS" "$POD" "$@"
