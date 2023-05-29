@@ -410,13 +410,14 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 # "$@"
 # # /!\ do not remove the previous line
 
+# On MacOS, set layout to U.S.
 bind r source-file ~/.tmux.conf
 {{ if eq .chezmoi.os "darwin" -}}
 bind-key -n ƒ run-shell "tmux neww -n sessionizer tmux-sessionizer"
 bind-key -n "å" run-shell "tpoon push"
 bind-key -n "´" run-shell "tmux neww -n tpoon tpoon edit"
 bind-key -n "⁄" run-shell "tpoon 1"
-bind-key -n "™" run-shell "tpoon 2"
+bind-key -n "€" run-shell "tpoon 2"
 bind-key -n "”" run-shell "tpoon 3"
 bind-key -n "’" run-shell "tpoon 4"
 bind-key -n "ﬂ" switch-client -l
