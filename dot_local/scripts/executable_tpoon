@@ -53,7 +53,8 @@ case "$1" in
     push)
         push;;
     edit)
-        "$EDITOR" "$STACK";;
+        # "$EDITOR" "$STACK";;
+        nvim -c Tpoon;;
     *)
         switch "$1";;
 esac

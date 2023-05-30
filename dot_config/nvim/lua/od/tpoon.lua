@@ -35,4 +35,6 @@ M.open = function()
 	vim.keymap.set("n", "<cr>", select_entry, { silent = true, buffer = 0 })
 end
 
+vim.api.nvim_create_user_command("Tpoon", M.open, { desc = "Read output of `terraform plan` into buffer" })
+
 return M
