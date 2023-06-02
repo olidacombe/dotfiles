@@ -2,6 +2,7 @@ require("mini.ai").setup()
 -- require("mini.comment").setup()
 local hipatterns = require("mini.hipatterns")
 require("mini.pairs").setup()
+require("mini.splitjoin").setup()
 require("mini.surround").setup()
 
 hipatterns.setup({
