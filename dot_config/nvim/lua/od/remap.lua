@@ -5,10 +5,11 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Tab Nav
-vim.keymap.set("n", "<Tab>", ":tabn<CR>")
+-- this was clashing with <c-i> for jumplist 🤔
+-- vim.keymap.set("n", "<Tab>", ":tabn<CR>")
 vim.keymap.set("n", "<S-Tab>", ":tabp<CR>")
 
-local os_cb = require('utils').os_cb
+local os_cb = require("utils").os_cb
 --  _______    _     _    _______
 -- (_______)  | |   | |  (_______)
 --  _____ ___ | | __| |   _     _ _____ _   _
@@ -33,7 +34,7 @@ local next_closed_fold = function(jk)
         if is_folded_at(current_line) then
             return
         end
-    until (current_line == last_line)
+    until current_line == last_line
 end
 
 local up_fold = function()
@@ -52,7 +53,7 @@ vim.keymap.set("n", "<Right>", function()
     if is_folded_at(get_current_line()) then
         return vim.cmd("normal zo")
     end
-    next_closed_fold('j')
+    next_closed_fold("j")
 end)
 
 vim.keymap.set("n", "<Left>", function()
@@ -66,7 +67,6 @@ vim.keymap.set("n", "<Left>", function()
 end)
 vim.keymap.set("n", "<Up>", "zk")
 vim.keymap.set("n", "<Down>", "zj")
-
 
 --    ___       ___       ___       ___       ___
 --   /\  \     /\__\     /\  \     /\  \     /\__\
@@ -103,12 +103,14 @@ os_cb({
     end,
 })
 vim.keymap.set("n", "<C-g>", quickcycle.prev)
-vim.keymap.set("n", '<C-c>', quickcycle.next)
+vim.keymap.set("n", "<C-c>", quickcycle.next)
 
 -- Edit dir of current file
 vim.keymap.set("n", "-", function()
     local buf = require("od.buffer").current_path()
-    if buf == "" then buf = vim.fn.getcwd() .. "/" end
+    if buf == "" then
+        buf = vim.fn.getcwd() .. "/"
+    end
     local dir = buf:gsub("/[^/]*$", "")
     vim.cmd("e " .. dir)
 end, { desc = "Edit current dir" })
