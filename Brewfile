@@ -84,6 +84,7 @@ brew "nvm"
 brew "nyancat"
 # brew "open-ocd", args: ["HEAD"]
 brew "openssh"
+brew "operator-sdk"
 brew "packer"
 brew "pcalc"
 brew "perl"
