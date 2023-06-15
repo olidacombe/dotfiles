@@ -83,6 +83,7 @@ brew "node"
 brew "nvm"
 brew "nyancat"
 # brew "open-ocd", args: ["HEAD"]
+# cask "openlens"
 brew "openssh"
 brew "operator-sdk"
 brew "packer"
