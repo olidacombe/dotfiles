@@ -23,6 +23,7 @@ nmap
 nvm
 openbsd-netcat
 ponysay
+pv
 python-pipx
 ripgrep
 strace
