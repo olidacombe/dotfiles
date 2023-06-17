@@ -16,6 +16,7 @@ jupyter-notebook
 keychain
 kubectl
 kubectx
+lsof
 luarocks
 moreutils
 neofetch
