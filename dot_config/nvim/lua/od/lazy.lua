@@ -188,7 +188,10 @@ local plugins = {
 	},
 
 	-- LSP status UI
-	"j-hui/fidget.nvim",
+	{
+		"j-hui/fidget.nvim",
+		branch = "legacy",
+	},
 
 	-- UFO nice folding
 	{ "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
