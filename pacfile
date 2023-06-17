@@ -31,6 +31,7 @@ tmux
 tree
 vim # provides xxd
 whois
+yq
 
 # zmk deps
 arm-none-eabi-gcc
