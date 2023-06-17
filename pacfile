@@ -25,6 +25,7 @@ nvm
 openbsd-netcat
 ponysay
 pv
+pyenv
 python-pipenv
 python-pipx
 ripgrep
