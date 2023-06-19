@@ -189,7 +189,7 @@ fi
 
 alias alpinism='docker run --privileged=true -v $(pwd):/summit -it alpine'
 # alias aws='AWS_PROFILE=$(cat ~/.aws/__selected_profile__) aws'
-alias co='git branch -a | fzf | xargs git checkout'
+alias co='git branch -a | fzf | sed -e "s/remotes\/[^/]*\///" | xargs git checkout'
 alias gpsh='git push origin HEAD'
 alias gupstr='git branch {--set-upstream-to=origin/,}$(git branch --show-current)'
 alias gpl='git pull'
