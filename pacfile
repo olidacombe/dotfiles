@@ -20,6 +20,7 @@ lsof
 luarocks
 moreutils
 neofetch
+net-tools
 nmap
 nvm
 openbsd-netcat
