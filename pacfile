@@ -19,6 +19,7 @@ kubectx
 lsof
 luarocks
 moreutils
+multipath-tools
 neofetch
 net-tools
 nmap
