@@ -141,12 +141,14 @@ fi
 
 # keychain
 SSH_ADD=ssh-add
+SSH_ADD_ARGS=
 if [[ "$OS" = "Darwin" ]]; then
     SSH_ADD=/usr/bin/ssh-add
+    SSH_ADD_ARGS="--apple-use-keychain"
 fi
 for KEY in "rsa" "ed25519"; do
     if [ -f "${HOME}/.ssh/id_${KEY}" ]; then
-        $SSH_ADD --apple-use-keychain "${HOME}/.ssh/id_${KEY}" 2>/dev/null || true
+        $SSH_ADD "${SSH_ADD_ARGS[@]}" "${HOME}/.ssh/id_${KEY}" 2>/dev/null || true
     fi
 done
 
