@@ -414,13 +414,13 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 # note: On MacOS, set layout to U.S.
 bind r source-file ~/.tmux.conf
 {{ if eq .chezmoi.os "darwin" -}}
-bind-key -n ƒ run-shell "tmux neww -n sessionizer tmux-sessionizer"
+bind-key -n ƒ run-shell "tmux neww -n sessionizer ~/.local/scripts/tmux-sessionizer"
 bind-key -n "å" run-shell "tpoon push"
 bind-key -n "´" run-shell "tmux neww -n tpoon tpoon edit"
 bind-key -n "ﬂ" switch-client -l
 bind-key -n "˘" new-window -c "#{pane_current_path}"
 {{ else if eq .chezmoi.os "linux" -}}
-bind-key -n "M-f" run-shell "tmux neww -n sessionizer tmux-sessionizer"
+bind-key -n "M-f" run-shell "tmux neww -n sessionizer ~/.local/scripts/tmux-sessionizer"
 bind-key -n "M-a" run-shell "tpoon push"
 bind-key -n "M-e" run-shell "tmux neww -n tpoon tpoon edit"
 bind-key -n "M-^" switch-client -l
