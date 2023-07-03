@@ -1,0 +1,2 @@
+. "$HOME/.cargo/env"
+find "${HOME}/.config/profile.d" -type f | while read -r F; do . "$F"; done
