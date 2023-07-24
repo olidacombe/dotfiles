@@ -15,6 +15,9 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 ## TODO
 
 + fix oil keymap clashes with c-{h,j,k,l}
++ async git
++ luasnips for work (jira prefix from branch name or similar)
++ quicx surround keymaps for common things
 + monorepo project sticky to tab?
 + open monorepo project root when changing project?
 + show monorepo project in lualine
