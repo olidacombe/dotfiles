@@ -7,6 +7,6 @@
 #  \/_/\/_/\/____/ \/_/ \/__,_ /\/____/ \/__/\/____/
 #                                                   
 #                                                   
-if command -v lima &> /dev/null; then
+if command -v lima &> /dev/null && ! command -v docker &> /dev/null; then
         alias docker="lima nerdctl"
 fi
