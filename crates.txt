@@ -17,6 +17,7 @@ cross
 du-dust
 #espmonitor
 espup
+flamegraph
 git-delta
 hardpass
 #ldproxy
