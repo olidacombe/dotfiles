@@ -1,7 +1,7 @@
 require("mini.ai").setup()
 -- require("mini.comment").setup()
 local hipatterns = require("mini.hipatterns")
-require("mini.pairs").setup()
+local pairs = require("mini.pairs")
 require("mini.splitjoin").setup()
 require("mini.surround").setup()
 
@@ -15,5 +15,23 @@ hipatterns.setup({
 
 		-- Highlight hex color strings (`#rrggbb`) using that color
 		hex_color = hipatterns.gen_highlighter.hex_color(),
+	},
+})
+
+pairs.setup({
+	mappings = {
+		["("] = { action = "open", pair = "()", neigh_pattern = "[^\\]." },
+		["["] = { action = "open", pair = "[]", neigh_pattern = "[^\\]." },
+		["{"] = { action = "open", pair = "{}", neigh_pattern = "[^\\]." },
+		["<"] = { action = "open", pair = "<>", neigh_pattern = "[^%s\\]." },
+
+		[")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
+		["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
+		["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
+		[">"] = { action = "close", pair = "<>", neigh_pattern = "[^\\]." },
+
+		['"'] = { action = "closeopen", pair = '""', neigh_pattern = "[^\\].", register = { cr = false } },
+		["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%a<&\\].", register = { cr = false } },
+		["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\].", register = { cr = false } },
 	},
 })
