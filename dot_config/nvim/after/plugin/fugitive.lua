@@ -69,6 +69,10 @@ autocmd("BufWinEnter", {
 			-- needed if i did not set the branch up correctly
 			t = { ":Git push -u origin ", "git push -u origin " },
 		}
+		mappings["@"] = {
+			":G push -u origin @<CR>",
+			"git push -u origin @",
+		}
 
 		whichkey.register(mappings, opts)
 	end,
