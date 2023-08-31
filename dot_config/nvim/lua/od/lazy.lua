@@ -274,7 +274,7 @@ local plugins = {
         "nvim-telescope/telescope.nvim", --tag = '0.1.0',
         -- or                            , branch = '0.1.x',
         branch = "0.1.x",          -- got me past https://github.com/nvim-telescope/telescope.nvim/issues/2192
-        dependencies = { { "nvim-lua/plenary.nvim" } },
+        dependencies = { { "nvim-lua/plenary.nvim", "Theo-Steiner/togglescope" } },
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
