@@ -8,7 +8,7 @@ cargo-insta # snapshot testing 😎
 cargo-mutants
 cargo-nextest
 cargo-pio
-cargo-readme
+cargo-rdme
 cargo-udeps
 cargo-watch
 cargo-workspaces
