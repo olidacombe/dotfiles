@@ -14,6 +14,9 @@ helm
 jdk-openjdk
 jupyter-notebook
 keychain
+kicad
+kicad-library
+kicad-library-3d
 kubectl
 kubectx
 lsof
