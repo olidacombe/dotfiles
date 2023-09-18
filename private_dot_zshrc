@@ -200,7 +200,7 @@ alias jira='jira-terminal'
 complete -F __start_jira-terminal jira
 alias k="kubectl"
 complete -F __start_kubectl k
-alias kctx="kubetcx"
+alias kctx="kubectx"
 alias kns="kubens"
 if [[ "$OS" = "Darwin" ]]; then
     alias sed="gsed"
