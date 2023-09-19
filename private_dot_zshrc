@@ -202,6 +202,7 @@ alias k="kubectl"
 complete -F __start_kubectl k
 alias kctx="kubectx"
 alias kns="kubens"
+alias knsls="kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --ignore-not-found -n"
 if [[ "$OS" = "Darwin" ]]; then
     alias sed="gsed"
 fi
