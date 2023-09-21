@@ -1,76 +1,104 @@
 local wk = require("od.which-key")
-local Api = require "nvim-tree.api"
+local Api = require("nvim-tree.api")
 local quickcycle = require("od.quickcycle")
 
 local focus_node = function(node)
-    if not node then return end
+    if not node then
+        return
+    end
     Api.tree.find_file(node.absolute_path)
 end
 
 local next_sibling
 next_sibling = function(node, closed)
-    if not node or not node.parent then return end
+    if not node or not node.parent then
+        return
+    end
     closed = closed or false
     local siblings = node.parent.nodes
     local s = 1
     repeat
-        if siblings[s] == node then break end
+        if siblings[s] == node then
+            break
+        end
         s = s + 1
         -- We sort of don't need to iterate all the way to the end here,
         -- if we reach one before the end here and haven't matched then
         -- we already know there's no next sibling.
-    until (s > #siblings)
+    until s > #siblings
     for i = s + 1, #siblings do
-        if siblings[i].type == "directory" then return siblings[i] end
+        if siblings[i].type == "directory" then
+            return siblings[i]
+        end
     end
     return next_sibling(node.parent)
 end
 
 local last_child_or_self
 last_child_or_self = function(node)
-    if node.type ~= "directory" then return node end
-    if not node.open then return node end
+    if node.type ~= "directory" then
+        return node
+    end
+    if not node.open then
+        return node
+    end
     local children = node.nodes
-    if #children == 0 then return node end
+    if #children == 0 then
+        return node
+    end
     for i = #children, 1, -1 do
         local child = children[i]
-        if child.type == "directory" then return last_child_or_self(child) end
+        if child.type == "directory" then
+            return last_child_or_self(child)
+        end
     end
     return node
 end
 
 local prev_sibling
 prev_sibling = function(node, closed)
-    if not node or not node.parent then return end
+    if not node or not node.parent then
+        return
+    end
     closed = closed or false
     local siblings = node.parent.nodes
     local s = #siblings
     repeat
-        if siblings[s] == node then break end
+        if siblings[s] == node then
+            break
+        end
         s = s - 1
         -- We sort of don't need to iterate all the way to the end here,
         -- if we reach one before the end here and haven't matched then
         -- we already know there's no next sibling.
-    until (s == 0)
+    until s == 0
     for i = s - 1, 1, -1 do
-        if siblings[i].type == "directory" then return last_child_or_self(siblings[i]) end
+        if siblings[i].type == "directory" then
+            return last_child_or_self(siblings[i])
+        end
     end
     return node.parent
 end
 
 local next_dir = function(node, closed)
-    if not node then return end
+    if not node then
+        return
+    end
     closed = closed or false
     if node.type == "directory" and node.open then
         for _, child in ipairs(node.nodes or {}) do
-            if child.type == "directory" and not (closed and child.open) then return child end
+            if child.type == "directory" and not (closed and child.open) then
+                return child
+            end
         end
     end
     return next_sibling(node, closed)
 end
 
 local prev_dir = function(node, closed)
-    if not node then return end
+    if not node then
+        return
+    end
     return prev_sibling(node, closed)
 end
 
@@ -100,10 +128,10 @@ end
 
 require("nvim-tree").setup({
     update_focused_file = {
-        enable = true
+        enable = true,
     },
     hijack_directories = {
-        enable = false
+        enable = false,
     },
     view = {
         mappings = {
@@ -114,7 +142,7 @@ require("nvim-tree").setup({
                     action = " Harpoon",
                     action_cb = function(node)
                         require("harpoon.mark").add_file(node.absolute_path)
-                    end
+                    end,
                 },
                 -- allow tab to fall through to my default
                 { key = "<Tab>",   action = "" },
@@ -136,7 +164,9 @@ require("nvim-tree").setup({
 
 wk.register_normal({
     w = {
+        "Workspace",
         b = { "<cmd>NvimTreeToggle<CR>", "Browser" },
+        r = { "<cmd>e .<cr>", "Root" },
     },
 })
 
@@ -161,22 +191,30 @@ autocmd("BufEnter", {
     group = od_tree,
     pattern = "*",
     callback = function()
-        if vim.bo.ft ~= "NvimTree" then return end
+        if vim.bo.ft ~= "NvimTree" then
+            return
+        end
         local bufnr = vim.api.nvim_get_current_buf()
-        if tree_buffers[bufnr] then return end
+        if tree_buffers[bufnr] then
+            return
+        end
         tree_buffers[bufnr] = true
         quickcycle.push(quickcycle_mappings)
-    end
+    end,
 })
 
 autocmd("BufLeave", {
     group = od_tree,
     pattern = "*",
     callback = function()
-        if vim.bo.ft ~= "NvimTree" then return end
+        if vim.bo.ft ~= "NvimTree" then
+            return
+        end
         local bufnr = vim.api.nvim_get_current_buf()
-        if not tree_buffers[bufnr] then return end
+        if not tree_buffers[bufnr] then
+            return
+        end
         tree_buffers[bufnr] = nil
         quickcycle.pop()
-    end
+    end,
 })
