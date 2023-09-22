@@ -5,6 +5,15 @@ local pairs = require("mini.pairs")
 require("mini.splitjoin").setup()
 require("mini.surround").setup()
 
+-- Surround convenience
+-- see [here](https://github.com/echasnovski/mini.surround/blob/9d1956b576d7051da3a483b251dfc778121c60db/lua/mini/surround.lua#L486-L486)
+require("which-key").register({
+	s = { name = "surround", w = { "saiw", "word" }, W = { "saiW", "Word" } },
+}, {
+	mode = "n",
+	remap = true,
+})
+
 hipatterns.setup({
 	highlighters = {
 		-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
