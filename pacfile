@@ -32,6 +32,7 @@ openbsd-netcat
 ponysay
 pv
 pyenv
+python-nrfutil
 python-pipenv
 python-pipx
 ripgrep
