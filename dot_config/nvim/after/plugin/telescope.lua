@@ -23,6 +23,7 @@ local normal_mappings = {
 				end,
 				"Files",
 			},
+			r = { builtin.registers, "Registers" },
 			R = { builtin.resume, "Resume" },
 			G = { builtin.live_grep, "Grep" },
 			g = {
