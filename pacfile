@@ -9,6 +9,7 @@ docker-buildx
 fd
 figlet
 fzf
+gimp
 github-cli
 helm
 jdk-openjdk
