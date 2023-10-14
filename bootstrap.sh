@@ -6,6 +6,12 @@ GH_USER=olidacombe
 LINUX="linux"
 MACOS="macos"
 
+alias is_gitpod='[ -n "$(command -v gp)" ]'
+
+function is_gitpod() {
+    command -v
+}
+
 function strip_comment() {
 	sed -e 's/#.*//' "$1" | awk NF
 }
@@ -14,20 +20,44 @@ function pac_install() {
 	sudo pacman -Sy --noconfirm "$@"
 }
 
+function apt_install() {
+    sudo apt-get install -y "$@"
+}
+
+function linux_distro() {
+    cat /etc/os-release | awk -F= '/^ID_LIKE=/ { print $2 }'
+}
+
+function linux_installer() {
+    case "$(linux_distro)" in
+    "arch")
+        echo pac_install
+        ;;
+    "debian")
+        echo apt_install
+        ;;
+    *)
+        ;;
+    esac
+}
+
 if uname -a | grep -i linux; then
-	export INSTALLER=pac_install
+    export INSTALLER=$(linux_installer)
 	export OS="$LINUX"
+    export DISTRO=$(linux_distro)
 else
 	command -v brew &> /dev/null && echo homebrew found || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	export INSTALLER="brew install"
 	export OS="$MACOS"
 fi
 
-# helpful https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0
-command -v gpg &> /dev/null && echo gpg found || $INSTALLER gpg2 pinentry-mac
-export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
-[ -z "$GPG_KEYS" ] && gpg --full-generate-key && export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
-echo "$GPG_KEYS"
+if ! is_gitpod; then
+    # helpful https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0
+    command -v gpg &> /dev/null && echo gpg found || $INSTALLER gpg2 pinentry-mac
+    export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
+    [ -z "$GPG_KEYS" ] && gpg --full-generate-key && export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
+    echo "$GPG_KEYS"
+fi
 
 function quit() {
         echo "$*"
@@ -61,9 +91,18 @@ popd
 if [ "$OS" = "$MACOS" ]; then
 	echo running \`brew bundle\`
 	brew bundle
-elif [ -f "/etc/arch-release" ]; then
-    pac_install $( strip_comment pacfile )
-    yes | yay -qS $( strip_comment yayfile ) <<< "A\nN\n"
+else
+    case "$DISTRO" in
+        "arch")
+            pac_install $( strip_comment pacfile )
+            yes | yay -qS $( strip_comment yayfile ) <<< "A\nN\n"
+            ;;
+        "debian")
+            apt_install $( strip_comment aptfile )
+            ;;
+        *)
+            ;;
+    esac
 fi
 
 # Setup fzf a bit more
