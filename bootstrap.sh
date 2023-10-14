@@ -80,11 +80,19 @@ else
         quit "Ok, chezmoi installed, now spawn a new zsh shell and \`chozmoi cd\` before running again"
 fi
 
+function clone_od_repo() {
+    if is_gitpod; then
+        git clone "https://github.com/olidacombe/$1"
+    else
+        git clone "git@github.com:olidacombe/$1"
+    fi
+}
+
 # required repos
 mkdir -p "${HOME}/od"
 pushd "${HOME}/od"
 for REPO in commentalist.nvim makemapper.nvim; do
-    [ -d "$REPO" ] || git clone "git@github.com:olidacombe/$REPO"
+    [ -d "$REPO" ] || clone_od_repo "$REPO"
 done
 popd
 
