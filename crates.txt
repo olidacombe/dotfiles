@@ -5,6 +5,7 @@ cargo-espflash
 cargo-expand
 cargo-generate
 cargo-insta # snapshot testing 😎
+cargo-make
 cargo-mutants
 cargo-nextest
 cargo-pio
