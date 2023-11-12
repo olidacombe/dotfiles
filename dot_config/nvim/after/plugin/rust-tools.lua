@@ -1,7 +1,7 @@
-require('rust-tools').setup({
+require("rust-tools").setup({
     server = {
-        on_attach=function(client, bufnr)
-            require('od.lsp').on_attach(client, bufnr)
+        on_attach = function(client, bufnr)
+            require("od.lsp").on_attach(client, bufnr)
 
             local status_ok, which_key = pcall(require, "which-key")
             if not status_ok then
@@ -9,12 +9,12 @@ require('rust-tools').setup({
             end
 
             local opts = {
-                mode = "n",     -- NORMAL mode
+                mode = "n", -- NORMAL mode
                 prefix = "<leader>",
-                buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-                silent = true,  -- use `silent` when creating keymaps
+                buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+                silent = true, -- use `silent` when creating keymaps
                 noremap = true, -- use `noremap` when creating keymaps
-                nowait = true,  -- use `nowait` when creating keymaps
+                nowait = true, -- use `nowait` when creating keymaps
             }
 
             local mappings = {
@@ -26,7 +26,25 @@ require('rust-tools').setup({
                     m = { "<cmd>RustExpandMacro<Cr>", "Expand Macro" },
                     c = { "<cmd>RustOpenCargo<Cr>", "Open Cargo" },
                     p = { "<cmd>RustParentModule<Cr>", "Parent Module" },
-                    d = { "<cmd>RustDebuggables<Cr>", "Debuggables" },
+                    -- annoyingly :RustOpenExternalDocs relies on `netrw`
+                    -- TODO PR to `rust-tools` accepting optional `url_open` function
+                    d = {
+                        function()
+                            require("rust-tools").utils.request(
+                                0,
+                                "experimental/externalDocs",
+                                vim.lsp.util.make_position_params(),
+                                function(_, url)
+                                    if url then
+                                        -- vim.fn["netrw#BrowseX"](url, 0)
+                                        require("lazy.util").open(url)
+                                    end
+                                end
+                            )
+                        end,
+                        "Docs",
+                    },
+                    D = { "<cmd>RustDebuggables<Cr>", "Debuggables" },
                     v = { "<cmd>RustViewCrateGraph<Cr>", "View Crate Graph" },
                     R = {
                         "<cmd>lua require('rust-tools/workspace_refresh')._reload_workspace_from_cargo_toml()<Cr>",
@@ -48,10 +66,10 @@ require('rust-tools').setup({
                     R = { "<cmd>lua require('crates').open_repository()<CR>", "Open Repository" },
                     D = { "<cmd>lua require('crates').open_documentation()<CR>", "Open Documentation" },
                     C = { "<cmd>lua require('crates').open_crates_io()<CR>", "Open Crate.io" },
-                }
+                },
             }
 
             which_key.register(mappings, opts)
         end,
-    }
+    },
 })
