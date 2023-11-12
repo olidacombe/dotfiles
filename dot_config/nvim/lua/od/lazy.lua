@@ -263,7 +263,7 @@ local plugins = {
     --   l__j   \___/  \___/ l_____j \___j
     --
     {
-        -- "simrat39/rust-tools.nvim", -- until my PR gets merged..?
+        -- "simrat39/rust-tools.nvim", -- until [my PR](https://github.com/simrat39/rust-tools.nvim/pull/431) gets merged..?
         "olidacombe/rust-tools.nvim",
         branch = "allow_override_url_opener",
     },

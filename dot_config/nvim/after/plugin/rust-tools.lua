@@ -27,7 +27,7 @@ require("rust-tools").setup({
                     c = { "<cmd>RustOpenCargo<Cr>", "Open Cargo" },
                     p = { "<cmd>RustParentModule<Cr>", "Parent Module" },
                     d = { "<cmd>RustOpenExternalDocs<Cr>", "Docs" },
-                    -- d = { TODO fall back to this if my PR gets canned
+                    -- d = { TODO fall back to this if [my PR](https://github.com/simrat39/rust-tools.nvim/pull/431) gets canned
                     --     function()
                     --         require("rust-tools").utils.request(
                     --             0,
