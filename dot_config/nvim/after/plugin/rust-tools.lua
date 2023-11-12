@@ -26,24 +26,23 @@ require("rust-tools").setup({
                     m = { "<cmd>RustExpandMacro<Cr>", "Expand Macro" },
                     c = { "<cmd>RustOpenCargo<Cr>", "Open Cargo" },
                     p = { "<cmd>RustParentModule<Cr>", "Parent Module" },
-                    -- annoyingly :RustOpenExternalDocs relies on `netrw`
-                    -- TODO PR to `rust-tools` accepting optional `url_open` function
-                    d = {
-                        function()
-                            require("rust-tools").utils.request(
-                                0,
-                                "experimental/externalDocs",
-                                vim.lsp.util.make_position_params(),
-                                function(_, url)
-                                    if url then
-                                        -- vim.fn["netrw#BrowseX"](url, 0)
-                                        require("lazy.util").open(url)
-                                    end
-                                end
-                            )
-                        end,
-                        "Docs",
-                    },
+                    d = { "<cmd>RustOpenExternalDocs<Cr>", "Docs" },
+                    -- d = { TODO fall back to this if my PR gets canned
+                    --     function()
+                    --         require("rust-tools").utils.request(
+                    --             0,
+                    --             "experimental/externalDocs",
+                    --             vim.lsp.util.make_position_params(),
+                    --             function(_, url)
+                    --                 if url then
+                    --                     -- vim.fn["netrw#BrowseX"](url, 0)
+                    --                     require("lazy.util").open(url)
+                    --                 end
+                    --             end
+                    --         )
+                    --     end,
+                    --     "Docs",
+                    -- },
                     D = { "<cmd>RustDebuggables<Cr>", "Debuggables" },
                     v = { "<cmd>RustViewCrateGraph<Cr>", "View Crate Graph" },
                     R = {
@@ -71,5 +70,9 @@ require("rust-tools").setup({
 
             which_key.register(mappings, opts)
         end,
+    },
+
+    tools = {
+        open_url = require("lazy.util").open,
     },
 })
