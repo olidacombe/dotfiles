@@ -10,11 +10,12 @@ M.on_attach = function(client, bufnr)
 
     -- Try to init the window bar context
     if client.server_capabilities.documentSymbolProvider then
-        local navic = require "nvim-navic"
+        local navic = require("nvim-navic")
         navic.attach(client, bufnr)
     end
 
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
     vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
