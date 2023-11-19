@@ -107,7 +107,7 @@ local function jira_matcher(line_to_cursor, trigger) --, trigger)
 	P(git_branch)
 	local jira_match = git_branch:match("%a%a%a%a%-%d%d%d%d")
 	if jira_match then
-		return line_to_cursor, { jira_match:upper() }
+		return line_to_cursor, { jira_match:upper(), "suggested commit message" }
 	else
 		return nil
 	end
@@ -122,21 +122,18 @@ ls.add_snippets(nil, {
 		-- Jira issue branch
 		s(
 			{
-				-- condition = function(line_to_cursor, matched_trigger, captures)
-				-- 	return false
-				-- end,
-				-- show_condition = function(line_to_cursor)
-				-- 	return true
-				-- end,
 				snippetType = "autosnippet",
 				trig = "jj",
 				trigEngine = jira_engine,
 			},
-			fmt("{}: {}", {
+			fmt("{}: {}{}", {
 				f(function(_, snip)
 					return snip.captures[1]
 				end),
 				i(0),
+				c(1, { f(function(_, snip)
+					return snip.captures[2]
+				end), t("") }),
 			})
 		),
 	},
