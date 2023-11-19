@@ -106,7 +106,6 @@ local function jira_matcher(line_to_cursor, trigger) --, trigger)
 		return nil
 	end
 	local git_branch = git.branch_name():lower()
-	P(git_branch)
 	local jira_match = git_branch:match("%a%a%a%a%-%d%d%d%d")
 	if jira_match then
 		return line_to_cursor, { jira_match:upper(), git.commit_message_from_branch_name(git_branch:sub(10)) }
