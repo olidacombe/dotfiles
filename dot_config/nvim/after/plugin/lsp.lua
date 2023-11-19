@@ -1,7 +1,7 @@
-local lsp = require('lsp-zero')
+local lsp = require("lsp-zero")
 local on_attach = require("od.lsp").on_attach
 
-lsp.preset('recommended')
+lsp.preset("recommended")
 lsp.nvim_workspace()
 
 lsp.setup_nvim_cmp({
@@ -14,34 +14,34 @@ lsp.setup_nvim_cmp({
 })
 
 lsp.ensure_installed({
-    'eslint',
-    'graphql',
-    'pyright',
-    'rust_analyzer',
+    "eslint",
+    "graphql",
+    "pyright",
+    "rust_analyzer",
     -- 'lua_ls', -- sadly broken or arm
-    'svelte',
-    'tailwindcss',
-    'tsserver',
-    'yamlls',
+    "svelte",
+    "tailwindcss",
+    "tsserver",
+    "yamlls",
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('lua_ls', {
+lsp.configure("lua_ls", {
     settings = {
         Lua = {
             diagnostics = {
-                globals = { 'vim', 'P', },
+                globals = { "vim", "P" },
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file('', true),
+                library = vim.api.nvim_get_runtime_file("", true),
                 checkThirdParty = false,
             },
         },
-    }
+    },
 })
 
-lsp.configure('yamlls', {
+lsp.configure("yamlls", {
     settings = {
         yaml = {
             schemaStore = {
@@ -51,32 +51,34 @@ lsp.configure('yamlls', {
             schemas = {
                 ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0/all.json"] = "*.yaml",
                 ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {
-                    "ci/*.yml", ".gitlab-ci.yml" },
+                    "ci/*.yml",
+                    ".gitlab-ci.yml",
+                },
             },
-        }
-    }
+        },
+    },
 })
 
-lsp.configure('svelte', {
+lsp.configure("svelte", {
     settings = {
         svelte = {
-            ['enable-ts-plugin'] = true
-        }
-    }
+            ["enable-ts-plugin"] = true,
+        },
+    },
 })
 
 lsp.on_attach(on_attach)
 
 -- extend default capabilities with those required by ufo
-local base_caps = require('cmp_nvim_lsp').default_capabilities()
+local base_caps = require("cmp_nvim_lsp").default_capabilities()
 local folding_caps = vim.lsp.protocol.make_client_capabilities()
 folding_caps.textDocument.foldingRange = {
     dynamicRegistration = false,
-    lineFoldingOnly = true
+    lineFoldingOnly = true,
 }
-local capabilities = vim.tbl_deep_extend('force', base_caps, folding_caps)
+local capabilities = vim.tbl_deep_extend("force", base_caps, folding_caps)
 lsp.set_server_config({
-    capabilities = capabilities
+    capabilities = capabilities,
 })
 
 -- configure neodev before lsp
@@ -85,15 +87,22 @@ require("neodev").setup({
 })
 lsp.setup()
 
-local cmp = require('cmp')
+local cmp = require("cmp")
 
 cmp.setup({
+    mapping = {
+        -- Stop enter from triggering things
+        ["<CR>"] = function(fallback)
+            cmp.mapping.close()
+            fallback()
+        end,
+    },
     sources = {
-        { name = 'path' },
-        { name = 'nvim_lsp' },
-        { name = 'buffer',  keyword_length = 3 },
-        { name = 'luasnip', keyword_length = 2 },
-        { name = 'crates' },
-        { name = 'emoji' }
-    }
+        { name = "path" },
+        { name = "nvim_lsp" },
+        { name = "buffer",  keyword_length = 3 },
+        { name = "luasnip", keyword_length = 2 },
+        { name = "crates" },
+        { name = "emoji" },
+    },
 })
