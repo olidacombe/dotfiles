@@ -95,10 +95,12 @@ local sh_snips = {
     ),
 }
 
-local function jira_matcher(line_to_cursor) --, trigger)
+local function jira_matcher(line_to_cursor, trigger) --, trigger)
     local git_branch = require("od.git").branch_name():lower()
-    if git_branch:match("^[a-z]{4}-[0-9]{4}") then
-        return line_to_cursor, {}
+    P(git_branch)
+    local jira_match = git_branch:match("%a%a%a%a%-%d%d%d%d")
+    if jira_match then
+        return line_to_cursor, { jira_match:upper() }
     else
         return nil
     end
@@ -111,7 +113,28 @@ end
 ls.add_snippets(nil, {
     gitcommit = {
         -- Jira issue branch
-        s({ trig = "jira", trigEngine = jira_engine }, t("matchy match - :D")),
+        s(
+            {
+                -- condition = function(line_to_cursor, matched_trigger, captures)
+                -- 	return false
+                -- end,
+                -- show_condition = function(line_to_cursor)
+                -- 	return true
+                -- end,
+                -- snippetType = "autosnippet",
+                trig = "jj",
+                trigEngine = jira_engine,
+                -- resolveExpandParams = function()
+                -- 	return nil
+                -- end,
+            },
+            fmt("{}: {}", {
+                f(function(_, snip)
+                    return snip.captures[1]
+                end),
+                i(0),
+            })
+        ),
     },
     lua = {
         -- OOP Boilerplate
