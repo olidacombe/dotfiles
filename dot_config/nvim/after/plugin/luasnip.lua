@@ -98,16 +98,18 @@ local sh_snips = {
 	),
 }
 
+local git = require("od.git")
+
 local function jira_matcher(line_to_cursor, trigger) --, trigger)
 	local trigger_match = line_to_cursor:match("^jj$")
 	if trigger_match == nil then
 		return nil
 	end
-	local git_branch = require("od.git").branch_name():lower()
+	local git_branch = git.branch_name():lower()
 	P(git_branch)
 	local jira_match = git_branch:match("%a%a%a%a%-%d%d%d%d")
 	if jira_match then
-		return line_to_cursor, { jira_match:upper(), "suggested commit message" }
+		return line_to_cursor, { jira_match:upper(), git.commit_message_from_branch_name(git_branch:sub(10)) }
 	else
 		return nil
 	end
