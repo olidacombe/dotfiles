@@ -263,5 +263,71 @@ ls.add_snippets(nil, {
 			)
 		),
 	},
+	terraform = {
+		s(
+			{
+				trig = "dd",
+				snippetType = "autosnippet",
+			},
+			fmt(
+				[[
+                data "{}" "{}" {{
+                    {}
+                }}
+            ]],
+				{ i(1), i(2), i(0) }
+			)
+		),
+		s(
+			{
+				trig = "output",
+			},
+			fmt(
+				[[
+                output "{}" {{
+                    value = {}
+                }}
+            ]],
+				{ i(1), i(0) }
+			)
+		),
+		s(
+			{
+				trig = "rr",
+				snippetType = "autosnippet",
+			},
+			fmt(
+				[[
+                resource "{}" "{}" {{
+                    {}
+                }}
+            ]],
+				{ i(1), i(2), i(0) }
+			)
+		),
+		s(
+			{
+				trig = "var",
+			},
+			fmt(
+				[[
+                variable "{}" {{
+                    type = {}
+                    {}
+                }}
+            ]],
+				{
+					i(1),
+					c(2, {
+						t("string"),
+						t("number"),
+						t("bool"),
+						-- sn(nil, { c(1, { t("list"), t("set"), t("map") }), i(1) }),
+					}),
+					i(0),
+				}
+			)
+		),
+	},
 	zsh = sh_snips,
 })
