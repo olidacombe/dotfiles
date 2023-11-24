@@ -266,7 +266,8 @@ ls.add_snippets(nil, {
     terraform = {
         s(
             {
-                trig = "dd",
+                trig = "^dd",
+                regTrig = true,
                 snippetType = "autosnippet",
             },
             fmt(
@@ -293,7 +294,8 @@ ls.add_snippets(nil, {
         ),
         s(
             {
-                trig = "rr",
+                trig = "^rr",
+                regTrig = true,
                 snippetType = "autosnippet",
             },
             fmt(
