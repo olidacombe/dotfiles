@@ -11,7 +11,11 @@ local normal_mappings = {
             C = { builtin.colorscheme, "Colourscheme" },
             f = {
                 function()
-                    builtin.git_files({ hidden = true })
+                    builtin.git_files({
+                        hidden = true,
+                        show_untracked = true,
+                        use_git_root = false, -- handy for monorepo
+                    })
                 end,
                 "Files<=Repo",
             },
