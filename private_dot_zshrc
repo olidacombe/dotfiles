@@ -196,7 +196,7 @@ alias gpsh='git push origin HEAD'
 alias gupstr='git branch {--set-upstream-to=origin/,}$(git branch --show-current)'
 alias gpl='git pull'
 alias ghprcp='gh pr view --json url | jq -r .url | pbcopy'
-alias glmr='glab mr create -t "$(git log -1 --pretty=%B)"'
+alias glmr='glab mr create -t "$(git log -1 --pretty=%B)" -d "" --squash-before-merge --remove-source-branch'
 alias jira='jira-terminal'
 complete -F __start_jira-terminal jira
 alias k="kubectl"
