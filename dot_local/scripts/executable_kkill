@@ -22,6 +22,4 @@ SELECTION="$(kubectl get pods -A \
     | awk '{ print $1,$2 }'
 )"
 
-while read -r NS POD; do
-    kubectl delete -n "$NS" pod "$POD" "$@"
-done <<< "$SELECTION"
+parallel --colsep ' ' kubectl delete -n "{1}" pod "{2}" <<< "$SELECTION"
