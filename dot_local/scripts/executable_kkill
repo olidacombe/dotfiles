@@ -23,5 +23,5 @@ SELECTION="$(kubectl get pods -A \
 )"
 
 while read -r NS POD; do
-    echo kubectl delete -n "$NS" pod "$POD" "$@"
+    kubectl delete -n "$NS" pod "$POD" "$@"
 done <<< "$SELECTION"
