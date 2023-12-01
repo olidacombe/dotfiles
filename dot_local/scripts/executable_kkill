@@ -18,10 +18,10 @@ set -euo pipefail
 
 SELECTION="$(kubectl get pods -A \
     | sed '1d' \
-    | fzf \
+    | fzf -m \
     | awk '{ print $1,$2 }'
 )"
 
-read -r NS POD <<< "$SELECTION"
-
-kubectl delete -n "$NS" pod "$POD" "$@"
+while read -r NS POD; do
+    echo kubectl delete -n "$NS" pod "$POD" "$@"
+done <<< "$SELECTION"
