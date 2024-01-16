@@ -1,6 +1,11 @@
 local rt = require("rust-tools")
 
+local codelldb_adapter = require("config.dap.lldb").adapter_components()
+
 rt.setup({
+	dap = {
+		adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_adapter.exe, codelldb_adapter.lib),
+	},
 	server = {
 		on_attach = function(client, bufnr)
 			require("od.lsp").on_attach(client, bufnr)
