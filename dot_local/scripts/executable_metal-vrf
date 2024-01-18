@@ -1,0 +1,317 @@
+#!/bin/bash
+
+list_vrfs () {
+	#read -p "Enter API Key: " AUTH_TOKEN
+	#read -p "Enter Project UUID: " PROJECT_UUID
+	echo "Printing Project VRFs..."
+	sleep 1
+	OUTPUT=$(curl -s "https://api.equinix.com/metal/v1/projects/$PROJECT_UUID/vrfs" \
+		-X GET \
+		-H "Content-Type: application/json" \
+		-H "X-Auth-Token: $AUTH_TOKEN" )
+	sleep 1
+        if [ ${OUTPUT:2:6} == "errors" ]; then
+                echo $OUTPUT
+        else
+		echo $OUTPUT | jq -r '.vrfs[] | { "VRF ID":.id, "Name":.name, "Local ASN":.local_asn, "IP Ranges":.ip_ranges}'
+                echo "Done..."
+        fi
+}
+
+create_vrf () {
+	#read -p "Enter API Key: " AUTH_TOKEN
+	#read -p "Enter Project UUID: " PROJECT_UUID
+	read -p "Enter VRF Name: " VRF_NAME
+	read -p "Enter Metro Code: " METRO_CODE
+	read -p "Enter Local ASN: " LOCAL_ASN
+	read -p "Enter an Array of IP Ranges: " IP_RANGES
+	echo "Creating the VRF..."
+	sleep 1
+	OUTPUT=$(curl -s "https://api.equinix.com/metal/v1/projects/$PROJECT_UUID/vrfs" \
+		-X POST \
+		-H "Content-Type: application/json" \
+                -H "X-Auth-Token: $AUTH_TOKEN" \
+		--data '{
+			"name":"'"$VRF_NAME"'",
+    			"metro":"'"$METRO_CODE"'",
+    			"local_asn":'"$LOCAL_ASN"',
+    			"ip_ranges":'"$IP_RANGES"'
+		}')
+	sleep 1
+        if [ ${OUTPUT:2:6} == "errors" ]; then
+                echo $OUTPUT
+        else
+		echo "Here is the new VRF..."
+        	echo "$OUTPUT" | jq -r '{ "VRF ID":.id, "Name":.name, "Local ASN":.local_asn, "IP Ranges":.ip_ranges}'
+		echo "Done..."
+        fi
+}
+
+delete_vrf () {
+	#read -p "Enter API Key: " AUTH_TOKEN
+	read -p "Enter VRF UUID: " VRF_UUID
+	echo "Deleting the VRF..."
+        sleep 1
+        curl -s "https://api.equinix.com/metal/v1/vrfs/$VRF_UUID" \
+                -X DELETE \
+                -H "Content-Type: application/json" \
+		-H "X-Auth-Token: $AUTH_TOKEN"
+	sleep 1
+        echo "Done..."
+}
+
+list_ip_reservations () {
+	#read -p "Enter API Key: " AUTH_TOKEN
+	#read -p "Enter PROJECT UUID: " PROJECT_UUID
+	echo "Printing IP Reservations..."
+        sleep 1
+        OUTPUT=$(curl -s "https://api.equinix.com/metal/v1/projects/$PROJECT_UUID/ips?types=vrf" \
+                -X GET \
+                -H "Content-Type: application/json" \
+		-H "X-Auth-Token: $AUTH_TOKEN")
+        sleep 1
+	if [ ${OUTPUT:2:6} == "errors" ]; then
+                echo $OUTPUT
+        else
+		echo $OUTPUT | jq -r '.ip_addresses[] | { "IP Reservation ID":.id, "IP Network":.network, "IP CIDR":.cidr}'
+                echo "Done..."
+        fi
+}
+
+create_ip_reservation () {
+	#read -p "Enter API Key: " AUTH_TOKEN
+        #read -p "Enter Project UUID: " PROJECT_UUID
+	read -p "Enter Metro Code: " METRO_CODE
+	read -p "Enter VRF UUID: " VRF_UUID
+	read -p "Enter Network Address: " IP_NETWORK
+	read -p "Enter Network CIDR: " IP_CIDR
+	echo "Creating the IP Reservation"
+	sleep 1
+	OUTPUT=$(curl -s "https://api.equinix.com/metal/v1/projects/$PROJECT_UUID/ips" \
+                -X POST \
+                -H "Content-Type: application/json" \
+                -H "X-Auth-Token: $AUTH_TOKEN" \
+                --data '{
+			"type":"vrf",
+                        "metro":"'"$METRO_CODE"'",
+                        "vrf_id":"'"$VRF_UUID"'",
+                        "network":"'"$IP_NETWORK"'",
+			"cidr":'"$IP_CIDR"'
+                }')
+        sleep 1
+	if [ ${OUTPUT:2:6} == "errors" ]; then
+                echo $OUTPUT
+        else
+		echo "Here is the new IP Reservation..."
+        	echo "$OUTPUT" | jq -r '{ "IP Reservation ID":.id, "IP Network":.network, "IP CIDR":.cidr}'
+		echo "Done..."
+        fi
+}
+
+delete_ip_reservation () {
+	#read -p "Enter API Key: " AUTH_TOKEN
+        read -p "Enter IP Reservation UUID: " IP_UUID
+        echo "Deleting the IP Reservation..."
+        sleep 1
+        curl -s "https://api.equinix.com/metal/v1/ips/$IP_UUID" \
+                -X DELETE \
+                -H "Content-Type: application/json" \
+		-H "X-Auth-Token: $AUTH_TOKEN"
+	sleep 1
+	echo "Done..."
+}
+
+list_metal_gateways () {
+	#read -p "Enter API Key: " AUTH_TOKEN
+        #read -p "Enter PROJECT UUID: " PROJECT_UUID
+        echo "Printing Metal Gateways..."
+        sleep 1
+        OUTPUT=$(curl -s "https://api.equinix.com/metal/v1/projects/$PROJECT_UUID/metal-gateways?include=virtual_network,ip_reservation" \
+                -X GET \
+                -H "Content-Type: application/json" \
+		-H "X-Auth-Token: $AUTH_TOKEN")
+        sleep 1
+	if [ ${OUTPUT:2:6} == "errors" ]; then
+                echo $OUTPUT
+        else
+		echo $OUTPUT | jq -r '.metal_gateways[] | { "Metal Gateway ID":.id, "VLAN":.virtual_network.vxlan, "IP Network":.ip_reservation.network}'
+                echo "Done..."
+        fi
+}
+
+create_metal_gateway () {
+        #read -p "Enter API Key: " AUTH_TOKEN
+        #read -p "Enter Project UUID: " PROJECT_UUID
+        read -p "Enter VLAN Number: " VLAN_NUMBER
+        read -p "Enter IP Reservation UUID: " IP_UUID
+        echo "Creating the Metal Gateway"
+        sleep 1
+	VLAN_UUID=$(curl -s "https://api.equinix.com/metal/v1/projects/$PROJECT_UUID/virtual-networks" \
+		-X GET \
+		-H "Content-Type: application/json" \
+		-H "X-Auth-Token: $AUTH_TOKEN" \
+		| jq -r '.[] | map(select(.vxlan=='"$VLAN_NUMBER"')) | .[].id')
+        OUTPUT=$(curl -s "https://api.equinix.com/metal/v1/projects/$PROJECT_UUID/metal-gateways?include=virtual_network,ip_reservation" \
+                -X POST \
+                -H "Content-Type: application/json" \
+                -H "X-Auth-Token: $AUTH_TOKEN" \
+                --data '{
+                        "virtual_network_id":"'"$VLAN_UUID"'",
+                        "ip_reservation_id":"'"$IP_UUID"'"
+                }')
+        sleep 1
+	if [ ${OUTPUT:2:6} == "errors" ]; then
+                echo $OUTPUT
+        else
+		echo "Here is the new Metal Gateway..."
+        	echo "$OUTPUT" | jq -r '{ "Metal Gateway ID":.id, "VLAN":.virtual_network.vxlan, "IP Network":.ip_reservation.network}'
+                echo "Done..."
+        fi
+}
+
+delete_metal_gateway () {
+        #read -p "Enter API Key: " AUTH_TOKEN
+        read -p "Enter Metal Gateway UUID: " GATEWAY_UUID
+        echo "Deleting the Metal Gateway..."
+        sleep 1
+        OUTPUT=$(curl -s "https://api.equinix.com/metal/v1/metal-gateways/$GATEWAY_UUID" \
+                -X DELETE \
+                -H "Content-Type: application/json" \
+		-H "X-Auth-Token: $AUTH_TOKEN")
+        sleep 1
+	if [ ${OUTPUT:2:6} == "errors" ]; then
+                echo $OUTPUT
+        else
+                echo "Done..."
+        fi
+}
+
+list_vrf_vcs () {
+        #read -p "Enter API Key: " AUTH_TOKEN
+        #read -p "Enter PROJECT UUID: " PROJECT_UUID
+        read -p "Enter Connection UUID: " CONNECTION_UUID
+        read -p "Enter Port UUID: " PORT_UUID
+        echo "Printing VRF VCs..."
+        sleep 1
+        OUTPUT=$(curl -s "https://api.equinix.com/metal/v1/connections/$CONNECTION_UUID/ports/$PORT_UUID/virtual-circuits?include=vrf" \
+                -X GET \
+                -H "Content-Type: application/json" \
+		-H "X-Auth-Token: $AUTH_TOKEN")
+        sleep 1
+	if [ ${OUTPUT:2:6} == "errors" ]; then
+                echo $OUTPUT
+        else
+		echo $OUTPUT | jq -r '.virtual_circuits[] | select(.vrf) | {"VC ID": .id, "VC Name":.name, "VC NNI":.nni_vnid, "Peer ASN":.peer_asn, "Peering Subnet":.subnet}'
+                echo "Done..."
+        fi
+}
+
+create_vrf_vc () {
+        #read -p "Enter API Key: " AUTH_TOKEN
+        #read -p "Enter Project UUID: " PROJECT_UUID
+        read -p "Enter Connection UUID: " CONNECTION_UUID
+        read -p "Enter Port UUID: " PORT_UUID
+        read -p "Enter VRF UUID: " VRF_UUID
+        read -p "Enter VC Name: " VC_NAME
+        read -p "Enter VC NNI: " VC_NNI
+        read -p "Enter Peer ASN: " PEER_ASN
+        read -p "Enter VC Subnet: " VC_SUBNET
+        read -p "Enter Metal Peer IP: " METAL_PEER_IP
+        read -p "Enter Customer Peer IP: " CUSTOMER_PEER_IP
+        echo "Creating the VC..."
+        sleep 1
+        OUTPUT=$(curl -s "https://api.equinix.com/metal/v1/connections/$CONNECTION_UUID/ports/$PORT_UUID/virtual-circuits?include=vrf" \
+                -X POST \
+                -H "Content-Type: application/json" \
+                -H "X-Auth-Token: $AUTH_TOKEN" \
+                --data '{
+                        "name":"'"$VC_NAME"'",
+                        "project_id":"'"$PROJECT_UUID"'",
+                        "vrf_id":"'"$VRF_UUID"'",
+                        "nni_vlan":'"$VC_NNI"',
+                        "peer_asn":'"$PEER_ASN"',
+                        "subnet":"'"$VC_SUBNET"'",
+                        "metal_ip":"'"$METAL_PEER_IP"'",
+                        "customer_ip":"'"$CUSTOMER_PEER_IP"'"
+                }')
+        sleep 1
+	if [ ${OUTPUT:2:6} == "errors" ]; then
+                echo $OUTPUT
+        else
+		echo "Here is the new VC..."
+        	echo "$OUTPUT" | jq -r '{"VC ID": .id, "VC Name":.name, "VC NNI":.nni_vnid, "Peer ASN":.peer_asn, "Peering Subnet":.subnet}'
+		echo "Done..."
+        fi
+}
+
+delete_vrf_vc () {
+        #read -p "Enter API Key: " AUTH_TOKEN
+        read -p "Enter VC UUID: " VC_UUID
+        echo "Deleting the VC..."
+        sleep 1
+        OUTPUT=$(curl -s "https://api.equinix.com/metal/v1/virtual-circuits/$VC_UUID" \
+                -X DELETE \
+                -H "Content-Type: application/json" \
+		-H "X-Auth-Token: $AUTH_TOKEN")
+        sleep 1
+	if [ ${OUTPUT:2:6} == "errors" ]; then
+                echo $OUTPUT
+        else
+                echo "Done..."
+        fi
+}
+
+
+read -p "Enter API Key: " AUTH_TOKEN
+read -p "Enter Project UUID: " PROJECT_UUID
+
+
+
+PS3='Please enter your choice: '
+options=("List VRFs" "List IP Reservations" "List Metal Gateways" "List VRF VCs" "Create VRF" "Create IP Reservation" "Create Metal Gateway" "Create VRF VC" "Delete VRF" "Delete IP Reservation" "Delete Metal Gateway" "Delete VRF VC" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "List VRFs")
+            	list_vrfs
+            ;;
+	"List IP Reservations")
+                list_ip_reservations
+	    ;;
+	"List Metal Gateways")
+                list_metal_gateways
+            ;;
+	"List VRF VCs")
+		list_vrf_vcs
+	    ;;
+        "Create VRF")
+            	create_vrf
+            ;;
+	"Create IP Reservation")
+                create_ip_reservation
+            ;;
+	"Create Metal Gateway")
+                create_metal_gateway
+            ;;
+	"Create VRF VC")
+                create_vrf_vc
+            ;;
+        "Delete VRF")
+		delete_vrf
+            ;;
+        "Delete IP Reservation")
+                delete_ip_reservation
+            ;;
+        "Delete Metal Gateway")
+                delete_metal_gateway
+            ;;
+	"Delete VRF VC")
+                delete_vrf_vc
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
+
