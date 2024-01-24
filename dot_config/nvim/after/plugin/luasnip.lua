@@ -38,7 +38,8 @@ end, {
 	desc = "Reload Luasnips",
 })
 
-local c, i, f, s, t = ls.choice_node, ls.insert_node, ls.function_node, ls.s, ls.text_node
+local c, d, i, f, s, t = ls.choice_node, ls.dynamic_node, ls.insert_node, ls.function_node, ls.s, ls.text_node
+local dl, l = extras.dynamic_lambda, extras.lambda
 local fmt = require("luasnip.extras.fmt").fmt
 
 local raycast_preamble = [[
@@ -116,6 +117,16 @@ end
 
 local function jira_engine(trigger)
 	return jira_matcher
+end
+
+-- TODO try and make a forced-uppercase input node 🤔 for use with rust snippets like OnceLock
+local dyn_uppercase
+dyn_uppercase = function(args)
+	-- if #args == 0 then
+	-- 	return sn(nil, { i(1) })
+	-- end
+	-- return sn(nil, { t(args[1]:upper()), d(1, dyn_uppercase, {}) })
+	return sn(nil, { t(args[1]), i(1) })
 end
 
 ls.add_snippets(nil, {
@@ -217,6 +228,22 @@ ls.add_snippets(nil, {
             ]],
 				{
 					c(1, { t("    use super::*;"), t("") }),
+					i(0),
+				}
+			)
+		),
+		-- OnceLock
+		s(
+			{ trig = "once", docstring = "OnceLock" },
+			fmt(
+				[[
+			         static {}: OnceLock<{}> = OnceLock::new();
+			         {}.get_or_init(|| {})
+			         ]],
+				{
+					i(1), -- TODO force uppercase somehow
+					i(2),
+					extras.rep(1),
 					i(0),
 				}
 			)
