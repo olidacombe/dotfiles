@@ -92,7 +92,7 @@ local get_resource_from_cursor = function()
 end
 
 local policy_document_from_raw = function(raw, name)
-	local out = nil
+	local out = {}
 	Job:new({
 		command = "terrabastard",
 		args = {
@@ -107,6 +107,9 @@ local policy_document_from_raw = function(raw, name)
 		end,
 		writer = { raw },
 	}):sync()
+	if #out == 0 then
+		return
+	end
 	return out
 end
 
@@ -136,9 +139,14 @@ M.extract_hard_policy = function()
 	if raw == nil then
 		return
 	end
+	local policy_document = policy_document_from_raw(raw, data_resource_name)
+	if policy_document == nil then
+		error("Failed to decode policy :'(")
+		return
+	end
 	-- P(resource_name .. ": " .. attr .. " = " .. raw)
 	replace_node(node, { "data.aws_iam_policy_document." .. data_resource_name .. ".json" })
-	vim.api.nvim_buf_set_lines(0, insert_point, insert_point, false, policy_document_from_raw(raw, data_resource_name))
+	vim.api.nvim_buf_set_lines(0, insert_point, insert_point, false, policy_document)
 end
 
 vim.keymap.set("n", "<leader><leader>x", M.extract_hard_policy)
