@@ -1,6 +1,7 @@
 local ts_utils = require("nvim-treesitter.ts_utils")
 local ts = vim.treesitter
 local parsers = require("nvim-treesitter.parsers")
+local Job = require("plenary.job")
 
 local debug_node = function(node)
 	vim.print("----")
@@ -91,7 +92,22 @@ local get_resource_from_cursor = function()
 end
 
 local policy_document_from_raw = function(raw, name)
-	return { '# TODO: data "iam_policy_document" "' .. name .. '" { ...' }
+	local out = nil
+	Job:new({
+		command = "terrabastard",
+		args = {
+			"aws",
+			"iam",
+			"convert-json-policy", -- "-n", name
+		},
+		on_exit = function(j, return_val)
+			P("terrabastard out")
+			P(j:result())
+			out = j:result()
+		end,
+		writer = { raw },
+	}):sync()
+	return out
 end
 
 local insert_point = function(node)
@@ -101,8 +117,8 @@ end
 
 local replace_node = function(node, replacement)
 	local start_row, start_col, end_row, end_col = node:range(false)
-	P(end_row .. ":" .. end_col)
-	vim.api.nvim_buf_set_text(0, start_row, start_col, end_row + 1, end_col, replacement)
+	-- P(start_row .. ":" .. start_col .. " - " .. end_row .. ":" .. end_col)
+	vim.api.nvim_buf_set_text(0, start_row, start_col, end_row, end_col, replacement)
 end
 
 M.extract_hard_policy = function()
@@ -120,9 +136,9 @@ M.extract_hard_policy = function()
 	if raw == nil then
 		return
 	end
-	P(resource_name .. ": " .. attr .. " = " .. raw)
-	vim.api.nvim_buf_set_lines(0, insert_point, insert_point, false, policy_document_from_raw(raw, data_resource_name))
+	-- P(resource_name .. ": " .. attr .. " = " .. raw)
 	replace_node(node, { "data.aws_iam_policy_document." .. data_resource_name .. ".json" })
+	vim.api.nvim_buf_set_lines(0, insert_point, insert_point, false, policy_document_from_raw(raw, data_resource_name))
 end
 
 vim.keymap.set("n", "<leader><leader>x", M.extract_hard_policy)
