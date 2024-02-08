@@ -98,7 +98,9 @@ local policy_document_from_raw = function(raw, name)
 		args = {
 			"aws",
 			"iam",
-			"convert-json-policy", -- "-n", name
+			"convert-json-policy",
+			"-n",
+			name,
 		},
 		on_exit = function(j, return_val)
 			P("terrabastard out")

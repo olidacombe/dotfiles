@@ -14,6 +14,8 @@ I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](h
 
 ## TODO
 
++ finish terrabastard plugin 🌟
++ make a teleport for choosing a branch, and cracking open `:DiffviewOpen {branch}`
 + fix oil keymap clashes with c-{h,j,k,l}
 + async git
 + luasnips for work (jira prefix from branch name or similar)
