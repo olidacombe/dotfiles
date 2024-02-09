@@ -188,6 +188,6 @@ M.extract_hard_policy = function()
 	vim.api.nvim_buf_set_lines(0, insert_point, insert_point, false, policy_document)
 end
 
-vim.keymap.set("n", "<leader><leader>x", M.extract_hard_policy)
+vim.keymap.set("n", "<leader><leader>p", M.extract_hard_policy)
 
 return M
