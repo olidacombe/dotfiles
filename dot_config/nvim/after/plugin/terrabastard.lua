@@ -109,6 +109,8 @@ local get_resource_from_cursor = function()
 	-- get the line number
 	local line_n = ts.get_node_range(node)
 
+	-- create a suffix.  If we figure out we're dealing with a "aws_iam_role", then add "-assume"
+	local suffix = ""
 	-- get the name (we will just re-use it assuming that it's for a different resource type)
 	local name = "change_me"
 	for child in node:iter_children() do
@@ -116,11 +118,14 @@ local get_resource_from_cursor = function()
 			for grandchild in child:iter_children() do
 				if grandchild:type() == "template_literal" then
 					name = ts_utils.get_node_text(grandchild, 0)[1]
+					if name == "aws_iam_role" then
+						suffix = "-assume"
+					end
 				end
 			end
 		end
 	end
-	return name, line_n
+	return name .. suffix, line_n
 end
 
 local policy_document_from_raw = function(raw, name)
