@@ -88,7 +88,39 @@ get_raw_expression = function(node)
 end
 
 local get_resource_from_cursor = function()
-	return "todo", 0
+	-- get node at cursor and:
+	-- - walk up until you are at a block
+	-- - (skip) check child `identifier` is "resource"
+	-- - grab line number L
+	-- - get second child `string_lit` I
+	-- - return I, L
+	local node = ts_utils.get_node_at_cursor()
+	local root = get_root()
+
+	while node:type() ~= "block" do
+		-- something went wrong,
+		-- Return a thing that will be rubbish but work
+		if node == root then
+			return "change_me", 0
+		end
+		node = node:parent()
+	end
+	-- now we have found a "block"
+	-- get the line number
+	local line_n = ts.get_node_range(node)
+
+	-- get the name (we will just re-use it assuming that it's for a different resource type)
+	local name = "change_me"
+	for child in node:iter_children() do
+		if child:type() == "string_lit" then
+			for grandchild in child:iter_children() do
+				if grandchild:type() == "template_literal" then
+					name = ts_utils.get_node_text(grandchild, 0)[1]
+				end
+			end
+		end
+	end
+	return name, line_n
 end
 
 local policy_document_from_raw = function(raw, name)
