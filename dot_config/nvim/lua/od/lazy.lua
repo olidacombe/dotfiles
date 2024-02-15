@@ -44,6 +44,15 @@ local plugins = {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		dev = true,
 	},
+	-- Terrabastard local dev
+	{
+		"olidacombe/terrabastard.nvim",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+		dev = true,
+	},
 
 	-- Mini
 	{ "echasnovski/mini.nvim", version = false },
