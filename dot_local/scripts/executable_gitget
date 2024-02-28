@@ -39,7 +39,7 @@ if [ -d "$TARGET" ]; then
 fi
 mkdir -p "${HOME}/${BASE}"
 cd "${HOME}/${BASE}"
-git clone "git@${host}:${path}"
+git clone "https://${host}/${path}"
 
 if [ -n "${AUTO_TMUX_SESSIONIZE+x}" ]; then
     tmux-sessionizer "$(basename "$TARGET")"
