@@ -67,7 +67,8 @@ autocmd("BufWinEnter", {
 
 			-- NOTE: It allows me to easily set the branch i am pushing and any tracking
 			-- needed if i did not set the branch up correctly
-			t = { ":Git push -u origin ", "git push -u origin " },
+			t = { ":G push -u origin ", "git push -u origin " },
+			u = { ":G reset @~<CR>", "_un_commit" },
 		}
 		mappings["@"] = {
 			":G push -u origin @<CR>",
