@@ -79,6 +79,18 @@ end
 
 telescope.setup({
 	defaults = {
+		file_ignore_patterns = {
+			".git/",
+			".cache",
+			"%.o",
+			"%.a",
+			"%.out",
+			"%.class",
+			"%.pdf",
+			"%.mkv",
+			"%.mp4",
+			"%.zip",
+		},
 		mappings = {
 			i = {
 				["<C-q>"] = send_to_qflist,
@@ -86,6 +98,16 @@ telescope.setup({
 			n = {
 				["<C-q>"] = send_to_qflist,
 			},
+		},
+		vimgrep_arguments = {
+			"rg",
+			"--color=never",
+			"--no-heading",
+			"--with-filename",
+			"--line-number",
+			"--column",
+			"--hidden",
+			"--smart-case",
 		},
 	},
 	extensions = {
@@ -100,18 +122,6 @@ telescope.setup({
 	pickers = {
 		colorscheme = {
 			enable_preview = true,
-		},
-		-- TODO exclude gitignore and dry below
-		-- https://github.com/BurntSushi/ripgrep/issues/623
-		grep_string = {
-			additional_args = function(opts)
-				return { "--hidden" }
-			end,
-		},
-		live_grep = {
-			additional_args = function(opts)
-				return { "--hidden" }
-			end,
 		},
 	},
 })
