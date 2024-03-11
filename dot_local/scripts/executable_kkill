@@ -16,10 +16,12 @@
 
 set -euo pipefail
 
-SELECTION="$(kubectl get pods -A \
+K="kubectl $*"
+
+SELECTION="$($K get pods -A \
     | sed '1d' \
     | fzf -m \
     | awk '{ print $1,$2 }'
 )"
 
-parallel --colsep ' ' kubectl delete -n "{1}" pod "{2}" <<< "$SELECTION"
+parallel --colsep ' ' $K delete -n "{1}" pod "{2}" <<< "$SELECTION"

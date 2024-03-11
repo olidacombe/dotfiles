@@ -101,6 +101,18 @@ telescope.setup({
 		colorscheme = {
 			enable_preview = true,
 		},
+		-- TODO exclude gitignore and dry below
+		-- https://github.com/BurntSushi/ripgrep/issues/623
+		grep_string = {
+			additional_args = function(opts)
+				return { "--hidden" }
+			end,
+		},
+		live_grep = {
+			additional_args = function(opts)
+				return { "--hidden" }
+			end,
+		},
 	},
 })
 
