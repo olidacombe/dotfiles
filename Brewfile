@@ -81,6 +81,7 @@ brew "mongosh"
 brew "mysql-client"
 # ng docker-like cli for mac
 # brew "nerdctl"
+brew "navi"
 brew "neovim", args: ["HEAD"]
 brew "nghttp2"
 brew "ninja"
@@ -114,6 +115,7 @@ brew "python-yq"
 brew "qemu"
 brew "rancher-cli"
 brew "reattach-to-user-namespace"
+brew "ranger"
 brew "redis"
 brew "ripgrep"
 brew "rsync"
@@ -144,6 +146,7 @@ brew "yq"
 # leave this to tfenv
 # brew "hashicorp/tap/terraform", link: false
 brew "yt-dlp/taps/yt-dlp"
+brew "zoxide"
 cask "1password-cli"
 cask "android-sdk"
 cask "bloomrpc"
