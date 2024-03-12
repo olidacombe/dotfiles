@@ -6,6 +6,7 @@ sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh
 
 ## TODO
 
++ a branch name maker from arbitrary message (satisfy [this](https://git-scm.com/docs/git-check-ref-format))
 + `titgrep` - grep but keep first (title) line
     - `bodgrep` - grep but unconditionally skip first line
 + sort out meta key in linux so I can have an easy life with shortcuts between OSs
