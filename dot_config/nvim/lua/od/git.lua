@@ -11,9 +11,10 @@ M.commit_message_from_branch_name = function(branch_name)
 	return message
 end
 
-M.git_checkout_new_branch = function()
+M.git_checkout_new_branch = function(default)
 	vim.ui.input({
 		prompt = "Branch Name",
+		default = default,
 	}, function(input)
 		if input then
 			local without_whitespace = input:gsub("%s+", "_")
