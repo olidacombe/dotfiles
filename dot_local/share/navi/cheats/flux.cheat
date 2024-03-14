@@ -1,4 +1,4 @@
 % flux
 
 # Flux resume all READY: False HRs
-k get hr -A | grep False | awk '{ print $1,$2 }' | while read -r ns hr; do flux suspend hr -n $ns $hr && flux resume hr -n $ns $hr; done
+kubectl get hr -A | grep False | awk '{ print $1,$2 }' | while read -r ns hr; do flux suspend hr -n $ns $hr && flux resume hr -n $ns $hr; done
