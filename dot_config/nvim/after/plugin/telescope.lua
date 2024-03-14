@@ -128,6 +128,7 @@ telescope.setup({
 
 telescope.load_extension("fzf")
 telescope.load_extension("harpoon")
+telescope.load_extension("jira")
 telescope.load_extension("makemapper")
 telescope.load_extension("monorepo")
 
