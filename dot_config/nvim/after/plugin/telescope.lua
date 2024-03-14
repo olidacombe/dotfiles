@@ -42,6 +42,7 @@ local normal_mappings = {
 				end,
 				'"Rg - ish"',
 			},
+			j = { "<cmd>Telescope jira<cr>", "Jira" },
 			k = { builtin.keymaps, "Keymaps" },
 			b = { builtin.current_buffer_fuzzy_find, "Within buffer" },
 			B = { builtin.buffers, "Buffers" },
@@ -117,6 +118,12 @@ telescope.setup({
 			override_file_sorter = true, -- override the file sorter
 			case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 			-- the default case_mode is "smart_case"
+		},
+		jira = {
+			projects = {
+				"ibau",
+				"infr",
+			},
 		},
 	},
 	pickers = {
