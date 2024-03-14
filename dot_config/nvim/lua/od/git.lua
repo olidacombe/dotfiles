@@ -1,3 +1,4 @@
+local Job = require("plenary.job")
 local M = {}
 
 M.branch_name = function()
@@ -17,8 +18,20 @@ M.git_checkout_new_branch = function(default)
 		default = default,
 	}, function(input)
 		if input then
-			local without_whitespace = input:gsub("%s+", "_")
-			vim.cmd("Git checkout -b " .. without_whitespace)
+			Job:new({
+				command = "refalizer",
+				args = { input },
+				on_exit = function(j, _)
+					Job:new({
+						command = "git",
+						args = {
+							"checkout",
+							"-b",
+							j:result()[1],
+						},
+					}):start()
+				end,
+			}):start()
 		end
 	end)
 end
