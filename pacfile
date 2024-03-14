@@ -26,6 +26,7 @@ lsof
 luarocks
 moreutils
 multipath-tools
+navi
 neofetch
 net-tools
 nmap
@@ -45,6 +46,7 @@ tree
 vim # provides xxd
 whois
 yq
+zoxide
 
 # zmk deps
 arm-none-eabi-gcc

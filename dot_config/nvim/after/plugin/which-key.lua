@@ -30,6 +30,9 @@ local mappings = {
 			"bLame",
 		},
 	},
+	l = {
+		l = { ":luafile %<CR>", "Run lua file" },
+	},
 	x = { "<cmd>!chmod +x %<CR>", "Make Executable" },
 	-- Yank to "+
 	y = yank_to_clipboard,

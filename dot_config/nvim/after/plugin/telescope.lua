@@ -42,6 +42,7 @@ local normal_mappings = {
 				end,
 				'"Rg - ish"',
 			},
+			j = { "<cmd>Telescope jira<cr>", "Jira" },
 			k = { builtin.keymaps, "Keymaps" },
 			b = { builtin.current_buffer_fuzzy_find, "Within buffer" },
 			B = { builtin.buffers, "Buffers" },
@@ -118,6 +119,12 @@ telescope.setup({
 			case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 			-- the default case_mode is "smart_case"
 		},
+		jira = {
+			projects = {
+				"ibau",
+				"infr",
+			},
+		},
 	},
 	pickers = {
 		colorscheme = {
@@ -128,6 +135,7 @@ telescope.setup({
 
 telescope.load_extension("fzf")
 telescope.load_extension("harpoon")
+telescope.load_extension("jira")
 telescope.load_extension("makemapper")
 telescope.load_extension("monorepo")
 
