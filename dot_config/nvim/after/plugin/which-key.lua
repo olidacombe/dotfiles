@@ -2,10 +2,10 @@ local whichkey = require("which-key")
 local wk = require("od.which-key")
 
 local conf = {
-	window = {
-		border = "single", -- none, single, double, shadow
-		position = "bottom", -- bottom, top
-	},
+    window = {
+        border = "single", -- none, single, double, shadow
+        position = "bottom", -- bottom, top
+    },
 }
 
 whichkey.setup(conf)
@@ -14,40 +14,50 @@ local yank_to_clipboard = { '"+y', "Yank to Clipboard" }
 
 -- Normal mode mappings
 local mappings = {
-	b = {
-		name = "Buffer",
-		c = { "<Cmd>bd!<CR>", "Close current buffer" },
-		D = { "<Cmd>%bd|e#|bd#<CR>", "Delete all buffers" },
-	},
-	g = {
-		name = "Git",
-		p = { "<cmd>Git pull<cr>", "﬇ pull" },
-		C = { require("od.git").git_checkout_new_branch, "Create Branch" },
-		l = {
-			function()
-				vim.cmd.Git("blame")
-			end,
-			"bLame",
-		},
-	},
-	x = { "<cmd>!chmod +x %<CR>", "Make Executable" },
-	-- Yank to "+
-	y = yank_to_clipboard,
-	Y = { '"+Y', "Yank line to Clipboard" },
+    b = {
+        name = "Buffer",
+        c = { "<Cmd>bd!<CR>", "Close current buffer" },
+        D = { "<Cmd>%bd|e#|bd#<CR>", "Delete all buffers" },
+    },
+    g = {
+        name = "Git",
+        p = { "<cmd>Git pull<cr>", "﬇ pull" },
+        C = { require("od.git").git_checkout_new_branch, "Create Branch" },
+        l = {
+            function()
+                vim.cmd.Git("blame")
+            end,
+            "bLame",
+        },
+    },
+    x = { "<cmd>!chmod +x %<CR>", "Make Executable" },
+    -- Yank to "+
+    y = yank_to_clipboard,
+    Y = { '"+Y', "Yank line to Clipboard" },
 }
 
 mappings["<leader>"] = {
-	g = { ":echo resolve(expand('%:p'))<cr>", "Show full path" },
+    g = { ":echo resolve(expand('%:p'))<cr>", "Show full path" },
 }
 
 wk.register_normal(mappings)
 
 -- Visual Mode mappings
 mappings = {
-	-- Replace selection everywhere
-	r = { 'y:%s/<C-r>"/', "Replace Everywhere" },
-	-- Yank to "+
-	Y = yank_to_clipboard,
+    -- Replace selection everywhere
+    r = { 'y:%s/<C-r>"/', "Replace Everywhere" },
+    -- Go to in browser
+    w = {
+        function()
+            P("yolo")
+            local url = require("utils").get_current_visual_selection()
+            -- P(url)
+            -- require("lazy.util").open(url)
+        end,
+        "Open in [w]eb browser",
+    },
+    -- Yank to "+
+    Y = yank_to_clipboard,
 }
 
 wk.register_visual(mappings)
