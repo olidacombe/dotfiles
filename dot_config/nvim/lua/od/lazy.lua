@@ -38,6 +38,7 @@ local plugins = {
 		},
 		dev = true,
 	},
+	-- Jirascope local dev
 	{
 		"olidacombe/jirascope",
 		dependencies = {
