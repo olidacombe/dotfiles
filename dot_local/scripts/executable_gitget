@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-REPO="$1"
+REPO=$(sed -e 's/^https:\/\/\([^:\/]*\)\//\1:/' <<< "$1")
 REMAPS=(github/olidacombe:od)
 REMAPS_CONFIG="${HOME}/.config/gitget/remaps"
 if [ -f "$REMAPS_CONFIG" ]; then
@@ -39,7 +39,11 @@ if [ -d "$TARGET" ]; then
 fi
 mkdir -p "${HOME}/${BASE}"
 cd "${HOME}/${BASE}"
-git clone "https://${host}/${path}"
+if [ "$host" = "gitlab.com" ]; then # I have a special case at work currently
+    echo git clone "https://${host}/${path}"
+else
+    echo git clone "git@${host}:${path}"
+fi
 
 if [ -n "${AUTO_TMUX_SESSIONIZE+x}" ]; then
     tmux-sessionizer "$(basename "$TARGET")"
