@@ -40,9 +40,9 @@ fi
 mkdir -p "${HOME}/${BASE}"
 cd "${HOME}/${BASE}"
 if [ "$host" = "gitlab.com" ]; then # I have a special case at work currently
-    echo git clone "https://${host}/${path}"
+    git clone "https://${host}/${path}"
 else
-    echo git clone "git@${host}:${path}"
+    git clone "git@${host}:${path}"
 fi
 
 if [ -n "${AUTO_TMUX_SESSIONIZE+x}" ]; then
