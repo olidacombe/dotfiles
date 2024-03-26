@@ -1,0 +1,4 @@
+% teleport
+
+# generate 2 hour teleport join token for k8s agent
+tctl nodes add --roles=kube,db,app --ttl=2h --format=json | jq -r '.[0]' | tr -d '\n' | pbcopy
