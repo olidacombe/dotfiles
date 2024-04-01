@@ -26,4 +26,5 @@ hardpass
 jira-terminal
 lemmeknow
 refalizer
+slint-lsp
 stylua
