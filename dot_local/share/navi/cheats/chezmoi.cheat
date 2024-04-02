@@ -1,0 +1,4 @@
+% chezmoi
+
+# chezmoi Update external sources and apply all
+chezmoi apply -R
