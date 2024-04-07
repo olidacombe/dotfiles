@@ -169,17 +169,18 @@ local plugins = {
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
-			"nvim-neotest/neotest-go",
 			"haydenmeade/neotest-jest",
-			"nvim-neotest/neotest-python",
+			"nvim-lua/plenary.nvim",
+			"nvim-neotest/neotest-go",
 			"nvim-neotest/neotest-plenary",
+			"nvim-neotest/neotest-python",
+			"nvim-neotest/neotest-vim-test",
+			"nvim-neotest/nvim-nio",
+			"nvim-treesitter/nvim-treesitter",
 			-- "rouge8/neotest-rust",
 			-- temp(1) until https://github.com/rouge8/neotest-rust/pull/19
 			{ "MarkEmmons/neotest-rust", branch = "feature/dap-support" },
-			"nvim-neotest/neotest-vim-test",
 		},
 	},
 
