@@ -1,4 +1,5 @@
 cargo-audit
+cargo-apk
 cargo-binstall
 cargo-edit
 cargo-espflash
