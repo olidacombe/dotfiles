@@ -1,4 +1,10 @@
 % flux
 
+# flux resume
+flux suspend hr -n <ns> <hr> && flux resume hr -n <ns> <hr>
+
+$ hr: kubectl get hr -ojson | jq -r '.items[].metadata.name'
+$ ns: kubens -c
+
 # Flux resume all READY: False HRs
 kubectl get hr -A | grep False | awk '{ print $1,$2 }' | while read -r ns hr; do flux suspend hr -n $ns $hr && flux resume hr -n $ns $hr; done
