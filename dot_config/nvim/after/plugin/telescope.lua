@@ -120,7 +120,7 @@ telescope.setup({
             -- the default case_mode is "smart_case"
         },
         jira = {
-            limit = 100,
+            limit = 500,
             projects = {
                 "ibau",
                 "infr",
