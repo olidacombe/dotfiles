@@ -1,0 +1,4 @@
+% atlantis
+
+# atlantis apply gitlab
+glab mr note -m "atlantis apply"
