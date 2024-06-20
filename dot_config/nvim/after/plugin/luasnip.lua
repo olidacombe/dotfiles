@@ -62,14 +62,14 @@ local raycast_preamble = [[
 
 local raycast_preamble_nodes = function()
     return {
-        i(1),                                                                                  -- title
-        c(2, { t("compact"), t("silent"), t("fullOutput"), t("inline") }),                     -- mode
-        c(3, { t(""), sn(nil, { t(" "), i(1, "pkg") }) }),                                     -- package name
-        c(4, { t("false"), t("true") }),                                                       -- needs confirmation
+        i(1),                                                                                        -- title
+        c(2, { t("compact"), t("silent"), t("fullOutput"), t("inline") }),                           -- mode
+        c(3, { t(""), sn(nil, { t(" "), i(1, "pkg") }) }),                                           -- package name
+        c(4, { t("false"), t("true") }),                                                             -- needs confirmation
         c(5, { t(""), t('# @raycast.argument1 { "type": "text", "placeholder": "Placeholder" }') }), -- argument boilerplate
-        i(6),                                                                                  --description
+        i(6),                                                                                        --description
         c(7, { t("Oli Dacombe"), i(nil, "Author") }),
-        c(8, { t(""), sn(nil, { t(" https://"), i(1, "example.com") }) }),                     -- author URL
+        c(8, { t(""), sn(nil, { t(" https://"), i(1, "example.com") }) }),                           -- author URL
         i(0),
     }
 end
@@ -320,6 +320,28 @@ ls.add_snippets(nil, {
                 { i(0) }
             )
         ),
+    },
+    sql = {
+        s(
+            {
+                trig = "^liq",
+                regTrig = true,
+                snippetType = "autosnippet",
+            },
+            fmt(
+                [[
+            --liquibase formatted sql
+            --changeset {}:{}
+
+            {}
+            ]],
+                { c(1, {
+                    t(os.getenv("JIRA_USER") or os.getenv("USER")),
+                    i(nil, "User...")
+                }
+                ), i(2), i(0) }
+            )
+        )
     },
     terraform = {
         s(
