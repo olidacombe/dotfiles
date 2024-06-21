@@ -1,4 +1,5 @@
+community/parallel
 figlet-fonts-extra
 neovim-nightly-bin
-community/parallel
+pyenv-virtualenv
 ttf-firacode-nerd
