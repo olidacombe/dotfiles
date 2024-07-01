@@ -21,6 +21,7 @@ du-dust
 #espmonitor
 espup
 flamegraph
+flamelens
 git-delta
 hardpass
 #ldproxy
