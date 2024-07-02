@@ -221,6 +221,13 @@ ls.add_snippets(nil, {
             )
         ),
     },
+    oil = {
+        -- README.md quickie
+        s(
+            { trig = "readme", docstring = "README.md" },
+            t("README.md")
+        ),
+    },
     python = {
         -- raycast script
         s(
