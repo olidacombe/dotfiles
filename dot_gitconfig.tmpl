@@ -2,12 +2,13 @@
 	postBuffer = 524288000
 	maxRequestBuffer = 100M
 [user]
-{{- if .gpg.signing.key -}}
-	signingKey = {{ .gpg.signing.key }}
-{{- end -}}
+{{- $signingKey := dig "gpg" "signing" "key" false . -}}
+{{- if $signingKey -}}
+        signingKey = {{ $signingKey | quote }}
+{{- end -}
 	name = Oli Dacombe
 	email = {{ .email }}
-{{- if .gpg.signing.key -}}
+{{- if $signingKey -}}
 [commit]
 	gpgSign = true
 {{- end -}}
