@@ -1,7 +1,11 @@
-{{- $email := default (promptString "email") (env "GITPOD_GIT_USER_EMAIL") -}}
+{{- if env "GITPOD_GIT_USER_EMAIL" -}}
+[data]
+    email = {{ env "GITPOD_GIT_USER_EMAIL" }}
+{{- else -}}
+{{- $email := promptString "email" -}}
 {{- $gpgSigningKey := promptString "GPG Signing Key" -}}
-
 [data]
     email = {{ $email | quote }}
 [data.gpg.signing]
     key = {{ $gpgSigningKey | quote }}
+{{- end -}}
