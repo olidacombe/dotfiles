@@ -1,0 +1,4 @@
+# completion
+if command -v flux &> /dev/null; then
+    . <(flux completion zsh)
+fi

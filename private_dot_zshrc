@@ -125,11 +125,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# Flux
-if command -v flux &> /dev/null; then
-    . <(flux completion zsh)
-fi
-
 # generate this file using `jira-terminal autocompletion --shell zsh > dot_jira_terminal.zsh`
 # [ -f ~/.jira_terminal.zsh ] && . ~/.jira_terminal.zsh
 [ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
