@@ -6,10 +6,8 @@ GH_USER=olidacombe
 LINUX="linux"
 MACOS="macos"
 
-alias is_gitpod='[ -n "$(command -v gp)" ]'
-
 function is_gitpod() {
-    command -v
+    gp version &> /dev/null
 }
 
 function strip_comment() {
@@ -77,24 +75,8 @@ else
         [ -z "$GET_CHEZMOI" ] && err "error fetching \`chezmoi\` install script, if it's a cert trust error, consider \`brew install curl\` first?"
 
         sh -c "$GET_CHEZMOI" -- init --apply olidacombe || err "chezmoi install failed"
-        quit "Ok, chezmoi installed, now spawn a new zsh shell and \`chozmoi cd\` before running again"
+        quit "Ok, chezmoi installed, now spawn a new zsh shell and \`chezmoi cd\` before running again"
 fi
-
-function clone_od_repo() {
-    if is_gitpod; then
-        git clone "https://github.com/olidacombe/$1"
-    else
-        git clone "git@github.com:olidacombe/$1"
-    fi
-}
-
-# required repos
-mkdir -p "${HOME}/od"
-pushd "${HOME}/od"
-for REPO in commentalist.nvim makemapper.nvim; do
-    [ -d "$REPO" ] || clone_od_repo "$REPO"
-done
-popd
 
 if [ "$OS" = "$MACOS" ]; then
 	echo running \`brew bundle\`
