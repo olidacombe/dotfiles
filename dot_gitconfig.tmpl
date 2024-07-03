@@ -5,7 +5,7 @@
 {{- $signingKey := dig "gpg" "signing" "key" false . -}}
 {{- if $signingKey -}}
         signingKey = {{ $signingKey | quote }}
-{{- end -}
+{{- end -}}
 	name = Oli Dacombe
 	email = {{ .email }}
 {{- if $signingKey -}}
