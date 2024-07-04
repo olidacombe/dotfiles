@@ -1,3 +1,4 @@
+direnv
 fzf
 tmux
 vim # provides xxd
