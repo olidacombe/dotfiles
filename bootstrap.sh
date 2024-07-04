@@ -69,13 +69,14 @@ function err() {
 
 if command -v chezmoi &> /dev/null; then
         echo chezmoi found
+        pushd "$(chezmoi source-path)"
 else
         GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
         cd "$HOME"
         [ -z "$GET_CHEZMOI" ] && err "error fetching \`chezmoi\` install script, if it's a cert trust error, consider \`brew install curl\` first?"
 
         sh -c "$GET_CHEZMOI" -- init --apply olidacombe || err "chezmoi install failed"
-        quit "Ok, chezmoi installed, now spawn a new zsh shell and \`chezmoi cd\` before running again"
+        pushd "$("${HOME}/bin/chezmoi" source-path)"
 fi
 
 if [ "$OS" = "$MACOS" ]; then
