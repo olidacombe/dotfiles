@@ -19,8 +19,13 @@ elif [ "$OS" = "Linux" ]; then
     export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
     # source some shell plugins for fzf
-    source /usr/share/fzf/completion.zsh
-    source /usr/share/fzf/key-bindings.zsh
+    while read -r COMPLETION; do
+        [ -f "$COMPLETION" ] && echo source "$COMPLETION"
+    done <<EOF
+/usr/share/fzf/completion.zsh
+/usr/share/fzf/key-bindings.zsh
+/usr/share/doc/fzf/examples/completion.zsh
+EOF
 fi
 
 _fzf_complete_gitget() {
