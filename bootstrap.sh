@@ -81,7 +81,7 @@ fi
 
 if [ "$OS" = "$MACOS" ]; then
 	echo running \`brew bundle\`
-	brew bundle
+	brew bundle & disown
 else
     case "$DISTRO" in
         "arch")
@@ -127,13 +127,14 @@ command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv
  #
  #  This is SUPER GOOD: https://nickgerace.dev/post/how-to-manage-rust-tools-and-applications/
  #  get current list with `cargo install --list | rg -o "^\S*\S" > crates.txt`
-strip_comment crates.txt | xargs cargo install
+strip_comment crates.txt | xargs cargo install & disown
 
 # Node
 [[ -f "${HOME}/.nvm/nvm.sh" ]] && . "${HOME}/.nvm/nvm.sh"
 if command -v nvm &> /dev/null; then
     # install node if we don't have it
     command -v node &> /dev/null || nvm install node
+    strip_comment npm_globals | xargs npm i -g & disown
 fi
 
 # let's leave it here for the moment
