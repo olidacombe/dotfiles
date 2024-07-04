@@ -41,7 +41,7 @@ function linux_installer() {
 
 function install_neovim_x64_linux() {
     curl -sLo nvim.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-    tar zxvf nvim.tar.gz -C /usr --strip-components=1
+    sudo tar zxvf nvim.tar.gz -C /usr --strip-components=1
     rm nvim.tar.gz
 }
 
