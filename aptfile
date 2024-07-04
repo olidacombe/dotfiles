@@ -1,2 +1,5 @@
+fzf
 neovim
+tmux
 vim # provides xxd
+zoxide

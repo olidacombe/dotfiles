@@ -89,7 +89,12 @@ else
             yes | yay -qS $( strip_comment yayfile ) <<< "A\nN\n"
             ;;
         "debian")
+            sudo apt-get update
             apt_install $( strip_comment aptfile )
+            if ! pyenv virtualenv-init -; then
+                mkdir -p "$(pyenv root)/plugins"
+                git clone https://github.com/pyenv/pyenv-virtualenv.git "$(pyenv root)/plugins/pyenv-virtualenv"
+            fi
             ;;
         *)
             ;;

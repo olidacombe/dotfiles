@@ -147,7 +147,8 @@ brew "wget"
 brew "yamllint"
 brew "yarn"
 brew "youtube-dl"
-brew "yq"
+# use python-yq instead?
+# brew "yq"
 # leave this to tfenv
 # brew "hashicorp/tap/terraform", link: false
 brew "yt-dlp/taps/yt-dlp"
