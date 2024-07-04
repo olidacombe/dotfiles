@@ -39,6 +39,12 @@ function linux_installer() {
     esac
 }
 
+function install_neovim_x64_linux() {
+    curl -sLo nvim.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+    tar zxvf nvim.tar.gz -C /usr --strip-components=1
+    rm nvim.tar.gz
+}
+
 if uname -a | grep -i linux; then
     export INSTALLER=$(linux_installer)
 	export OS="$LINUX"
@@ -95,6 +101,7 @@ else
                 mkdir -p "$(pyenv root)/plugins"
                 git clone https://github.com/pyenv/pyenv-virtualenv.git "$(pyenv root)/plugins/pyenv-virtualenv"
             fi
+            install_neovim_x64_linux
             ;;
         *)
             ;;
