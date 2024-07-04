@@ -254,7 +254,7 @@ if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then . ${HOME}/.nix-profile
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 # keychain
-if [ "$OS" = "Linux" ]; then
+if [ "$OS" = "Linux" ] && command -v keychain &>/dev/null; then
     eval $(keychain --eval --quiet id_ed25519 --agents ssh,gpg)
 fi
 
