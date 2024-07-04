@@ -129,9 +129,12 @@ command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv
  #  get current list with `cargo install --list | rg -o "^\S*\S" > crates.txt`
 strip_comment crates.txt | xargs cargo install
 
-# NPM
-. "${HOME}/.nvm/nvm.sh"
-command -v node &> /dev/null || nvm install node
+# Node
+[[ -f "${HOME}/.nvm/nvm.sh" ]] && . "${HOME}/.nvm/nvm.sh"
+if command -v nvm &> /dev/null; then
+    # install node if we don't have it
+    command -v node &> /dev/null || nvm install node
+fi
 
 # let's leave it here for the moment
 exit 0
