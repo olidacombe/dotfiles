@@ -2,16 +2,16 @@
 	postBuffer = 524288000
 	maxRequestBuffer = 100M
 [user]
-{{- $signingKey := dig "gpg" "signing" "key" false . -}}
-{{- if $signingKey -}}
+{{- $signingKey := dig "gpg" "signing" "key" false . }}
+{{- if $signingKey }}
         signingKey = {{ $signingKey | quote }}
-{{- end -}}
+{{- end }}
 	name = Oli Dacombe
 	email = {{ .email }}
-{{- if $signingKey -}}
+{{- if $signingKey }}
 [commit]
 	gpgSign = true
-{{- end -}}
+{{- end }}
 [alias]
 	st = status
 	ci = commit
@@ -43,7 +43,7 @@
     colorMoved = default
 [pull]
     rebase = true
-{{ if eq .chezmoi.os "darwin" -}}
+{{- if eq .chezmoi.os "darwin" }}
 [credential]
     helper = osxkeychain
-{{ end -}}
+{{- end }}
