@@ -16,8 +16,6 @@ rt.setup({
 			end
 
 			local opts = {
-				mode = "n", -- NORMAL mode
-				prefix = "<leader>",
 				buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
 				silent = true, -- use `silent` when creating keymaps
 				noremap = true, -- use `noremap` when creating keymaps
@@ -27,14 +25,14 @@ rt.setup({
 			vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
 
 			local mappings = {
-				{ "r", group = "+Rust" },
-				{ "rj", "<cmd>lua require('rust-tools').join_lines.join_lines()<CR>", desc = "Join Lines" },
-				{ "rr", "<cmd>RustRunnables<Cr>", desc = "Runnables" },
-				{ "rt", "<cmd>lua _CARGO_TEST()<cr>", desc = "Cargo Test" },
-				{ "rm", "<cmd>RustExpandMacro<Cr>", desc = "Expand Macro" },
-				{ "rc", "<cmd>RustOpenCargo<Cr>", desc = "Open Cargo" },
-				{ "rp", "<cmd>RustParentModule<Cr>", desc = "Parent Module" },
-				{ "rd", "<cmd>RustOpenExternalDocs<Cr>", desc = "Docs" },
+				{ "<leader>r", group = "+Rust" },
+				{ "<leader>rj", "<cmd>lua require('rust-tools').join_lines.join_lines()<CR>", desc = "Join Lines" },
+				{ "<leader>rr", "<cmd>RustRunnables<Cr>", desc = "Runnables" },
+				{ "<leader>rt", "<cmd>lua _CARGO_TEST()<cr>", desc = "Cargo Test" },
+				{ "<leader>rm", "<cmd>RustExpandMacro<Cr>", desc = "Expand Macro" },
+				{ "<leader>rc", "<cmd>RustOpenCargo<Cr>", desc = "Open Cargo" },
+				{ "<leader>rp", "<cmd>RustParentModule<Cr>", desc = "Parent Module" },
+				{ "<leader>rd", "<cmd>RustOpenExternalDocs<Cr>", desc = "Docs" },
 				-- d = { TODO fall back to this if [my PR](https://github.com/simrat39/rust-tools.nvim/pull/431) gets canned
 				--     function()
 				--         require("rust-tools").utils.request(
@@ -51,33 +49,53 @@ rt.setup({
 				--     end,
 				--     "Docs",
 				-- },
-				{ "rD", "<cmd>RustDebuggables<Cr>", desc = "Debuggables" },
-				{ "rv", "<cmd>RustViewCrateGraph<Cr>", desc = "View Crate Graph" },
+				{ "<leader>rD", "<cmd>RustDebuggables<Cr>", desc = "Debuggables" },
 				{
-					"rR",
+					"<leader>rv",
+					"<cmd>RustViewCrateGraph<Cr>",
+					desc = "View Crate Graph",
+				},
+				{
+					"<leader>rR",
 					"<cmd>lua require('rust-tools/workspace_refresh')._reload_workspace_from_cargo_toml()<Cr>",
 					desc = "Reload Workspace",
 				},
 				{
-					"t",
+					"<leader>t",
 					group = "+Rust Crates",
 				},
-				{ "to", "<cmd>lua require('crates').show_popup()<CR>", "Show popup" },
-				{ "tr", "<cmd>lua require('crates').reload()<CR>", "Reload" },
-				{ "tv", "<cmd>lua require('crates').show_versions_popup()<CR>", "Show Versions" },
-				{ "tf", "<cmd>lua require('crates').show_features_popup()<CR>", "Show Features" },
-				{ "td", "<cmd>lua require('crates').show_dependencies_popup()<CR>", "Show Dependencies Popup" },
-				{ "tu", "<cmd>lua require('crates').update_crate()<CR>", "Update Crate" },
-				{ "ta", "<cmd>lua require('crates').update_all_crates()<CR>", "Update All Crates" },
-				{ "tU", "<cmd>lua require('crates').upgrade_crate<CR>", "Upgrade Crate" },
-				{ "tA", "<cmd>lua require('crates').upgrade_all_crates(true)<CR>", "Upgrade All Crates" },
-				{ "tH", "<cmd>lua require('crates').open_homepage()<CR>", "Open Homepage" },
-				{ "tR", "<cmd>lua require('crates').open_repository()<CR>", "Open Repository" },
-				{ "tD", "<cmd>lua require('crates').open_documentation()<CR>", "Open Documentation" },
-				{ "tC", "<cmd>lua require('crates').open_crates_io()<CR>", "Open Crate.io" },
+				{ "<leader>to", "<cmd>lua require('crates').show_popup()<CR>", desc = "Show popup" },
+				{ "<leader>tr", "<cmd>lua require('crates').reload()<CR>", desc = "Reload" },
+				{ "<leader>tv", "<cmd>lua require('crates').show_versions_popup()<CR>", desc = "Show Versions" },
+				{ "<leader>tf", "<cmd>lua require('crates').show_features_popup()<CR>", desc = "Show Features" },
+				{
+					"<leader>td",
+					"<cmd>lua require('crates').show_dependencies_popup()<CR>",
+					desc = "Show Dependencies Popup",
+				},
+				{ "<leader>tu", "<cmd>lua require('crates').update_crate()<CR>", desc = "Update Crate" },
+				{
+					"<leader>ta",
+					"<cmd>lua require('crates').update_all_crates()<CR>",
+					desc = "Update All Crates",
+				},
+				{ "<leader>tU", "<cmd>lua require('crates').upgrade_crate<CR>", desc = "Upgrade Crate" },
+				{
+					"<leader>tA",
+					"<cmd>lua require('crates').upgrade_all_crates(true)<CR>",
+					desc = "Upgrade All Crates",
+				},
+				{ "<leader>tH", "<cmd>lua require('crates').open_homepage()<CR>", desc = "Open Homepage" },
+				{ "<leader>tR", "<cmd>lua require('crates').open_repository()<CR>", desc = "Open Repository" },
+				{
+					"<leader>tD",
+					"<cmd>lua require('crates').open_documentation()<CR>",
+					desc = "Open Documentation",
+				},
+				{ "<leader>tC", "<cmd>lua require('crates').open_crates_io()<CR>", desc = "Open Crate.io" },
 			}
 
-			which_key.register(mappings, opts)
+			which_key.add(mappings, opts)
 		end,
 	},
 

@@ -17,7 +17,7 @@
 --       (____(____)
 require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 
-register_nv = require("od.which-key").register_nv
+local register_nv = require("od.which-key").register_nv
 
 local mappings = {
 	{ "h", group = "Hop / GitSigns" },
