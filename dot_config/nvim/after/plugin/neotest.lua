@@ -16,7 +16,7 @@ require("neotest").setup({
 })
 
 register_normal({
-	{ "t", name = "Test / Tab" },
+	{ "t", group = "Test / Tab" },
 	{ "ta", "<cmd>lua require('neotest').run.attach()<cr>", desc = "Attach" },
 	{ "tc", "<cmd>tabc<CR>", desc = "Tab Close" },
 	{ "tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", desc = "Run File" },

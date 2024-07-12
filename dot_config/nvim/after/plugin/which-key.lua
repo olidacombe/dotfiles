@@ -12,10 +12,10 @@ whichkey.setup(conf)
 
 -- Normal mode mappings
 local mappings = {
-	{ "b", name = "Buffer" },
+	{ "b", group = "Buffer" },
 	{ "bc", "<Cmd>bd!<CR>", desc = "Close current buffer" },
 	{ "bD", "<Cmd>%bd|e#|bd#<CR>", desc = "Delete all buffers" },
-	{ "g", name = "Git" },
+	{ "g", group = "Git" },
 	{ "gp", "<cmd>Git pull<cr>", desc = "﬇ pull" },
 	{ "gC", require("od.git").git_checkout_new_branch, desc = "Create Branch" },
 	{

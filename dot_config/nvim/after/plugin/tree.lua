@@ -163,7 +163,7 @@ require("nvim-tree").setup({
 })
 
 wk.register_normal({
-	{ "w", name = "Workspace" },
+	{ "w", group = "Workspace" },
 	{ "wb", "<cmd>NvimTreeToggle<CR>", desc = "Browser" },
 	{ "wr", "<cmd>e .<cr>", desc = "Root" },
 })
