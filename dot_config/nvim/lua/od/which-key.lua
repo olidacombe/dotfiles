@@ -3,23 +3,18 @@ local whichkey = require("which-key")
 
 local wk = {}
 
-local function get_opts(mode)
+local function register(mappings, mode, prefix)
+	prefix = prefix or ""
 	local opts = {
-		mode = mode,
 		buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
 		silent = true, -- use `silent` when creating keymaps
 		noremap = true, -- use `noremap` when creating keymaps
 		nowait = false, -- use `nowait` when creating keymaps
 	}
-	return opts
-end
-
-local function register(mappings, mode, prefix)
-	prefix = prefix or ""
-	local opts = get_opts(mode)
 	local prefixed_mappings = {}
 	for _, v in ipairs(mappings) do
 		v[1] = prefix .. v[1]
+		v["mode"] = mode
 		table.insert(prefixed_mappings, v)
 	end
 	whichkey.add(prefixed_mappings, opts)
