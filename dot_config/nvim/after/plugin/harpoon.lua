@@ -6,9 +6,9 @@ local register_normal = require("od.which-key").register_normal
 local os_cb = require("utils").os_cb
 
 local mappings = {
-    a = { mark.add_file, "Harpoon Mark" },
-    e = { ui.toggle_quick_menu, "Harpoon List" },
-    E = { ":Telescope harpoon marks<CR>", "Harpoon Telescope" },
+    { "a", mark.add_file,                  desc = "Harpoon Mark" },
+    { "e", ui.toggle_quick_menu,           desc = "Harpoon List" },
+    { "E", ":Telescope harpoon marks<CR>", desc = "Harpoon Telescope" },
 }
 
 register_normal(mappings)

@@ -1,33 +1,31 @@
 local register_normal = require("od.which-key").register_normal
 
 require("neotest").setup({
-    adapters = {
-        require("neotest-python")({
-            dap = { justMyCode = false },
-        }),
-        require("neotest-jest"),
-        require("neotest-go"),
-        require("neotest-plenary"),
-        require("neotest-rust"),
-        require("neotest-vim-test")({
-            ignore_file_types = { "lua", "python", "rust", "vim", },
-        }),
-    },
+	adapters = {
+		require("neotest-python")({
+			dap = { justMyCode = false },
+		}),
+		require("neotest-jest"),
+		require("neotest-go"),
+		require("neotest-plenary"),
+		require("neotest-rust"),
+		require("neotest-vim-test")({
+			ignore_file_types = { "lua", "python", "rust", "vim" },
+		}),
+	},
 })
 
 register_normal({
-    t = {
-        name = "Test / Tab",
-        a = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach" },
-        c = { "<cmd>tabc<CR>", "Tab Close" },
-        f = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "Run File" },
-        F = { "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", "Debug File" },
-        l = { "<cmd>lua require('neotest').run.run_last()<cr>", "Run Last" },
-        L = { "<cmd>lua require('neotest').run.run_last({ strategy = 'dap' })<cr>", "Debug Last" },
-        n = { "<cmd>lua require('neotest').run.run()<cr>", "Run Nearest" },
-        N = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Debug Nearest" },
-        o = { "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "Output" },
-        S = { "<cmd>lua require('neotest').run.stop()<cr>", "Stop" },
-        s = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Summary" },
-    },
+	{ "t", name = "Test / Tab" },
+	{ "ta", "<cmd>lua require('neotest').run.attach()<cr>", desc = "Attach" },
+	{ "tc", "<cmd>tabc<CR>", desc = "Tab Close" },
+	{ "tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", desc = "Run File" },
+	{ "tF", "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", desc = "Debug File" },
+	{ "tl", "<cmd>lua require('neotest').run.run_last()<cr>", desc = "Run Last" },
+	{ "tL", "<cmd>lua require('neotest').run.run_last({ strategy = 'dap' })<cr>", desc = "Debug Last" },
+	{ "tn", "<cmd>lua require('neotest').run.run()<cr>", desc = "Run Nearest" },
+	{ "tN", "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", desc = "Debug Nearest" },
+	{ "to", "<cmd>lua require('neotest').output.open({ enter = true })<cr>", desc = "Output" },
+	{ "tS", "<cmd>lua require('neotest').run.stop()<cr>", desc = "Stop" },
+	{ "ts", "<cmd>lua require('neotest').summary.toggle()<cr>", desc = "Summary" },
 })

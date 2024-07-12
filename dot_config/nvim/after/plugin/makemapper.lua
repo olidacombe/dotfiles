@@ -1,7 +1,7 @@
-require "makemapper".setup({
+require("makemapper").setup({
     -- runner = "harpoon_tmux"
 })
 
-require("which-key").register({
-    m = { name = "make" }
-}, { mode = "n", prefix = "<leader>" })
+require("which-key").add({
+    { "<leader>m", group = "make" },
+})

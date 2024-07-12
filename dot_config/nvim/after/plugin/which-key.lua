@@ -10,37 +10,27 @@ local conf = {
 
 whichkey.setup(conf)
 
-local yank_to_clipboard = { '"+y', "Yank to Clipboard" }
-
 -- Normal mode mappings
 local mappings = {
-	b = {
-		name = "Buffer",
-		c = { "<Cmd>bd!<CR>", "Close current buffer" },
-		D = { "<Cmd>%bd|e#|bd#<CR>", "Delete all buffers" },
+	{ "b", name = "Buffer" },
+	{ "bc", "<Cmd>bd!<CR>", desc = "Close current buffer" },
+	{ "bD", "<Cmd>%bd|e#|bd#<CR>", desc = "Delete all buffers" },
+	{ "g", name = "Git" },
+	{ "gp", "<cmd>Git pull<cr>", desc = "﬇ pull" },
+	{ "gC", require("od.git").git_checkout_new_branch, desc = "Create Branch" },
+	{
+		"gl",
+		function()
+			vim.cmd.Git("blame")
+		end,
+		desc = "bLame",
 	},
-	g = {
-		name = "Git",
-		p = { "<cmd>Git pull<cr>", "﬇ pull" },
-		C = { require("od.git").git_checkout_new_branch, "Create Branch" },
-		l = {
-			function()
-				vim.cmd.Git("blame")
-			end,
-			"bLame",
-		},
-	},
-	l = {
-		l = { ":luafile %<CR>", "Run lua file" },
-	},
-	x = { "<cmd>!chmod +x %<CR>", "Make Executable" },
+	{ "ll", ":luafile %<CR>", desc = "Run lua file" },
+	{ "x", "<cmd>!chmod +x %<CR>", desc = "Make Executable" },
 	-- Yank to "+
-	y = yank_to_clipboard,
-	Y = { '"+Y', "Yank line to Clipboard" },
-}
-
-mappings["<leader>"] = {
-	g = { ":echo resolve(expand('%:p'))<cr>", "Show full path" },
+	{ "y", '"+y', desc = "Yank to Clipboard" },
+	{ "Y", '"+Y', desc = "Yank line to Clipboard" },
+	{ "<leader>g", ":echo resolve(expand('%:p'))<cr>", desc = "Show full path" },
 }
 
 wk.register_normal(mappings)
@@ -48,9 +38,9 @@ wk.register_normal(mappings)
 -- Visual Mode mappings
 mappings = {
 	-- Replace selection everywhere
-	r = { 'y:%s/<C-r>"/', "Replace Everywhere" },
+	{ "r", 'y:%s/<C-r>"/', desc = "Replace Everywhere" },
 	-- Yank to "+
-	Y = yank_to_clipboard,
+	{ "Y", '"+y', desc = "Yank to Clipboard" },
 }
 
 wk.register_visual(mappings)

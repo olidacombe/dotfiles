@@ -6,20 +6,20 @@ local quickcycle_mappings = quickcycle.new({
     {
         "change",
         next = "normal ]c",
-        prev = "normal [c"
+        prev = "normal [c",
     },
     {
         "conflict",
         next = "normal ]x",
-        prev = "normal [x"
+        prev = "normal [x",
     },
 })
 
 local file_panel_common_mappings = {
     { "n", "<C-g>", actions.select_prev_entry, { desc = "Next" } },
     { "n", "<C-c>", actions.select_next_entry, { desc = "Prev" } },
-        ["<tab>"] = false,
-        ["<s-tab>"] = false,
+    ["<tab>"] = false,
+    ["<s-tab>"] = false,
 }
 
 require("diffview").setup({
@@ -52,7 +52,7 @@ require("diffview").setup({
         view_enter = function()
             quickcycle.push(quickcycle_mappings)
         end,
-        view_leave = quickcycle.pop
+        view_leave = quickcycle.pop,
     },
     keymaps = {
         file_panel = file_panel_common_mappings,
@@ -64,10 +64,8 @@ require("diffview").setup({
 
 -- Global mappings
 local mappings = {
-    g = {
-        D = { "<cmd>DiffviewOpen<CR>", "Diff" },
-        h = { "<cmd>DiffviewFileHistory %<CR>", "File History" },
-    }
+    { "gD", "<cmd>DiffviewOpen<CR>",          desc = "Diff" },
+    { "gh", "<cmd>DiffviewFileHistory %<CR>", desc = "File History" },
 }
 
 register_normal(mappings)

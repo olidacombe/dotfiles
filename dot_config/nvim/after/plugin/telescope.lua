@@ -5,61 +5,57 @@ local builtin = require("telescope.builtin")
 local telescope = require("telescope")
 
 local normal_mappings = {
-    f = {
-        name = "Fuzzy Find",
-        {
-            c = { builtin.lsp_references, "References" },
-            C = { builtin.colorscheme, "Colourscheme" },
-            f = {
-                function()
-                    builtin.git_files({
-                        hidden = true,
-                        show_untracked = true,
-                        use_git_root = false, -- handy for monorepo
-                    })
-                end,
-                "Files<=Repo",
-            },
-            F = {
-                function()
-                    builtin.find_files({
-                        hidden = true,
-                    })
-                end,
-                "Files",
-            },
-            r = { builtin.registers, "Registers" },
-            R = { builtin.resume, "Resume" },
-            G = { builtin.live_grep, "Grep" },
-            g = {
-                function()
-                    builtin.grep_string({
-                        shorten_path = true,
-                        word_match = "-w",
-                        only_sort_text = true,
-                        search = "",
-                    })
-                end,
-                '"Rg - ish"',
-            },
-            j = { "<cmd>Telescope jira<cr>", "Jira" },
-            k = { builtin.keymaps, "Keymaps" },
-            b = { builtin.current_buffer_fuzzy_find, "Within buffer" },
-            B = { builtin.buffers, "Buffers" },
-            h = { builtin.help_tags, "Help" },
-            m = { "<cmd>Telescope makemapper<cr>", "Make Targets" },
-            s = { builtin.lsp_document_symbols, "Document Symbols" },
-            S = { builtin.lsp_workspace_symbols, "Workspace Symbols" },
-            q = { builtin.quickfix, "Quickfix" },
-        },
+    { "f",  name = "Fuzzy Find" },
+    { "fc", builtin.lsp_references, desc = "References" },
+    { "fC", builtin.colorscheme,    desc = "Colourscheme" },
+    {
+        "ff",
+        function()
+            builtin.git_files({
+                hidden = true,
+                show_untracked = true,
+                use_git_root = false, -- handy for monorepo
+            })
+        end,
+        desc = "Files<=Repo",
     },
-    g = {
-        b = { builtin.git_branches, "Branch" },
-        c = { builtin.git_commits, "Commits" },
+    {
+        "fF",
+        function()
+            builtin.find_files({
+                hidden = true,
+            })
+        end,
+        desc = "Files",
     },
+    { "fr", builtin.registers, desc = "Registers" },
+    { "fR", builtin.resume,    desc = "Resume" },
+    { "fG", builtin.live_grep, desc = "Grep" },
+    {
+        "fg",
+        function()
+            builtin.grep_string({
+                shorten_path = true,
+                word_match = "-w",
+                only_sort_text = true,
+                search = "",
+            })
+        end,
+        desc = '"Rg - ish"',
+    },
+    { "fj", "<cmd>Telescope jira<cr>",         desc = "Jira" },
+    { "fk", builtin.keymaps,                   desc = "Keymaps" },
+    { "fb", builtin.current_buffer_fuzzy_find, desc = "Within buffer" },
+    { "fB", builtin.buffers,                   desc = "Buffers" },
+    { "fh", builtin.help_tags,                 desc = "Help" },
+    { "fm", "<cmd>Telescope makemapper<cr>",   desc = "Make Targets" },
+    { "fs", builtin.lsp_document_symbols,      desc = "Document Symbols" },
+    { "fS", builtin.lsp_workspace_symbols,     desc = "Workspace Symbols" },
+    { "fq", builtin.quickfix,                  desc = "Quickfix" },
+    { 'f"', builtin.registers,                 desc = "Registers" },
+    { "gb", builtin.git_branches,              desc = "Branch" },
+    { "gc", builtin.git_commits,               desc = "Commits" },
 }
-
-normal_mappings.f['"'] = { builtin.registers, "Registers" }
 
 register_normal(normal_mappings)
 

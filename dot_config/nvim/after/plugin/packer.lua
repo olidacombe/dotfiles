@@ -2,12 +2,10 @@ register_normal = require("od.which-key").register_normal
 
 -- key mappings
 local mappings = {
-    z = {
-        name = "Lazy",
-        i = { "<cmd>Lazy install<cr>", "Install" },
-        s = { "<cmd>Lazy sync<cr>", "Sync" },
-        u = { "<cmd>Lazy update<cr>", "Update" },
-    },
+	{ "z", name = "Lazy" },
+	{ "zi", "<cmd>Lazy install<cr>", desc = "Install" },
+	{ "zs", "<cmd>Lazy sync<cr>", desc = "Sync" },
+	{ "zu", "<cmd>Lazy update<cr>", desc = "Update" },
 }
 
 register_normal(mappings)
