@@ -57,7 +57,7 @@ require("gitsigns").setup({
 				end,
 				desc = "Blame Line",
 			},
-			{ "hd", gs.diffthis, "Diff This" },
+			{ "hd", gs.diffthis, desc = "Diff This" },
 			{
 				"hD",
 				function()
