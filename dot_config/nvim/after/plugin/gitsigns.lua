@@ -4,11 +4,9 @@ require("gitsigns").setup({
 	on_attach = function(bufnr)
 		local gs = package.loaded.gitsigns
 
-		local function map(mode, mappings)
+		local function map(mappings)
 			local opts = {
 				buffer = bufnr,
-				mode = mode,
-				prefix = "<leader>",
 				silent = true,
 				noremap = true,
 				nowait = false,
@@ -42,10 +40,10 @@ require("gitsigns").setup({
 		vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select Git Hunk" })
 
 		local mappings = {
-			{ "hs", ":Gitsigns stage_hunk<CR>", desc = "Stage Hunk" },
-			{ "hr", ":Gitsigns reset_hunk<CR>", desc = "Reset Hunk" },
+			{ "hs", ":Gitsigns stage_hunk<CR>", mode = { "n", "v" }, desc = "Stage Hunk" },
+			{ "hr", ":Gitsigns reset_hunk<CR>", mode = { "n", "v" }, desc = "Reset Hunk" },
 		}
-		map({ "n", "v" }, mappings)
+		map(mappings)
 
 		mappings = {
 			{ "hS", gs.stage_buffer, desc = "Stage Buffer" },
@@ -70,6 +68,6 @@ require("gitsigns").setup({
 			{ "tb", gs.toggle_current_line_blame, desc = "Toggle Blame" },
 			{ "td", gs.toggle_deleted, desc = "Toggle Deleted" },
 		}
-		map("n", mappings)
+		map(mappings)
 	end,
 })

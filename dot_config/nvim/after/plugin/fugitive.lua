@@ -41,8 +41,6 @@ autocmd("BufWinEnter", {
 		local bufnr = vim.api.nvim_get_current_buf()
 
 		local opts = {
-			mode = "n",
-			prefix = "<leader>",
 			buffer = bufnr,
 			silent = true,
 			remap = false,
@@ -51,7 +49,7 @@ autocmd("BufWinEnter", {
 
 		local mappings = {
 			{
-				"p",
+				"<leader>p",
 				function()
 					vim.cmd.Git("push")
 				end,
@@ -60,7 +58,7 @@ autocmd("BufWinEnter", {
 
 			-- rebase always on pull
 			{
-				"P",
+				"<leader>P",
 				function()
 					vim.cmd.Git("pull --rebase")
 				end,
@@ -69,9 +67,9 @@ autocmd("BufWinEnter", {
 
 			-- NOTE: It allows me to easily set the branch i am pushing and any tracking
 			-- needed if i did not set the branch up correctly
-			{ "t", ":G push -u origin ", desc = "git push -u origin " },
-			{ "u", ":G reset @~<CR>", desc = "_un_commit" },
-			{ "@", ":G push -u origin @<CR>", desc = "git push -u origin @" },
+			{ "<leader>t", ":G push -u origin ", desc = "git push -u origin " },
+			{ "<leader>u", ":G reset @~<CR>", desc = "_un_commit" },
+			{ "<leader>@", ":G push -u origin @<CR>", desc = "git push -u origin @" },
 		}
 
 		whichkey.add(mappings, opts)
