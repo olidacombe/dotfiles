@@ -5,14 +5,14 @@ require("gitsigns").setup({
 		local gs = package.loaded.gitsigns
 
 		local function map(mappings)
-			local opts = {
-				buffer = bufnr,
-				silent = true,
-				noremap = true,
-				nowait = false,
-			}
+			for _, mapping in ipairs(mappings) do
+				mapping.buffer = bufnr
+				mapping.silent = true
+				mapping.noremap = true
+				mapping.nowait = false
+			end
 
-			whichkey.add(mappings, opts)
+			whichkey.add(mappings)
 		end
 
 		-- Navigation
