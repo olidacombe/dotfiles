@@ -39,11 +39,11 @@ if [ -d "$TARGET" ]; then
 fi
 mkdir -p "${HOME}/${BASE}"
 cd "${HOME}/${BASE}"
-if [ "$host" = "gitlab.com" ]; then # I have a special case at work currently
-    git clone "https://${host}/${path}"
-else
+# if [ "$host" = "gitlab.com" ]; then # I have a special case at work currently
+#     git clone "https://${host}/${path}"
+# else
     git clone "git@${host}:${path}"
-fi
+# fi
 
 if [ -n "${AUTO_TMUX_SESSIONIZE+x}" ]; then
     tmux-sessionizer "$(basename "$TARGET")"
