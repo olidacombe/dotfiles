@@ -1,5 +1,5 @@
-local whichkey = require("which-key")
-local wk = require("od.which-key")
+-- local whichkey = require("which-key")
+-- local wk = require("od.which-key")
 
 local conf = {
 	window = {
@@ -8,7 +8,7 @@ local conf = {
 	},
 }
 
-whichkey.setup(conf)
+-- whichkey.setup(conf)
 
 -- Normal mode mappings
 local mappings = {
@@ -33,7 +33,7 @@ local mappings = {
 	{ "<leader>g", ":echo resolve(expand('%:p'))<cr>", desc = "Show full path" },
 }
 
-wk.register_normal(mappings)
+-- wk.register_normal(mappings)
 
 -- Visual Mode mappings
 mappings = {
@@ -43,4 +43,4 @@ mappings = {
 	{ "Y", '"+y', desc = "Yank to Clipboard" },
 }
 
-wk.register_visual(mappings)
+-- wk.register_visual(mappings)
