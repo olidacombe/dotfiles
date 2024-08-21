@@ -1,14 +1,4 @@
-local whichkey = require("which-key")
 local wk = require("od.which-key")
-
-local conf = {
-	window = {
-		border = "single", -- none, single, double, shadow
-		position = "bottom", -- bottom, top
-	},
-}
-
-whichkey.setup(conf)
 
 -- Normal mode mappings
 local mappings = {
