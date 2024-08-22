@@ -1,4 +1,6 @@
 # completion
-if command -v gitpod &> /dev/null; then
-    . <(gitpod completion zsh)
-fi
+# FIXME
+# craaaazy slow!
+# if command -v gitpod &> /dev/null; then
+#     . <(gitpod completion zsh)
+# fi

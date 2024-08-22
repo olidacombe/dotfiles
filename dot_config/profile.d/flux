@@ -1,4 +1,6 @@
 # completion
-if command -v flux &> /dev/null; then
-    . <(flux completion zsh)
-fi
+# FIXME
+# craaaaaazy slow!
+# if command -v flux &> /dev/null; then
+#     . <(flux completion zsh)
+# fi
