@@ -153,7 +153,7 @@ if is_gitpod; then
     strip_comment crates-core.txt
 else
     strip_comment crates-{core,full}.txt
-fi | xargs cargo intall & disown
+fi | xargs cargo install & disown
 
 # Node
 [[ -f "${HOME}/.nvm/nvm.sh" ]] && . "${HOME}/.nvm/nvm.sh"
