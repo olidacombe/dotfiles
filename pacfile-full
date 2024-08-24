@@ -3,13 +3,10 @@ brave-browser
 btop
 calc
 cmake
-cowsay
 direnv
 docker
 docker-buildx
 fd
-figlet
-fzf
 gimp
 github-cli
 go
@@ -39,13 +36,10 @@ pyenv
 python-nrfutil
 python-pipenv
 python-pipx
-ripgrep
 strace
-tmux
 tree
 vim # provides xxd
 whois
-yq
 zoxide
 
 # zmk deps

@@ -1,0 +1,7 @@
+cargo-edit
+cargo-insta # snapshot testing 😎
+cargo-rdme
+cargo-watch
+dgira
+git-delta
+refalizer
