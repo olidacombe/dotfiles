@@ -11,7 +11,7 @@ function is_gitpod() {
 }
 
 function strip_comment() {
-	sed -e 's/#.*//' "$1" | awk NF
+    cat "$@" | sed -e 's/#.*//' | awk NF
 }
 
 function pac_install() {
@@ -91,15 +91,24 @@ if [ "$OS" = "$MACOS" ]; then
 else
     case "$DISTRO" in
         "arch")
-            pac_install $( strip_comment pacfile )
-            yes | yay -qS $( strip_comment yayfile ) <<< "A\nN\n"
+            if is_gitpod; then
+                pac_install $( strip_comment pacfile-core )
+                yes | yay -qS $( strip_comment yayfile-core ) <<< "A\nN\n"
+            else
+                pac_install $( strip_comment pacfile-{core,full} )
+                yes | yay -qS $( strip_comment yayfile-{core,full} ) <<< "A\nN\n"
+            fi
             ;;
         "debian")
             sudo apt-get update
-            apt_install $( strip_comment aptfile )
-            if ! pyenv virtualenv-init -; then
-                mkdir -p "$(pyenv root)/plugins"
-                git clone https://github.com/pyenv/pyenv-virtualenv.git "$(pyenv root)/plugins/pyenv-virtualenv"
+            if is_gitpod; then
+                apt_install $( strip_comment aptfile-core )
+            else
+                apt_install $( strip_comment aptfile-{core,full} )
+                if ! pyenv virtualenv-init -; then
+                    mkdir -p "$(pyenv root)/plugins"
+                    git clone https://github.com/pyenv/pyenv-virtualenv.git "$(pyenv root)/plugins/pyenv-virtualenv"
+                fi
             fi
             install_neovim_x64_linux
             ;;
@@ -139,7 +148,12 @@ command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv
  #
  #  This is SUPER GOOD: https://nickgerace.dev/post/how-to-manage-rust-tools-and-applications/
  #  get current list with `cargo install --list | rg -o "^\S*\S" > crates.txt`
-strip_comment crates.txt | xargs cargo install & disown
+
+if is_gitpod; then
+    strip_comment crates-core.txt
+else
+    strip_comment crates-{core,full}.txt
+fi | xargs cargo install & disown
 
 # Node
 [[ -f "${HOME}/.nvm/nvm.sh" ]] && . "${HOME}/.nvm/nvm.sh"
