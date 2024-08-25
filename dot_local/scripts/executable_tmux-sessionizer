@@ -56,7 +56,7 @@ if [[ -z "${TMUX+x}" ]] && [[ -z "$tmux_running" ]]; then
     if [[ -z "$remote_type" ]]; then
         tmux new-session -s "$selected_name" -c "$remote_location"
     else
-        tmux new-session -ds "$selected_name" "${SESSIONIZER_REMOTE_CONNECTORS_DIR}/$remote_type $remote_location || (echo Press Enter to exit; read -r)"
+        tmux new-session -s "$selected_name" "${SESSIONIZER_REMOTE_CONNECTORS_DIR}/$remote_type $remote_location || (echo Press Enter to exit; read -r)"
     fi
     exit 0
 fi
