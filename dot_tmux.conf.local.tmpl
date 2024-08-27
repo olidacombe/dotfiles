@@ -313,6 +313,7 @@ tmux_conf_battery_status_discharging="🔋"  # U+1F50B
 tmux_conf_theme_clock_colour="$tmux_conf_theme_colour_4"
 tmux_conf_theme_clock_style="24"
 
+# FIXME un-hardcode remote_repo_connectors.d
 set -s command-alias[69] "status-shower=if '[[ #{m:\"/Users/oliver.dacombe/.config/sessionizer/remote_repo_connectors.d/*,#{pane_start_command}} -ne 0 ]]' { set -g status off } { set -g status on }"
 set-hook -g client-session-changed status-shower
 
