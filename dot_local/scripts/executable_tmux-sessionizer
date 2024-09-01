@@ -35,7 +35,7 @@ get_repos() {
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(get_repos | fzf)
+    selected=$({ fzf; kill "$!"; } < <(get_repos))
 fi
 
 if [[ -z $selected ]]; then

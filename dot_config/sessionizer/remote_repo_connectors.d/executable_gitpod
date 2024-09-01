@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+GITPOD="${GITPOD_COMMAND:-"gitpod"}"
+
+$GITPOD workspace get-or-create "$1"
