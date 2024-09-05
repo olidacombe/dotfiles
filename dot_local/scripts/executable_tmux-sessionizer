@@ -37,7 +37,6 @@ if [[ $# -eq 1 ]]; then
 else
     selected=$({ fzf --bind 'ctrl-r:transform-query(
         S={q}
-        echo {q} >> $TMPDIR/fzfwtf.log
         if [[ "$S" =~ ^! ]]; then
             echo "${S:1}"
         elif [[ "$S" =~ ^\\^ ]]; then
