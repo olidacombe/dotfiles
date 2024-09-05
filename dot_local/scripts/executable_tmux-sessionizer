@@ -35,7 +35,18 @@ get_repos() {
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$({ fzf; kill "$!"; } < <(get_repos))
+    selected=$({ fzf --bind 'ctrl-r:transform-query(
+        S={q}
+        echo {q} >> $TMPDIR/fzfwtf.log
+        if [[ "$S" =~ ^! ]]; then
+            echo "${S:1}"
+        elif [[ "$S" =~ ^\\^ ]]; then
+            echo "!$S"
+        else
+            echo "^r: $S"
+        fi
+    )'; kill "$!"; } < <(get_repos))
+    # selected=$({ fzf --bind 'ctrl-r:transform-query(echo ^r:{q})'; kill "$!"; } < <(get_repos))
 fi
 
 if [[ -z $selected ]]; then
