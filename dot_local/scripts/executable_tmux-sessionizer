@@ -3,6 +3,7 @@
 set -euo pipefail
 
 REMOTE_REPO_PREFIX="r:"
+REMOTE_SESSION_PREFIX="r_"
 SESSIONIZER_DIRS=(~/od)
 SESSIONIZER_REMOTE_REPOS_FINDERS_DIR="${HOME}/.config/sessionizer/remote_repo_finders.d"
 SESSIONIZER_REMOTE_CONNECTORS_DIR="${HOME}/.config/sessionizer/remote_repo_connectors.d"
@@ -61,6 +62,9 @@ else
 fi)"
 
 selected_name=$(basename "$selected" | tr . _)
+if [[ -n "$remote_type" ]]; then
+    selected_name="${REMOTE_SESSION_PREFIX}$selected_name"
+fi
 tmux_running=$(pgrep tmux || true)
 
 if [[ -z "${TMUX+x}" ]] && [[ -z "$tmux_running" ]]; then
