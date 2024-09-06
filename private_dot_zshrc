@@ -84,8 +84,9 @@ export IS_GITPOD="${${GITPOD_WORKSPACE_URL+false}:-true}"
 export ZSH_TMUX_AUTOSTART="true"
 export ZSH_TMUX_AUTOCONNECT="$IS_GITPOD"
 export ZSH_TMUX_AUTOQUIT="$IS_GITPOD"
-if [ -n "${GITPOD_REPO_ROOTS:+x}" ]; then
-    export ZSH_TMUX_DEFAULT_SESSION_NAME="$(basename "$GITPOD_REPO_ROOTS")"
+if [ -n "${GITPOD_REPO_ROOT:+x}" ]; then
+    export ZSH_TMUX_DEFAULT_SESSION_NAME="$(basename "$GITPOD_REPO_ROOT")"
+    cd "$GITPOD_REPO_ROOT"
 fi
 
 export NVM_LAZY_LOAD=true
