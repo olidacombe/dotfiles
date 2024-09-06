@@ -47,7 +47,6 @@ else
             echo "^r: $S"
         fi
     )'; kill "$!"; } < <(get_repos))
-    # selected=$({ fzf --bind 'ctrl-r:transform-query(echo ^r:{q})'; kill "$!"; } < <(get_repos))
 fi
 
 if [[ -z $selected ]]; then
