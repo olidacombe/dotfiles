@@ -2,7 +2,11 @@
 
 set -euo pipefail
 
+REMOTE_REPO_PREFIX="r:"
+REMOTE_SESSION_PREFIX="r_"
 SESSIONIZER_DIRS=(~/od)
+SESSIONIZER_REMOTE_REPOS_FINDERS_DIR="${HOME}/.config/sessionizer/remote_repo_finders.d"
+SESSIONIZER_REMOTE_CONNECTORS_DIR="${HOME}/.config/sessionizer/remote_repo_connectors.d"
 SESSIONIZER_DIRS_CONFIG="${HOME}/.config/sessionizer/dirs"
 if [ -f "$SESSIONIZER_DIRS_CONFIG" ]; then
     # :'( only bash >= 4.4
@@ -15,31 +19,68 @@ if [ -f "$SESSIONIZER_DIRS_CONFIG" ]; then
     export SESSIONIZER_DIRS
 fi
 
-get_git_repos() {
+get_local_repos() {
     find "${SESSIONIZER_DIRS[@]/#\~/${HOME}}" -mindepth 1 -maxdepth 5 -name .terraform -prune -o -name .git -print0 | xargs -0 dirname
+}
+
+get_remote_repos() {
+    # TODO only executable files - but have to split off for linux/mac https://stackoverflow.com/a/4458361
+    find "$SESSIONIZER_REMOTE_REPOS_FINDERS_DIR" -type f -exec {} \; | sed -e "s/^/$REMOTE_REPO_PREFIX/"
+}
+
+get_repos() {
+    get_local_repos
+    get_remote_repos
 }
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(get_git_repos | fzf)
+    # shellcheck disable=SC2016
+    selected=$({ fzf --bind 'ctrl-r:transform-query(
+        S={q}
+        if [[ "$S" =~ ^! ]]; then
+            echo "${S:1}"
+        elif [[ "$S" =~ ^\\^ ]]; then
+            echo "!$S"
+        else
+            echo "^r: $S"
+        fi
+    )'; kill "$!"; } < <(get_repos))
 fi
 
 if [[ -z $selected ]]; then
     exit 0
 fi
 
+read -r remote_location remote_type <<< "$(
+if [[ "$selected" = "$REMOTE_REPO_PREFIX"* ]]; then
+    sed -e 's/\([^/]*\)\/\(.*\)/\2 \1/' <<< "${selected:${#REMOTE_REPO_PREFIX}}"
+else
+    echo "$selected"
+fi)"
+
 selected_name=$(basename "$selected" | tr . _)
+if [[ -n "$remote_type" ]]; then
+    selected_name="${REMOTE_SESSION_PREFIX}$selected_name"
+fi
 tmux_running=$(pgrep tmux || true)
 
-# if [[ -z "${TMUX+x}" ]] && [[ -z "$tmux_running" ]]; then
 if [[ -z "${TMUX+x}" ]] && [[ -z "$tmux_running" ]]; then
-    tmux new-session -s "$selected_name" -c "$selected"
+    if [[ -z "$remote_type" ]]; then
+        tmux new-session -s "$selected_name" -c "$remote_location"
+    else
+        tmux new-session -s "$selected_name" "${SESSIONIZER_REMOTE_CONNECTORS_DIR}/$remote_type $remote_location || (echo Press Enter to exit; read -r)"
+    fi
     exit 0
 fi
 
 if ! tmux has-session -t="$selected_name" 2> /dev/null; then
-    tmux new-session -ds "$selected_name" -c "$selected"
+    if [[ -z "$remote_type" ]]; then
+        tmux new-session -ds "$selected_name" -c "$remote_location"
+    else
+        tmux new-session -ds "$selected_name" "${SESSIONIZER_REMOTE_CONNECTORS_DIR}/$remote_type $remote_location || (echo Press Enter to exit; read -r)"
+    fi
 fi
 
 if [[ -z "${TMUX+x}" ]]; then

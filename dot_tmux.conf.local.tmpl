@@ -313,6 +313,17 @@ tmux_conf_battery_status_discharging="🔋"  # U+1F50B
 tmux_conf_theme_clock_colour="$tmux_conf_theme_colour_4"
 tmux_conf_theme_clock_style="24"
 
+set -s command-alias[69] "status-shower=if '[[ #{m:\"${HOME}/.config/sessionizer/remote_repo_connectors.d/*,#{pane_start_command}} -ne 0 ]]' \
+{ \
+    set -g status off; \
+    set prefix None ; \
+    set key-table off ; \
+} { \
+    set -g status on; \
+    set -u prefix ; \
+    set -u key-table ; \
+}"
+set-hook -g client-session-changed status-shower
 
 # -- clipboard -----------------------------------------------------------------
 
@@ -413,23 +424,30 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 
 # note: On MacOS, set layout to U.S.
 bind r source-file ~/.tmux.conf
+{{ range $keyTable := list "root" "off" }}
+{{ if eq $.chezmoi.os "darwin" -}}
+bind-key -T {{ $keyTable }} ƒ run-shell "tmux neww -n sessionizer tmux-sessionizer"
+bind-key -T {{ $keyTable }} "å" run-shell "tpoon push"
+bind-key -T {{ $keyTable }} "´" run-shell "tmux neww -n tpoon tpoon edit"
+bind-key -T {{ $keyTable }} "ﬂ" switch-client -l
+bind-key -T {{ $keyTable }} "˘" new-window -c "#{pane_current_path}"
+{{ else if eq $.chezmoi.os "linux" -}}
+bind-key -T {{ $keyTable }} "M-f" run-shell "tmux neww -n sessionizer tmux-sessionizer"
+bind-key -T {{ $keyTable }} "M-a" run-shell "tpoon push"
+bind-key -T {{ $keyTable }} "M-e" run-shell "tmux neww -n tpoon tpoon edit"
+bind-key -T {{ $keyTable }} "M-^" switch-client -l
+bind-key -T {{ $keyTable }} "M->" new-window -c "#{pane_current_path}"
+{{ end -}}
+bind-key -T {{ $keyTable }} "S-F5" run-shell "tpoon 1"
+bind-key -T {{ $keyTable }} "S-F6" run-shell "tpoon 2"
+bind-key -T {{ $keyTable }} "S-F7" run-shell "tpoon 3"
+bind-key -T {{ $keyTable }} "S-F8" run-shell "tpoon 4"
+{{- end }}
 {{ if eq .chezmoi.os "darwin" -}}
-bind-key -n ƒ run-shell "tmux neww -n sessionizer tmux-sessionizer"
-bind-key -n "å" run-shell "tpoon push"
-bind-key -n "´" run-shell "tmux neww -n tpoon tpoon edit"
-bind-key -n "ﬂ" switch-client -l
 bind-key -n "˘" new-window -c "#{pane_current_path}"
 {{ else if eq .chezmoi.os "linux" -}}
-bind-key -n "M-f" run-shell "tmux neww -n sessionizer tmux-sessionizer"
-bind-key -n "M-a" run-shell "tpoon push"
-bind-key -n "M-e" run-shell "tmux neww -n tpoon tpoon edit"
-bind-key -n "M-^" switch-client -l
 bind-key -n "M->" new-window -c "#{pane_current_path}"
 {{ end -}}
-bind-key -n "S-F5" run-shell "tpoon 1"
-bind-key -n "S-F6" run-shell "tpoon 2"
-bind-key -n "S-F7" run-shell "tpoon 3"
-bind-key -n "S-F8" run-shell "tpoon 4"
 bind-key -n "S-F9" select-window -t 1
 bind-key -n "S-F10" select-window -t 2
 bind-key -n "S-F11" select-window -t 3

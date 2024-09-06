@@ -80,9 +80,13 @@ DISABLE_AUTO_UPDATE="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-export ZSH_TMUX_AUTOSTART="${${GITPOD_WORKSPACE_URL+false}:-true}"
-export ZSH_TMUX_AUTOCONNECT=false
-export ZSH_TMUX_AUTOQUIT=false
+export IS_GITPOD="${${GITPOD_WORKSPACE_URL+false}:-true}"
+export ZSH_TMUX_AUTOSTART="true"
+export ZSH_TMUX_AUTOCONNECT="$IS_GITPOD"
+export ZSH_TMUX_AUTOQUIT="$IS_GITPOD"
+if [ -n "${GITPOD_REPO_ROOTS:+x}" ]; then
+    export ZSH_TMUX_DEFAULT_SESSION_NAME="$(basename "$GITPOD_REPO_ROOTS")"
+fi
 
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true

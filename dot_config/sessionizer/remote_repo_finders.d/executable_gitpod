@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+GITPOD="${GITPOD_COMMAND:-"gitpod"}"
+CACHE="${HOME}/tmp/gitpod-repos"
+
+if [ -f "$CACHE" ]; then
+    cat "$CACHE"
+else
+    mkdir -p "$(dirname "$CACHE")"
+    touch "$CACHE"
+fi
+
+TEMPY="$(mktemp)"
+
+cleanup() {
+    rm -f "$TEMPY"
+}
+trap cleanup EXIT
+
+$GITPOD repo list -q | awk '{ print "gitpod/"$2 }' | sort | uniq > "$TEMPY"
+comm -2 -3 "$TEMPY" "$CACHE"
