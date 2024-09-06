@@ -20,7 +20,7 @@ elif [ "$OS" = "Linux" ]; then
 
     # source some shell plugins for fzf
     while read -r COMPLETION; do
-        [ -f "$COMPLETION" ] && echo source "$COMPLETION"
+        [ -f "$COMPLETION" ] && source "$COMPLETION"
     done <<EOF
 /usr/share/fzf/completion.zsh
 /usr/share/fzf/key-bindings.zsh
