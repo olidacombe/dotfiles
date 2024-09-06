@@ -12,7 +12,7 @@ require("mason-lspconfig").setup({
 		-- 'lua_ls', -- sadly broken or arm
 		"svelte",
 		"tailwindcss",
-		"tsserver",
+		"ts_ls",
 		"yamlls",
 	},
 	handlers = {
@@ -26,7 +26,8 @@ require("mason-lspconfig").setup({
 	},
 })
 
-lsp.preset("recommended")
+-- deprecated
+-- lsp.preset("recommended")
 
 lsp.configure("pyright", {
 	settings = {
