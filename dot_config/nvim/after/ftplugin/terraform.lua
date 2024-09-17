@@ -5,4 +5,4 @@ vim.keymap.set("n", "<leader><leader>p", ":TerrabastardExtractIamPolicy<cr>", {
     silent = true,
 })
 
-vim.keymap.set("n", "<leader>p", ":! terraform fmt %<cr>")
+vim.keymap.set("n", "<leader>F", ":! terraform fmt %<cr>")
