@@ -1,3 +1,9 @@
+vim.filetype.add({
+    extension = {
+        tf = "terraform"
+    }
+})
+
 M = {}
 
 local out = {}

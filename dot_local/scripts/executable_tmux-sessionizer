@@ -46,7 +46,7 @@ else
         else
             echo "^r: $S"
         fi
-    )'; kill "$!"; } < <(get_repos))
+    )'; kill "$!" 2>/dev/null || true; } < <(get_repos))
 fi
 
 if [[ -z $selected ]]; then
