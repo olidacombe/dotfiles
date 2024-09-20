@@ -31,10 +31,7 @@ lsp.preset({
     call_servers = 'local',
     configure_diagnostics = true,
     setup_servers_on_start = true,
-    set_lsp_keymaps = {
-        preserve_mappings = false,
-        omit = {},
-    },
+    set_lsp_keymaps = { omit = { '<C-k>' } },
     manage_nvim_cmp = {
         set_sources = 'recommended',
         set_basic_mappings = true,
