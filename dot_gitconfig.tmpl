@@ -1,31 +1,34 @@
 [http]
-	postBuffer = 524288000
-	maxRequestBuffer = 100M
+    postBuffer = 524288000
+    maxRequestBuffer = 100M
 [user]
 {{- $signingKey := dig "gpg" "signing" "key" false . }}
 {{- if $signingKey }}
-        signingKey = {{ $signingKey | quote }}
+    signingKey = {{ $signingKey | quote }}
 {{- end }}
-	name = Oli Dacombe
-	email = {{ .email }}
+    name = Oli Dacombe
+    email = {{ .email }}
 {{- if $signingKey }}
 [commit]
-	gpgSign = true
+    gpgSign = true
 {{- end }}
 [alias]
-	st = status
-	ci = commit
-	br = branch
-	co = checkout
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
 [gpg]
-	program = gpg
+    program = gpg
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
 [init]
-	defaultBranch = main
+    defaultBranch = main
+{{- if not (empty .git.templateDir) }}
+    templateDir = {{ .git.templateDir | quote }}
+{{- end }}
 [core]
     pager = delta
 

@@ -8,4 +8,7 @@
     email = {{ $email | quote }}
 [data.gpg.signing]
     key = {{ $gpgSigningKey | quote }}
-{{- end -}}
+{{ end -}}
+{{- $gitTemplateDir := promptString "git templateDir (optional)" "" -}}
+[data.git]
+    templateDir = {{ $gitTemplateDir | quote }}
