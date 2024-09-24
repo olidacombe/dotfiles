@@ -117,6 +117,9 @@ else
     esac
 fi
 
+# we have neovim by now, so pre-install plugins...
+nvim --headless "+Lazy! install" +qa & disown
+
 # Setup fzf a bit more
 # $(brew --prefix)/opt/fzf/install
 
