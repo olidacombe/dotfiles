@@ -9,6 +9,10 @@
 [data.gpg.signing]
     key = {{ $gpgSigningKey | quote }}
 {{ end -}}
-{{- $gitTemplateDir := promptString "git templateDir (optional)" "" -}}
 [data.git]
+{{- if env "GITPOD_GIT_USER_EMAIL" -}}
+    templateDir = ""
+{{- else -}}
+{{- $gitTemplateDir := promptString "git templateDir (optional)" "" -}}
     templateDir = {{ $gitTemplateDir | quote }}
+{{ end -}}
