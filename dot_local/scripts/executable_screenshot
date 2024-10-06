@@ -3,4 +3,6 @@
 set -euo pipefail
 
 FILENAME="screenshot-`date +%F-%T`"
-grim -g "$(slurp)" "${XDG_PICTURES_DIR}/${FILENAME}.png"
+TARGET_DIR="${XDG_PICTURES_DIR:-${HOME}/Pictures}"
+mkdir -p "${TARGET_DIR}"
+grim -g "$(slurp)" "${TARGET_DIR}/${FILENAME}.png"
