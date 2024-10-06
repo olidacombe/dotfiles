@@ -261,7 +261,7 @@ if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then . ${HOME}/.nix-profile
 
 # keychain
 if [ "$OS" = "Linux" ] && command -v keychain &>/dev/null; then
-    _evalcache keychain --eval --quiet id_ed25519 --agents ssh,gpg
+    eval $(keychain --eval --quiet id_ed25519 --agents ssh,gpg)
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
