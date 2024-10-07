@@ -49,7 +49,7 @@
 {{- if eq .chezmoi.os "darwin" }}
 [credential]
     helper = osxkeychain
-{{- elif env "GITPOD_GIT_USER_EMAIL" }}
+{{- else if env "GITPOD_GIT_USER_EMAIL" }}
 [credential]
     helper = /usr/bin/gp credential-helper
 {{- end }}
