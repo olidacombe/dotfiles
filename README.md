@@ -6,6 +6,11 @@ sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh
 
 ## TODO
 
++ lsp-zero `.profile` deprecation nag
++ migrate from simrat/rust-tools to [rustaceanvim](https://github.com/mrcjkb/rustaceanvim)
++ nested tmux
+    - [clipboard](https://stackoverflow.com/questions/60923257/tmux-how-to-copy-text-between-nested-remote-ssh-session-and-local-machine)
+    - pass-through things like new tab shortcut, and tab change
 + a branch name maker from arbitrary message (satisfy [this](https://git-scm.com/docs/git-check-ref-format))
 + `titgrep` - grep but keep first (title) line
     - `bodgrep` - grep but unconditionally skip first line
