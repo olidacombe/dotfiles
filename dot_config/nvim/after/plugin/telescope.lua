@@ -85,8 +85,8 @@ telescope.setup({
             "%.class",
             "%.pdf",
             "%.mkv",
-            "%.mp4",
             "%.zip",
+            "%.mp4",
         },
         mappings = {
             i = {
