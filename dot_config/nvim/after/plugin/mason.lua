@@ -1,6 +1,6 @@
 require('mason-tool-installer').setup {
     ensure_installed = {
-        'codelldb'
+        'codelldb',
     },
     run_on_start = true,
 }

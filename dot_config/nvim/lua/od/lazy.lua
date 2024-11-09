@@ -264,26 +264,10 @@ local plugins = {
         dependencies = "neovim/nvim-lspconfig",
     },
 
-    --                  ____   __ __  _____ ______
-    --                 |    \ |  T  T/ ___/|      T
-    --                 |  D  )|  |  (   \_ |      |
-    --                 |    / |  |  |\__  Tl_j  l_j
-    --                 |    \ |  :  |/  \ |  |  |
-    --                 |  .  Yl     |\    |  |  |
-    --                 l__j\_j \__,_j \___j  l__j
-    --
-    --  ______   ___    ___   _      _____
-    -- |      T /   \  /   \ | T    / ___/
-    -- |      |Y     YY     Y| |   (   \_
-    -- l_j  l_j|  O  ||  O  || l___ \__  T
-    --   |  |  |     ||     ||     T/  \ |
-    --   |  |  l     !l     !|     |\    |
-    --   l__j   \___/  \___/ l_____j \___j
-    --
     {
-        -- "simrat39/rust-tools.nvim", -- until [my PR](https://github.com/simrat39/rust-tools.nvim/pull/431) gets merged..?
-        "olidacombe/rust-tools.nvim",
-        branch = "allow_override_url_opener",
+        'mrcjkb/rustaceanvim',
+        version = '^5', -- Recommended
+        lazy = false,   -- This plugin is already lazy
     },
 
     {

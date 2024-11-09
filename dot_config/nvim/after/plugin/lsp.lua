@@ -7,8 +7,7 @@ require("mason-lspconfig").setup({
         "eslint",
         "graphql",
         "pyright",
-        "ruff_lsp",
-        "rust_analyzer",
+        "ruff",
         -- 'lua_ls', -- sadly broken or arm
         "svelte",
         "tailwindcss",
