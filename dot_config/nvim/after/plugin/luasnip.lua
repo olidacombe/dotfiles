@@ -254,6 +254,35 @@ ls.add_snippets(nil, {
                 }
             )
         ),
+        -- Newtype(Vec<T>)
+        s(
+            { trig = "newvec", docstring = "Newtype(Vec<T>)" },
+            fmt(
+                [[
+                struct {}(Vec<{}>);
+
+                impl IntoIterator for {} {{
+                    type Item = {};
+                    type IntoIter = std::vec::IntoIter<Self::Item>;
+                    fn into_iter(self) -> Self::IntoIter {{
+                        self.0.into_iter()
+                    }}
+                }}
+
+                impl<'a> IntoIterator for &'a {} {{
+                    type Item = &'a {};
+                    type IntoIter = std::slice::Iter<'a, {}>;
+                    fn into_iter(self) -> Self::IntoIter {{
+                        self.0.iter()
+                    }}
+                }}
+            ]],
+                {
+                    i(1), i(2), extras.rep(1), extras.rep(1), extras.rep(2), extras.rep(2), extras.rep(2)
+                }
+            )
+        ),
+
         -- OnceLock
         s(
             { trig = "once", docstring = "OnceLock" },
