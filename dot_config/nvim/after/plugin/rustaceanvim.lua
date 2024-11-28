@@ -31,6 +31,9 @@ vim.g.rustaceanvim = {
                 { "<leader>xm", function() vim.cmd.RustLsp("expandMacro") end, { desc = "macro" } },
             })
         end
+    },
+    tools = {
+        test_executor = "background"
     }
 }
 
