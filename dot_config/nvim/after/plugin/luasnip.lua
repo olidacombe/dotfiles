@@ -278,7 +278,7 @@ ls.add_snippets(nil, {
                 }}
             ]],
                 {
-                    i(1), i(2), extras.rep(1), extras.rep(1), extras.rep(2), extras.rep(2), extras.rep(2)
+                    i(1), i(2), extras.rep(1), extras.rep(2), extras.rep(1), extras.rep(2), extras.rep(2)
                 }
             )
         ),
