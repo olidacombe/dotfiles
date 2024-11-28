@@ -3,6 +3,8 @@ local M = {}
 M.on_attach = function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+
     if client.name == "eslint" then
         client.stop()
         return
@@ -20,8 +22,8 @@ M.on_attach = function(client, bufnr)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
     vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
+    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
     vim.keymap.set("n", "<leader>lr", ":LspRestart<cr>", opts)
     vim.keymap.set("n", "<leader>li", ":LspInfo<cr>", opts)
     vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)

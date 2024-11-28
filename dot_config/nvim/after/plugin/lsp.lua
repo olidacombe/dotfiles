@@ -1,6 +1,8 @@
 local lsp = require("lsp-zero")
 local on_attach = require("od.lsp").on_attach
 
+require("config.rustaceanvim")
+
 require("mason").setup({})
 require("mason-lspconfig").setup({
     ensure_installed = {
