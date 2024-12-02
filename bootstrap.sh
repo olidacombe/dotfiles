@@ -77,7 +77,15 @@ if command -v chezmoi &> /dev/null; then
         echo chezmoi found
         pushd "$(chezmoi source-path)"
 else
-        GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
+        if is_gitpod; then
+            cp /etc/resolv.conf{,.bak}
+            echo nameserver 8.8.8.8 > /etc/resolv.conf
+            GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
+            # TODO?
+            # mv /etc/resolv.conf{.bak,}
+        else
+            GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
+        fi
         cd "$HOME"
         [ -z "$GET_CHEZMOI" ] && err "error fetching \`chezmoi\` install script, if it's a cert trust error, consider \`brew install curl\` first?"
 
