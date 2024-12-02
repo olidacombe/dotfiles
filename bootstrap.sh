@@ -78,11 +78,11 @@ if command -v chezmoi &> /dev/null; then
         pushd "$(chezmoi source-path)"
 else
         if is_gitpod; then
-            cp /etc/resolv.conf{,.bak}
-            echo nameserver 8.8.8.8 > /etc/resolv.conf
+            sudo cp /etc/resolv.conf{,.bak}
+            echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
             GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
             # TODO?
-            # mv /etc/resolv.conf{.bak,}
+            # sudo mv /etc/resolv.conf{.bak,}
         else
             GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
         fi
