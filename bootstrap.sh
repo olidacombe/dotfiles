@@ -86,13 +86,13 @@ else
         [ -z "$GET_CHEZMOI" ] && err "error fetching \`chezmoi\` install script, if it's a cert trust error, consider \`brew install curl\` first?"
 
         sh -c "$GET_CHEZMOI" -- init --apply olidacombe || err "chezmoi install failed"
-        if is_gitpod; then
-            sudo mv /etc/resolv.conf{.bak,}
-        fi
         pushd "$("${HOME}/bin/chezmoi" source-path)"
 fi
 
 if [ "$OS" = "$MACOS" ]; then
+    if is_gitpod && [ -f "/etc/resolv.conf.bak"]; then
+        sudo mv /etc/resolv.conf{.bak,}
+    fi
 	echo running \`brew bundle\`
 	brew bundle & disown
 else
@@ -190,6 +190,9 @@ if is_gitpod; then
 fi
 
 # let's leave it here for the moment
+if is_gitpod && [ -f "/etc/resolv.conf.bak"]; then
+    sudo mv /etc/resolv.conf{.bak,}
+fi
 exit 0
 
 # Install ESP dev toolchain (`espup` installed above)
