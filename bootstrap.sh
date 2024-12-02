@@ -81,8 +81,7 @@ else
             sudo cp /etc/resolv.conf{,.bak}
             echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
             GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
-            # TODO?
-            # sudo mv /etc/resolv.conf{.bak,}
+            sudo mv /etc/resolv.conf{.bak,}
         else
             GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
         fi
