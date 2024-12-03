@@ -351,7 +351,7 @@ ls.add_snippets(nil, {
                     {}{}
                 }}
 
-                type Result<T> = std::result::Result<T, Error>;
+                pub type Result<T> = std::result::Result<T, Error>;
             ]], {
                 c(1, {
                     t(""),
