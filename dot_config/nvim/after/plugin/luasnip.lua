@@ -38,7 +38,7 @@ end, {
     desc = "Reload Luasnips",
 })
 
-local c, d, i, f, s, t = ls.choice_node, ls.dynamic_node, ls.insert_node, ls.function_node, ls.s, ls.text_node
+local c, d, i, f, s, t, isn = ls.choice_node, ls.dynamic_node, ls.insert_node, ls.function_node, ls.s, ls.text_node, ls.indent_snippet_node
 local dl, l = extras.dynamic_lambda, extras.lambda
 local fmt = require("luasnip.extras.fmt").fmt
 
@@ -341,6 +341,29 @@ ls.add_snippets(nil, {
                 }
             )
         ),
+        -- module-level thiserror
+        s(
+            { trig = "thiserror", docstring="Module-level thiserror `pub enum Error`"},
+            fmt(
+                [[
+                #[derive(Debug, Error)]
+                pub enum Error {{
+                    {}{}
+                }}
+
+                type Result<T> = std::result::Result<T, Error>;
+            ]], {
+                c(1, {
+                    t(""),
+                    t({
+                        "// TODO lots more luasnip goodies for these",
+                        " #[error(transparent)]",
+                        " BoxError(#[from] Box<dyn std::error::Error + Send + Sync>),",
+                        "",
+                    }),
+                }), i(0)
+            })
+        )
     },
     sh = sh_snips,
     template = {
