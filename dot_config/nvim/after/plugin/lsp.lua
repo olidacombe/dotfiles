@@ -144,7 +144,8 @@ cmp.setup({
         -- Stop overriding my beautifil luasnip "next"
         ["<C-N>"] = cmp.config.disable,
         -- Stop enter from triggering things
-        ["<CR>"] = cmp.config.disable,    }),
+        ["<CR>"] = cmp.config.disable,
+    }),
     sources = {
         { name = "path" },
         { name = "nvim_lsp" },

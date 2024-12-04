@@ -363,7 +363,12 @@ ls.add_snippets(nil, {
                     }),
                 }), i(0)
             })
-        )
+        ),
+        -- tracing-subscriber
+        s(
+            { trig = "tracing-subscriber", docstring = "tracing_subscriber::fmt::init()"},
+            fmt("tracing_subscriber::fmt::init();\n", {})
+        ),
     },
     sh = sh_snips,
     template = {
