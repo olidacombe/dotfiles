@@ -6,6 +6,7 @@ sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh
 
 ## TODO
 
++ [tinymist](https://github.com/Myriad-Dreamin/tinymist)
 + lsp-zero `.profile` deprecation nag
 + migrate from simrat/rust-tools to [rustaceanvim](https://github.com/mrcjkb/rustaceanvim)
 + nested tmux
