@@ -101,6 +101,9 @@ local plugins = {
     -- Neodev
     "folke/neodev.nvim",
 
+    -- Copilot
+    { "github/copilot.vim",    lazy = false },
+
     -- Gitlinker
     {
         "ruifm/gitlinker.nvim",
@@ -221,7 +224,7 @@ local plugins = {
     },
 
     -- UFO nice folding
-    { "kevinhwang91/nvim-ufo",     dependencies = "kevinhwang91/promise-async" },
+    { "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
 
     -- [LSP](https://github.com/VonHeikemen/lsp-zero.nvim)
     {
@@ -319,7 +322,7 @@ local plugins = {
     "folke/which-key.nvim",
 
     -- wilder.nvim
-    { "gelguy/wilder.nvim", build = ":UpdateRemotePlugins" },
+    { "gelguy/wilder.nvim",        build = ":UpdateRemotePlugins" },
 
     -- Install tools via Mason which aren't LSP servers
     "WhoIsSethDaniel/mason-tool-installer.nvim",

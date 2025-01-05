@@ -1,0 +1,4 @@
+-- require('copilot').setup({
+--     -- suggestion = { enabled = false },  -- disable Copilot suggestions
+--     -- panel = { enabled = false },  -- disable Copilot panel
+-- })

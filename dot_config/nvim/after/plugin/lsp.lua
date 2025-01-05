@@ -147,6 +147,7 @@ cmp.setup({
         ["<CR>"] = cmp.config.disable,
     }),
     sources = {
+        { name = "copilot", group_index = 2 },
         { name = "path" },
         { name = "nvim_lsp" },
         { name = "buffer",  keyword_length = 3 },
