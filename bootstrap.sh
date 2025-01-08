@@ -80,13 +80,16 @@ else
         if is_gitpod; then
             sudo cp /etc/resolv.conf{,.bak}
             echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
+            brew install chezmoi
+            chezmoi init --apply olidacombe
+            pushd "$(chezmoi source-path)"
+        else
+            GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
+            cd "$HOME"
+            [ -z "$GET_CHEZMOI" ] && err "error fetching \`chezmoi\` install script, if it's a cert trust error, consider \`brew install curl\` first?"
+            sh -c "$GET_CHEZMOI" -- init --apply olidacombe || err "chezmoi install failed"
+            pushd "$("${HOME}/bin/chezmoi" source-path)"
         fi
-        GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
-        cd "$HOME"
-        [ -z "$GET_CHEZMOI" ] && err "error fetching \`chezmoi\` install script, if it's a cert trust error, consider \`brew install curl\` first?"
-
-        sh -c "$GET_CHEZMOI" -- init --apply olidacombe || err "chezmoi install failed"
-        pushd "$("${HOME}/bin/chezmoi" source-path)"
 fi
 
 if [ "$OS" = "$MACOS" ]; then
