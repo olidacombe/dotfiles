@@ -79,9 +79,8 @@ if command -v chezmoi &> /dev/null; then
 else
         if is_gitpod; then
             brew install chezmoi
-            # TODO probably clean up
-            # sudo cp /etc/resolv.conf{,.bak}
-            # echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
+            sudo cp /etc/resolv.conf{,.bak}
+            echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
             chezmoi init --apply olidacombe
             pushd "$(chezmoi source-path)"
         else
