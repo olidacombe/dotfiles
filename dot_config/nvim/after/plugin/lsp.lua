@@ -113,17 +113,6 @@ lsp.configure("svelte", {
 
 lsp.on_attach(on_attach)
 
--- extend default capabilities with those required by ufo
-local base_caps = require("cmp_nvim_lsp").default_capabilities()
-local folding_caps = vim.lsp.protocol.make_client_capabilities()
-folding_caps.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-}
-local capabilities = vim.tbl_deep_extend("force", base_caps, folding_caps)
-lsp.set_server_config({
-    capabilities = capabilities,
-})
 
 -- configure neodev before lsp
 require("neodev").setup({
