@@ -264,6 +264,11 @@ if [ "$OS" = "Linux" ] && command -v keychain &>/dev/null; then
     eval $(keychain --eval --quiet id_ed25519 --agents ssh,gpg)
 fi
 
+if [ -d "${HOME}/.jenv/bin" ]; then
+    export PATH="${HOME}/.jenv/bin:${PATH}"
+    eval "$(jenv init -)"
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
