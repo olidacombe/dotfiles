@@ -111,6 +111,7 @@ plugins=(
 	github
 	golang
 	ipfs
+    jenv
     kubectl
     kubectx
 	nmap
@@ -262,11 +263,6 @@ if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then . ${HOME}/.nix-profile
 # keychain
 if [ "$OS" = "Linux" ] && command -v keychain &>/dev/null; then
     eval $(keychain --eval --quiet id_ed25519 --agents ssh,gpg)
-fi
-
-if [ -d "${HOME}/.jenv/bin" ]; then
-    export PATH="${HOME}/.jenv/bin:${PATH}"
-    eval "$(jenv init -)"
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
