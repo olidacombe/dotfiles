@@ -5,6 +5,8 @@ set -euo pipefail
 GITPOD="${GITPOD_COMMAND:-"gitpod"}"
 CACHE="${HOME}/tmp/gitpod-repos"
 
+command -v "$GITPOD" >/dev/null 2>&1 || exit 0
+
 if [ -f "$CACHE" ]; then
     cat "$CACHE"
 else

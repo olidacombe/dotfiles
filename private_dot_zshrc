@@ -92,6 +92,11 @@ fi
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
 
+# this needs to be set earlier than the stuff in ~/.config/profile.d/path
+if [ -d "${HOME}/.local/scripts" ]; then
+   export PATH="${PATH}:${HOME}/.local/scripts"
+fi
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/

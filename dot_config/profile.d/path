@@ -2,9 +2,10 @@ if [ -d "${HOME}/.local/bin" ]; then
     export PATH="${PATH}:${HOME}/.local/bin"
 fi
 
-if [ -d "${HOME}/.local/scripts" ]; then
-    export PATH="${PATH}:${HOME}/.local/scripts"
-fi
+# this needs to be set before .zshrc's plugins=(...)
+#if [ -d "${HOME}/.local/scripts" ]; then
+#    export PATH="${PATH}:${HOME}/.local/scripts"
+#fi
 
 if [ -d "${HOME}/bin" ]; then
     export PATH="${PATH}:${HOME}/bin"
