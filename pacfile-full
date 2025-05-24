@@ -39,6 +39,9 @@ python-pipenv
 python-pipx
 strace
 texlive-binextra
+texlive-fontsextra
+texlive-fontsrecommended
+texlive-latexextra
 tree
 vim # provides xxd
 whois
