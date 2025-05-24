@@ -38,6 +38,7 @@ python-nrfutil
 python-pipenv
 python-pipx
 strace
+texlive-binextra
 tree
 vim # provides xxd
 whois
