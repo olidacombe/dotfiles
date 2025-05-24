@@ -30,6 +30,7 @@ nmap
 nvm
 obsidian # hmmm not sure yet
 openbsd-netcat
+pandoc-cli
 ponysay
 pv
 pyenv
@@ -44,18 +45,18 @@ zoxide
 
 # zmk deps
 arm-none-eabi-gcc
-git
-cmake
-ninja
-gperf
 ccache
+cmake
 dfu-util
 dtc
-wget
+file
+git
+gperf
+make
+ninja
 python-pip
 python-setuptools
 python-wheel
 tk
+wget
 xz
-file
-make
