@@ -6,6 +6,7 @@ sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh
 
 ## TODO
 
++ [quarto](https://quarto.org/)
 + a `<leader>r` to run a script within markdown bash code block
 + [tinymist](https://github.com/Myriad-Dreamin/tinymist)
 + lsp-zero `.profile` deprecation nag
