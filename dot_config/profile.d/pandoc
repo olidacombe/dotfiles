@@ -1,1 +1,2 @@
-alias pandf="pandoc --lua-filter ${HOME}/.pandoc/ext/diagram/diagram.lua --pdf-engine=xelatex"
+export TEXINPUTS=${HOME}/.config/pandoc/themes/dracula//:
+alias pandf="pandoc --lua-filter ${HOME}/.pandoc/ext/diagram/diagram.lua --pdf-engine=xelatex --defaults ${HOME}/.config/pandoc/themes/dracula/dracula.yaml"
