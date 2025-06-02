@@ -1,0 +1,1 @@
+alias pandf="pandoc --lua-filter ${HOME}/.pandoc/ext/diagram/diagram.lua --pdf-engine=xelatex"
