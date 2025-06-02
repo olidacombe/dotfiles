@@ -1,3 +1,13 @@
+local pickers = require('telescope.pickers')
+local finders = require('telescope.finders')
+local conf = require('telescope.config').values
+local Job = require('plenary.job')
+local actions = require('telescope.actions')
+local action_state = require('telescope.actions.state')
+local action_set = require('telescope.actions.set')
+
+local M = {}
+
 local function get_cost_data(callback, accounts)
     local json = vim.fn.system({
         'aws', 'ce', 'get-cost-and-usage',
@@ -61,12 +71,66 @@ vim.api.nvim_create_user_command("ShowAwsCostGraph", function(args)
     end, args.fargs)
 end, { desc = "Show AWS Cost Graph", nargs = '+' })
 
--- TODO: move to ftplugin/markdown.lua
+function M.aws_account_picker(opts, callback)
+    opts = opts or {}
 
-vim.keymap.set("n", "<leader>A", "<Nop>", {
-    desc = "AWS"
-})
+    Job:new({
+        command = "aws",
+        args = { "organizations", "list-accounts", "--output", "json" },
+        on_exit = function(j, _)
+            vim.schedule(function()
+                local output = table.concat(j:result(), "\n")
+                local decoded = vim.fn.json_decode(output)
+                local entries = {}
 
-vim.keymap.set("n", "<leader>Ac", "<Nop>", {
-    desc = "Costs"
-})
+                for _, acct in ipairs(decoded.Accounts or {}) do
+                    local line = string.format("%s\t%s", acct.Id, acct.Name)
+                    table.insert(entries, line)
+                end
+
+                pickers.new(opts, {
+                    prompt_title = "Select AWS Accounts",
+                    finder = finders.new_table {
+                        results = entries,
+                    },
+                    sorter = conf.generic_sorter(opts),
+                    attach_mappings = function(prompt_bufnr, map)
+                        action_set.select:replace(function()
+                            local picker = action_state.get_current_picker(prompt_bufnr)
+                            local selections = picker:get_multi_selection()
+                            if vim.tbl_isempty(selections) then
+                                selections = { action_state.get_selected_entry() }
+                            end
+
+                            local account_ids = {}
+                            for _, item in ipairs(selections) do
+                                local id = item[1]:match("^(%d+)")
+                                table.insert(account_ids, id)
+                            end
+
+                            actions.close(prompt_bufnr)
+
+                            callback(account_ids)
+                        end)
+                        return true
+                    end,
+                }):find()
+            end)
+        end,
+    }):start()
+end
+
+vim.api.nvim_create_user_command("ShowAwsCostGraphPicker", function()
+    M.aws_account_picker({}, function(accounts)
+        if #accounts == 0 then
+            vim.notify("No accounts selected", vim.log.levels.WARN)
+            return
+        end
+        get_cost_data(function(data)
+            local graph = cost_data_to_mermaid(data)
+            local buf = vim.api.nvim_get_current_buf()
+            local current_line = vim.api.nvim_win_get_cursor(0)[1]
+            vim.api.nvim_buf_set_lines(buf, current_line, current_line, false, graph)
+        end, accounts)
+    end)
+end, { desc = "Show AWS Cost Graph" })
