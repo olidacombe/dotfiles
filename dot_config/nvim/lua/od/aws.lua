@@ -8,11 +8,27 @@ local action_set = require('telescope.actions.set')
 
 local M = {}
 
+local function get_yesterdays_date()
+    return os.date("%Y-%m-%d", os.time() - 86400)
+end
+
+local function first_day_six_months_ago()
+    local now = os.date("*t")
+    local year = now.year
+    local month = now.month - 6
+
+    if month <= 0 then
+        month = month + 12
+        year = year - 1
+    end
+
+    return string.format("%04d-%02d-01", year, month)
+end
+
 local function get_cost_data(callback, accounts)
     local json = vim.fn.system({
         'aws', 'ce', 'get-cost-and-usage',
-        -- TODO retrieve dates automatically
-        '--time-period', 'Start=2025-01-01,End=2025-06-01',
+        '--time-period', string.format('Start=%s,End=%s', first_day_six_months_ago(), get_yesterdays_date()),
         '--granularity', 'MONTHLY',
         '--filter', string.format([[
             {
