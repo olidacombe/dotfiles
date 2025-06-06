@@ -231,8 +231,8 @@ local table_callback = function(from_line, to_line)
             actions.close(prompt_bufnr)
 
             local lines = {
-                "| Key | Status | RAG | Priority | Summary | Due Date | Description | Assignee | Business Team | Updated |",
-                "|:----|:--------|:----|:----------|:---------|:----------|:-------------|:----------|:---------|"
+                "| Key | Status | RAG | Priority | Summary | Due Date | Description | Assignee | Business Team |",
+                "|:----|:--------|:----|:----------|:---------|:----------|:-------------|:----------|:---------|",
             }
 
             for _, entry in ipairs(selections) do
@@ -257,9 +257,7 @@ local table_callback = function(from_line, to_line)
                     due = "—"
                 end
                 local assignee = safe_field(fields.assignee, "displayName", "Unassigned")
-                local business_team = (fields.customfield_10978 or { value = "—" })
-                    .value -- Update this field name to match your Business Team
-                local updated = fields.updated or "—"
+                local business_team = safe_field(fields.customfield_10978, "value", "—") -- Update this field name to match your Business Team
 
                 -- Description (flatten first paragraph)
                 local description = "—"
@@ -288,8 +286,8 @@ local table_callback = function(from_line, to_line)
 
                 -- Markdown row
                 table.insert(lines, string.format(
-                    "| %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |",
-                    key_link, status, rag, priority, summary, due, description, assignee, business_team, updated
+                    "| %s | %s | %s | %s | %s | %s | %s | %s | %s |",
+                    key_link, status, rag, priority, summary, due, description, assignee, business_team
                 ))
             end
 
