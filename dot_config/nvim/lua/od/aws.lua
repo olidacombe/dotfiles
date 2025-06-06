@@ -56,8 +56,8 @@ local function cost_data_to_mermaid(cost_data)
     local dates = {}
 
     for _, result in ipairs(cost_data.ResultsByTime) do
-        local date = result.TimePeriod.Start
-        table.insert(dates, string.format('"%s"', date))
+        local month = result.TimePeriod.Start:sub(1, 7)
+        table.insert(dates, string.format('"%s"', month))
     end
 
     table.insert(diagram, string.format('  x-axis "Month" [%s]', table.concat(dates, ", ")))
