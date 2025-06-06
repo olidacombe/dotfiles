@@ -1,2 +1,2 @@
 export TEXINPUTS=${HOME}/.config/pandoc/themes/dracula//:
-alias pandf="pandoc --lua-filter ${HOME}/.pandoc/ext/diagram/diagram.lua --pdf-engine=xelatex --defaults ${HOME}/.config/pandoc/themes/dracula/dracula.yaml"
+alias pandf="pandoc --lua-filter ${HOME}/.pandoc/ext/diagram/diagram.lua --pdf-engine=xelatex --defaults ${HOME}/.config/pandoc/themes/dracula/dracula.yaml -V mainfont=\"FiraCode Nerd Font Mono\""
