@@ -1,3 +1,4 @@
+abseil-cpp
 base-devel # like deb build-essentials
 brave-browser
 btop
@@ -22,6 +23,7 @@ kubectx
 lsof
 luarocks
 moreutils
+mosh
 multipath-tools
 navi
 neofetch
@@ -32,6 +34,7 @@ obsidian # hmmm not sure yet
 openbsd-netcat
 pandoc-cli
 ponysay
+protobuf
 pv
 pyenv
 python-nrfutil
