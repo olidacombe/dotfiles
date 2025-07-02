@@ -38,7 +38,8 @@ end, {
     desc = "Reload Luasnips",
 })
 
-local c, d, i, f, s, t, isn = ls.choice_node, ls.dynamic_node, ls.insert_node, ls.function_node, ls.s, ls.text_node, ls.indent_snippet_node
+local c, d, i, f, s, t, isn = ls.choice_node, ls.dynamic_node, ls.insert_node, ls.function_node, ls.s, ls.text_node,
+    ls.indent_snippet_node
 local dl, l = extras.dynamic_lambda, extras.lambda
 local fmt = require("luasnip.extras.fmt").fmt
 
@@ -130,6 +131,19 @@ dyn_uppercase = function(args)
 end
 
 ls.add_snippets(nil, {
+    -- all = {
+    --     s("date", {
+    --   f(function()
+    --     return os.date("%Y-%m-%d")  -- e.g., 2025-07-02
+    --   end, {})
+    -- }},
+    all = {
+        s("date", {
+            f(function()
+                return os.date("%Y-%m-%d") -- e.g., 2025-07-02
+            end, {}),
+        })
+    },
     gitcommit = {
         -- Jira issue branch
         s(
@@ -343,7 +357,7 @@ ls.add_snippets(nil, {
         ),
         -- module-level thiserror
         s(
-            { trig = "thiserror", docstring="Module-level thiserror `pub enum Error`"},
+            { trig = "thiserror", docstring = "Module-level thiserror `pub enum Error`" },
             fmt(
                 [[
                 #[derive(Debug, Error)]
@@ -353,20 +367,20 @@ ls.add_snippets(nil, {
 
                 pub type Result<T> = std::result::Result<T, Error>;
             ]], {
-                c(1, {
-                    t(""),
-                    t({
-                        "// TODO lots more luasnip goodies for these",
-                        " #[error(transparent)]",
-                        " BoxError(#[from] Box<dyn std::error::Error + Send + Sync>),",
-                        "",
-                    }),
-                }), i(0)
-            })
+                    c(1, {
+                        t(""),
+                        t({
+                            "// TODO lots more luasnip goodies for these",
+                            " #[error(transparent)]",
+                            " BoxError(#[from] Box<dyn std::error::Error + Send + Sync>),",
+                            "",
+                        }),
+                    }), i(0)
+                })
         ),
         -- tracing-subscriber
         s(
-            { trig = "tracing-subscriber", docstring = "tracing_subscriber::fmt::init()"},
+            { trig = "tracing-subscriber", docstring = "tracing_subscriber::fmt::init()" },
             fmt("tracing_subscriber::fmt::init();\n", {})
         ),
     },
