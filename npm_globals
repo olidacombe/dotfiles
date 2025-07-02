@@ -1,3 +1,4 @@
 # packages to `npm install --global`
 eslint
+@mermaid-js/mermaid-cli
 prettier

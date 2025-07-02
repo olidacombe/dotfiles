@@ -76,3 +76,14 @@ vim.keymap.set({ "n", "v" }, "<leader>jt", ":JiraTable<CR>", {
     nowait = true,
     silent = true,
 })
+
+vim.keymap.set("n", "<leader>A", "<Nop>", {
+    desc = "AWS"
+})
+
+vim.keymap.set("n", "<leader>Ac", ":ShowAwsCostGraphPicker<CR>", {
+    desc = "Costs",
+    noremap = true,
+    nowait = true,
+    silent = true,
+})

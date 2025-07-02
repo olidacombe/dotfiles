@@ -44,3 +44,13 @@ type = "archive"
 url = "https://github.com/gpakosz/.tmux/archive/master.tar.gz"
 exact = true
 stripComponents = 1
+[".pandoc/ext/diagram"]
+type = "archive"
+url = "https://github.com/pandoc-ext/diagram/archive/master.tar.gz"
+exact = true
+stripComponents = 1
+[".fonts/noto-emoji"]
+type = "archive"
+url = "https://github.com/googlefonts/noto-emoji/archive/refs/tags/v2.034.tar.gz"
+exact = true
+stripComponents = 1
