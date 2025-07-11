@@ -1,5 +1,6 @@
 abseil-cpp
 base-devel # like deb build-essentials
+bind
 brave-browser
 btop
 calc
