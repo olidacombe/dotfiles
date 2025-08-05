@@ -175,7 +175,7 @@ local plugins = {
         "nvim-neotest/neotest",
         dependencies = {
             "antoinemadec/FixCursorHold.nvim",
-            "haydenmeade/neotest-jest",
+            -- "haydenmeade/neotest-jest",
             "nvim-lua/plenary.nvim",
             "nvim-neotest/neotest-go",
             "nvim-neotest/neotest-plenary",
@@ -281,9 +281,7 @@ local plugins = {
 
     -- Telescope for fuzzy finding
     {
-        "nvim-telescope/telescope.nvim", --tag = '0.1.0',
-        -- or                            , branch = '0.1.x',
-        branch = "0.1.x",                -- got me past https://github.com/nvim-telescope/telescope.nvim/issues/2192
+        "nvim-telescope/telescope.nvim",
         dependencies = { { "nvim-lua/plenary.nvim" } },
     },
     {
