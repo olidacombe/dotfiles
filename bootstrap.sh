@@ -98,6 +98,23 @@ if [ "$OS" = "$MACOS" ]; then
 else
     case "$DISTRO" in
         "arch")
+            cat << EOF
+ ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄ 
+▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌
+▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌
+▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌
+▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌
+▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+ ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌ ▀▀▀▀█░█▀▀▀▀ 
+     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
+     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
+     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
+      ▀       ▀         ▀       ▀      
+EOF
+            sudo pacman -S --needed git base-devel
+            git clone https://aur.archlinux.org/yay.git
+            cd yay
+            makepkg -si
             if is_gitpod; then
                 pac_install $( strip_comment pacfile-core )
                 yes | yay -qS $( strip_comment yayfile-core ) <<< "A\nN\n"
