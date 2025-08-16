@@ -23,7 +23,12 @@ function apt_install() {
 }
 
 function linux_distro() {
-    cat /etc/os-release | awk -F= '/^ID_LIKE=/ { print $2 }'
+    if grep -e '^ID_LIKE=' /etc/os-release &> /dev/null; then
+        # For distros that use ID_LIKE
+        cat /etc/os-release | awk -F= '/^ID_LIKE=/ { print $2 }' | tr -d '"'
+        return
+    fi
+    cat /etc/os-release | awk -F= '/^ID=/ { print $2 }' | tr -d '"'
 }
 
 function linux_installer() {
