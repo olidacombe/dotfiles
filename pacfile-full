@@ -1,7 +1,7 @@
 abseil-cpp
 base-devel # like deb build-essentials
 bind
-brave-browser
+# brave
 btop
 calc
 cmake
@@ -27,7 +27,7 @@ moreutils
 mosh
 multipath-tools
 navi
-neofetch
+# neofetch
 net-tools
 nmap
 nvm
@@ -38,7 +38,7 @@ ponysay
 protobuf
 pv
 pyenv
-python-nrfutil
+# python-nrfutil
 python-pipenv
 python-pipx
 strace
