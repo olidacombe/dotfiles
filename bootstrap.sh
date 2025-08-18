@@ -50,6 +50,26 @@ function install_neovim_x64_linux() {
     rm nvim.tar.gz
 }
 
+function install_yay() {
+    cat << EOF
+ ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄ 
+▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌
+▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌
+▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌
+▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌
+▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+ ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌ ▀▀▀▀█░█▀▀▀▀ 
+     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
+     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
+     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
+      ▀       ▀         ▀       ▀      
+EOF
+    sudo pacman -S --needed git base-devel
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+}
+
 if uname -a | grep -i linux; then
     export INSTALLER=$(linux_installer)
 	export OS="$LINUX"
@@ -103,23 +123,9 @@ if [ "$OS" = "$MACOS" ]; then
 else
     case "$DISTRO" in
         "arch")
-            cat << EOF
- ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄ 
-▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌
-▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌
-▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌
-▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌
-▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
- ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌ ▀▀▀▀█░█▀▀▀▀ 
-     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
-     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
-     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
-      ▀       ▀         ▀       ▀      
-EOF
-            sudo pacman -S --needed git base-devel
-            git clone https://aur.archlinux.org/yay.git
-            cd yay
-            makepkg -si
+            if ! command -v yay &> /dev/null; then
+                install_yay
+            fi
             if is_gitpod; then
                 pac_install $( strip_comment pacfile-core )
                 yes | yay -qS $( strip_comment yayfile-core ) <<< "A\nN\n"
@@ -165,6 +171,7 @@ git remote -v | grep "${GH_USER}/dotfiles" || quit "we're not, time to \`chezmoi
 # |/   \__/(_______)\_______)   )_(   
 #                                     
 command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup default || rustup default stable
 rustup component add rust-analyzer
 
  #      ___           ___           ___           ___           ___     
