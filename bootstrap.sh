@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-set -euo pipefail
+set -xeuo pipefail
 
 GH_USER=olidacombe
 LINUX="linux"
@@ -65,9 +65,12 @@ function install_yay() {
       ▀       ▀         ▀       ▀      
 EOF
     sudo pacman -S --needed git base-devel
-    git clone https://aur.archlinux.org/yay.git
-    cd yay
+    YAYDIR="$(mktemp -d)"
+    git clone https://aur.archlinux.org/yay.git "$YAYDIR"
+    pushd "$YAYDIR"
     makepkg -si
+    popd
+    rm -rf "$YAYDIR"
 }
 
 if uname -a | grep -i linux; then
@@ -131,7 +134,8 @@ else
                 yes | yay -qS $( strip_comment yayfile-core ) <<< "A\nN\n"
             else
                 pac_install $( strip_comment pacfile-{core,full} )
-                yes | yay -qS $( strip_comment yayfile-{core,full} ) <<< "A\nN\n"
+                # FIXME
+                yes | yay -qS $( strip_comment yayfile-{core,full} ) <<< "A\nN\n" || true # I didn't figure out why this is failing
             fi
             ;;
         "debian")

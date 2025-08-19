@@ -1,1 +1,6 @@
 coc
+bootstrap.sh
+yayfile-*
+pacfile-*
+crates-*.txt
+npm_globals
