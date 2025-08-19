@@ -217,8 +217,8 @@ if command -v nvm &> /dev/null; then
     strip_comment npm_globals | xargs npm i -g & disown
 fi
 
-# FIXME Force default shell in gitpod
-if is_gitpod; then
+# Force default shell in linux
+if [ "$OS" = "$LINUX" ]; then
     sudo usermod --shell "$(which zsh)" "$(whoami)"
 fi
 
