@@ -149,6 +149,10 @@ if [ -f "${HOME}/.zsh_secrets" ]; then
 	. "${HOME}/.zsh_secrets"
 fi
 
+if [ -d "${HOME}/.cargo/bin" ]; then
+    export PATH="${PATH}:${HOME}/.cargo/bin"
+fi
+
 # # keychain
 # SSH_ADD=ssh-add
 # SSH_ADD_ARGS=
