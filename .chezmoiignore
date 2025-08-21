@@ -1,5 +1,6 @@
-coc
 bootstrap.sh
+README.md
+aptfile-*
 yayfile-*
 pacfile-*
 crates-*.txt

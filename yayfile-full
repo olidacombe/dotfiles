@@ -1,5 +1,6 @@
-brave-bin
 # zen-browser-bin
+brave-bin
+extra/playerctl
 pulsemixer
 pyenv-virtualenv
 ttf-firacode-nerd
