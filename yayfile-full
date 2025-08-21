@@ -4,3 +4,5 @@ extra/playerctl
 pulsemixer
 pyenv-virtualenv
 ttf-firacode-nerd
+extra/waybar
+extra/cava
