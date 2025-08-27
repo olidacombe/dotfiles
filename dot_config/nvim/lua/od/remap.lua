@@ -98,6 +98,11 @@ os_cb({
         vim.keymap.set("n", "<A-c>", quickcycle.mode_next)
     end,
     darwin = function()
+        -- we need the linux mappings again for ghostty
+        vim.keymap.set("n", "<A-g>", quickcycle.mode_prev)
+        vim.keymap.set("n", "<A-c>", quickcycle.mode_next)
+        -- only for iTerm2 - might ditch this terminal soon
+        -- and standardize to linux shortcuts everywhere
         vim.keymap.set("n", "©", quickcycle.mode_prev)
         vim.keymap.set("n", "ç", quickcycle.mode_next)
     end,
