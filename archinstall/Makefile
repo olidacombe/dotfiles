@@ -3,8 +3,13 @@
 
 BUILD_DIR := ./archiso
 
+clean:
+	@sudo rm -rf $(BUILD_DIR)
+	# @rm test.qcow2
+
 build-and-test:
-	./build-and-test.sh $(BUILD_DIR) true
+	@make clean
+	@./build-and-test.sh $(BUILD_DIR) true
 
 test:
-	./build-and-test.sh $(BUILD_DIR)
+	@./build-and-test.sh $(BUILD_DIR)
