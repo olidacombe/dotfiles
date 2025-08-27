@@ -1,9 +1,13 @@
-# zen-browser-bin
 brave-bin
+extra/archinstall
+extra/archiso
+extra/cava
+extra/edk2-ovmf
+extra/hyprpaper
 extra/playerctl
+extra/qemu-desktop
+extra/waybar
 pulsemixer
 pyenv-virtualenv
 ttf-firacode-nerd
-extra/waybar
-extra/cava
-extra/hyprpaper
+# zen-browser-bin
