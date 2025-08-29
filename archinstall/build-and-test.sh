@@ -35,17 +35,8 @@ then
 git
 EOF
 
-# 	cat <<\EOF >> "${ARCHISO_FOLDER}/airootfs/root/.zprofile"
-# [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && sh -c "cd /root/archinstall-git; git config --global pull.rebase false; git pull; cp examples/guided.py ./; python guided.py"
-# EOF
-
-# TODO
-# here we dump the archinstall config and user jsons
-# maybe we generate the user config each time (taking ephemeral password)
-# then the script below simply uses those to launch archinstall
-	cat <<\EOF >> "${ARCHISO_FOLDER}/airootfs/root/.zprofile"
-        echo YO YO YO WHASSSSUUUUUUUP
-EOF
+	cp autorun.sh "${ARCHISO_FOLDER}/airootfs/root/.zprofile"
+    sudo cp user_{credentials,configuration}.json "${ARCHISO_FOLDER}/airootfs/root/"
 
 	( cd "${ARCHISO_FOLDER}/"; sudo mkarchiso -v -w work/ -o out/ ./; )
 fi

@@ -12,4 +12,5 @@ extra/wev
 pulsemixer
 pyenv-virtualenv
 ttf-firacode-nerd
+core/less
 # zen-browser-bin
