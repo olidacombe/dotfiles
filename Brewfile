@@ -94,6 +94,7 @@ brew "node"
 brew "nvm"
 brew "nyancat"
 # brew "open-ocd", args: ["HEAD"]
+brew "sst/tap/opencode"
 # cask "openlens"
 brew "openssh"
 brew "operator-sdk"
