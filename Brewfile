@@ -21,6 +21,7 @@ brew "autojump"
 brew "automake"
 brew "bat" # cat with syntax highlighting 👌
 brew "bats-core"
+brew "oven-sh/bun/bun"
 brew "glib"
 # brew "basictex" # conflicts with mactex
 brew "boxes"
