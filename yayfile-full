@@ -4,9 +4,11 @@ extra/archiso
 extra/cava
 extra/edk2-ovmf
 extra/hyprpaper
+extra/networkmanager
 extra/playerctl
 extra/qemu-desktop
 extra/waybar
+extra/wev
 pulsemixer
 pyenv-virtualenv
 ttf-firacode-nerd

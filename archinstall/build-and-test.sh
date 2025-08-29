@@ -31,9 +31,9 @@ then
 	git clone "${REPO}" "${ARCHISO_FOLDER}/airootfs/root/archinstall-git"
 	(cd "${ARCHISO_FOLDER}/airootfs/root/archinstall-git"; git checkout "${BRANCH}" )
 
-	echo "git" >> "${ARCHISO_FOLDER}/packages.x86_64"
-	echo "python" >> "${ARCHISO_FOLDER}/packages.x86_64"
-	echo "python-setuptools" >> "${ARCHISO_FOLDER}/packages.x86_64"
+    cat <<\EOF >> "${ARCHISO_FOLDER}/packages.x86_64"
+git
+EOF
 
 # 	cat <<\EOF >> "${ARCHISO_FOLDER}/airootfs/root/.zprofile"
 # [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && sh -c "cd /root/archinstall-git; git config --global pull.rebase false; git pull; cp examples/guided.py ./; python guided.py"
