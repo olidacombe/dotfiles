@@ -11,7 +11,8 @@
     "auth_config": {},
     "bootloader": "Systemd-boot",
     "custom_commands": [
-        "touch /home/oli/first-run"
+        "usermod -s $(which zsh) oli",
+        "echo sh -c \"$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh)\" > /home/oli/.zshrc"
     ],
     "hostname": "nemesis",
     "kernels": [

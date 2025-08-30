@@ -425,14 +425,6 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 # note: On MacOS, set layout to U.S.
 bind r source-file ~/.tmux.conf
 {{ range $keyTable := list "root" "off" }}
-{{ if eq $.chezmoi.os "darwin" -}}
-# only for iTerm2 - I think we can ditch all this moving to ghostty
-bind-key -T {{ $keyTable }} ƒ run-shell "tmux neww -n sessionizer tmux-sessionizer"
-bind-key -T {{ $keyTable }} "å" run-shell "tpoon push"
-bind-key -T {{ $keyTable }} "´" run-shell "tmux neww -n tpoon tpoon edit"
-bind-key -T {{ $keyTable }} "ﬂ" switch-client -l
-bind-key -T {{ $keyTable }} "˘" new-window -c "#{pane_current_path}"
-{{ end -}}
 bind-key -T {{ $keyTable }} "M-f" run-shell "tmux neww -n sessionizer tmux-sessionizer"
 bind-key -T {{ $keyTable }} "M-a" run-shell "tpoon push"
 bind-key -T {{ $keyTable }} "M-e" run-shell "tmux neww -n tpoon tpoon edit"
@@ -443,10 +435,6 @@ bind-key -T {{ $keyTable }} "S-F6" run-shell "tpoon 2"
 bind-key -T {{ $keyTable }} "S-F7" run-shell "tpoon 3"
 bind-key -T {{ $keyTable }} "S-F8" run-shell "tpoon 4"
 {{- end }}
-{{ if eq .chezmoi.os "darwin" -}}
-# only for iTerm2 - I think we can ditch all this moving to ghostty
-bind-key -n "˘" new-window -c "#{pane_current_path}"
-{{ end -}}
 bind-key -n "M->" new-window -c "#{pane_current_path}"
 bind-key -n "S-F9" select-window -t 1
 bind-key -n "S-F10" select-window -t 2
