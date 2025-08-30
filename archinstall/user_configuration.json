@@ -10,7 +10,9 @@
     "archinstall-language": "English",
     "auth_config": {},
     "bootloader": "Systemd-boot",
-    "custom_commands": [],
+    "custom_commands": [
+        "touch /home/oli/first-run"
+    ],
     "hostname": "nemesis",
     "kernels": [
         "linux"
@@ -58,7 +60,10 @@
         "type": "nm"
     },
     "ntp": true,
-    "packages": [],
+    "packages": [
+        "zsh",
+        "ghostty"
+    ],
     "parallel_downloads": 0,
     "profile_config": {
         "gfx_driver": "All open-source",

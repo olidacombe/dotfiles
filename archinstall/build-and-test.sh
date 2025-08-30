@@ -33,6 +33,7 @@ then
 
     cat <<\EOF >> "${ARCHISO_FOLDER}/packages.x86_64"
 git
+networkmanager
 EOF
 
 	cp autorun.sh "${ARCHISO_FOLDER}/airootfs/root/.zprofile"
@@ -43,7 +44,7 @@ fi
 
 if [ ! -f "./test.qcow2" ];
 then
-	qemu-img create -f qcow2 ./test.qcow2 15G
+	qemu-img create -f qcow2 ./test.qcow2 200G
 fi
 
 sudo -E qemu-system-x86_64 \

@@ -5,7 +5,7 @@ BUILD_DIR := ./archiso
 
 clean:
 	@sudo rm -rf $(BUILD_DIR)
-	# @rm test.qcow2
+	# @rm -f test.qcow2
 
 build-and-test:
 	@make clean
