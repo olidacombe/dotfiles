@@ -175,6 +175,7 @@ git remote -v | grep "${GH_USER}/dotfiles" || quit "we're not, time to \`chezmoi
 # |/   \__/(_______)\_______)   )_(   
 #                                     
 command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+. ${HOME}/.cargo/env
 rustup default || rustup default stable
 rustup component add rust-analyzer
 
