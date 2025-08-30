@@ -37,8 +37,6 @@ networkmanager
 EOF
 
 	cp autorun.sh "${ARCHISO_FOLDER}/airootfs/root/.zprofile"
-    cp ../dot_config/hypr/hyprland.conf "${ARCHISO_FOLDER}/airootfs/usr/share/hypr/hyprland.conf"
-    echo "exec-once = \$terminal" >> "${ARCHISO_FOLDER}/airootfs/usr/share/hypr/hyprland.conf"
     sudo cp user_{credentials,configuration}.json "${ARCHISO_FOLDER}/airootfs/root/"
 
 	( cd "${ARCHISO_FOLDER}/"; sudo mkarchiso -v -w work/ -o out/ ./; )
