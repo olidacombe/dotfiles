@@ -11,7 +11,7 @@
     "auth_config": {},
     "bootloader": "Systemd-boot",
     "custom_commands": [],
-    "hostname": "archlinux",
+    "hostname": "nemesis",
     "kernels": [
         "linux"
     ],
@@ -53,6 +53,9 @@
             ]
         },
         "optional_repositories": []
+    },
+    "network_config": {
+        "type": "nm"
     },
     "ntp": true,
     "packages": [],
