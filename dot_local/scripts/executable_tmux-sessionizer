@@ -8,6 +8,10 @@ SESSIONIZER_DIRS=(~/od)
 SESSIONIZER_REMOTE_REPOS_FINDERS_DIR="${HOME}/.config/sessionizer/remote_repo_finders.d"
 SESSIONIZER_REMOTE_CONNECTORS_DIR="${HOME}/.config/sessionizer/remote_repo_connectors.d"
 SESSIONIZER_DIRS_CONFIG="${HOME}/.config/sessionizer/dirs"
+if [ ! -f "$SESSIONIZER_DIRS_CONFIG" ]; then
+    mkdir -p "$(dirname "$SESSIONIZER_DIRS_CONFIG")"
+    chezmoi source-path >> "$SESSIONIZER_DIRS_CONFIG"
+fi
 if [ -f "$SESSIONIZER_DIRS_CONFIG" ]; then
     # :'( only bash >= 4.4
     # mapfile -t SESSIONIZER_DIRS < "$SESSIONIZER_DIRS_CONFIG"

@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-set -euo pipefail
+set -xeuo pipefail
 
 GH_USER=olidacombe
 LINUX="linux"
@@ -23,7 +23,12 @@ function apt_install() {
 }
 
 function linux_distro() {
-    cat /etc/os-release | awk -F= '/^ID_LIKE=/ { print $2 }'
+    if grep -e '^ID_LIKE=' /etc/os-release &> /dev/null; then
+        # For distros that use ID_LIKE
+        cat /etc/os-release | awk -F= '/^ID_LIKE=/ { print $2 }' | tr -d '"'
+        return
+    fi
+    cat /etc/os-release | awk -F= '/^ID=/ { print $2 }' | tr -d '"'
 }
 
 function linux_installer() {
@@ -43,6 +48,29 @@ function install_neovim_x64_linux() {
     curl -sLo nvim.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
     sudo tar zxvf nvim.tar.gz -C /usr --strip-components=1
     rm nvim.tar.gz
+}
+
+function install_yay() {
+    cat << EOF
+ ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄ 
+▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌
+▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌
+▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌
+▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌
+▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+ ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌ ▀▀▀▀█░█▀▀▀▀ 
+     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
+     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
+     ▐░▌     ▐░▌       ▐░▌     ▐░▌     
+      ▀       ▀         ▀       ▀      
+EOF
+    sudo pacman -S --needed git base-devel
+    YAYDIR="$(mktemp -d)"
+    git clone https://aur.archlinux.org/yay.git "$YAYDIR"
+    pushd "$YAYDIR"
+    makepkg -si
+    popd
+    rm -rf "$YAYDIR"
 }
 
 if uname -a | grep -i linux; then
@@ -98,12 +126,16 @@ if [ "$OS" = "$MACOS" ]; then
 else
     case "$DISTRO" in
         "arch")
+            if ! command -v yay &> /dev/null; then
+                install_yay
+            fi
             if is_gitpod; then
                 pac_install $( strip_comment pacfile-core )
                 yes | yay -qS $( strip_comment yayfile-core ) <<< "A\nN\n"
             else
                 pac_install $( strip_comment pacfile-{core,full} )
-                yes | yay -qS $( strip_comment yayfile-{core,full} ) <<< "A\nN\n"
+                # FIXME
+                yes | yay -qS $( strip_comment yayfile-{core,full} ) <<< "A\nN\n" || true # I didn't figure out why this is failing
             fi
             ;;
         "debian")
@@ -143,6 +175,7 @@ git remote -v | grep "${GH_USER}/dotfiles" || quit "we're not, time to \`chezmoi
 # |/   \__/(_______)\_______)   )_(   
 #                                     
 command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup default || rustup default stable
 rustup component add rust-analyzer
 
  #      ___           ___           ___           ___           ___     
@@ -184,8 +217,8 @@ if command -v nvm &> /dev/null; then
     strip_comment npm_globals | xargs npm i -g & disown
 fi
 
-# FIXME Force default shell in gitpod
-if is_gitpod; then
+# Force default shell in linux
+if [ "$OS" = "$LINUX" ]; then
     sudo usermod --shell "$(which zsh)" "$(whoami)"
 fi
 
