@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-set -xeuo pipefail
+set -euo pipefail
 
 GH_USER=olidacombe
 LINUX="linux"
