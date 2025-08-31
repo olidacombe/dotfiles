@@ -10,10 +10,7 @@
     "archinstall-language": "English",
     "auth_config": {},
     "bootloader": "Systemd-boot",
-    "custom_commands": [
-        "usermod -s $(which zsh) oli",
-        "echo sh -c \"$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh)\" > /home/oli/.zshrc"
-    ],
+    "custom_commands": [],
     "hostname": "nemesis",
     "kernels": [
         "linux"
