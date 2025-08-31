@@ -193,12 +193,14 @@ rustup component add rust-analyzer
  #
  #  This is SUPER GOOD: https://nickgerace.dev/post/how-to-manage-rust-tools-and-applications/
  #  get current list with `cargo install --list | rg -o "^\S*\S" > crates.txt`
+ 
+ cargo install cargo-binstall
 
 if is_gitpod; then
     strip_comment crates-core.txt
 else
     strip_comment crates-{core,full}.txt
-fi | xargs cargo install & disown
+fi | xargs cargo binstall & disown
 
 # :::.    :::.:::      .::..        :   
 # `;;;;,  `;;;';;,   ,;;;' ;;,.    ;;;  

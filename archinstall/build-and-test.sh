@@ -15,6 +15,42 @@ ARCHISO_FOLDER=$1
 REBUILD=$2
 BRANCH="master"
 
+function get_password() {
+    # Loop until the passwords match
+    while true; do
+      # Prompt user for the first password
+      echo -n "Enter your password: " >&2
+      read -s password1
+      echo >&2
+
+      if [ -z "$password1" ]; then
+        echo "Password must not be empty.  Please try again." >&2
+        continue
+      fi
+
+      # Prompt user for the second password
+      echo -n "Confirm your password: " >&2
+      read -s password2
+      echo >&2
+
+      # Check if passwords match
+      if [ "$password1" == "$password2" ]; then
+        echo "Passwords match!" >&2
+        break  # Exit the loop if passwords match
+      else
+        echo "Passwords do not match. Please try again." >&2
+      fi
+    done
+
+    mkpasswd -m yescrypt "$password1"
+}
+
+# Prompt with default = $USER
+read -p "Enter name for arch super user [${USER}]: " USERNAME
+# If empty, fall back to $USER
+USERNAME=${USERNAME:-$USER}
+PASSWORD="$(get_password)"
+
 if [ $REBUILD ]
 then
 	echo "Making a clean build!"
@@ -37,7 +73,13 @@ networkmanager
 EOF
 
 	cp autorun.sh "${ARCHISO_FOLDER}/airootfs/root/.zprofile"
-    sudo cp user_{credentials,configuration}.json "${ARCHISO_FOLDER}/airootfs/root/"
+    jq -n --arg user "$USERNAME" --arg password "$PASSWORD" \
+        '{users: [{enc_password: $password, groups: [], sudo: true, username: $user}]}' \
+        > "${ARCHISO_FOLDER}/airootfs/root/user_credentials.json"
+    jq --arg user "$USERNAME" --arg hyprconf "$(base64 ../dot_config/hypr/hyprland.conf)" \
+        '.custom_commands += ["usermod -s $(which zsh) \($user)", "echo sh -c \"$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh)\" > /home/\($user)/.zshrc", "base64 -d \($hyprconf) > /usr/share/hypr/hyprland.conf"]' \
+        < user_configuration.json \
+        > "${ARCHISO_FOLDER}/airootfs/root/user_configuration.json"
 
 	( cd "${ARCHISO_FOLDER}/"; sudo mkarchiso -v -w work/ -o out/ ./; )
 fi

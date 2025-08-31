@@ -1,5 +1,5 @@
-cargo-audit
 cargo-apk
+cargo-audit
 cargo-binstall
 cargo-espflash
 cargo-expand
@@ -9,6 +9,7 @@ cargo-mutants
 cargo-nextest
 cargo-pio
 cargo-udeps
+cargo-warehouse
 cargo-workspaces
 #commache
 cross
@@ -18,8 +19,8 @@ du-dust
 flamegraph
 flamelens
 hardpass
-#ldproxy
 jira-terminal
+#ldproxy
 lemmeknow
 slint-lsp
 stylua
