@@ -45,14 +45,14 @@ function get_password() {
     mkpasswd -m yescrypt "$password1"
 }
 
-# Prompt with default = $USER
-read -p "Enter name for arch super user [${USER}]: " USERNAME
-# If empty, fall back to $USER
-USERNAME=${USERNAME:-$USER}
-PASSWORD="$(get_password)"
-
 if [ $REBUILD ]
 then
+    # Prompt with default = $USER
+    read -p "Enter name for arch super user [${USER}]: " USERNAME
+    # If empty, fall back to $USER
+    USERNAME=${USERNAME:-$USER}
+    PASSWORD="$(get_password)"
+
 	echo "Making a clean build!"
 	`rm -rf "${ARCHISO_FOLDER}" 2>/dev/null` || (
 		echo "Could not delete protected folder:";
@@ -76,7 +76,7 @@ EOF
     jq -n --arg user "$USERNAME" --arg password "$PASSWORD" \
         '{users: [{enc_password: $password, groups: [], sudo: true, username: $user}]}' \
         > "${ARCHISO_FOLDER}/airootfs/root/user_credentials.json"
-    jq --arg user "$USERNAME" --arg hyprconf "$(base64 ../dot_config/hypr/hyprland.conf)" \
+    jq --arg user "$USERNAME" --arg hyprconf "$(base64 -w 0 ../dot_config/hypr/hyprland.conf)" \
         '.custom_commands += ["usermod -s $(which zsh) \($user)", "echo sh -c \"$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh)\" > /home/\($user)/.zshrc", "base64 -d <<< \($hyprconf) > /usr/share/hypr/hyprland.conf"]' \
         < user_configuration.json \
         > "${ARCHISO_FOLDER}/airootfs/root/user_configuration.json"
