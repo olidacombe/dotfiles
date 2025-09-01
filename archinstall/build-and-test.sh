@@ -77,7 +77,7 @@ EOF
         '{users: [{enc_password: $password, groups: [], sudo: true, username: $user}]}' \
         > "${ARCHISO_FOLDER}/airootfs/root/user_credentials.json"
     jq --arg user "$USERNAME" --arg hyprconf "$(base64 ../dot_config/hypr/hyprland.conf)" \
-        '.custom_commands += ["usermod -s $(which zsh) \($user)", "echo sh -c \"$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh)\" > /home/\($user)/.zshrc", "base64 -d \($hyprconf) > /usr/share/hypr/hyprland.conf"]' \
+        '.custom_commands += ["usermod -s $(which zsh) \($user)", "echo sh -c \"$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh)\" > /home/\($user)/.zshrc", "base64 -d <<< \($hyprconf) > /usr/share/hypr/hyprland.conf"]' \
         < user_configuration.json \
         > "${ARCHISO_FOLDER}/airootfs/root/user_configuration.json"
 
