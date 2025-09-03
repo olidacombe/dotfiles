@@ -19,7 +19,7 @@ function get_password() {
     # Loop until the passwords match
     while true; do
       # Prompt user for the first password
-      echo -n "Enter your password: " >&2
+      echo -n "Enter a password: " >&2
       read -s password1
       echo >&2
 
@@ -29,7 +29,7 @@ function get_password() {
       fi
 
       # Prompt user for the second password
-      echo -n "Confirm your password: " >&2
+      echo -n "Confirm that password: " >&2
       read -s password2
       echo >&2
 

@@ -1,16 +1,254 @@
 {
     "layer": "top",
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["battery", "clock"],
-    "sway/window": {
-        "max-length": 50
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 36,
+    "margin-right": 5,
+    "margin-left": 5, 
+
+    "modules-left": [
+        // "custom/rofi",
+        // "custom/weather",
+        // "custom/khorshididate",
+        "clock",
+        "wlr/taskbar",
+    ],
+
+    "modules-center": [
+        "hyprland/workspaces",
+    ],
+
+    "modules-right": [
+        "tray",
+        "battery",
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "bluetooth",
+        // "backlight",
+        "cpu",
+        "memory",
+        "disk",
+        "temperature",
+        // "custom/updates",
+        "network",
+        "hyprland/language"
+        // "custom/lock_screen",
+        // "custom/power"
+    ],
+
+    // "custom/rofi": {
+    //     "format": "",
+    //     "on-click": "rofi -theme ~/.config/rofi/theme/onedark_mini.rasi -show drun",
+    //     "tooltip": false
+    // },
+
+    // "custom/power": {
+    //     "format": "",
+    //     "on-click": "sysact",
+    //     "tooltip": false
+    // },
+
+    "hyprland/workspaces": {
+        "on-click": "activate",
+        "disable-scroll": true,
+        "all-outputs": true,
+        "show-special": true,
+        "persistent-workspaces": {
+            "*": [ 0, 1, 2, 3 ],
+        },
     },
+
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 12,
+        "all-outputs": true,
+        "tooltip-format": "{name}: {title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "ignore-list": [
+            "rofi"
+         ]
+    },
+
+    "tray": {
+        "icon-size": 12,
+        "spacing": 10
+    },
+
+    "cpu": {
+        "interval": 10,
+        "format": "",
+        "max-length": 10,
+        "format-alt-click": "click-right",
+        "format-alt": " {usage}%",
+        "on-click": "hyprctl dispatch -- exec ghostty -e btop",
+    },
+
+    "memory": {
+        "interval": 30,
+        "format": "",
+        "format-alt-click": "click-right",
+        "format-alt": " {}%",
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "Memory - {used:0.1f}GB used",
+        "on-click": "hyprctl dispatch -- exec ghostty -e btop",
+    },
+    
+    "disk": {
+        "interval": 600,
+        "format": "󰋊",
+        "path": "/",
+        "format-alt-click": "click-right",
+        "format-alt": "󰋊 {percentage_used}%",
+        "tooltip": true,
+        "tooltip-format": "HDD - {used} used out of {total} on {path} ({percentage_used}%)",
+        "states": {
+            "warning": 85,
+            "critical": 90,
+        },
+    },
+
+    "temperature": {
+        "thermal-zone": 1,
+        "format": "",
+        "format-alt-click": "click-right",
+        "format-alt": " {temperatureC}°C",
+        "critical-threshold": 70,
+        "format-critical": " {temperatureC}°C",
+    },
+
     "battery": {
-        "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""]
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon}",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt-click": "click-right",
+        "format-alt": "{icon} {capacity}%",
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "",
+        // "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click": "hyprctl dispatch -- exec ghostty -e cava; hyprctl dispatch -- exec ghostty -e pulsemixer",
+        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "tooltip": false,
+        "tooltip-format": "{icon} at {volume}%"
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "",
+        "format-source-muted": "",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%+",
+        "on-scroll-down": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%-",
+        "scroll-step": 5,
+        "tooltip": true,
+        "tooltip-format": " at {volume}%"
+    },
+
+    "bluetooth": {
+        "format": "",
+        "on-click": "hyprctl dispatch -- exec ghostty -e bluetuith",
+        // "format-connected": " {device_alias}",
+        // "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    },
+
+    // "backlight": {
+    //     "device": "intel_backlight",
+    //     "format": "{icon}",
+    //     "format-alt-click": "click-right",
+    //     "format-alt": "{icon} {percent}%",
+    //     "format-icons": ["󰃞", "󰃟", "󰃠"],
+    //     "on-scroll-up": "incbrightness",
+    //     "on-scroll-down": "decbrightness"
+    // },
+
+    // "custom/weather": {
+    //     //shows the current weather and forecast
+    //     "tooltip" : true,
+    //     "format" : "{}",
+    //     "interval" : 3600,
+    //     "exec" : "~/.config/waybar/scripts/wttr.py",
+    //     "return-type" : "json"
+    // },
+
+    // "custom/updates": {
+    //     "format": "{}",
+    //     "exec": "~/.config/waybar/scripts/update-sys",
+    //     "on-click": "~/.config/waybar/scripts/update-sys update",
+    //     "interval": 3600,
+    //     "tooltip": true,
+    //     "signal": 8,
+    //     "return-type" : "json"
+    // },
+
+    "network": {
+        "format": "{ifname}",
+        "format-wifi": " ",
+        "format-ethernet": " ",
+        "format-disconnected": " ", //An empty format will hide the module.
+        "tooltip-format": " {ifname} via {gwaddr}",
+        "tooltip-format-wifi": " {essid} ({signalStrength}%)",
+        "tooltip-format-ethernet": " {ifname} {ipaddr}/{cidr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50,
+        "on-click": "hyprctl dispatch -- exec ghostty -e nmtui",
+    },
+
     "clock": {
-        "format-alt": "{:%a, %d. %b  %H:%M}"
-    }
+        "timezone": "Europe/London",
+        "format": "  {:%H:%M}",
+        "tooltip": true,
+        // "on-click": "setbg",
+        "tooltip-format": " {:%A, %B %e %Y}"
+    },
+
+    // "custom/khorshididate": { 
+    //     "tooltip" : true,
+    //     "format": " {}",
+    //     "format-alt": " {alt}",
+    //     "format-alt-click": "click-right",
+    //     "interval": 3600,
+    //     "exec": "~/.config/waybar/scripts/khorshidi-date",
+    //     "return-type" : "json"
+    // },
+
+   "hyprland/language": {
+        "format": "{}",
+        "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next",
+        "format-en": "EN",
+        "format-bg": "BG"
+   },
+
 }
