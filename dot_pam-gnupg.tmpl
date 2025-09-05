@@ -1,0 +1,2 @@
+{{- $signingKey := dig "gpg" "signing" "key" false . }}
+{{- if $signingKey }}{{ $signingKey }}{{- end }}
