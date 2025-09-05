@@ -10,6 +10,7 @@ extra/playerctl
 extra/qemu-desktop
 extra/waybar
 extra/wev
+pam-gnupg
 pulsemixer
 pyenv-virtualenv
 ttf-firacode-nerd

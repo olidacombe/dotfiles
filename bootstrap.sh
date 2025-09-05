@@ -73,6 +73,15 @@ EOF
     rm -rf "$YAYDIR"
 }
 
+function setup_pam() {
+    if ! grep -q '^auth[[:blank:]]*optional[[:blank:]]*pam_gnupg.so[[:blank:]]*store-only$' /etc/pam.d/system-local-login; then
+        echo 'auth     optional  pam_gnupg.so store-only' | sudo tee -a /etc/pam.d/system-local-login
+    fi
+    if ! grep -q '^session[[:blank:]]*optional[[:blank:]]*pam_gnupg.so$' /etc/pam.d/system-local-login; then
+        echo 'session  optional  pam_gnupg.so' | sudo tee -a /etc/pam.d/system-local-login
+    fi
+}
+
 if uname -a | grep -i linux; then
     export INSTALLER=$(linux_installer)
 	export OS="$LINUX"
@@ -136,6 +145,7 @@ else
                 pac_install $( strip_comment pacfile-{core,full} )
                 # FIXME
                 yes | yay -qS $( strip_comment yayfile-{core,full} ) <<< "A\nN\n" || true # I didn't figure out why this is failing
+                setup_pam
             fi
             ;;
         "debian")
