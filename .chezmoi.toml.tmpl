@@ -1,10 +1,10 @@
-{{- if env "GITPOD_GIT_USER_EMAIL" -}}
 [data]
+    configDir = "{{ .chezmoi.homeDir }}/.config"
+{{- if env "GITPOD_GIT_USER_EMAIL" -}}
     email = {{ env "GITPOD_GIT_USER_EMAIL" | quote }}
 {{- else -}}
 {{- $email := promptString "email" -}}
 {{- $gpgSigningKey := promptString "GPG Signing Key" -}}
-[data]
     email = {{ $email | quote }}
 [data.gpg.signing]
     key = {{ $gpgSigningKey | quote }}
