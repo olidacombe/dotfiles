@@ -73,6 +73,8 @@ EOF
     rm -rf "$YAYDIR"
 }
 
+# No small amount of inspiration from
+# [unlock GPG magically](https://petrmanek.cz/blog/2022/unlocking-gpg-agent/)
 function setup_pam() {
     if ! grep -q '^auth[[:blank:]]*optional[[:blank:]]*pam_gnupg.so[[:blank:]]*store-only$' /etc/pam.d/system-local-login; then
         echo 'auth     optional  pam_gnupg.so store-only' | sudo tee -a /etc/pam.d/system-local-login
