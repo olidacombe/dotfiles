@@ -76,12 +76,14 @@ EOF
 # No small amount of inspiration from
 # [unlock GPG magically](https://petrmanek.cz/blog/2022/unlocking-gpg-agent/)
 function setup_pam() {
-    if ! grep -q '^auth[[:blank:]]*optional[[:blank:]]*pam_gnupg.so[[:blank:]]*store-only$' /etc/pam.d/system-local-login; then
-        echo 'auth     optional  pam_gnupg.so store-only' | sudo tee -a /etc/pam.d/system-local-login
-    fi
-    if ! grep -q '^session[[:blank:]]*optional[[:blank:]]*pam_gnupg.so$' /etc/pam.d/system-local-login; then
-        echo 'session  optional  pam_gnupg.so' | sudo tee -a /etc/pam.d/system-local-login
-    fi
+    for pam in system-local-login sddm; do
+        if ! grep -q '^auth[[:blank:]]*optional[[:blank:]]*pam_gnupg.so[[:blank:]]*store-only$' "/etc/pam.d/${pam}"; then
+            echo 'auth     optional  pam_gnupg.so store-only' | sudo tee -a "/etc/pam.d/${pam}"
+        fi
+        if ! grep -q '^session[[:blank:]]*optional[[:blank:]]*pam_gnupg.so$' "/etc/pam.d/${pam}"; then
+            echo 'session  optional  pam_gnupg.so' | sudo tee -a "/etc/pam.d/${pam}"
+        fi
+    done
 }
 
 if uname -a | grep -i linux; then
