@@ -4,6 +4,7 @@ extra/archinstall
 extra/archiso
 extra/cava
 extra/edk2-ovmf
+extra/hypridle
 extra/hyprlock
 extra/hyprpaper
 extra/networkmanager
