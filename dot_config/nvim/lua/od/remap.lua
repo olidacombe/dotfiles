@@ -106,4 +106,8 @@ vim.keymap.set("n", "-", function()
     vim.cmd("e " .. dir)
 end, { desc = "Edit current dir" })
 
+-- Sort
+vim.keymap.set("n", "<leader><leader>S", ":% ! sort<CR>", { desc = "Sort the whole file"})
+vim.keymap.set("v", "<leader>S", ":'<,'>sort<CR>", { desc = "Sort Selection"})
+
 -- All else has moved to `which-key.lua`

@@ -7,11 +7,13 @@ extra/edk2-ovmf
 extra/hypridle
 extra/hyprlock
 extra/hyprpaper
+extra/hyprpolkitagent
 extra/networkmanager
 extra/playerctl
 extra/qemu-desktop
 extra/waybar
 extra/wev
+extra/wl-clipboard
 pam-gnupg
 pulsemixer
 pyenv-virtualenv

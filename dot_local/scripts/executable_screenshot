@@ -2,7 +2,14 @@
 
 set -euo pipefail
 
+MODE=${1:-"partial"}
+
 FILENAME="screenshot-`date +%F-%T`"
 TARGET_DIR="${XDG_PICTURES_DIR:-${HOME}/Pictures}"
 mkdir -p "${TARGET_DIR}"
-grim -g "$(slurp)" "${TARGET_DIR}/${FILENAME}.png"
+
+if [ "$MODE" = "full" ]; then
+    grim "${TARGET_DIR}/${FILENAME}.png"
+else
+    grim -g "$(slurp)" "${TARGET_DIR}/${FILENAME}.png"
+fi
