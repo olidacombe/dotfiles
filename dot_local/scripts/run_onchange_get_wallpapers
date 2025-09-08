@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+WALLPAPER_DIR=${WALLPAPER_DIR:-"${HOME}/wallpapers"}
+
+mkdir -p "$WALLPAPER_DIR"
+
+while read -r NAME URL; do
+    TARGET_PATH="${WALLPAPER_DIR}/${NAME}"
+    if [ ! -f "$TARGET_PATH" ]; then
+        curl -o "${WALLPAPER_DIR}/${NAME}" "$URL"
+    fi
+done <<EOF
+fire.jpg https://w.wallhaven.cc/full/8x/wallhaven-8x85xy.jpg
+vista.jpg https://w.wallhaven.cc/full/lm/wallhaven-lmm9k2.jpg
+misty_lake.jpg https://w.wallhaven.cc/full/42/wallhaven-42m3lm.jpg
+EOF
