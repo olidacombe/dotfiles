@@ -196,7 +196,7 @@
 
     "bluetooth": {
         "format": "",
-        "on-click": "hyprctl dispatch -- exec ghostty -e bluetuith",
+        "on-click": "hyprctl dispatch -- exec [float] alacritty -e bluetuith",
         // "format-connected": " {device_alias}",
         // "format-connected-battery": " {device_alias} {device_battery_percentage}%",
         // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
@@ -245,7 +245,7 @@
         "tooltip-format-ethernet": " {ifname} {ipaddr}/{cidr}",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50,
-        "on-click": "hyprctl dispatch -- exec ghostty -e nmtui",
+        "on-click": "hyprctl dispatch -- exec [float] alacritty -e nmtui",
     },
 
     "clock": {
