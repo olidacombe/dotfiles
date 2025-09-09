@@ -1,7 +1,9 @@
+# brave
+# neofetch
+# python-nrfutil
 abseil-cpp
 base-devel # like deb build-essentials
 bind
-# brave
 btop
 calc
 cmake
@@ -27,7 +29,6 @@ moreutils
 mosh
 multipath-tools
 navi
-# neofetch
 net-tools
 nmap
 nvm
@@ -38,9 +39,12 @@ ponysay
 protobuf
 pv
 pyenv
-# python-nrfutil
 python-pipenv
 python-pipx
+qt6-multimedia-ffmpeg
+qt6-svg
+qt6-virtualkeyboard
+sddm
 strace
 texlive-binextra
 texlive-fontsextra

@@ -1,7 +1,7 @@
 require("mini.ai").setup()
--- require("mini.comment").setup()
 local hipatterns = require("mini.hipatterns")
-local pairs = require("mini.pairs")
+-- TODO, kill this off after a "trial period"
+-- local pairs = require("mini.pairs")
 require("mini.splitjoin").setup()
 require("mini.surround").setup()
 
@@ -26,20 +26,21 @@ hipatterns.setup({
     },
 })
 
-pairs.setup({
-    mappings = {
-        ["("] = { action = "open", pair = "()", neigh_pattern = "[^\\]." },
-        ["["] = { action = "open", pair = "[]", neigh_pattern = "[^\\]." },
-        ["{"] = { action = "open", pair = "{}", neigh_pattern = "[^\\]." },
-        ["<"] = { action = "open", pair = "<>", neigh_pattern = "[^%s\\<]." },
-
-        [")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
-        ["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
-        ["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
-        [">"] = { action = "close", pair = "<>", neigh_pattern = "[^\\]." },
-
-        ['"'] = { action = "closeopen", pair = '""', neigh_pattern = "[^\\].", register = { cr = false } },
-        ["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%a<&\\].", register = { cr = false } },
-        ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^`\\].", register = { cr = false } },
-    },
-})
+-- TODO, kill this off after a "trial period"
+-- pairs.setup({
+--     mappings = {
+--         ["("] = { action = "open", pair = "()", neigh_pattern = "[^\\]." },
+--         ["["] = { action = "open", pair = "[]", neigh_pattern = "[^\\]." },
+--         ["{"] = { action = "open", pair = "{}", neigh_pattern = "[^\\]." },
+--         ["<"] = { action = "open", pair = "<>", neigh_pattern = "[^%s\\<]." },
+--
+--         [")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
+--         ["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
+--         ["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
+--         [">"] = { action = "close", pair = "<>", neigh_pattern = "[^\\]." },
+--
+--         ['"'] = { action = "closeopen", pair = '""', neigh_pattern = "[^\\].", register = { cr = false } },
+--         ["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%a<&\\].", register = { cr = false } },
+--         ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^`\\].", register = { cr = false } },
+--     },
+-- })

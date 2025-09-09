@@ -1,0 +1,57 @@
+/* vim: set filetype=css */
+@import url("{{ .configDir }}/colours/mocha.css");
+
+* {
+	background-image: none;
+	box-shadow: none;
+}
+
+window {
+	background-color: rgba(12, 12, 12, 0);
+}
+
+button {
+    border-radius: 0;
+	text-decoration-color: @text;
+    color: @text;
+    opacity: 0.8;
+	background-color: rgba(12, 12, 12, 0.6);
+	border-style: none;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 16%;
+    padding: 10px;
+    margin: 5px;
+    font-size: 44px;
+}
+
+button:focus, button:active, button:hover {
+	background-color: rgba(15, 15, 15, 0.65);
+	text-decoration-color: @sapphire;
+    color: @sapphire;
+	outline-style: none;
+}
+
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+}
