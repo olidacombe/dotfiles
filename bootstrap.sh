@@ -87,7 +87,14 @@ function setup_pam() {
 }
 
 function setup_sddm_theme() {
-    sudo git clone -b master --depth 1 https://github.com/olidacombe/sddm-astronaut-theme.git /usr/share/sddm/themes/sddm-astronaut-theme
+    local THEME_DIR=/usr/share/sddm/themes/sddm-astronaut-theme
+    if [ ! -d "$THEME_DIR" ]; then
+        sudo git clone -b master --depth 1 https://github.com/olidacombe/sddm-astronaut-theme.git /usr/share/sddm/themes/sddm-astronaut-theme
+    else
+        pushd "$THEME_DIR"
+        sudo git pull
+        popd
+    fi
     sudo cp -r /usr/share/sddm/themes/sddm-astronaut-theme/Fonts/* /usr/share/fonts/
     echo "[Theme]\nCurrent=sddm-astronaut-theme" | sudo tee /etc/sddm.conf
     echo "[General]\nInputMethod=qtvirtualkeyboard" | sudo tee /etc/sddm.conf.d/virtualkbd.conf
