@@ -86,6 +86,13 @@ function setup_pam() {
     done
 }
 
+function setup_sddm_theme() {
+    sudo git clone -b master --depth 1 https://github.com/olidacombe/sddm-astronaut-theme.git /usr/share/sddm/themes/sddm-astronaut-theme
+    sudo cp -r /usr/share/sddm/themes/sddm-astronaut-theme/Fonts/* /usr/share/fonts/
+    echo "[Theme]\nCurrent=sddm-astronaut-theme" | sudo tee /etc/sddm.conf
+    echo "[General]\nInputMethod=qtvirtualkeyboard" | sudo tee /etc/sddm.conf.d/virtualkbd.conf
+}
+
 if uname -a | grep -i linux; then
     export INSTALLER=$(linux_installer)
 	export OS="$LINUX"
@@ -150,6 +157,7 @@ else
                 # FIXME
                 yes | yay -qS $( strip_comment yayfile-{core,full} ) <<< "A\nN\n" || true # I didn't figure out why this is failing
                 setup_pam
+                setup_sddm_theme
             fi
             ;;
         "debian")
