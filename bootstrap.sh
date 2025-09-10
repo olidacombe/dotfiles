@@ -204,7 +204,9 @@ git remote -v | grep "${GH_USER}/dotfiles" || quit "we're not, time to \`chezmoi
 # |/   \__/(_______)\_______)   )_(   
 #                                     
 command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-. ${HOME}/.cargo/env
+if [ -f "${HOME}/.cargo/env" ]; then
+    . ${HOME}/.cargo/env
+fi
 rustup default || rustup default stable
 rustup component add rust-analyzer
 
@@ -267,32 +269,3 @@ exit 0
 # |_____|___/|  __/|____/|  __/ 
 #            |_|         |_|    
 espup install
-
-[[ -d "${HOME}/.sdkman" ]] && echo sdkman found || curl -s "https://get.sdkman.io" | bash
-# TODO get auto usage of `sdk` working as attempted below
-# ensure sdkman env is available
-# export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-#
-# command -v kotlinc &> /dev/null && echo kotlin found || sdk install kotlin
-# command -v gradle &> /dev/null && echo kotlin found || sdk install gradle
-
-# TODO work out hydrating templates so this will work
-# echo running \`chezmoi apply\`
-# chezmoi apply
-
-#  __________ 
-# < firebase >
-#  ---------- 
-#   \            .    .     .   
-#    \      .  . .     `  ,     
-#     \    .; .  : .' :  :  : . 
-#      \   i..`: i` i.i.,i  i . 
-#       \   `,--.|i |i|ii|ii|i: 
-#            UooU\.'@@@@@@`.||' 
-#            \__/(@@@@@@@@@@)'  
-#                 (@@@@@@@@)    
-#                 `YY~~~~YY'    
-#                  ||    ||     
-#
-command -v firebase &> /dev/null && echo firebase found || curl -sL firebase.tools | bash
