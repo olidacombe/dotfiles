@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+export HYPRLAND_INSTANCE_SIGNATURE="$(ls "/run/user/$(id -u)/hypr" | head -1)"
+
+hyprctl dispatch exec /usr/lib/pentablet/PenTablet
