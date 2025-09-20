@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+sudo tee /etc/udev/rules.d/99-xppen.rules <<EOF
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="28bd", ATTR{idProduct}=="095a", RUN+="/usr/bin/sudo -u {{ .chezmoi.username }} {{ .scriptsDir }}/xppen-attach"
+EOF
+
+# vim: set ft=sh :
