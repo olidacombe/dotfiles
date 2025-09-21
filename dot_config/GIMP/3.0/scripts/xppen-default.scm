@@ -5,6 +5,11 @@
 ; - macOS: ~/Library/Application Support/GIMP/3.0/scripts/
 ; Name it something like: auto-create-black-image.scm
 
+; TODO
+; Set Palette
+; Set Foreground to non-black
+; Zoom-to-fit
+
 (define (blackboard)
   (let* (
          ; Define image dimensions
