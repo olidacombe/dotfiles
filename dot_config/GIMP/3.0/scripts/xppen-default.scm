@@ -20,8 +20,17 @@
          (img (car (gimp-image-new width height 0))) ; 0 for RGB
          
          ; Create new layer - GIMP 3.0 syntax
-         (layer (car (gimp-layer-new img
+         (bglayer (car (gimp-layer-new img
                                       "Background"  ; layer name
+                                      width
+                                      height
+                                      0            ; RGB with alpha
+                                      100          ; opacity
+                                      0)))         ; normal mode
+
+         ; Create new layer - GIMP 3.0 syntax
+         (fglayer (car (gimp-layer-new img
+                                      "Scratch"  ; layer name
                                       width
                                       height
                                       0            ; RGB with alpha
@@ -33,13 +42,21 @@
         )
     
     ; Add layer to image
-    (gimp-image-insert-layer img layer 0 0)
+    (gimp-image-insert-layer img bglayer 0 0)
     
-    ; Set foreground color to black
-    (gimp-context-set-foreground '(0 0 0))
+    ; Set background color to black
+    (gimp-context-set-background '(0 0 0))
     
     ; Fill layer with black (0 = foreground)
-    (gimp-drawable-fill layer 0)
+    ;; (gimp-drawable-fill bglayer 1)
+
+    (gimp-layer-add-alpha fglayer)
+
+    ; (4 = transparent https://developer.gimp.org/api/3.0/libgimp/enum.FillType.html)
+    (gimp-drawable-fill fglayer 4)
+
+    ; Add layer to image
+    (gimp-image-insert-layer img fglayer 0 0)
 
     (gimp-display-new img)
     
