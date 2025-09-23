@@ -4,6 +4,11 @@
 
 (file-version 1)
 
+(action "blackboard" "<Primary>b")
+(action "context-palette-foreground-previous" "<Primary><Alt>g")
+(action "context-palette-foreground-next" "<Primary><Alt>c")
+(action "view-zoom-out" "<Primary>minus" "ZoomOut")
+
 # (action "filters-tile-paper")
 # (action "context-foreground-red-minimum")
 # (action "tools-warp-effect-pixel-size-set")
@@ -1067,7 +1072,5 @@
 # (action "filters-spiral")
 # (action "layers-lock-alpha")
 # (action "edit-paste-as-new-image" "<Primary><Shift>v" "<Shift>Paste")
-
-(action "blackboard" "<Primary>b")
 
 # end of shortcutsrc
