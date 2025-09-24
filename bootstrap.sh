@@ -112,7 +112,10 @@ fi
 
 if ! is_gitpod; then
     # helpful https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0
-    command -v gpg &> /dev/null && echo gpg found || $INSTALLER gpg2 pinentry-mac
+    command -v gpg &> /dev/null && echo gpg found || $INSTALLER gpg2
+    if [ "$OS" = "$MACOS" ]; then
+        $INSTALLER pinentry-mac
+    fi
     export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
     [ -z "$GPG_KEYS" ] && gpg --full-generate-key && export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
     echo "$GPG_KEYS"

@@ -6,7 +6,6 @@ sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh
 
 ## TODO
 
-+ [quarto](https://quarto.org/)
 + [Pandoc-Emojis-Filter?](https://github.com/masbicudo/Pandoc-Emojis-Filter)
 + [quarto](https://quarto.org/)
 + a `<leader>r` to run a script within markdown bash code block
@@ -25,6 +24,4 @@ sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh
 + https://rycee.gitlab.io/home-manager/
 + https://github.com/tmux-plugins/tmux-resurrect
 + or https://github.com/tmux-plugins/tmux-continuum
-+ Auto sddm theme (e.g. [sddm-astronaut-theme](https://github.com/Keyitdev/sddm-astronaut-theme)) on Arch
 + sort out [pam-gnupg](https://github.com/cruegge/pam-gnupg)
-+ sort out tablet in linux? https://github.com/OpenTabletDriver/OpenTabletDriver/pull/3948#pullrequestreview-3160719269
