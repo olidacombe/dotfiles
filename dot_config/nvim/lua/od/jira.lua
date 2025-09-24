@@ -98,41 +98,83 @@ function M.find_field_by_name(name)
     }):start()
 end
 
--- 🔍 Query Jira using JQL and call `callback(issues)`
-function M.query_jira(jql, callback)
-    local base_url = get_env("JIRA_HOST")
-    local url = base_url .. "/rest/api/3/search?jql=" .. urlencode(jql)
-
+-- Helper: call /rest/api/3/search/jql once, follow nextPageToken if present
+local function _jira_search_once(url, acc, done)
     Job:new({
         command = "curl",
         args = {
             "-s",
             "-H", "Authorization: " .. get_auth_header(),
-            "-H", "Content-Type: application/json",
+            "-H", "Accept: application/json",
             url
         },
         on_exit = function(j, return_val)
             local result = table.concat(j:result(), "\n")
             vim.schedule(function()
                 if return_val ~= 0 then
-                    vim.notify("Jira query failed.", vim.log.levels.ERROR)
+                    vim.notify("Jira query failed (" .. return_val .. ")", vim.log.levels.ERROR)
                     return
                 end
-
                 local ok, parsed = pcall(vim.json.decode or vim.fn.json_decode, result)
-                if not ok or not parsed then
+                if not ok or type(parsed) ~= "table" then
                     vim.notify("Failed to parse Jira response.", vim.log.levels.ERROR)
                     return
                 end
 
-                if parsed.issues then
-                    callback(parsed.issues)
+                if type(parsed.issues) == "table" then
+                    for _, it in ipairs(parsed.issues) do
+                        table.insert(acc, it)
+                    end
+                end
+
+                local next_token = parsed.nextPageToken
+                if type(next_token) == "string" and next_token ~= "" then
+                    local base_url = get_env("JIRA_HOST")
+                    local next_url = string.format(
+                        "%s/rest/api/3/search/jql?nextPageToken=%s&fields=%s",
+                        base_url,
+                        urlencode(next_token),
+                        -- keep fields consistent across pages
+                        urlencode(table.concat({
+                            "key", "summary", "status", "assignee", "priority", "duedate", "updated", "description",
+                            "customfield_10286", -- RAG (as used below)
+                            "customfield_10978", -- Business Team (as used below)
+                        }, ","))
+                    )
+                    _jira_search_once(next_url, acc, done)
                 else
-                    vim.notify("No issues found.", vim.log.levels.WARN)
+                    done(acc)
                 end
             end)
         end,
     }):start()
+end
+
+-- 🔍 Query Jira using *enhanced* JQL endpoint and return ALL pages
+function M.query_jira(jql, callback)
+    local base_url = get_env("JIRA_HOST")
+    -- Request the fields you actually use elsewhere in this file
+    local fields = table.concat({
+        "key", "summary", "status", "assignee", "priority", "duedate", "updated", "description",
+        "customfield_10286", -- RAG
+        "customfield_10978", -- Business Team
+    }, ",")
+
+    -- New endpoint: /rest/api/3/search/jql (old /search is removed)
+    local url = string.format(
+        "%s/rest/api/3/search/jql?jql=%s&fields=%s",
+        base_url,
+        urlencode(jql),
+        urlencode(fields)
+    )
+
+    _jira_search_once(url, {}, function(all_issues)
+        if #all_issues > 0 then
+            callback(all_issues)
+        else
+            vim.notify("No issues found.", vim.log.levels.WARN)
+        end
+    end)
 end
 
 local function safe_field(tbl, field, default)
