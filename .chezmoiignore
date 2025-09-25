@@ -6,3 +6,10 @@ pacfile-*
 crates-*.txt
 npm_globals
 archinstall/
+{{ if ne .chezmoi.os "darwin" }}
+Library
+{{ end }}
+{{ if ne .chezmoi.os "linux" }}
+.config/GIMP
+.local/scripts/xppen*
+{{ end }}
