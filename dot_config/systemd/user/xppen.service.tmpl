@@ -1,0 +1,10 @@
+[Unit]
+Description=XP-Pen Initialization Script
+
+[Service]
+Type=oneshot
+ExecStart={{ .scriptsDir }}/xppen-attach
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target   
