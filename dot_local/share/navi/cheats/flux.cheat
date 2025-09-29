@@ -7,4 +7,4 @@ $ hr: kubectl get hr -ojson | jq -r '.items[].metadata.name'
 $ ns: kubens -c
 
 # Flux resume all READY: False HRs
-kubectl get hr -A | grep False | awk '{ print $1,$2 }' | while read -r ns hr; do flux suspend hr -n $ns $hr && flux resume hr -n $ns $hr; done
+kubectl get hr -A | awk '$4 == "False" { print $1,$2 }' | while read -r ns hr; do flux suspend hr -n $ns $hr && flux resume hr -n $ns $hr; done
