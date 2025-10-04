@@ -64,7 +64,7 @@ class LayerSoloNav(Gimp.PlugIn):
         if background:
             background.set_visible(True)
 
-        if active_index is not None and active_index + 1 < len(layers):
+        if active_index is not None and active_index + 2 < len(layers):
             new_active = layers[active_index + 1]
             image.set_selected_layers([new_active])
 
