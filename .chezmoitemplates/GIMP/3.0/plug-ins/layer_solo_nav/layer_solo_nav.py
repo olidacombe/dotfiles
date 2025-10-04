@@ -7,6 +7,9 @@ import sys
 gi.require_version("Gimp", "3.0")
 from gi.repository import Gimp, GObject, GLib
 
+my_name = "Oli Dacombe"
+year = 2025
+
 
 class LayerSoloNav(Gimp.PlugIn):
     def do_query_procedures(self):
@@ -23,7 +26,7 @@ class LayerSoloNav(Gimp.PlugIn):
                 "Solo the next lower layer.",
                 name,
             )
-            proc.set_attribution("Your Name", "Your Name", "2025")
+            proc.set_attribution(my_name, my_name, f"{year}")
             proc.set_image_types("*")
             proc.add_menu_path("<Image>/Layer")
             return proc
@@ -38,7 +41,7 @@ class LayerSoloNav(Gimp.PlugIn):
                 "Solo next higher layer.",
                 name,
             )
-            proc.set_attribution("Your Name", "Your Name", "2025")
+            proc.set_attribution(my_name, my_name, f"{year}")
             proc.set_image_types("*")
             proc.add_menu_path("<Image>/Layer")
             return proc
