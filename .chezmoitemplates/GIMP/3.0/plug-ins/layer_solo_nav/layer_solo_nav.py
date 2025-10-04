@@ -52,7 +52,8 @@ class LayerSoloNav(Gimp.PlugIn):
         image.undo_group_start()
 
         layers = image.get_layers()
-        active = drawables[0] if drawables else None
+        selected_layers = image.get_selected_layers()
+        active = selected_layers[0] if selected_layers else None
 
         if active and active in layers:
             active_index = layers.index(active)
@@ -63,9 +64,9 @@ class LayerSoloNav(Gimp.PlugIn):
         if background:
             background.set_visible(True)
 
-        if active_index is not None and active_index > 1:
-            new_active = layers[active_index - 1]
-            # image.props.active_layer = new_active
+        if active_index is not None and active_index + 1 < len(layers):
+            new_active = layers[active_index + 1]
+            image.set_selected_layers([new_active])
 
             for lyr in layers:
                 if lyr is new_active or lyr is background and background is not None:
@@ -81,7 +82,8 @@ class LayerSoloNav(Gimp.PlugIn):
         image.undo_group_start()
 
         layers = image.get_layers()
-        active = drawables[0] if drawables else None
+        selected_layers = image.get_selected_layers()
+        active = selected_layers[0] if selected_layers else None
 
         background = layers[-1] if layers else None
         if background:
@@ -105,9 +107,7 @@ class LayerSoloNav(Gimp.PlugIn):
                 Gimp.LayerMode.NORMAL,
             )
             image.insert_layer(new_active, None, 0)
-
-        # image.props.active_layer = new_active  # ✅ Set active layer properly
-        # Gimp.image_set_active_layer(image, new_active)
+        image.set_selected_layers([new_active])
 
         for lyr in layers:
             if lyr is new_active or lyr is background:
