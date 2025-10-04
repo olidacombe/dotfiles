@@ -1,6 +1,9 @@
 # GIMP shortcutsrc
 # 
 # If you delete this file, all shortcuts will be reset to defaults.
+#
+# To stop GIMP overwriting this file:
+# Edit -> Preferences -> Interface -> Keyboard Shortcuts -> { disable "Save keyboard shourtcuts on exit"
 
 (file-version 1)
 
@@ -8,6 +11,8 @@
 (action "context-palette-foreground-previous" "<Primary><Alt>g")
 (action "context-palette-foreground-next" "<Primary><Alt>c")
 (action "view-zoom-out" "<Primary>minus" "ZoomOut")
+(action "python-fu-layer-down-solo" "<Primary><Alt>h")
+(action "python-fu-layer-up-solo" "<Primary><Alt>t")
 
 # (action "filters-tile-paper")
 # (action "context-foreground-red-minimum")
