@@ -10,6 +10,33 @@ from gi.repository import Gimp, GObject, GLib
 my_name = "Oli Dacombe"
 year = 2025
 
+PARASITE_NAME = "layer-solo-nav-slide-count"
+
+
+def get_layer_counter(image):
+    try:
+        parasite = image.get_parasite(PARASITE_NAME)
+        if parasite is not None:
+            data = parasite.get_data()
+
+            # Sometimes get_data() returns a list of ints
+            if isinstance(data, list):
+                data = bytes(data)
+
+            return int(data.decode("utf-8"))
+    except Exception as e:
+        print(f"[layer_solo_nav] Failed to read parasite: {e}")
+    return 2
+
+
+def set_layer_counter(image, new_value):
+    try:
+        data = str(new_value).encode("utf-8")
+        parasite = Gimp.Parasite.new(PARASITE_NAME, 0, data)
+        image.attach_parasite(parasite)
+    except Exception as e:
+        print(f"[layer_solo_nav] Failed to set parasite: {e}")
+
 
 class LayerSoloNav(Gimp.PlugIn):
     def do_query_procedures(self):
@@ -97,15 +124,17 @@ class LayerSoloNav(Gimp.PlugIn):
         if active_index is not None and active_index > 0:
             new_active = layers[active_index - 1]
         else:
+            slide_num = get_layer_counter(image)
             new_active = Gimp.Layer.new(
                 image,
-                "New Layer",
+                f"Slide {slide_num}",
                 image.get_width(),
                 image.get_height(),
                 Gimp.ImageType.RGBA_IMAGE,
                 100.0,
                 Gimp.LayerMode.NORMAL,
             )
+            set_layer_counter(image, slide_num + 1)
             image.insert_layer(new_active, None, 0)
         image.set_selected_layers([new_active])
 
