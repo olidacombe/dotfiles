@@ -1,4 +1,4 @@
-; GIMP 3.0 Startup Script - Auto Create 1920x1200 Black Image
+; GIMP 3.0 Startup Script - Auto Create 7680x4800 Black Image
 ; Place this file in your GIMP scripts folder:
 ; - Linux: ~/.config/GIMP/3.0/scripts/
 ; - Windows: %APPDATA%\GIMP\3.0\scripts\
@@ -13,8 +13,8 @@
 (define (blackboard)
   (let* (
          ; Define image dimensions
-         (width 1920)
-         (height 1200)
+         (width 7680)
+         (height 4800)
          
          ; Create new RGB image
          (img (car (gimp-image-new width height 0))) ; 0 for RGB
@@ -30,7 +30,7 @@
 
          ; Create new layer - GIMP 3.0 syntax
          (fglayer (car (gimp-layer-new img
-                                      "Scratch"  ; layer name
+                                      "Slide 1"  ; layer name
                                       width
                                       height
                                       0            ; RGB with alpha
@@ -46,6 +46,11 @@
     
     ; Set background color to black
     (gimp-context-set-background '(0 0 0))
+
+    ;; Lock layer content if function exists
+    (if (defined? 'gimp-item-set-lock-content)
+        (gimp-item-set-lock-content bglayer TRUE)
+    )
     
     ; Fill layer with black (0 = foreground)
     ;; (gimp-drawable-fill bglayer 1)
@@ -72,7 +77,7 @@
 (script-fu-register
   "blackboard"
   "Auto Blackboard Image"
-  "Automatically creates a 1920x1200 black image"
+  "Automatically creates a 7680x4800 black image"
   "Oli Dacombe"
   "Oli Dacombe"
   "2025"
