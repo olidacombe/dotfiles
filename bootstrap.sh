@@ -213,6 +213,14 @@ fi
 rustup default || rustup default stable
 rustup component add rust-analyzer
 
+#  ▄ .▄ ▄▄▄· .▄▄ · ▄ •▄ ▄▄▄ .▄▄▌  ▄▄▌  
+# ██▪▐█▐█ ▀█ ▐█ ▀. █▌▄▌▪▀▄.▀·██•  ██•  
+# ██▀▐█▄█▀▀█ ▄▀▀▀█▄▐▀▀▄·▐▀▀▪▄██▪  ██▪  
+# ██▌▐▀▐█ ▪▐▌▐█▄▪▐█▐█.█▌▐█▄▄▌▐█▌▐▌▐█▌▐▌
+# ▀▀▀ · ▀  ▀  ▀▀▀▀ ·▀  ▀ ▀▀▀ .▀▀▀ .▀▀▀ 
+command -v ghc &> /dev/null && echo haskell found || curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+
+
  #      ___           ___           ___           ___           ___     
  #     /\  \         /\  \         /\  \         /\  \         /\  \    
  #    /::\  \       /::\  \       /::\  \       /::\  \       /::\  \   

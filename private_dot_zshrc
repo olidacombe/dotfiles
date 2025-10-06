@@ -159,6 +159,8 @@ if [ -d "${HOME}/.cargo/bin" ]; then
     export PATH="${PATH}:${HOME}/.cargo/bin"
 fi
 
+[ -f "/home/oli/.ghcup/env" ] && . "/home/oli/.ghcup/env" # ghcup-env
+
 # # keychain
 # SSH_ADD=ssh-add
 # SSH_ADD_ARGS=
@@ -274,7 +276,3 @@ if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then . ${HOME}/.nix-profile
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
