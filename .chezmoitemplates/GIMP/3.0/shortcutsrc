@@ -11,8 +11,8 @@
 (action "context-palette-foreground-previous" "<Primary><Alt>g")
 (action "context-palette-foreground-next" "<Primary><Alt>c")
 (action "view-zoom-out" "<Primary>minus" "ZoomOut")
-(action "python-fu-layer-down-solo" "<Primary><Alt>h")
-(action "python-fu-layer-up-solo" "<Primary><Alt>t")
+(action "python-fu-layer-down-solo" "<Primary><Alt><Shift>g")
+(action "python-fu-layer-up-solo" "<Primary><Alt><Shift>c")
 
 # (action "filters-tile-paper")
 # (action "context-foreground-red-minimum")
