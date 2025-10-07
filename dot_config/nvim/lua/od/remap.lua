@@ -1,5 +1,7 @@
 vim.g.mapleader = " "
 
+vim.keymap.set("n", "<leader><leader>p", ":% ! prettier %<CR>", { desc = "Prettier the whole file" })
+
 -- Slide visual selections around
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -107,7 +109,7 @@ vim.keymap.set("n", "-", function()
 end, { desc = "Edit current dir" })
 
 -- Sort
-vim.keymap.set("n", "<leader><leader>S", ":% ! sort<CR>", { desc = "Sort the whole file"})
-vim.keymap.set("v", "<leader>S", ":'<,'>sort<CR>", { desc = "Sort Selection"})
+vim.keymap.set("n", "<leader><leader>S", ":% ! sort<CR>", { desc = "Sort the whole file" })
+vim.keymap.set("v", "<leader>S", ":'<,'>sort<CR>", { desc = "Sort Selection" })
 
 -- All else has moved to `which-key.lua`
