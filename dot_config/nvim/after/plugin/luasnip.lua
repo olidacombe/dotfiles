@@ -43,48 +43,11 @@ local c, d, i, f, s, t, isn = ls.choice_node, ls.dynamic_node, ls.insert_node, l
 local dl, l = extras.dynamic_lambda, extras.lambda
 local fmt = require("luasnip.extras.fmt").fmt
 
-local raycast_preamble = [[
-# Required parameters:
-# @raycast.schemaVersion 1
-# @raycast.title {}
-# @raycast.mode {}
-
-# Optional parameters:
-# @raycast.icon 🤖
-# @raycast.packageName{}
-# @raycast.needsConfirmation {}
-{}
-
-# Documentation:
-# @raycast.description {}
-# @raycast.author {}
-# @raycast.authorURL{}
-]]
-
-local raycast_preamble_nodes = function()
-    return {
-        i(1),                                                                                        -- title
-        c(2, { t("compact"), t("silent"), t("fullOutput"), t("inline") }),                           -- mode
-        c(3, { t(""), sn(nil, { t(" "), i(1, "pkg") }) }),                                           -- package name
-        c(4, { t("false"), t("true") }),                                                             -- needs confirmation
-        c(5, { t(""), t('# @raycast.argument1 { "type": "text", "placeholder": "Placeholder" }') }), -- argument boilerplate
-        i(6),                                                                                        --description
-        c(7, { t("Oli Dacombe"), i(nil, "Author") }),
-        c(8, { t(""), sn(nil, { t(" https://"), i(1, "example.com") }) }),                           -- author URL
-        i(0),
-    }
-end
-
 local sh_snips = {
     -- Basic bash preamble
     s("bash", fmt("#!/usr/bin/env bash\n\nset -euo pipefail\n\n\n", {})),
     -- check if executable in path
     s("isexe", fmt("command -v {} &> /dev/null {}", { i(1), i(0) })),
-    -- raycast script
-    s(
-        { trig = "raycast", docstring = "Raycast Script 󱆃" },
-        fmt("#!/usr/bin/env bash\n\n" .. raycast_preamble .. "\nset -euo pipefail\n\n{}", raycast_preamble_nodes())
-    ),
     -- add dir to path
     s(
         { trig = "path", docstring = "Add dir to $PATH" },
@@ -240,13 +203,6 @@ ls.add_snippets(nil, {
         s(
             { trig = "readme", docstring = "README.md" },
             t("README.md")
-        ),
-    },
-    python = {
-        -- raycast script
-        s(
-            { trig = "raycast", docstring = "Raycast Script " },
-            fmt("#!/usr/bin/env python\n\n" .. raycast_preamble .. "\n\n{}", raycast_preamble_nodes())
         ),
     },
     rust = {

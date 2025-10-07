@@ -2,8 +2,45 @@
 
 set -euo pipefail
 
-sudo tee /etc/udev/rules.d/99-xppen.rules <<EOF
-ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="28bd", ATTR{idProduct}=="095a", TAG+="systemd", ENV{SYSTEMD_USER_WANTS}+="xppen.service"
-EOF
+#                                           _____                     
+# ______   _____     ____________      _____\    \ _______    ______  
+# \     \  \    \    \           \    /    / |    |\      |  |      | 
+#  \    |  |    |     \           \  /    /  /___/| |     /  /     /| 
+#   |   |  |    |      |    /\     ||    |__ |___|/ |\    \  \    |/  
+#   |    \_/   /|      |   |  |    ||       \       \ \    \ |    |   
+#   |\         \|      |    \/     ||     __/ __     \|     \|    |   
+#   | \         \__   /           /||\    \  /  \     |\         /|   
+#    \ \_____/\    \ /___________/ || \____\/    |    | \_______/ |   
+#     \ |    |/___/||           | / | |    |____/|     \ |     | /    
+#      \|____|   | ||___________|/   \|____|   | |      \|_____|/     
+#            |___|/                        |___|/                     
+
+UDEV_RULES='ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="28bd", ATTR{idProduct}=="095a", TAG+="systemd", ENV{SYSTEMD_USER_WANTS}+="xppen.service"'
+UDEV_RULES_FILE=/etc/udev/rules.d/99-xppen.rules 
+
+if [ "$UDEV_RULES" != "$(cat "$UDEV_RULES_FILE")" ]; then
+    sudo tee "$UDEV_RULES_FILE" <<< "$UDEV_RULES"
+fi
+
+#                                  ██████   ███          
+#                                 ███░░███ ░░░           
+#   ██████   ██████  ████████    ░███ ░░░  ████   ███████
+#  ███░░███ ███░░███░░███░░███  ███████   ░░███  ███░░███
+# ░███ ░░░ ░███ ░███ ░███ ░███ ░░░███░     ░███ ░███ ░███
+# ░███  ███░███ ░███ ░███ ░███   ░███      ░███ ░███ ░███
+# ░░██████ ░░██████  ████ █████  █████     █████░░███████
+#  ░░░░░░   ░░░░░░  ░░░░ ░░░░░  ░░░░░     ░░░░░  ░░░░░███
+#                                                ███ ░███
+#                                               ░░██████ 
+#                                                ░░░░░░  
+
+DST="/usr/lib/pentablet/conf/xppen/config.xml"
+SRC="{{ .configDir }}/xppen/config.xml" 
+
+if [ "$SRC" -nt "$DST" ]; then
+    cp "$SRC" "$DST"
+else
+    cp "$DST" "$(chezmoi source-path "$SRC")"
+fi
 
 # vim: set ft=sh :

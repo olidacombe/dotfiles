@@ -1,13 +1,15 @@
-# TODO
+# Direct Apply
 
-## Direct Apply
-
-Find default location?  In MacOS there's:
+## MacOS
 
 - `~/.XPPen/config.xml`
 - `~/.XPPen/dialogpos.ini`
 
-## Split Template
+## Linux
+
+- `/usr/lib/pentablet/conf/xppen/`
+
+## GIMP Split Template
 
 `shortcutsrc` uses `<Primary>` and `<Alt>` for Linux.
 

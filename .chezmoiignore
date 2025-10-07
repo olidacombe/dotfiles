@@ -8,8 +8,10 @@ npm_globals
 archinstall/
 {{ if ne .chezmoi.os "darwin" }}
 Library
+.XPPen
 {{ end }}
 {{ if ne .chezmoi.os "linux" }}
 .config/GIMP
+.config/xppen
 .local/scripts/xppen*
 {{ end }}
