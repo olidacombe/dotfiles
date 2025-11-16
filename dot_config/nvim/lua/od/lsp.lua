@@ -50,4 +50,12 @@ M.on_attach = function(client, bufnr)
     })
 end
 
+-- Tell the server the capability of foldingRange,
+-- Neovim hasn't added foldingRange to default capabilities, users must add it manually
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+
 return M

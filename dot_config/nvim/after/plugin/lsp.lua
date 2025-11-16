@@ -1,5 +1,5 @@
-local lsp = require("lsp-zero")
 local on_attach = require("od.lsp").on_attach
+local capabilities = require("od.lsp").capabilities
 
 require("config.rustaceanvim")
 
@@ -10,19 +10,10 @@ require("mason-lspconfig").setup({
         "graphql",
         "pyright",
         "ruff",
-        -- 'lua_ls', -- sadly broken or arm
+        'lua_ls', -- sadly broken or arm
         "svelte",
         "tailwindcss",
         "yamlls",
-    },
-    handlers = {
-        function(server_name)
-            require("lspconfig")[server_name].setup({})
-        end,
-        lua_ls = function()
-            -- local lua_opts = lsp.nvim_lua_ls()
-            -- require("lspconfig").lua_ls.setup(lua_opts)
-        end,
     },
 })
 
@@ -43,7 +34,7 @@ require("mason-lspconfig").setup({
 --     },
 -- })
 
-lsp.configure("pyright", {
+vim.lsp.config("pyright", {
     settings = {
         pyright = {
             -- Using Ruff's import organizer
@@ -57,20 +48,10 @@ lsp.configure("pyright", {
         },
     },
 })
-
--- lsp.configure("ruff_lsp", {
--- 	settings = {
--- 		init_options = {
--- 			settings = {
--- 				-- Any extra CLI arguments for `ruff` go here.
--- 				args = {},
--- 			},
--- 		},
--- 	},
--- })
+vim.lsp.enable("pyright")
 
 -- Fix Undefined global 'vim'
-lsp.configure("lua_ls", {
+vim.lsp.config("lua_ls", {
     settings = {
         Lua = {
             diagnostics = {
@@ -84,8 +65,9 @@ lsp.configure("lua_ls", {
         },
     },
 })
+vim.lsp.enable("lua_ls")
 
-lsp.configure("yamlls", {
+vim.lsp.config("yamlls", {
     settings = {
         yaml = {
             schemaStore = {
@@ -102,23 +84,26 @@ lsp.configure("yamlls", {
         },
     },
 })
+vim.lsp.enable("yamlls")
 
-lsp.configure("svelte", {
+vim.lsp.config("svelte", {
     settings = {
         svelte = {
             ["enable-ts-plugin"] = true,
         },
     },
 })
+vim.lsp.enable("svelte")
 
-lsp.on_attach(on_attach)
-
+vim.lsp.config("*", {
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
 
 -- configure neodev before lsp
 require("neodev").setup({
     library = { plugins = { "neotest" }, types = true },
 })
-lsp.setup()
 
 local cmp = require("cmp")
 
