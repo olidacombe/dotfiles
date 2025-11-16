@@ -10,7 +10,6 @@ sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh
 + [quarto](https://quarto.org/)
 + a `<leader>r` to run a script within markdown bash code block
 + [tinymist](https://github.com/Myriad-Dreamin/tinymist)
-+ lsp-zero `.profile` deprecation nag
 + migrate from simrat/rust-tools to [rustaceanvim](https://github.com/mrcjkb/rustaceanvim)
 + nested tmux
     - [clipboard](https://stackoverflow.com/questions/60923257/tmux-how-to-copy-text-between-nested-remote-ssh-session-and-local-machine)

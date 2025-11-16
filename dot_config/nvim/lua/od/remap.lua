@@ -11,6 +11,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- vim.keymap.set("n", "<Tab>", ":tabn<CR>")
 vim.keymap.set("n", "<S-Tab>", ":tabp<CR>")
 
+-- FIXME: These are basically not working, except <Down> 🤔
 --  _______    _     _    _______
 -- (_______)  | |   | |  (_______)
 --  _____ ___ | | __| |   _     _ _____ _   _
