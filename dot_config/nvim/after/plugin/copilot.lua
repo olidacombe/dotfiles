@@ -16,3 +16,9 @@ vim.g.copilot_no_tab_map = true
 --     expr = true,
 --     noremap = false
 -- })
+
+vim.keymap.set("n", "<leader>c", "<Nop>", {
+    desc = "Copilot"
+})
+vim.keymap.set('n', '<leader>ce', ':Copilot enable<CR>')
+vim.keymap.set('n', '<leader>cd', ':Copilot disable<CR>')
