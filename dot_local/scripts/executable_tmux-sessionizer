@@ -24,7 +24,13 @@ if [ -f "$SESSIONIZER_DIRS_CONFIG" ]; then
 fi
 
 get_local_repos() {
-    find "${SESSIONIZER_DIRS[@]/#\~/${HOME}}" -mindepth 1 -maxdepth 5 -name .terraform -prune -o -name .git -print0 | xargs -0 dirname
+    # speed up with some parallelization
+    printf '%s\n' "${SESSIONIZER_DIRS[@]/#\~/${HOME}}" \
+        | xargs -P "${#SESSIONIZER_DIRS[@]}" -I{} find "{}" \
+        -mindepth 1 -maxdepth 5 \
+        -name .terraform -prune \
+        -o -name .git \
+        -print0 | xargs -0 dirname
 }
 
 get_remote_repos() {
