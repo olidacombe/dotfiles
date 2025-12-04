@@ -1,8 +1,9 @@
 background = #000000
 confirm-close-surface = false
 window-decoration = none
-keybind = super+equal=reset_font_size
-keybind = super+kp_equal=reset_font_size
+# keybind = super+equal=reset_font_size
+# keybind = super+kp_equal=reset_font_size
+keybind = super+0=reset_font_size
 keybind = super+minus=decrease_font_size:1
 keybind = super+kp_subtract=decrease_font_size:1
 
@@ -10,4 +11,5 @@ keybind = super+kp_subtract=decrease_font_size:1
 keybind = super+plus=increase_font_size:1
 keybind = super+kp_add=increase_font_size:1
 # This is an apology for the above 2 lines
-keybind = super+shift+minus=increase_font_size:1
+# basically MacOS sees cmd-"-" as cmd-shift-=
+keybind = super+shift+equal=increase_font_size:1
