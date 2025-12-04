@@ -6,7 +6,7 @@ local mappings = {
     { "bc", "<Cmd>bd!<CR>", desc = "Close current buffer" },
     { "bD", "<Cmd>%bd|e#|bd#<CR>", desc = "Delete all buffers" },
     { "g", group = "Git" },
-    { "gp", "<cmd>Git pull<cr>", desc = "﬇ pull" },
+    { "gp", "<cmd>G! pull<cr>", desc = "﬇ pull" },
     { "gC", require("od.git").git_checkout_new_branch, desc = "Create Branch" },
     {
         "gl",
