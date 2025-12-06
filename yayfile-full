@@ -11,6 +11,7 @@ extra/hyprpolkitagent
 extra/networkmanager
 extra/playerctl
 extra/qemu-desktop
+extra/swayosd
 extra/waybar
 extra/wev
 extra/wl-clipboard
