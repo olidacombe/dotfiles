@@ -1,6 +1,7 @@
 local whichkey = require("which-key")
 local register_normal = require("od.which-key").register_normal
 local quickcycle = require("od.quickcycle")
+local od_git = require("od.git")
 
 local fugitive_quickcycle_mappings = quickcycle.new({
     { "change", next = "normal ]/=", prev = "normal [/=" },
@@ -91,6 +92,16 @@ autocmd("BufLeave", {
 -- Global mappings
 local mappings = {
     { "gs", "<cmd>G<CR>", desc = "Status" },
+    {
+        "gx",
+        function()
+            P("Closing Git/Fugitive Buffers")
+            od_git.bd_ft("git")
+            od_git.bd_ft("fugitive")
+            P("Closed Git/Fugitive Buffers")
+        end,
+        desc = "Close Git/Fugitive Buffers"
+    },
 }
 
 register_normal(mappings)
