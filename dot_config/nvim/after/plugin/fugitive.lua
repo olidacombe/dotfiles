@@ -1,7 +1,8 @@
 local whichkey = require("which-key")
 local register_normal = require("od.which-key").register_normal
 local quickcycle = require("od.quickcycle")
-local od_git = require("od.git")
+local od_buffer = require("od.buffer")
+local run_with_fidget = require("od.command").run_with_fidget
 
 local fugitive_quickcycle_mappings = quickcycle.new({
     { "change", next = "normal ]/=", prev = "normal [/=" },
@@ -44,14 +45,18 @@ autocmd("BufWinEnter", {
         local mappings = {
             {
                 "<leader>p",
-                "<cmd>G! push<CR>",
+                function()
+                    run_with_fidget({ "git", "push" }, { title = "Git Push" })
+                end,
                 desc = "git push",
             },
 
             -- rebase always on pull
             {
                 "<leader>P",
-                "<cmd>G! pull --rebase<CR>",
+                function()
+                    run_with_fidget({ "git", "pull", "--rebase" }, { title = "Git Pull --rebase" })
+                end,
                 desc = "git pull --rebase",
             },
 
@@ -96,8 +101,8 @@ local mappings = {
         "gx",
         function()
             P("Closing Git/Fugitive Buffers")
-            od_git.bd_ft("git")
-            od_git.bd_ft("fugitive")
+            od_buffer.bd_ft("git")
+            od_buffer.bd_ft("fugitive")
             P("Closed Git/Fugitive Buffers")
         end,
         desc = "Close Git/Fugitive Buffers"

@@ -219,8 +219,6 @@ local plugins = {
     -- LSP status UI
     {
         "j-hui/fidget.nvim",
-        -- TODO update to main and fix for new options
-        branch = "legacy",
     },
 
     -- UFO nice folding
