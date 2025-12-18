@@ -1,9 +1,12 @@
+# opentabletdriver
+# zen-browser-bin
 brave-bin
 core/less
 extra/archinstall
 extra/archiso
 extra/cava
 extra/edk2-ovmf
+extra/git-lfs
 extra/hypridle
 extra/hyprlock
 extra/hyprpaper
@@ -15,10 +18,8 @@ extra/swayosd
 extra/waybar
 extra/wev
 extra/wl-clipboard
-# opentabletdriver
 pam-gnupg
 pulsemixer
 pyenv-virtualenv
 ttf-firacode-nerd
 wlogout
-# zen-browser-bin
