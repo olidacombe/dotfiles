@@ -46,7 +46,7 @@ autocmd("BufWinEnter", {
             {
                 "<leader>p",
                 function()
-                    run_with_fidget({ "git", "push" }, { title = "Git Push" })
+                    run_with_fidget({ "git", "push" }, { title = "git push" })
                 end,
                 desc = "git push",
             },
@@ -55,16 +55,17 @@ autocmd("BufWinEnter", {
             {
                 "<leader>P",
                 function()
-                    run_with_fidget({ "git", "pull", "--rebase" }, { title = "Git Pull --rebase" })
+                    run_with_fidget({ "git", "pull", "--rebase" }, { title = "git pull --rebase" })
                 end,
                 desc = "git pull --rebase",
             },
 
             -- NOTE: It allows me to easily set the branch i am pushing and any tracking
             -- needed if i did not set the branch up correctly
-            { "<leader>t", ":G! push -u origin ",      desc = "git push -u origin " },
-            { "<leader>u", ":G! reset @~<CR>",         desc = "_un_commit" },
-            { "<leader>@", ":G! push -u origin @<CR>", desc = "git push -u origin @" },
+            { "<leader>t", function() run_with_fidget({ "git", "push", "-u", "origin" }, { title = "git push -u origin" }) end, desc = "git push -u origin" },
+            { "<leader>u", function() run_with_fidget({ "git", "reset", "@~", }, { title = "_un_commit" }) end,                 desc = "git push -u origin " },
+            { "<leader>@", function() run_with_fidget({ "git", "push", "-u", "origin", "@" }, { title = "_un_commit" }) end,    desc = "git push -u origin @" },
+
         }
 
         for _, mapping in ipairs(mappings) do
