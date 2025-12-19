@@ -103,6 +103,7 @@ local mappings = {
             P("Closing Git/Fugitive Buffers")
             od_buffer.bd_ft("git")
             od_buffer.bd_ft("fugitive")
+            od_buffer.bd_ft("fugitiveblame")
             P("Closed Git/Fugitive Buffers")
         end,
         desc = "Close Git/Fugitive Buffers"
