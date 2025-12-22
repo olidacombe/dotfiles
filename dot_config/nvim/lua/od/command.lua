@@ -21,10 +21,18 @@ M.run_with_fidget = function(cmd, opts)
             end
         end,
     }, function(res)
-        handle:report({
-            message = res.code == 0 and "Done" or "Failed",
-        })
-        handle:finish()
+        vim.schedule(function()
+            local success = res.code == 0
+
+            handle:report({
+                message = success and "Done" or "Failed",
+            })
+            handle:finish()
+
+            if success and type(opts.on_success) == "function" then
+                opts.on_success(res)
+            end
+        end)
     end)
 end
 
