@@ -35,10 +35,12 @@ autocmd("BufEnter", {
 local function git_fidget(cmd, opts)
     local opts = opts or {}
     opts.title = opts.title or table.concat(cmd, " ")
-    local ret = function()
-        run_with_fidget(cmd, opts)
+    opts.on_success = opts.on_success or function()
         -- Refresh fugitive buffers
         vim.cmd("windo silent if &filetype ==# 'fugitive' | e | endif")
+    end
+    local ret = function()
+        run_with_fidget(cmd, opts)
     end
     return ret
 end
