@@ -32,6 +32,17 @@ autocmd("BufEnter", {
     end,
 })
 
+local function git_fidget(cmd, opts)
+    local opts = opts or {}
+    opts.title = opts.title or table.concat(cmd, " ")
+    local ret = function()
+        run_with_fidget(cmd, opts)
+        -- Refresh fugitive buffers
+        vim.cmd("windo silent if &filetype ==# 'fugitive' | e | endif")
+    end
+    return ret
+end
+
 autocmd("BufWinEnter", {
     group = Od_Fugitive,
     pattern = "*",
@@ -45,26 +56,22 @@ autocmd("BufWinEnter", {
         local mappings = {
             {
                 "<leader>p",
-                function()
-                    run_with_fidget({ "git", "push" }, { title = "git push" })
-                end,
+                git_fidget({ "git", "push" }),
                 desc = "git push",
             },
 
             -- rebase always on pull
             {
                 "<leader>P",
-                function()
-                    run_with_fidget({ "git", "pull", "--rebase" }, { title = "git pull --rebase" })
-                end,
+                git_fidget({ "git", "pull", "--rebase" }),
                 desc = "git pull --rebase",
             },
 
             -- NOTE: It allows me to easily set the branch i am pushing and any tracking
             -- needed if i did not set the branch up correctly
-            { "<leader>t", function() run_with_fidget({ "git", "push", "-u", "origin" }, { title = "git push -u origin" }) end, desc = "git push -u origin" },
-            { "<leader>u", function() run_with_fidget({ "git", "reset", "@~", }, { title = "_un_commit" }) end,                 desc = "git push -u origin " },
-            { "<leader>@", function() run_with_fidget({ "git", "push", "-u", "origin", "@" }, { title = "_un_commit" }) end,    desc = "git push -u origin @" },
+            { "<leader>t", git_fidget({ "git", "push", "-u", "origin" }),                                               desc = "git push -u origin" },
+            { "<leader>u", git_fidget({ "git", "reset", "@~", }, { title = "_un_commit" }),                             desc = "git push -u origin " },
+            { "<leader>@", git_fidget({ "git", "push", "-u", "origin", "@" }, { title = "push and track new branch" }), desc = "git push -u origin @" },
 
         }
 
