@@ -11,6 +11,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- vim.keymap.set("n", "<Tab>", ":tabn<CR>")
 vim.keymap.set("n", "<S-Tab>", ":tabp<CR>")
 
+local od_buffer = require("od.buffer")
+
 -- FIXME: These are basically not working, except <Down> 🤔
 --  _______    _     _    _______
 -- (_______)  | |   | |  (_______)
@@ -112,5 +114,13 @@ end, { desc = "Edit current dir" })
 -- Sort
 vim.keymap.set("n", "<leader><leader>S", ":% ! sort<CR>", { desc = "Sort the whole file" })
 vim.keymap.set("v", "<leader>S", ":'<,'>sort<CR>", { desc = "Sort Selection" })
+
+vim.keymap.set("n", "<leader>x", function()
+    od_buffer.bd_ft("fugitive")
+    od_buffer.bd_ft("fugitiveblame")
+    od_buffer.bd_ft("git")
+    od_buffer.bd_ft("qf")
+    od_buffer.close_terminals()
+end, { desc = "Close \"special\" buffers" })
 
 -- All else has moved to `which-key.lua`

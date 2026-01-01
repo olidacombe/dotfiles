@@ -17,7 +17,7 @@ local mappings = {
         end,
         desc = "bLame",
     },
-    { "x",         "<cmd>!chmod +x %<CR>",             desc = "Make Executable" },
+    { "<leader>x", "<cmd>!chmod +x %<CR>",             desc = "Make Executable" },
     -- Yank to "+
     { "y",         '"+y',                              desc = "Yank to Clipboard" },
     { "Y",         '"+Y',                              desc = "Yank line to Clipboard" },
