@@ -15,21 +15,23 @@ test:
 	@./build-and-test.sh $(BUILD_DIR)
 
 burn:
-	@export SOURCE_IMG="$$( \
-		ls -t ./archiso/out/archlinux-*.iso | fzf --prompt="Select source image: " --height 10 --reverse --border --preview-window=right:60%:wrap \
+	export SOURCE_IMG="$$( \
+		ls -t ./archiso/out/archlinux-*.iso | \
+		fzf --prompt="Select source image: " --height 10 --reverse --border \
 	)"; \
+	[ -f "$$SOURCE_IMG" ] || { echo "Invalid image"; exit 1; }; \
 	echo "Selected source image: $$SOURCE_IMG"; \
-	export DISK="/dev/$$( \
-		lsblk -l | grep '^sd[a-z]\s' \
-		| fzf --prompt="Select target disk: " --height 10 --reverse --border --preview-window=right:60%:wrap \
-		| awk '{print $$1}' \
-	)"; \
-	if [ -b "$$DISK" ]; then \
-		echo "Selected disk: $$DISK"; \
-	else \
-		echo "Error: No disk selected or invalid selection."; \
+	export DISK_NAME="$$(lsblk -dn -o NAME,TYPE | awk '$$2=="disk"{print $$1}' | \
+		fzf --prompt="Select target disk: " --height 10 --reverse --border)"; \
+	export DISK="/dev/$$DISK_NAME"; \
+	[ -b "$$DISK" ] || { echo "Invalid disk: $$DISK"; exit 1; }; \
+	export SIZE=$$(stat -c%s "$$SOURCE_IMG"); \
+	echo "Image size: $$SIZE bytes"; \
+	echo "Selected disk: $$DISK"; \
+	if grep -q "^$${DISK_NAME}" <(lsblk -nr -o NAME,MOUNTPOINT | awk 'NF>1 { print; }'); then \
+		echo "ERROR: $${DISK_NAME} has mounted partitions — aborting"; \
 		exit 1; \
 	fi; \
-	sudo dd if="$$SOURCE_IMG" of="$$DISK" bs=4M status=progress conv=fsync;
-
-
+	pv -s "$$SIZE" "$$SOURCE_IMG" | sudo dd of="$$DISK" bs=4M oflag=direct conv=fsync; \
+	sync ; \
+	echo "Burn complete."
