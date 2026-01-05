@@ -13,6 +13,15 @@ M.bd_ft = function(ft)
     end
 end
 
+-- Close terminal buffers
+M.close_terminals = function()
+    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.bo[bufnr].buftype == "terminal" then
+            vim.api.nvim_buf_delete(bufnr, {})
+        end
+    end
+end
+
 -- Create user command for deleting buffers by filetype
 vim.api.nvim_create_user_command("BDFiletype", function(opts)
     local ft = opts.args
