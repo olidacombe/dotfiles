@@ -59,6 +59,7 @@
     },
     "ntp": true,
     "packages": [
+        "jq",
         "zsh",
         "ghostty"
     ],

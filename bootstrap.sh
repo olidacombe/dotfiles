@@ -133,22 +133,22 @@ function err() {
 
 if command -v chezmoi &> /dev/null; then
         echo chezmoi found
-        pushd "$(chezmoi source-path)"
 else
         if is_gitpod; then
             brew install chezmoi
             sudo cp /etc/resolv.conf{,.bak}
             echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
             chezmoi init --apply olidacombe
-            pushd "$(chezmoi source-path)"
         else
             GET_CHEZMOI="$(curl -fsLS get.chezmoi.io)"
             cd "$HOME"
             [ -z "$GET_CHEZMOI" ] && err "error fetching \`chezmoi\` install script, if it's a cert trust error, consider \`brew install curl\` first?"
+            # workaround because the apply below calls some `run_*` scripts that expect chezmoi to be in PATH
+            export PATH="${HOME}/bin:${PATH}"
             sh -c "$GET_CHEZMOI" -- init --apply olidacombe || err "chezmoi install failed"
-            pushd "$("${HOME}/bin/chezmoi" source-path)"
         fi
 fi
+pushd "$(chezmoi source-path)"
 
 if [ "$OS" = "$MACOS" ]; then
 	echo running \`brew bundle\`
