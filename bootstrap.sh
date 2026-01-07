@@ -97,6 +97,7 @@ function setup_sddm_theme() {
     fi
     sudo cp -r /usr/share/sddm/themes/sddm-astronaut-theme/Fonts/* /usr/share/fonts/
     echo "[Theme]\nCurrent=sddm-astronaut-theme" | sudo tee /etc/sddm.conf
+    sudo mkdir -p /etc/sddm.conf.d
     echo "[General]\nInputMethod=qtvirtualkeyboard" | sudo tee /etc/sddm.conf.d/virtualkbd.conf
 }
 
