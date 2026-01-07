@@ -189,6 +189,11 @@ else
     esac
 fi
 
+# Force default shell in linux
+if [ "$OS" = "$LINUX" ]; then
+    sudo usermod --shell "$(which zsh)" "$(whoami)"
+fi
+
 # we have neovim by now, so pre-install plugins...
 nvim --headless "+Lazy! install" +qa & disown
 
@@ -261,11 +266,6 @@ if command -v nvm &> /dev/null; then
     # install node if we don't have it
     command -v node &> /dev/null || nvm install node
     strip_comment npm_globals | xargs npm i -g & disown
-fi
-
-# Force default shell in linux
-if [ "$OS" = "$LINUX" ]; then
-    sudo usermod --shell "$(which zsh)" "$(whoami)"
 fi
 
 # let's leave it here for the moment
