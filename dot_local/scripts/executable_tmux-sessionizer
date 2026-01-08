@@ -4,11 +4,11 @@ set -euo pipefail
 
 REMOTE_REPO_PREFIX="r:"
 REMOTE_SESSION_PREFIX="r_"
-SESSIONIZER_DIRS=(~/od)
+SESSIONIZER_DIRS=()
 SESSIONIZER_REMOTE_REPOS_FINDERS_DIR="${HOME}/.config/sessionizer/remote_repo_finders.d"
 SESSIONIZER_REMOTE_CONNECTORS_DIR="${HOME}/.config/sessionizer/remote_repo_connectors.d"
 SESSIONIZER_DIRS_CONFIG="${HOME}/.config/sessionizer/dirs"
-if [ ! -f "$SESSIONIZER_DIRS_CONFIG" ]; then
+if [ ! -s "$SESSIONIZER_DIRS_CONFIG" ]; then
     mkdir -p "$(dirname "$SESSIONIZER_DIRS_CONFIG")"
     chezmoi source-path >> "$SESSIONIZER_DIRS_CONFIG"
 fi
