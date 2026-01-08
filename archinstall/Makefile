@@ -32,6 +32,6 @@ burn:
 		echo "ERROR: $${DISK_NAME} has mounted partitions — aborting"; \
 		exit 1; \
 	fi; \
-	pv -s "$$SIZE" "$$SOURCE_IMG" | sudo dd of="$$DISK" bs=4M oflag=direct conv=fsync; \
+	pv -s "$$SIZE" "$$SOURCE_IMG" | sudo dd of="$$DISK" bs=4M iflag=fullblock oflag=direct conv=fsync; \
 	sync ; \
 	echo "Burn complete."
