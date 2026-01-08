@@ -1,5 +1,5 @@
 bootstrap.sh
-README.md
+*.md
 aptfile-*
 yayfile-*
 pacfile-*
