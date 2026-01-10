@@ -61,7 +61,7 @@ local plugins = {
             { "nvim-lua/plenary.nvim" },
             { "nvim-treesitter/nvim-treesitter" },
         },
-        -- dev = true,
+        dev = true,
     },
 
     -- Mini
@@ -287,9 +287,9 @@ local plugins = {
     -- Treesitter
     {
         "nvim-treesitter/nvim-treesitter",
+        lazy = false,
         build = ":TSUpdate",
     },
-    { "nvim-treesitter/playground" },
 
     -- Undotree
     "mbbill/undotree",
@@ -311,7 +311,7 @@ local plugins = {
     "folke/which-key.nvim",
 
     -- wilder.nvim
-    { "gelguy/wilder.nvim",        build = ":UpdateRemotePlugins" },
+    { "gelguy/wilder.nvim", build = ":UpdateRemotePlugins" },
 
     {
         "hat0uma/csvview.nvim",
