@@ -42,12 +42,13 @@ require("nvim-treesitter").setup({
 -- fix command window bug caused by using <cr> for incremental selection
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2634
 vim.api.nvim_create_augroup("cmdwin_treesitter", { clear = true })
-vim.api.nvim_create_autocmd("CmdwinEnter", {
-    pattern = "*",
-    command = "TSBufDisable incremental_selection",
-    group = "cmdwin_treesitter",
-    desc = "Disable treesitter's incremental selection in Command-line window",
-})
+-- FIXME!!!
+-- vim.api.nvim_create_autocmd("CmdwinEnter", {
+--     pattern = "*",
+--     command = "TSBufDisable incremental_selection",
+--     group = "cmdwin_treesitter",
+--     desc = "Disable treesitter's incremental selection in Command-line window",
+-- })
 
 -- ___  _    ____ _ _ ____ ____ ____ _  _ __ _ ___
 -- |--' |___ |--|  Y  |__, |--< [__] |__| | \| |__>
@@ -60,3 +61,15 @@ require("nvim-treesitter").setup({
     },
 })
 vim.keymap.set("n", "<leader>S", "<cmd>InspectTree<cr>", { desc = "Treesitter Playground" })
+
+vim.keymap.set('n', '<CR>', function()
+    require('od.treesitter').init_selection()
+end, { desc = 'Init treesitter selection' })
+
+vim.keymap.set('v', '<CR>', function()
+    require('od.treesitter').node_incremental()
+end, { desc = 'Increment node' })
+
+vim.keymap.set('v', '<BS>', function()
+    require('od.treesitter').node_decremental()
+end, { desc = 'Decrement node' })

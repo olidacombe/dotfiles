@@ -24,3 +24,4 @@ jira-terminal
 lemmeknow
 slint-lsp
 stylua
+terrabastard

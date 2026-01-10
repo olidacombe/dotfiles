@@ -1,3 +1,4 @@
 extra/parallel
 figlet-fonts-extra
 neovim-nightly-bin
+extra/tree-sitter-cli
