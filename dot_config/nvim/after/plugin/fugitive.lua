@@ -2,7 +2,7 @@ local whichkey = require("which-key")
 local register_normal = require("od.which-key").register_normal
 local quickcycle = require("od.quickcycle")
 local od_buffer = require("od.buffer")
-local run_with_fidget = require("od.command").run_with_fidget
+local run_with_progress = require("od.command").run_with_progress
 
 local fugitive_quickcycle_mappings = quickcycle.new({
     { "change", next = "normal ]/=", prev = "normal [/=" },
@@ -32,7 +32,7 @@ autocmd("BufEnter", {
     end,
 })
 
-local function git_fidget(cmd, opts)
+local function git_notify(cmd, opts)
     local opts = opts or {}
     opts.title = opts.title or table.concat(cmd, " ")
     opts.on_success = opts.on_success or function()
@@ -40,7 +40,7 @@ local function git_fidget(cmd, opts)
         vim.cmd("windo silent if &filetype ==# 'fugitive' | e | endif")
     end
     local ret = function()
-        run_with_fidget(cmd, opts)
+        run_with_progress(cmd, opts)
     end
     return ret
 end
@@ -58,22 +58,22 @@ autocmd("BufWinEnter", {
         local mappings = {
             {
                 "<leader>p",
-                git_fidget({ "git", "push" }),
+                git_notify({ "git", "push" }),
                 desc = "git push",
             },
 
             -- rebase always on pull
             {
                 "<leader>P",
-                git_fidget({ "git", "pull", "--rebase" }),
+                git_notify({ "git", "pull", "--rebase" }),
                 desc = "git pull --rebase",
             },
 
             -- NOTE: It allows me to easily set the branch i am pushing and any tracking
             -- needed if i did not set the branch up correctly
-            { "<leader>t", git_fidget({ "git", "push", "-u", "origin" }),                                               desc = "git push -u origin" },
-            { "<leader>u", git_fidget({ "git", "reset", "@~", }, { title = "_un_commit" }),                             desc = "git push -u origin " },
-            { "<leader>@", git_fidget({ "git", "push", "-u", "origin", "@" }, { title = "push and track new branch" }), desc = "git push -u origin @" },
+            { "<leader>t", git_notify({ "git", "push", "-u", "origin" }),                                               desc = "git push -u origin" },
+            { "<leader>u", git_notify({ "git", "reset", "@~", }, { title = "_un_commit" }),                             desc = "git push -u origin " },
+            { "<leader>@", git_notify({ "git", "push", "-u", "origin", "@" }, { title = "push and track new branch" }), desc = "git push -u origin @" },
 
         }
 

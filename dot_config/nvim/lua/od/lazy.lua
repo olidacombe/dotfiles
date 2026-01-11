@@ -216,11 +216,6 @@ local plugins = {
         branch = "v2",
     },
 
-    -- LSP status UI
-    {
-        "j-hui/fidget.nvim",
-    },
-
     -- UFO nice folding
     { "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
 
@@ -345,7 +340,6 @@ local plugins = {
             -- "rcarriga/nvim-notify",
         }
     },
-
 
     {
         "hat0uma/csvview.nvim",

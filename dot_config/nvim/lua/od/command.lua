@@ -1,33 +1,69 @@
 local M = {}
 
-M.run_with_fidget = function(cmd, opts)
+M.run_with_progress = function(cmd, opts)
     opts = opts or {}
 
-    local handle = require("fidget.progress").handle.create({
-        title = opts.title or cmd[1],
-        message = opts.message or "Running…",
-    })
+    local title = opts.title or cmd[1]
+    local notify = require("notify")
+
+    -- Show initial progress notification
+    local notification = notify(
+        opts.message or "Running…",
+        "info",
+        {
+            title = title,
+            icon = "⏳",
+            timeout = false,
+            hide_from_history = false,
+        }
+    )
 
     vim.system(cmd, {
         text = true,
         stdout = function(_, data)
             if data then
-                handle:report({ message = data:gsub("\n", "") })
+                notification = notify(
+                    data:gsub("\n", ""),
+                    "info",
+                    {
+                        title = title,
+                        icon = "⏳",
+                        timeout = false,
+                        hide_from_history = false,
+                        replace = notification,
+                    }
+                )
             end
         end,
         stderr = function(_, data)
             if data then
-                handle:report({ message = data:gsub("\n", "") })
+                notification = notify(
+                    data:gsub("\n", ""),
+                    "info",
+                    {
+                        title = title,
+                        icon = "⏳",
+                        timeout = false,
+                        hide_from_history = false,
+                        replace = notification,
+                    }
+                )
             end
         end,
     }, function(res)
         vim.schedule(function()
             local success = res.code == 0
 
-            handle:report({
-                message = success and "Done" or "Failed",
-            })
-            handle:finish()
+            notify(
+                success and "Done" or "Failed",
+                success and "info" or "error",
+                {
+                    title = title,
+                    icon = success and "✓" or "✗",
+                    timeout = 2000,
+                    replace = notification,
+                }
+            )
 
             if success and type(opts.on_success) == "function" then
                 opts.on_success(res)
@@ -37,7 +73,7 @@ M.run_with_fidget = function(cmd, opts)
 end
 
 -- usage
--- run_with_fidget({ "git", "fetch" }, { title = "Git fetch" })
--- run_with_fidget({ "git", "status" }, { title = "Git status" })
+-- run_with_progress({ "git", "fetch" }, { title = "Git fetch" })
+-- run_with_progress({ "git", "status" }, { title = "Git status" })
 
 return M

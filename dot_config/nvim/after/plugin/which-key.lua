@@ -1,5 +1,5 @@
 local wk = require("od.which-key")
-local run_with_fidget = require("od.command").run_with_fidget
+local run_with_progress = require("od.command").run_with_progress
 
 -- Normal mode mappings
 local mappings = {
@@ -8,7 +8,7 @@ local mappings = {
     { "bD", "<Cmd>%bd|e#|bd#<CR>", desc = "Delete all buffers" },
     { "g", group = "Git" },
     { "gp", "<cmd>G! pull<cr>", desc = "﬇ pull" },
-    { "gp", function() run_with_fidget({ "git", "pull" }, { title = "git pull" }) end, desc = "﬇ pull" },
+    { "gp", function() run_with_progress({ "git", "pull" }, { title = "git pull" }) end, desc = "﬇ pull" },
     { "gC", require("od.git").git_checkout_new_branch, desc = "Create Branch" },
     {
         "gl",
