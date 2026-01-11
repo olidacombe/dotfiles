@@ -1,53 +1,40 @@
 local M = {}
 
+-- internal helper to create / update notifications
+local function notify(msg, level, opts)
+    return vim.notify(msg, level, opts)
+end
+
+-- Fidget-like API
 M.run_with_progress = function(cmd, opts)
     opts = opts or {}
 
     local title = opts.title or cmd[1]
-    local notify = require("notify")
+    local message = opts.message or "Running…"
 
-    -- Show initial progress notification
-    local notification = notify(
-        opts.message or "Running…",
-        "info",
-        {
-            title = title,
-            icon = "⏳",
-            timeout = false,
-            hide_from_history = false,
-        }
-    )
+    -- initial spinner
+    local notif_id = notify(message, "info", {
+        title = title,
+        icon = "󰑓", -- spinner
+        timeout = false,
+    })
 
     vim.system(cmd, {
         text = true,
         stdout = function(_, data)
             if data then
-                notification = notify(
-                    data:gsub("\n", ""),
-                    "info",
-                    {
-                        title = title,
-                        icon = "⏳",
-                        timeout = false,
-                        hide_from_history = false,
-                        replace = notification,
-                    }
-                )
+                notify(data:gsub("\n", ""), "info", {
+                    title = title,
+                    replace = notif_id,
+                })
             end
         end,
         stderr = function(_, data)
             if data then
-                notification = notify(
-                    data:gsub("\n", ""),
-                    "info",
-                    {
-                        title = title,
-                        icon = "⏳",
-                        timeout = false,
-                        hide_from_history = false,
-                        replace = notification,
-                    }
-                )
+                notify(data:gsub("\n", ""), "warn", {
+                    title = title,
+                    replace = notif_id,
+                })
             end
         end,
     }, function(res)
@@ -59,9 +46,9 @@ M.run_with_progress = function(cmd, opts)
                 success and "info" or "error",
                 {
                     title = title,
-                    icon = success and "✓" or "✗",
-                    timeout = 2000,
-                    replace = notification,
+                    replace = notif_id,
+                    icon = success and "✔" or "✖",
+                    timeout = 1500,
                 }
             )
 
