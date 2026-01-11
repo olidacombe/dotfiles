@@ -242,7 +242,7 @@ command -v ghc &> /dev/null && echo haskell found || curl --proto '=https' --tls
  #  This is SUPER GOOD: https://nickgerace.dev/post/how-to-manage-rust-tools-and-applications/
  #  get current list with `cargo install --list | rg -o "^\S*\S" > crates.txt`
  
- cargo install cargo-binstall
+cargo install cargo-binstall
 
 if is_gitpod; then
     strip_comment crates-core.txt

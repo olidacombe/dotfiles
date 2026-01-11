@@ -8,7 +8,7 @@ require("mason-lspconfig").setup({
     ensure_installed = {
         "eslint",
         "graphql",
-        "make",
+        "hls",
         "pyright",
         "ruff",
         "svelte",
