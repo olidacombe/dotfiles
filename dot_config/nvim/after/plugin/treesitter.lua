@@ -9,9 +9,6 @@ require("nvim-treesitter").setup({
         },
     },
 
-    -- A list of parser names, or "all"
-    ensure_installed = { "c", "javascript", "lua", "make", "rust", "toml", "typescript" },
-
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
 
@@ -38,6 +35,8 @@ require("nvim-treesitter").setup({
         max_file_lines = nil,
     },
 })
+
+require("nvim-treesitter").install({ "c", "javascript", "lua", "make", "rust", "toml", "typescript" })
 
 -- fix command window bug caused by using <cr> for incremental selection
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2634

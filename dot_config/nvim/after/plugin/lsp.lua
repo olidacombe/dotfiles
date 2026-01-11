@@ -8,12 +8,13 @@ require("mason-lspconfig").setup({
     ensure_installed = {
         "eslint",
         "graphql",
+        "make",
         "pyright",
         "ruff",
-        'lua_ls', -- sadly broken or arm
         "svelte",
         "tailwindcss",
         "yamlls",
+        'lua_ls', -- sadly broken or arm
     },
 })
 
@@ -96,8 +97,8 @@ vim.lsp.config("svelte", {
 vim.lsp.enable("svelte")
 
 vim.lsp.config("*", {
-  on_attach = on_attach,
-  capabilities = capabilities,
+    on_attach = on_attach,
+    capabilities = capabilities,
 })
 
 -- configure neodev before lsp
