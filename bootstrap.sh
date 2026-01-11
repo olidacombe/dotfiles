@@ -257,7 +257,7 @@ fi | xargs cargo binstall & disown
 #   888    Y88   Y88P      888 Y88" 888o
 #   MMM     YM    MP       MMM  M'  "MMM
 if [ "$OS" = "$LINUX" ] && ! command -v nvm &> /dev/null; then
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 fi
 
 # Node
