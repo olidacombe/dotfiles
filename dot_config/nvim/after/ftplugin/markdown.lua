@@ -96,3 +96,12 @@ vim.keymap.set("v", "<leader>ms", ":MarkdownSortSections<CR>", {
     nowait = true,
     silent = true,
 })
+
+require("od.markdown_bash").setup()
+
+vim.keymap.set("n", "<leader>rb", ":MarkdownRunBashBlock<CR>", {
+    desc = "Run markdown bash block",
+    noremap = true,
+    nowait = true,
+    silent = true,
+})
