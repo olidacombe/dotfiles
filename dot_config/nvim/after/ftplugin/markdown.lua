@@ -87,3 +87,12 @@ vim.keymap.set("n", "<leader>Ac", ":ShowAwsCostGraphPicker<CR>", {
     nowait = true,
     silent = true,
 })
+
+require("od.markdown_sort").setup()
+
+vim.keymap.set("v", "<leader>ms", ":MarkdownSortSections<CR>", {
+    desc = "Sort markdown sections",
+    noremap = true,
+    nowait = true,
+    silent = true,
+})
