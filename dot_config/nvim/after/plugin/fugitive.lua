@@ -106,7 +106,8 @@ autocmd("BufLeave", {
 
 -- Global mappings
 local mappings = {
-    { "gs", "<cmd>G<CR>", desc = "Status" },
+    { "gs", "<cmd>G<CR>",     desc = "Status" },
+    { "go", "<cmd>G log<CR>", desc = "l[o]g" },
     {
         "gx",
         function()
