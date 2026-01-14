@@ -59,7 +59,11 @@ local function run_bash_block()
         return
     end
 
-    vim.cmd("split | terminal bash -c " .. vim.fn.shellescape(content))
+    vim.cmd("split")
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_win_set_buf(0, buf)
+    vim.fn.termopen({ "bash", "-c", content })
+    vim.cmd("startinsert")
 end
 
 function M.setup()
