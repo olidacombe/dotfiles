@@ -24,6 +24,9 @@ end)
 vim.keymap.set("n", "<S-F3>", function()
     ui.nav_file(3)
 end)
+-- Deal with a ghostty / tmux 3.6a quirk making me lose <F15> on some builds 🤷
+vim.keymap.set("n", '<Esc>[13;2~', function() ui.nav_file(3) end)
+
 vim.keymap.set("n", "<F16>", function()
     ui.nav_file(4)
 end)
