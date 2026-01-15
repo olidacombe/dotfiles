@@ -430,16 +430,16 @@ bind-key -T {{ $keyTable }} "M-a" run-shell "tpoon push"
 bind-key -T {{ $keyTable }} "M-e" run-shell "tmux neww -n tpoon tpoon edit"
 bind-key -T {{ $keyTable }} "M-^" switch-client -l
 bind-key -T {{ $keyTable }} "M->" new-window -c "#{pane_current_path}"
-bind-key -T {{ $keyTable }} "S-F5" run-shell "tpoon 1"
-bind-key -T {{ $keyTable }} "S-F6" run-shell "tpoon 2"
-bind-key -T {{ $keyTable }} "S-F7" run-shell "tpoon 3"
-bind-key -T {{ $keyTable }} "S-F8" run-shell "tpoon 4"
+bind-key -T {{ $keyTable }} "S-F5" run-shell "tpoon 4"
+bind-key -T {{ $keyTable }} "S-F6" run-shell "tpoon 3"
+bind-key -T {{ $keyTable }} "S-F7" run-shell "tpoon 2"
+bind-key -T {{ $keyTable }} "S-F8" run-shell "tpoon 1"
 {{- end }}
 bind-key -n "M->" new-window -c "#{pane_current_path}"
-bind-key -n "S-F9" select-window -t 1
-bind-key -n "S-F10" select-window -t 2
-bind-key -n "S-F11" select-window -t 3
-bind-key -n "S-F12" select-window -t 4
+bind -n "S-F9" run-shell 'tmux select-window -t :$(tmux list-windows -F "##{window_index}" | tail -n 4 | head -n 1)'
+bind -n "S-F10" run-shell 'tmux select-window -t :$(tmux list-windows -F "##{window_index}" | tail -n 3 | head -n 1)'
+bind -n "S-F11" run-shell 'tmux select-window -t :$(tmux list-windows -F "##{window_index}" | tail -n 2 | head -n 1)'
+bind -n "S-F12" run-shell 'tmux select-window -t :$(tmux list-windows -F "##{window_index}" | tail -n 1)'
 
 # quickly shuffle windows
 bind-key -n S-left swap-window -t -1 \; select-window -t -1

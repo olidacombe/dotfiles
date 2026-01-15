@@ -12,23 +12,23 @@ local mappings = {
 register_normal(mappings)
 
 vim.keymap.set("n", "<F13>", function()
-    ui.nav_file(1)
+    ui.nav_file(4)
 end)
 vim.keymap.set("n", "<F14>", function()
-    ui.nav_file(2)
+    ui.nav_file(3)
 end)
 vim.keymap.set("n", "<F15>", function()
-    ui.nav_file(3)
+    ui.nav_file(2)
 end)
 -- I don't know why <F15> is being sent as <S-F3> on some machines 🤔
 vim.keymap.set("n", "<S-F3>", function()
-    ui.nav_file(3)
+    ui.nav_file(2)
 end)
 -- Deal with a ghostty / tmux 3.6a quirk making me lose <F15> on some builds 🤷
-vim.keymap.set("n", '<Esc>[13;2~', function() ui.nav_file(3) end)
+vim.keymap.set("n", '<Esc>[13;2~', function() ui.nav_file(2) end)
 
 vim.keymap.set("n", "<F16>", function()
-    ui.nav_file(4)
+    ui.nav_file(1)
 end)
 -- easy quick-switches :D
 
