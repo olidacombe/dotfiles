@@ -436,6 +436,8 @@ bind-key -T {{ $keyTable }} "S-F7" run-shell "tpoon 2"
 bind-key -T {{ $keyTable }} "S-F8" run-shell "tpoon 1"
 {{- end }}
 bind-key -n "M->" new-window -c "#{pane_current_path}"
+# TODO ignore when there aren't enough windows on the stack to consider the keys to the left
+# (otherwise they all just take us to the "leftmost")
 bind -n "S-F9" run-shell 'tmux select-window -t :$(tmux list-windows -F "##{window_index}" | tail -n 4 | head -n 1)'
 bind -n "S-F10" run-shell 'tmux select-window -t :$(tmux list-windows -F "##{window_index}" | tail -n 3 | head -n 1)'
 bind -n "S-F11" run-shell 'tmux select-window -t :$(tmux list-windows -F "##{window_index}" | tail -n 2 | head -n 1)'
