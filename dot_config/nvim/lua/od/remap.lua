@@ -116,6 +116,7 @@ vim.keymap.set("n", "<leader><leader>S", ":% ! sort<CR>", { desc = "Sort the who
 vim.keymap.set("v", "<leader>S", ":'<,'>sort<CR>", { desc = "Sort Selection" })
 
 vim.keymap.set("n", "<leader>x", function()
+    od_buffer.bd_ft("checkhealth")
     od_buffer.bd_ft("fugitive")
     od_buffer.bd_ft("fugitiveblame")
     od_buffer.bd_ft("help")

@@ -5,6 +5,8 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.g.mapleader = " "
 
+vim.g.health = { style = "float" }
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
