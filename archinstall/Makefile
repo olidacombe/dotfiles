@@ -3,7 +3,7 @@
 
 BUILD_DIR := ./archiso
 
-clean:
+clean: #nvim_map(c)
 	@sudo rm -rf $(BUILD_DIR)
 	# @rm -f test.qcow2
 
