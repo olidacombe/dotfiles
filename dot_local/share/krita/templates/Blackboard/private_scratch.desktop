@@ -1,0 +1,6 @@
+[Desktop Entry]
+Icon=.icon/scratch.png
+Name=scratch
+Type=Link
+URL[$e]=.source/scratch.kra
+X-KDE-Hidden=false
