@@ -1,10 +1,11 @@
 # opentabletdriver
 # zen-browser-bin
-brave-bin
 bluetuith
+brave-bin
 core/less
 extra/archinstall
 extra/archiso
+extra/bun
 extra/cava
 extra/edk2-ovmf
 extra/git-lfs

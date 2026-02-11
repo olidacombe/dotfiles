@@ -51,6 +51,7 @@ texlive-fontsextra
 texlive-fontsrecommended
 texlive-latexextra
 tree
+usbutils
 vim # provides xxd
 whois
 zoxide
