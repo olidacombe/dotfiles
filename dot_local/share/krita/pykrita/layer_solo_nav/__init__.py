@@ -2,12 +2,17 @@
 """
 Layer Solo Nav - Krita Plugin
 
-Krita layer order: Index 0 = top of stack (visually on top), Index -1 = bottom
+Navigation by position (index):
+- Layer Up: move to higher index (away from background, deeper in stack)
+- Layer Down: move to lower index (toward background)
+- At highest index + Up: create new slide at bottom
+- At index 1 + Down: do nothing
+- Background (index 0) is never selected
 """
 
 from krita import *
 
-DEBUG = True
+DEBUG = False
 
 
 def log(msg):
@@ -15,10 +20,10 @@ def log(msg):
         print(f"[LAYER_SOLO_NAV] {msg}")
 
 
-def get_next_slide_number(doc):
-    """Find the highest existing slide number and return next."""
+def get_max_slide_number(doc):
+    """Find the highest slide number for naming new slides."""
     root = doc.rootNode()
-    max_num = 1
+    max_num = 0
 
     for child in root.childNodes():
         name = child.name()
@@ -29,17 +34,23 @@ def get_next_slide_number(doc):
             except (IndexError, ValueError):
                 pass
 
-    return max_num + 1
+    return max_num
 
 
-def get_root_layers(doc):
-    """Get layers from top (index 0) to bottom (index -1)."""
+def get_background_layer(doc):
+    """Get the background layer (index 0, topmost)."""
     root = doc.rootNode()
     layers = [child for child in root.childNodes()]
-    log(f"Root layers (top to bottom):")
+    return layers[0] if layers else None
+
+
+def log_layers(doc, title="Layers"):
+    """Log current layer state."""
+    root = doc.rootNode()
+    layers = [child for child in root.childNodes()]
+    log(f"{title} (top to bottom):")
     for i, lyr in enumerate(layers):
         log(f"  [{i}] {lyr.name()}")
-    return layers
 
 
 class LayerSoloNav(Extension):
@@ -56,16 +67,12 @@ class LayerSoloNav(Extension):
         action = window.createAction("layer_up_solo", "Layer Up (Solo Next or New)")
         action.triggered.connect(self.layer_up_solo)
 
-    def get_background_layer(self, layers):
-        """Background is the first/top layer (index 0)."""
-        return layers[0] if layers else None
-
     def layer_down_solo(self):
-        """Move DOWN the layer stack (toward bottom, higher index)."""
+        """Move DOWN = toward background (lower index)."""
         log("\n=== LAYER DOWN ===")
         doc = Krita.instance().activeDocument()
         if not doc:
-            log("ERROR: No document!")
+            log("ERROR: No document")
             return
 
         active = doc.activeNode()
@@ -73,135 +80,100 @@ class LayerSoloNav(Extension):
             log("ERROR: No active layer")
             return
 
-        root_layers = get_root_layers(doc)
-        if len(root_layers) < 2:
-            log("Need more layers")
+        background = get_background_layer(doc)
+        if active == background:
+            log("Background is selected, nothing to do")
             return
 
-        background = self.get_background_layer(root_layers)
-        log(f"Background: {background.name()}")
+        # Get all layers
+        root = doc.rootNode()
+        all_layers = [child for child in root.childNodes()]
 
         try:
-            active_index = root_layers.index(active)
+            active_index = all_layers.index(active)
         except ValueError:
-            log(f"Active layer not in root")
+            log("Active layer not in root")
             return
 
         log(f"Active: {active.name()} at index {active_index}")
+        log_layers(doc, "Before")
 
-        # Move down = higher index
-        if active_index < len(root_layers) - 1:
-            new_active = root_layers[active_index + 1]
+        # Move DOWN = lower index (toward background)
+        # Stop at index 1 (can't go to index 0 which is background)
+        if active_index > 1:
+            new_active = all_layers[active_index - 1]
+            log(f"Moving DOWN to: {new_active.name()}")
 
-            # Don't select background layer
-            if new_active == background:
-                log("Can't go below background")
-                return
-
-            log(f"Moving to: {new_active.name()}")
             doc.setActiveNode(new_active)
 
-            # Solo visibility
-            for layer in root_layers:
+            # Solo visibility: active + background
+            for layer in all_layers:
                 layer.setVisible(layer == new_active or layer == background)
 
             doc.refreshProjection()
         else:
-            log("Already at bottom")
+            log("Already at index 1, doing nothing")
 
     def layer_up_solo(self):
-        """Move UP or create new layer."""
+        """Move UP = away from background (higher index), or create new if at bottom."""
         log("\n=== LAYER UP ===")
         doc = Krita.instance().activeDocument()
         if not doc:
-            log("ERROR: No document!")
+            log("ERROR: No document")
             return
 
         active = doc.activeNode()
-        root_layers = get_root_layers(doc)
+        background = get_background_layer(doc)
 
-        if not root_layers:
-            log("ERROR: No layers")
-            return
+        # Get all layers
+        root = doc.rootNode()
+        all_layers = [child for child in root.childNodes()]
 
-        background = self.get_background_layer(root_layers)
-        log(f"Background: {background.name()}")
-
-        # Get active layer index
-        active_index = None
-        if active:
+        if not active:
+            log("No active layer, will create new at bottom")
+            active_index = None
+        else:
             try:
-                active_index = root_layers.index(active)
+                active_index = all_layers.index(active)
                 log(f"Active: {active.name()} at index {active_index}")
             except ValueError:
-                log("Active not in root layers")
+                log("Active layer not in root, will create new at bottom")
+                active_index = None
 
-        # If at background or just below it, create new slide
-        if active_index is None or active_index <= 1:
-            # Create new slide layer
-            slide_num = get_next_slide_number(doc)
-            new_name = f"Slide {slide_num}"
-            log(f"Creating new layer: {new_name}")
+        log_layers(doc, "Before")
+
+        # If at bottom (highest index) or no active, create new slide at bottom
+        if active_index is None or active_index >= len(all_layers) - 1:
+            # Create new slide at the bottom (highest index)
+            new_num = get_max_slide_number(doc) + 1
+            new_name = f"Slide {new_num}"
+            log(f"Creating new layer: {new_name} at bottom")
 
             new_layer = doc.createNode(new_name, "paintlayer")
             new_layer.setVisible(True)
 
-            # Add to root - this puts it at the bottom (highest index)
-            root = doc.rootNode()
+            # Add at bottom (no position = append at end)
             root.addChildNode(new_layer, None)
 
-            # Now we need to move it to just below background (index 1)
-            # In Krita, we need to move it UP in the stack (toward lower index)
-            # to position it right after background
-
-            # Get fresh layer list
-            fresh_layers = get_root_layers(doc)
-            new_layer_idx = None
-            for i, lyr in enumerate(fresh_layers):
-                if lyr == new_layer:
-                    new_layer_idx = i
-                    break
-
-            if new_layer_idx is not None and new_layer_idx > 1:
-                log(f"Moving new layer from index {new_layer_idx} to position 1")
-                # Move up repeatedly until we're at index 1
-                for _ in range(new_layer_idx - 1):
-                    # Move up in Krita means moving toward lower index
-                    # We use the layer's move functionality if available
-                    pass  # Layer positioning is tricky, let's try another approach
-
-            new_active = new_layer
+            doc.setActiveNode(new_layer)
+            target = new_layer
 
             # Refresh layer list
-            root_layers = get_root_layers(doc)
+            all_layers = [child for child in root.childNodes()]
         else:
-            # Move up to lower index (toward top)
-            new_active = root_layers[active_index - 1]
+            # Move UP to higher index
+            new_active = all_layers[active_index + 1]
+            log(f"Moving UP to: {new_active.name()}")
 
-            if new_active == background:
-                # Create new instead of selecting background
-                slide_num = get_next_slide_number(doc)
-                new_name = f"Slide {slide_num}"
-                log(f"Would hit background, creating: {new_name}")
+            doc.setActiveNode(new_active)
+            target = new_active
 
-                new_layer = doc.createNode(new_name, "paintlayer")
-                new_layer.setVisible(True)
-                root = doc.rootNode()
-                root.addChildNode(new_layer, None)
-                new_active = new_layer
-                root_layers = get_root_layers(doc)
-            else:
-                log(f"Moving to: {new_active.name()}")
-
-        doc.setActiveNode(new_active)
-
-        # Solo mode visibility
-        background = self.get_background_layer(root_layers)
-        for layer in root_layers:
-            layer.setVisible(layer == new_active or layer == background)
+        # Solo visibility: active + background
+        for layer in all_layers:
+            layer.setVisible(layer == target or layer == background)
 
         doc.refreshProjection()
-        log(f"Active now: {new_active.name()}")
+        log(f"Now on: {target.name()}")
 
 
 Krita.instance().addExtension(LayerSoloNav(Krita.instance()))
