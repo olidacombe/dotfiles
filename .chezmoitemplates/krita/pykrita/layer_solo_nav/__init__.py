@@ -91,39 +91,33 @@ class LayerSoloNav(Extension):
         if not doc:
             return
 
-        doc.startUndoMacro("Layer Down Solo")
-        
-        try:
-            root_layers = get_root_layers(doc)
-            if not root_layers:
-                doc.endUndoMacro()
-                return
+        root_layers = get_root_layers(doc)
+        if not root_layers:
+            return
 
-            active = self.get_active_layer(doc)
-            background = self.get_background_layer(root_layers)
+        active = self.get_active_layer(doc)
+        background = self.get_background_layer(root_layers)
 
-            # Make background visible
-            if background:
-                background.setVisible(True)
+        # Make background visible
+        if background:
+            background.setVisible(True)
 
-            if active and active in root_layers:
-                active_index = root_layers.index(active)
-                # Check if we can move down (layers are in reverse order in Krita)
-                # Index 0 is top, index -1 is bottom (background)
-                if active_index + 1 < len(root_layers) - 1:  # Don't go past background
-                    new_active = root_layers[active_index + 1]
-                    doc.setActiveNode(new_active)
+        if active and active in root_layers:
+            active_index = root_layers.index(active)
+            # Check if we can move down (layers are in reverse order in Krita)
+            # Index 0 is top, index -1 is bottom (background)
+            if active_index + 1 < len(root_layers) - 1:  # Don't go past background
+                new_active = root_layers[active_index + 1]
+                doc.setActiveNode(new_active)
 
-                    # Solo mode: only new active and background visible
-                    for layer in root_layers:
-                        if layer == new_active or layer == background:
-                            layer.setVisible(True)
-                        else:
-                            layer.setVisible(False)
+                # Solo mode: only new active and background visible
+                for layer in root_layers:
+                    if layer == new_active or layer == background:
+                        layer.setVisible(True)
+                    else:
+                        layer.setVisible(False)
 
-            doc.refreshProjection()
-        finally:
-            doc.endUndoMacro()
+        doc.refreshProjection()
 
     def layer_up_solo(self):
         """Navigate to the next layer up or create a new layer in solo mode."""
@@ -131,50 +125,44 @@ class LayerSoloNav(Extension):
         if not doc:
             return
 
-        doc.startUndoMacro("Layer Up Solo")
-        
-        try:
-            root_layers = get_root_layers(doc)
-            if not root_layers:
-                doc.endUndoMacro()
-                return
+        root_layers = get_root_layers(doc)
+        if not root_layers:
+            return
 
-            active = self.get_active_layer(doc)
-            background = self.get_background_layer(root_layers)
+        active = self.get_active_layer(doc)
+        background = self.get_background_layer(root_layers)
 
-            # Make background visible
-            if background:
-                background.setVisible(True)
+        # Make background visible
+        if background:
+            background.setVisible(True)
 
-            if active and active in root_layers:
-                active_index = root_layers.index(active)
+        if active and active in root_layers:
+            active_index = root_layers.index(active)
+        else:
+            active_index = None
+
+        # If we're not at the top (index 0), move up
+        if active_index is not None and active_index > 0:
+            new_active = root_layers[active_index - 1]
+        else:
+            # Create a new layer at the top
+            slide_num = get_layer_counter(doc)
+            new_active = doc.createNode(f"Slide {slide_num}", "paintlayer")
+            new_active.setVisible(True)
+            root = doc.rootNode()
+            root.addChildNode(new_active, root_layers[0] if root_layers else None)
+            set_layer_counter(doc, slide_num + 1)
+
+        doc.setActiveNode(new_active)
+
+        # Solo mode: only new active and background visible
+        for layer in root_layers:
+            if layer == new_active or layer == background:
+                layer.setVisible(True)
             else:
-                active_index = None
+                layer.setVisible(False)
 
-            # If we're not at the top (index 0), move up
-            if active_index is not None and active_index > 0:
-                new_active = root_layers[active_index - 1]
-            else:
-                # Create a new layer at the top
-                slide_num = get_layer_counter(doc)
-                new_active = doc.createNode(f"Slide {slide_num}", "paintlayer")
-                new_active.setVisible(True)
-                root = doc.rootNode()
-                root.addChildNode(new_active, root_layers[0] if root_layers else None)
-                set_layer_counter(doc, slide_num + 1)
-
-            doc.setActiveNode(new_active)
-
-            # Solo mode: only new active and background visible
-            for layer in root_layers:
-                if layer == new_active or layer == background:
-                    layer.setVisible(True)
-                else:
-                    layer.setVisible(False)
-
-            doc.refreshProjection()
-        finally:
-            doc.endUndoMacro()
+        doc.refreshProjection()
 
 
 # Register the extension
