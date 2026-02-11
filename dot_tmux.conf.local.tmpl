@@ -362,7 +362,7 @@ set -g mouse on
 # split
 bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
-bind c new-window -c "#{pane_current_path}"
+bind c new-window -b -t :0 -c "#{pane_current_path}"
 
 # -- tpm -----------------------------------------------------------------------
 
@@ -429,13 +429,13 @@ bind-key -T {{ $keyTable }} "M-f" run-shell "tmux neww -n sessionizer tmux-sessi
 bind-key -T {{ $keyTable }} "M-a" run-shell "tpoon push"
 bind-key -T {{ $keyTable }} "M-e" run-shell "tmux neww -n tpoon tpoon edit"
 bind-key -T {{ $keyTable }} "M-^" switch-client -l
-bind-key -T {{ $keyTable }} "M->" new-window -c "#{pane_current_path}"
+bind-key -T {{ $keyTable }} "M->" new-window -b -t :0 -c "#{pane_current_path}"
 bind-key -T {{ $keyTable }} "S-F5" run-shell "tpoon 4"
 bind-key -T {{ $keyTable }} "S-F6" run-shell "tpoon 3"
 bind-key -T {{ $keyTable }} "S-F7" run-shell "tpoon 2"
 bind-key -T {{ $keyTable }} "S-F8" run-shell "tpoon 1"
 {{- end }}
-bind-key -n "M->" new-window -c "#{pane_current_path}"
+bind-key -n "M->" new-window -b -t :0 -c "#{pane_current_path}"
 bind -n "S-F9" run-shell 'tmux list-windows -F "##{window_index}" | tail -4 | tac | sed -n 4p | xargs -I{} tmux select-window -t :{}'
 bind -n "S-F10" run-shell 'tmux list-windows -F "##{window_index}" | tail -4 | tac | sed -n 3p | xargs -I{} tmux select-window -t :{}'
 bind -n "S-F11" run-shell 'tmux list-windows -F "##{window_index}" | tail -4 | tac | sed -n 2p | xargs -I{} tmux select-window -t :{}'
