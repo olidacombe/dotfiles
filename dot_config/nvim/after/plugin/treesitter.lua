@@ -1,13 +1,14 @@
 require("nvim-treesitter").setup({
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = "<CR>",
-            node_Incremental = "<CR>",
-            scope_incremental = "<S-CR>",
-            node_decremental = "<BS>",
-        },
-    },
+    -- TODO goodnight to this stuff?
+    -- incremental_selection = {
+    --     enable = true,
+    --     keymaps = {
+    --         init_selection = "<CR>",
+    --         node_Incremental = "<CR>",
+    --         scope_incremental = "<S-CR>",
+    --         node_decremental = "<BS>",
+    --     },
+    -- },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,

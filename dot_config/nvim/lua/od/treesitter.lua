@@ -81,10 +81,29 @@ function M.node_decremental()
     local esc = vim.api.nvim_replace_termcodes('<Esc>', true, false, true)
     vim.api.nvim_feedkeys(esc, 'x', false)
 
+    local current_node = selection_stack[#selection_stack]
+    if not current_node then
+        return
+    end
+
     if #selection_stack <= 1 then
-        -- Re-select current
-        if selection_stack[1] then
-            select_node(selection_stack[1])
+        -- At root, try to go deeper into children
+        local deepest = current_node
+        while deepest do
+            local child = deepest:named_child(0)
+            if child then
+                deepest = child
+            else
+                break
+            end
+        end
+
+        if deepest and deepest ~= current_node then
+            table.insert(selection_stack, deepest)
+            select_node(deepest)
+        else
+            -- No children to go deeper, re-select current
+            select_node(current_node)
         end
         return
     end
