@@ -1,4 +1,5 @@
 # packages to `npm install --global`
-eslint
 @mermaid-js/mermaid-cli
+eslint
+opencode-ai
 prettier
