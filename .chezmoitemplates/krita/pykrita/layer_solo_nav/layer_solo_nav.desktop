@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=Krita/PythonPlugin
+X-KDE-Library=layer_solo_nav
+X-Python-2-Compatible=false
+X-Krita-Manual=Layer Solo Navigation plugin for presentation-style layer navigation
+Name=Layer Solo Nav
+Comment=Solo layer navigation for presentations - navigate layers with solo visibility

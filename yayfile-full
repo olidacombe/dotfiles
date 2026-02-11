@@ -15,6 +15,7 @@ extra/hyprpaper
 extra/hyprpolkitagent
 extra/networkmanager
 extra/playerctl
+extra/python-pyqt5
 extra/qemu-desktop
 extra/swayosd
 extra/waybar
