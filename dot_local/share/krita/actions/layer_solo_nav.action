@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ActionCollection version="2" name="Scripts">
+    <Actions category="Layer Solo Nav">
+        <text>Layer Solo Nav</text>
+        <Action name="layer_down_solo">
+            <text>Layer Down (Solo Prev)</text>
+            <shortcut>Page Down</shortcut>
+        </Action>
+        <Action name="layer_up_solo">
+            <text>Layer Up (Solo Next or New)</text>
+            <shortcut>Page Up</shortcut>
+        </Action>
+    </Actions>
+</ActionCollection>
