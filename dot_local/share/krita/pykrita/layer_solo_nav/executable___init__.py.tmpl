@@ -1,1 +1,178 @@
-{{- template "krita/pykrita/layer_solo_nav/__init__.py" . -}}
+# -*- coding: utf-8 -*-
+"""
+Layer Solo Nav - Krita Plugin
+
+Krita layer order: Index 0 = top of stack (visually on top)
+Background at index 0, Slide 1 at index 1, Slide 2 at index 2, etc.
+New slides are appended at the bottom (highest index)
+"""
+
+from krita import *
+
+DEBUG = True
+
+def log(msg):
+    if DEBUG:
+        print(f"[LAYER_SOLO_NAV] {msg}")
+
+def get_slide_by_number(doc, slide_num):
+    """Find a slide layer by its number (e.g., "Slide 3")."""
+    root = doc.rootNode()
+    target_name = f"Slide {slide_num}"
+    
+    for child in root.childNodes():
+        if child.name() == target_name:
+            return child
+    return None
+
+def get_current_slide_number(active_layer):
+    """Extract slide number from layer name."""
+    if not active_layer:
+        return None
+    name = active_layer.name()
+    if name.startswith("Slide "):
+        try:
+            return int(name.split()[1])
+        except (IndexError, ValueError):
+            pass
+    return None
+
+def get_max_slide_number(doc):
+    """Find the highest slide number."""
+    root = doc.rootNode()
+    max_num = 0
+    
+    for child in root.childNodes():
+        name = child.name()
+        if name.startswith("Slide "):
+            try:
+                num = int(name.split()[1])
+                max_num = max(max_num, num)
+            except (IndexError, ValueError):
+                pass
+    
+    return max_num
+
+def get_background_layer(doc):
+    """Get the background layer (index 0, topmost)."""
+    root = doc.rootNode()
+    layers = [child for child in root.childNodes()]
+    return layers[0] if layers else None
+
+def log_layers(doc, title="Layers"):
+    """Log current layer state."""
+    root = doc.rootNode()
+    layers = [child for child in root.childNodes()]
+    log(f"{title} (top to bottom):")
+    for i, lyr in enumerate(layers):
+        log(f"  [{i}] {lyr.name()}")
+
+class LayerSoloNav(Extension):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+    def setup(self):
+        pass
+
+    def createActions(self, window):
+        action = window.createAction("layer_down_solo", "Layer Down (Solo Prev)")
+        action.triggered.connect(self.layer_down_solo)
+        
+        action = window.createAction("layer_up_solo", "Layer Up (Solo Next or New)")
+        action.triggered.connect(self.layer_up_solo)
+
+    def layer_down_solo(self):
+        """Navigate to previous slide (Slide k -> Slide k-1). Stop at Slide 1."""
+        log("\n=== LAYER DOWN ===")
+        doc = Krita.instance().activeDocument()
+        if not doc:
+            log("ERROR: No document")
+            return
+
+        active = doc.activeNode()
+        current_num = get_current_slide_number(active)
+        
+        if current_num is None:
+            log(f"Active layer '{active.name() if active else 'None'}' is not a numbered slide")
+            return
+        
+        log(f"On Slide {current_num}")
+
+        # If at Slide 1, do nothing
+        if current_num <= 1:
+            log("Already at Slide 1, doing nothing")
+            return
+
+        # Find previous slide (lower number = higher up in stack = lower index)
+        target = get_slide_by_number(doc, current_num - 1)
+        
+        if target:
+            log(f"Moving to Slide {current_num - 1}")
+            doc.setActiveNode(target)
+            
+            # Solo visibility
+            background = get_background_layer(doc)
+            root = doc.rootNode()
+            for child in root.childNodes():
+                child.setVisible(child == target or child == background)
+            
+            doc.refreshProjection()
+        else:
+            log(f"Slide {current_num - 1} not found")
+
+    def layer_up_solo(self):
+        """Navigate to next slide, or create new if at max."""
+        log("\n=== LAYER UP ===")
+        doc = Krita.instance().activeDocument()
+        if not doc:
+            log("ERROR: No document")
+            return
+
+        active = doc.activeNode()
+        current_num = get_current_slide_number(active)
+        max_num = get_max_slide_number(doc)
+        background = get_background_layer(doc)
+        
+        if current_num is None:
+            log(f"Active not a slide, defaulting to max ({max_num})")
+            current_num = max_num
+        
+        log(f"Current: Slide {current_num}, Max: {max_num}")
+        log_layers(doc, "Before")
+
+        # If at max slide, create new one at the bottom (highest index)
+        if current_num >= max_num:
+            new_num = max_num + 1
+            log(f"At max slide, creating Slide {new_num} at bottom")
+            
+            new_layer = doc.createNode(f"Slide {new_num}", "paintlayer")
+            new_layer.setVisible(True)
+            
+            root = doc.rootNode()
+            # Add without specifying position - appends at bottom
+            root.addChildNode(new_layer, None)
+            
+            doc.setActiveNode(new_layer)
+            target = new_layer
+        else:
+            # Navigate to next slide (higher number = lower in stack = higher index)
+            target_num = current_num + 1
+            log(f"Moving to Slide {target_num}")
+            
+            target = get_slide_by_number(doc, target_num)
+            
+            if target:
+                doc.setActiveNode(target)
+            else:
+                log(f"ERROR: Slide {target_num} not found")
+                return
+
+        # Solo visibility
+        root = doc.rootNode()
+        for child in root.childNodes():
+            child.setVisible(child == target or child == background)
+        
+        doc.refreshProjection()
+        log(f"Now on: {target.name()}")
+
+Krita.instance().addExtension(LayerSoloNav(Krita.instance()))
