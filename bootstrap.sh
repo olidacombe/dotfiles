@@ -265,6 +265,7 @@ fi
 if command -v nvm &> /dev/null; then
     # install node if we don't have it
     command -v node &> /dev/null || nvm install node
+    # TODO replace all with `bun`?
     strip_comment npm_globals | xargs npm i -g & disown
 fi
 
