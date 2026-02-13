@@ -28,7 +28,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -136,14 +136,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen8>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="101" Show="1" id="0" Motid="7"/>
-        <K8 Actid="105" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="101" Show="1" id="0"/>
+        <K8 Motid="8" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -302,7 +302,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -544,7 +544,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -796,14 +796,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="26" Show="1" id="0" Motid="3"/>
-        <K4 Actid="25" Show="1" id="0" Motid="4"/>
-        <K5 Actid="22" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="6" Show="1" id="0" Motid="7"/>
-        <K8 Actid="8" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="26" Show="1" id="0"/>
+        <K4 Motid="4" Actid="25" Show="1" id="0"/>
+        <K5 Motid="5" Actid="22" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="6" Show="1" id="0"/>
+        <K8 Motid="8" Actid="8" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -886,56 +886,56 @@
     <CommonAPP>
       <SelectID>0</SelectID>
       <K id="1">
-        <K1 Actid="110" Show="1" id="0" Motid="1"/>
-        <K2 Actid="111" Show="1" id="1" Motid="2">1|Alt+Ctrl+G|Alt+Ctrl+G|56:64+29:37+34:42</K2>
-        <K3 Actid="24" Show="1" id="1" Motid="3">1|Alt+Ctrl+C|Alt+Ctrl+C|56:64+29:37+46:54</K3>
-        <K4 Actid="201" Show="1" id="1" Motid="4">1|P|P|25:33</K4>
-        <K5 Actid="204" Show="1" id="1" Motid="5">1|N|N|49:57</K5>
-        <K6 Actid="3" Show="1" id="1" Motid="6">1|Shift+E|Shift+E|42:62+18:26</K6>
-        <K7 Actid="5" Show="1" id="1" Motid="7">1|Ctrl+Alt+Shift+C|Ctrl+Alt+Shift+C|29:37+56:64+42:50+46:54</K7>
-        <K8 Actid="6" Show="1" id="0" Motid="8"/>
-        <K9 Actid="4" Show="1" id="0" Motid="9"/>
-        <K10 Actid="8" Show="1" id="1" Motid="10">1|Alt+Ctrl+Shift+G|Alt+Ctrl+Shift+G|56:64+29:37+42:50+34:42</K10>
-        <K11 Actid="105" Show="1" id="0" Motid="11"/>
+        <K1 Motid="1" Actid="110" Show="1" id="1">1|Ctrl+Z|Ctrl+Z|29:37+44:52</K1>
+        <K2 Motid="2" Actid="111" Show="1" id="1">1|Super+Alt+Ctrl+C|Super+Alt+Ctrl+C|56:64+29:37+46:54</K2>
+        <K3 Motid="3" Actid="24" Show="1" id="1">1|Super+Alt+Ctrl+G|Super+Alt+Ctrl+G|56:64+29:37+34:42</K3>
+        <K4 Motid="4" Actid="201" Show="1" id="1">1|Shift+E|Shift+E|42:62+18:26</K4>
+        <K5 Motid="5" Actid="204" Show="1" id="1">1|N|N|49:57</K5>
+        <K6 Motid="6" Actid="3" Show="1" id="1">1|P|P|25:33</K6>
+        <K7 Motid="7" Actid="5" Show="1" id="1">1|Space|Space|57:65</K7>
+        <K8 Motid="8" Actid="6" Show="1" id="1">1|Alt+Ctrl+Super+C|Alt+Ctrl+Super+C|56:64+29:37+0:133+46:54</K8>
+        <K9 Motid="9" Actid="4" Show="1" id="1">1|Alt+Ctrl+Super+G|Alt+Ctrl+Super+G|56:64+29:37+0:133+34:42</K9>
+        <K10 Motid="10" Actid="8" Show="1" id="1">3|Key group switching|10</K10>
+        <K11 Motid="11" Actid="105" Show="1" id="0"/>
       </K>
       <K_1 id="0">
-        <K1 Actid="110" Show="1" id="0" Motid="1"/>
-        <K2 Actid="111" Show="1" id="0" Motid="2"/>
-        <K3 Actid="24" Show="1" id="0" Motid="3"/>
-        <K4 Actid="201" Show="1" id="0" Motid="4"/>
-        <K5 Actid="204" Show="1" id="0" Motid="5"/>
-        <K6 Actid="3" Show="1" id="0" Motid="6"/>
-        <K7 Actid="5" Show="1" id="0" Motid="7"/>
-        <K8 Actid="6" Show="1" id="0" Motid="8"/>
-        <K9 Actid="4" Show="1" id="0" Motid="9"/>
-        <K10 Actid="8" Show="1" id="0" Motid="10"/>
-        <K11 Actid="105" Show="1" id="0" Motid="11"/>
+        <K1 Motid="1" Actid="110" Show="1" id="0"/>
+        <K2 Motid="2" Actid="111" Show="1" id="0"/>
+        <K3 Motid="3" Actid="24" Show="1" id="0"/>
+        <K4 Motid="4" Actid="201" Show="1" id="0"/>
+        <K5 Motid="5" Actid="204" Show="1" id="0"/>
+        <K6 Motid="6" Actid="3" Show="1" id="0"/>
+        <K7 Motid="7" Actid="5" Show="1" id="0"/>
+        <K8 Motid="8" Actid="6" Show="1" id="0"/>
+        <K9 Motid="9" Actid="4" Show="1" id="0"/>
+        <K10 Motid="10" Actid="8" Show="1" id="0"/>
+        <K11 Motid="11" Actid="105" Show="1" id="0"/>
       </K_1>
       <K_2 id="0">
-        <K1 Actid="110" Show="1" id="0" Motid="1"/>
-        <K2 Actid="111" Show="1" id="0" Motid="2"/>
-        <K3 Actid="24" Show="1" id="0" Motid="3"/>
-        <K4 Actid="201" Show="1" id="0" Motid="4"/>
-        <K5 Actid="204" Show="1" id="0" Motid="5"/>
-        <K6 Actid="3" Show="1" id="0" Motid="6"/>
-        <K7 Actid="5" Show="1" id="0" Motid="7"/>
-        <K8 Actid="6" Show="1" id="0" Motid="8"/>
-        <K9 Actid="4" Show="1" id="0" Motid="9"/>
-        <K10 Actid="8" Show="1" id="0" Motid="10"/>
-        <K11 Actid="105" Show="1" id="0" Motid="11"/>
+        <K1 Motid="1" Actid="110" Show="1" id="0"/>
+        <K2 Motid="2" Actid="111" Show="1" id="0"/>
+        <K3 Motid="3" Actid="24" Show="1" id="0"/>
+        <K4 Motid="4" Actid="201" Show="1" id="0"/>
+        <K5 Motid="5" Actid="204" Show="1" id="0"/>
+        <K6 Motid="6" Actid="3" Show="1" id="0"/>
+        <K7 Motid="7" Actid="5" Show="1" id="0"/>
+        <K8 Motid="8" Actid="6" Show="1" id="0"/>
+        <K9 Motid="9" Actid="4" Show="1" id="0"/>
+        <K10 Motid="10" Actid="8" Show="1" id="0"/>
+        <K11 Motid="11" Actid="105" Show="1" id="0"/>
       </K_2>
       <K_3 id="0">
-        <K1 Actid="110" Show="1" id="0" Motid="1"/>
-        <K2 Actid="111" Show="1" id="0" Motid="2"/>
-        <K3 Actid="24" Show="1" id="0" Motid="3"/>
-        <K4 Actid="201" Show="1" id="0" Motid="4"/>
-        <K5 Actid="204" Show="1" id="0" Motid="5"/>
-        <K6 Actid="3" Show="1" id="0" Motid="6"/>
-        <K7 Actid="5" Show="1" id="0" Motid="7"/>
-        <K8 Actid="6" Show="1" id="0" Motid="8"/>
-        <K9 Actid="4" Show="1" id="0" Motid="9"/>
-        <K10 Actid="8" Show="1" id="0" Motid="10"/>
-        <K11 Actid="105" Show="1" id="0" Motid="11"/>
+        <K1 Motid="1" Actid="110" Show="1" id="0"/>
+        <K2 Motid="2" Actid="111" Show="1" id="0"/>
+        <K3 Motid="3" Actid="24" Show="1" id="0"/>
+        <K4 Motid="4" Actid="201" Show="1" id="0"/>
+        <K5 Motid="5" Actid="204" Show="1" id="0"/>
+        <K6 Motid="6" Actid="3" Show="1" id="0"/>
+        <K7 Motid="7" Actid="5" Show="1" id="0"/>
+        <K8 Motid="8" Actid="6" Show="1" id="0"/>
+        <K9 Motid="9" Actid="4" Show="1" id="0"/>
+        <K10 Motid="10" Actid="8" Show="1" id="0"/>
+        <K11 Motid="11" Actid="105" Show="1" id="0"/>
       </K_3>
       <R id="0">
         <W1 id="0"/>
@@ -949,56 +949,56 @@
         <path/>
         <SelectID>0</SelectID>
         <K id="1">
-          <K1 Actid="110" Show="1" id="0" Motid="1"/>
-          <K2 Actid="111" Show="1" id="0" Motid="2"/>
-          <K3 Actid="24" Show="1" id="0" Motid="3"/>
-          <K4 Actid="201" Show="1" id="0" Motid="4"/>
-          <K5 Actid="204" Show="1" id="0" Motid="5"/>
-          <K6 Actid="3" Show="1" id="0" Motid="6"/>
-          <K7 Actid="5" Show="1" id="0" Motid="7"/>
-          <K8 Actid="6" Show="1" id="0" Motid="8"/>
-          <K9 Actid="4" Show="1" id="0" Motid="9"/>
-          <K10 Actid="8" Show="1" id="0" Motid="10"/>
-          <K11 Actid="105" Show="1" id="0" Motid="11"/>
+          <K1 Motid="1" Actid="110" Show="1" id="0"/>
+          <K2 Motid="2" Actid="111" Show="1" id="0"/>
+          <K3 Motid="3" Actid="24" Show="1" id="0"/>
+          <K4 Motid="4" Actid="201" Show="1" id="0"/>
+          <K5 Motid="5" Actid="204" Show="1" id="0"/>
+          <K6 Motid="6" Actid="3" Show="1" id="0"/>
+          <K7 Motid="7" Actid="5" Show="1" id="0"/>
+          <K8 Motid="8" Actid="6" Show="1" id="0"/>
+          <K9 Motid="9" Actid="4" Show="1" id="0"/>
+          <K10 Motid="10" Actid="8" Show="1" id="0"/>
+          <K11 Motid="11" Actid="105" Show="1" id="0"/>
         </K>
         <K_1 id="0">
-          <K1 Actid="110" Show="1" id="0" Motid="1"/>
-          <K2 Actid="111" Show="1" id="0" Motid="2"/>
-          <K3 Actid="24" Show="1" id="0" Motid="3"/>
-          <K4 Actid="201" Show="1" id="0" Motid="4"/>
-          <K5 Actid="204" Show="1" id="0" Motid="5"/>
-          <K6 Actid="3" Show="1" id="0" Motid="6"/>
-          <K7 Actid="5" Show="1" id="0" Motid="7"/>
-          <K8 Actid="6" Show="1" id="0" Motid="8"/>
-          <K9 Actid="4" Show="1" id="0" Motid="9"/>
-          <K10 Actid="8" Show="1" id="0" Motid="10"/>
-          <K11 Actid="105" Show="1" id="0" Motid="11"/>
+          <K1 Motid="1" Actid="110" Show="1" id="0"/>
+          <K2 Motid="2" Actid="111" Show="1" id="0"/>
+          <K3 Motid="3" Actid="24" Show="1" id="0"/>
+          <K4 Motid="4" Actid="201" Show="1" id="0"/>
+          <K5 Motid="5" Actid="204" Show="1" id="0"/>
+          <K6 Motid="6" Actid="3" Show="1" id="0"/>
+          <K7 Motid="7" Actid="5" Show="1" id="0"/>
+          <K8 Motid="8" Actid="6" Show="1" id="0"/>
+          <K9 Motid="9" Actid="4" Show="1" id="0"/>
+          <K10 Motid="10" Actid="8" Show="1" id="0"/>
+          <K11 Motid="11" Actid="105" Show="1" id="0"/>
         </K_1>
         <K_2 id="0">
-          <K1 Actid="110" Show="1" id="0" Motid="1"/>
-          <K2 Actid="111" Show="1" id="0" Motid="2"/>
-          <K3 Actid="24" Show="1" id="0" Motid="3"/>
-          <K4 Actid="201" Show="1" id="0" Motid="4"/>
-          <K5 Actid="204" Show="1" id="0" Motid="5"/>
-          <K6 Actid="3" Show="1" id="0" Motid="6"/>
-          <K7 Actid="5" Show="1" id="0" Motid="7"/>
-          <K8 Actid="6" Show="1" id="0" Motid="8"/>
-          <K9 Actid="4" Show="1" id="0" Motid="9"/>
-          <K10 Actid="8" Show="1" id="0" Motid="10"/>
-          <K11 Actid="105" Show="1" id="0" Motid="11"/>
+          <K1 Motid="1" Actid="110" Show="1" id="0"/>
+          <K2 Motid="2" Actid="111" Show="1" id="0"/>
+          <K3 Motid="3" Actid="24" Show="1" id="0"/>
+          <K4 Motid="4" Actid="201" Show="1" id="0"/>
+          <K5 Motid="5" Actid="204" Show="1" id="0"/>
+          <K6 Motid="6" Actid="3" Show="1" id="0"/>
+          <K7 Motid="7" Actid="5" Show="1" id="0"/>
+          <K8 Motid="8" Actid="6" Show="1" id="0"/>
+          <K9 Motid="9" Actid="4" Show="1" id="0"/>
+          <K10 Motid="10" Actid="8" Show="1" id="0"/>
+          <K11 Motid="11" Actid="105" Show="1" id="0"/>
         </K_2>
         <K_3 id="0">
-          <K1 Actid="110" Show="1" id="0" Motid="1"/>
-          <K2 Actid="111" Show="1" id="0" Motid="2"/>
-          <K3 Actid="24" Show="1" id="0" Motid="3"/>
-          <K4 Actid="201" Show="1" id="0" Motid="4"/>
-          <K5 Actid="204" Show="1" id="0" Motid="5"/>
-          <K6 Actid="3" Show="1" id="0" Motid="6"/>
-          <K7 Actid="5" Show="1" id="0" Motid="7"/>
-          <K8 Actid="6" Show="1" id="0" Motid="8"/>
-          <K9 Actid="4" Show="1" id="0" Motid="9"/>
-          <K10 Actid="8" Show="1" id="0" Motid="10"/>
-          <K11 Actid="105" Show="1" id="0" Motid="11"/>
+          <K1 Motid="1" Actid="110" Show="1" id="0"/>
+          <K2 Motid="2" Actid="111" Show="1" id="0"/>
+          <K3 Motid="3" Actid="24" Show="1" id="0"/>
+          <K4 Motid="4" Actid="201" Show="1" id="0"/>
+          <K5 Motid="5" Actid="204" Show="1" id="0"/>
+          <K6 Motid="6" Actid="3" Show="1" id="0"/>
+          <K7 Motid="7" Actid="5" Show="1" id="0"/>
+          <K8 Motid="8" Actid="6" Show="1" id="0"/>
+          <K9 Motid="9" Actid="4" Show="1" id="0"/>
+          <K10 Motid="10" Actid="8" Show="1" id="0"/>
+          <K11 Motid="11" Actid="105" Show="1" id="0"/>
         </K_3>
         <R id="0">
           <W1 id="0"/>
@@ -1037,7 +1037,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -1144,7 +1144,7 @@
         <TablePC>1</TablePC>
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen8>
-      <PR id="0" Speed="0">
+      <PR Speed="0" id="0">
         <W1 id="0"/>
         <W2 id="0"/>
         <W3 id="0"/>
@@ -1242,7 +1242,7 @@
           <TablePC>1</TablePC>
           <RelativeCoords Speed="5">0</RelativeCoords>
         </Pen8>
-        <PR id="0" Speed="0">
+        <PR Speed="0" id="0">
           <W1 id="0"/>
           <W2 id="0"/>
           <W3 id="0"/>
@@ -1279,7 +1279,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -1505,7 +1505,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -1756,12 +1756,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="6" Show="1" id="0" Motid="4"/>
-        <K5 Actid="101" Show="1" id="0" Motid="5"/>
-        <K6 Actid="105" Show="1" id="0" Motid="6"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="6" Show="1" id="0"/>
+        <K5 Motid="5" Actid="101" Show="1" id="0"/>
+        <K6 Motid="6" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -1837,12 +1837,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="7"/>
-        <K2 Actid="2" Show="1" id="0" Motid="8"/>
-        <K3 Actid="6" Show="1" id="0" Motid="1"/>
-        <K4 Actid="21" Show="1" id="0" Motid="5"/>
-        <K5 Actid="22" Show="1" id="0" Motid="3"/>
-        <K6 Actid="101" Show="1" id="0" Motid="4"/>
+        <K1 Motid="7" Actid="1" Show="1" id="0"/>
+        <K2 Motid="8" Actid="2" Show="1" id="0"/>
+        <K3 Motid="1" Actid="6" Show="1" id="0"/>
+        <K4 Motid="5" Actid="21" Show="1" id="0"/>
+        <K5 Motid="3" Actid="22" Show="1" id="0"/>
+        <K6 Motid="4" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -2011,12 +2011,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="6" Show="1" id="0" Motid="3"/>
-        <K4 Actid="21" Show="1" id="0" Motid="4"/>
-        <K5 Actid="22" Show="1" id="0" Motid="5"/>
-        <K6 Actid="101" Show="1" id="0" Motid="6"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="6" Show="1" id="0"/>
+        <K4 Motid="4" Actid="21" Show="1" id="0"/>
+        <K5 Motid="5" Actid="22" Show="1" id="0"/>
+        <K6 Motid="6" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -2080,12 +2080,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -2149,12 +2149,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="6" Show="1" id="0" Motid="4"/>
-        <K5 Actid="101" Show="1" id="0" Motid="5"/>
-        <K6 Actid="105" Show="1" id="0" Motid="6"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="6" Show="1" id="0"/>
+        <K5 Motid="5" Actid="101" Show="1" id="0"/>
+        <K6 Motid="6" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -2230,12 +2230,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -2299,14 +2299,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="6" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="22" Show="1" id="0" Motid="7"/>
-        <K8 Actid="101" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="6" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="22" Show="1" id="0"/>
+        <K8 Motid="8" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -2373,14 +2373,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="6" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="22" Show="1" id="0" Motid="7"/>
-        <K8 Actid="101" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="6" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="22" Show="1" id="0"/>
+        <K8 Motid="8" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -2447,14 +2447,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="101" Show="1" id="0" Motid="7"/>
-        <K8 Actid="105" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="101" Show="1" id="0"/>
+        <K8 Motid="8" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -2545,14 +2545,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="101" Show="1" id="0" Motid="7"/>
-        <K8 Actid="105" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="101" Show="1" id="0"/>
+        <K8 Motid="8" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -2643,14 +2643,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="101" Show="1" id="0" Motid="7"/>
-        <K8 Actid="105" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="101" Show="1" id="0"/>
+        <K8 Motid="8" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -2741,14 +2741,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="101" Show="1" id="0" Motid="7"/>
-        <K8 Actid="105" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="101" Show="1" id="0"/>
+        <K8 Motid="8" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -2839,12 +2839,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="6" Show="1" id="0" Motid="3"/>
-        <K4 Actid="21" Show="1" id="0" Motid="4"/>
-        <K5 Actid="22" Show="1" id="0" Motid="5"/>
-        <K6 Actid="101" Show="1" id="0" Motid="6"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="6" Show="1" id="0"/>
+        <K4 Motid="4" Actid="21" Show="1" id="0"/>
+        <K5 Motid="5" Actid="22" Show="1" id="0"/>
+        <K6 Motid="6" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -2909,14 +2909,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="6" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="22" Show="1" id="0" Motid="7"/>
-        <K8 Actid="101" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="6" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="22" Show="1" id="0"/>
+        <K8 Motid="8" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -2984,16 +2984,16 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="9" Show="1" id="0" Motid="5"/>
-        <K6 Actid="5" Show="1" id="0" Motid="6"/>
-        <K7 Actid="6" Show="1" id="0" Motid="7"/>
-        <K8 Actid="21" Show="1" id="0" Motid="8"/>
-        <K9 Actid="22" Show="1" id="0" Motid="9"/>
-        <K10 Actid="101" Show="1" id="0" Motid="10"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="9" Show="1" id="0"/>
+        <K6 Motid="6" Actid="5" Show="1" id="0"/>
+        <K7 Motid="7" Actid="6" Show="1" id="0"/>
+        <K8 Motid="8" Actid="21" Show="1" id="0"/>
+        <K9 Motid="9" Actid="22" Show="1" id="0"/>
+        <K10 Motid="10" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -3063,16 +3063,16 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="9" Show="1" id="0" Motid="5"/>
-        <K6 Actid="5" Show="1" id="0" Motid="6"/>
-        <K7 Actid="6" Show="1" id="0" Motid="7"/>
-        <K8 Actid="21" Show="1" id="0" Motid="8"/>
-        <K9 Actid="22" Show="1" id="0" Motid="9"/>
-        <K10 Actid="101" Show="1" id="0" Motid="10"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="9" Show="1" id="0"/>
+        <K6 Motid="6" Actid="5" Show="1" id="0"/>
+        <K7 Motid="7" Actid="6" Show="1" id="0"/>
+        <K8 Motid="8" Actid="21" Show="1" id="0"/>
+        <K9 Motid="9" Actid="22" Show="1" id="0"/>
+        <K10 Motid="10" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -3142,14 +3142,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="6" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="22" Show="1" id="0" Motid="7"/>
-        <K8 Actid="101" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="6" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="22" Show="1" id="0"/>
+        <K8 Motid="8" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -3217,18 +3217,18 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="21" Show="1" id="0" Motid="7"/>
-        <K8 Actid="22" Show="1" id="0" Motid="8"/>
-        <K9 Actid="101" Show="1" id="0" Motid="9"/>
-        <K10 Actid="102" Show="1" id="0" Motid="10"/>
-        <K11 Actid="9" Show="1" id="0" Motid="11"/>
-        <K12 Actid="11" Show="1" id="0" Motid="12"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="21" Show="1" id="0"/>
+        <K8 Motid="8" Actid="22" Show="1" id="0"/>
+        <K9 Motid="9" Actid="101" Show="1" id="0"/>
+        <K10 Motid="10" Actid="102" Show="1" id="0"/>
+        <K11 Motid="11" Actid="9" Show="1" id="0"/>
+        <K12 Motid="12" Actid="11" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -3300,18 +3300,18 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="21" Show="1" id="0" Motid="7"/>
-        <K8 Actid="22" Show="1" id="0" Motid="8"/>
-        <K9 Actid="101" Show="1" id="0" Motid="9"/>
-        <K10 Actid="102" Show="1" id="0" Motid="10"/>
-        <K11 Actid="9" Show="1" id="0" Motid="11"/>
-        <K12 Actid="11" Show="1" id="0" Motid="12"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="21" Show="1" id="0"/>
+        <K8 Motid="8" Actid="22" Show="1" id="0"/>
+        <K9 Motid="9" Actid="101" Show="1" id="0"/>
+        <K10 Motid="10" Actid="102" Show="1" id="0"/>
+        <K11 Motid="11" Actid="9" Show="1" id="0"/>
+        <K12 Motid="12" Actid="11" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -3369,7 +3369,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3383,14 +3383,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="101" Show="1" id="0" Motid="7"/>
-        <K8 Actid="105" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="101" Show="1" id="0"/>
+        <K8 Motid="8" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -3468,7 +3468,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3520,7 +3520,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3534,14 +3534,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="6" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="22" Show="1" id="0" Motid="7"/>
-        <K8 Actid="101" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="6" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="22" Show="1" id="0"/>
+        <K8 Motid="8" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -3595,7 +3595,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3650,7 +3650,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3664,26 +3664,26 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="7" Show="1" id="0" Motid="7"/>
-        <K8 Actid="8" Show="1" id="0" Motid="8"/>
-        <K9 Actid="101" Show="1" id="0" Motid="9"/>
-        <K10 Actid="105" Show="1" id="0" Motid="10"/>
-        <K11 Actid="102" Show="1" id="0" Motid="11"/>
-        <K12 Actid="9" Show="1" id="0" Motid="12"/>
-        <K13 Actid="10" Show="1" id="0" Motid="13"/>
-        <K14 Actid="11" Show="1" id="0" Motid="14"/>
-        <K15 Actid="12" Show="1" id="0" Motid="15"/>
-        <K16 Actid="13" Show="1" id="0" Motid="16"/>
-        <K17 Actid="14" Show="1" id="0" Motid="17"/>
-        <K18 Actid="15" Show="1" id="0" Motid="18"/>
-        <K19 Actid="19" Show="1" id="0" Motid="19"/>
-        <K20 Actid="20" Show="1" id="0" Motid="20"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="7" Show="1" id="0"/>
+        <K8 Motid="8" Actid="8" Show="1" id="0"/>
+        <K9 Motid="9" Actid="101" Show="1" id="0"/>
+        <K10 Motid="10" Actid="105" Show="1" id="0"/>
+        <K11 Motid="11" Actid="102" Show="1" id="0"/>
+        <K12 Motid="12" Actid="9" Show="1" id="0"/>
+        <K13 Motid="13" Actid="10" Show="1" id="0"/>
+        <K14 Motid="14" Actid="11" Show="1" id="0"/>
+        <K15 Motid="15" Actid="12" Show="1" id="0"/>
+        <K16 Motid="16" Actid="13" Show="1" id="0"/>
+        <K17 Motid="17" Actid="14" Show="1" id="0"/>
+        <K18 Motid="18" Actid="15" Show="1" id="0"/>
+        <K19 Motid="19" Actid="19" Show="1" id="0"/>
+        <K20 Motid="20" Actid="20" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -3773,7 +3773,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3787,14 +3787,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="101" Show="1" id="0" Motid="7"/>
-        <K8 Actid="105" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="101" Show="1" id="0"/>
+        <K8 Motid="8" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -3860,7 +3860,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3915,7 +3915,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3928,12 +3928,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="6" Show="1" id="0" Motid="4"/>
-        <K5 Actid="101" Show="1" id="0" Motid="5"/>
-        <K6 Actid="105" Show="1" id="0" Motid="6"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="6" Show="1" id="0"/>
+        <K5 Motid="5" Actid="101" Show="1" id="0"/>
+        <K6 Motid="6" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -3996,7 +3996,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -4010,22 +4010,22 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="21" Show="1" id="0" Motid="7"/>
-        <K8 Actid="22" Show="1" id="0" Motid="8"/>
-        <K9 Actid="101" Show="1" id="0" Motid="9"/>
-        <K10 Actid="102" Show="1" id="0" Motid="10"/>
-        <K11 Actid="9" Show="1" id="0" Motid="11"/>
-        <K12 Actid="11" Show="1" id="0" Motid="12"/>
-        <K13 Actid="12" Show="1" id="0" Motid="13"/>
-        <K14 Actid="13" Show="1" id="0" Motid="14"/>
-        <K15 Actid="25" Show="1" id="0" Motid="15"/>
-        <K16 Actid="26" Show="1" id="0" Motid="16"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="21" Show="1" id="0"/>
+        <K8 Motid="8" Actid="22" Show="1" id="0"/>
+        <K9 Motid="9" Actid="101" Show="1" id="0"/>
+        <K10 Motid="10" Actid="102" Show="1" id="0"/>
+        <K11 Motid="11" Actid="9" Show="1" id="0"/>
+        <K12 Motid="12" Actid="11" Show="1" id="0"/>
+        <K13 Motid="13" Actid="12" Show="1" id="0"/>
+        <K14 Motid="14" Actid="13" Show="1" id="0"/>
+        <K15 Motid="15" Actid="25" Show="1" id="0"/>
+        <K16 Motid="16" Actid="26" Show="1" id="0"/>
       </K>
       <PR id="0">
         <W1 id="0"/>
@@ -4099,7 +4099,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -4113,12 +4113,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="6" Show="1" id="0" Motid="3"/>
-        <K4 Actid="21" Show="1" id="0" Motid="4"/>
-        <K5 Actid="22" Show="1" id="0" Motid="5"/>
-        <K6 Actid="101" Show="1" id="0" Motid="6"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="6" Show="1" id="0"/>
+        <K4 Motid="4" Actid="21" Show="1" id="0"/>
+        <K5 Motid="5" Actid="22" Show="1" id="0"/>
+        <K6 Motid="6" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -4183,14 +4183,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="6" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="22" Show="1" id="0" Motid="7"/>
-        <K8 Actid="101" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="6" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="22" Show="1" id="0"/>
+        <K8 Motid="8" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -4257,12 +4257,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="6" Show="1" id="0" Motid="4"/>
-        <K5 Actid="101" Show="1" id="0" Motid="5"/>
-        <K6 Actid="105" Show="1" id="0" Motid="6"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="6" Show="1" id="0"/>
+        <K5 Motid="5" Actid="101" Show="1" id="0"/>
+        <K6 Motid="6" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -4339,16 +4339,16 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="6"/>
-        <K2 Actid="2" Show="1" id="0" Motid="7"/>
-        <K3 Actid="3" Show="1" id="0" Motid="8"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="9" Show="1" id="0" Motid="12"/>
-        <K6 Actid="5" Show="1" id="0" Motid="5"/>
-        <K7 Actid="6" Show="1" id="0" Motid="1"/>
-        <K8 Actid="13" Show="1" id="0" Motid="2"/>
-        <K9 Actid="101" Show="1" id="0" Motid="3"/>
-        <K10 Actid="105" Show="1" id="0" Motid="9"/>
+        <K1 Motid="6" Actid="1" Show="1" id="0"/>
+        <K2 Motid="7" Actid="2" Show="1" id="0"/>
+        <K3 Motid="8" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="12" Actid="9" Show="1" id="0"/>
+        <K6 Motid="5" Actid="5" Show="1" id="0"/>
+        <K7 Motid="1" Actid="6" Show="1" id="0"/>
+        <K8 Motid="2" Actid="13" Show="1" id="0"/>
+        <K9 Motid="3" Actid="101" Show="1" id="0"/>
+        <K10 Motid="9" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -4416,7 +4416,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -4512,14 +4512,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="6" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="22" Show="1" id="0" Motid="7"/>
-        <K8 Actid="101" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="6" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="22" Show="1" id="0"/>
+        <K8 Motid="8" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -4738,7 +4738,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -4846,14 +4846,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen8>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="21" Show="1" id="0" Motid="7"/>
-        <K8 Actid="22" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="21" Show="1" id="0"/>
+        <K8 Motid="8" Actid="22" Show="1" id="0"/>
       </K>
       <PR id="0">
         <W1 id="0"/>
@@ -4989,7 +4989,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -5044,7 +5044,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -5102,7 +5102,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -5210,14 +5210,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen8>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="6" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="22" Show="1" id="0" Motid="7"/>
-        <K8 Actid="101" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="6" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="22" Show="1" id="0"/>
+        <K8 Motid="8" Actid="101" Show="1" id="0"/>
       </K>
       <PR id="0">
         <W1 id="0"/>
@@ -5356,7 +5356,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -5464,15 +5464,15 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen8>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="21" Show="1" id="0" Motid="7"/>
-        <K8 Actid="22" Show="1" id="0" Motid="8"/>
-        <K9 Actid="101" Show="1" id="0" Motid="9"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="21" Show="1" id="0"/>
+        <K8 Motid="8" Actid="22" Show="1" id="0"/>
+        <K9 Motid="9" Actid="101" Show="1" id="0"/>
       </K>
       <PR id="0">
         <W1 id="0"/>
@@ -5612,7 +5612,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -5720,12 +5720,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen8>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="21" Show="1" id="0" Motid="5"/>
-        <K6 Actid="22" Show="1" id="0" Motid="6"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="21" Show="1" id="0"/>
+        <K6 Motid="6" Actid="22" Show="1" id="0"/>
       </K>
       <PR id="0">
         <W1 id="0"/>
@@ -5865,7 +5865,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -5973,16 +5973,16 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen8>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="21" Show="1" id="0" Motid="7"/>
-        <K8 Actid="22" Show="1" id="0" Motid="8"/>
-        <K9 Actid="101" Show="1" id="0" Motid="9"/>
-        <K10 Actid="102" Show="1" id="0" Motid="10"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="21" Show="1" id="0"/>
+        <K8 Motid="8" Actid="22" Show="1" id="0"/>
+        <K9 Motid="9" Actid="101" Show="1" id="0"/>
+        <K10 Motid="10" Actid="102" Show="1" id="0"/>
       </K>
       <PR id="0">
         <W1 id="0"/>
@@ -6118,7 +6118,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -6132,22 +6132,22 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="21" Show="1" id="0" Motid="7"/>
-        <K8 Actid="22" Show="1" id="0" Motid="8"/>
-        <K9 Actid="101" Show="1" id="0" Motid="9"/>
-        <K10 Actid="102" Show="1" id="0" Motid="10"/>
-        <K11 Actid="9" Show="1" id="0" Motid="11"/>
-        <K12 Actid="11" Show="1" id="0" Motid="12"/>
-        <K13 Actid="12" Show="1" id="0" Motid="13"/>
-        <K14 Actid="13" Show="1" id="0" Motid="14"/>
-        <K15 Actid="25" Show="1" id="0" Motid="15"/>
-        <K16 Actid="26" Show="1" id="0" Motid="16"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="21" Show="1" id="0"/>
+        <K8 Motid="8" Actid="22" Show="1" id="0"/>
+        <K9 Motid="9" Actid="101" Show="1" id="0"/>
+        <K10 Motid="10" Actid="102" Show="1" id="0"/>
+        <K11 Motid="11" Actid="9" Show="1" id="0"/>
+        <K12 Motid="12" Actid="11" Show="1" id="0"/>
+        <K13 Motid="13" Actid="12" Show="1" id="0"/>
+        <K14 Motid="14" Actid="13" Show="1" id="0"/>
+        <K15 Motid="15" Actid="25" Show="1" id="0"/>
+        <K16 Motid="16" Actid="26" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -6212,7 +6212,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -6320,14 +6320,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen8>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="6" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="22" Show="1" id="0" Motid="7"/>
-        <K8 Actid="101" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="6" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="22" Show="1" id="0"/>
+        <K8 Motid="8" Actid="101" Show="1" id="0"/>
       </K>
       <PR id="0">
         <W1 id="0"/>
@@ -6476,14 +6476,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="6" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="22" Show="1" id="0" Motid="7"/>
-        <K8 Actid="101" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="6" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="22" Show="1" id="0"/>
+        <K8 Motid="8" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -6550,14 +6550,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="6" Show="1" id="0" Motid="5"/>
-        <K6 Actid="21" Show="1" id="0" Motid="6"/>
-        <K7 Actid="22" Show="1" id="0" Motid="7"/>
-        <K8 Actid="101" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="6" Show="1" id="0"/>
+        <K6 Motid="6" Actid="21" Show="1" id="0"/>
+        <K7 Motid="7" Actid="22" Show="1" id="0"/>
+        <K8 Motid="8" Actid="101" Show="1" id="0"/>
       </K>
     </CommonAPP>
     <Apps>
@@ -6614,7 +6614,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -6856,7 +6856,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -7095,7 +7095,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -7108,12 +7108,12 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="6" Show="1" id="0" Motid="4"/>
-        <K5 Actid="101" Show="1" id="0" Motid="5"/>
-        <K6 Actid="105" Show="1" id="0" Motid="6"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="6" Show="1" id="0"/>
+        <K5 Motid="5" Actid="101" Show="1" id="0"/>
+        <K6 Motid="6" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -7135,12 +7135,12 @@
           <RelativeCoords Speed="5">0</RelativeCoords>
         </Pen>
         <K>
-          <K1 Actid="1" Show="1" id="0" Motid="1"/>
-          <K2 Actid="2" Show="1" id="0" Motid="2"/>
-          <K3 Actid="3" Show="1" id="0" Motid="3"/>
-          <K4 Actid="6" Show="1" id="0" Motid="4"/>
-          <K5 Actid="101" Show="1" id="0" Motid="5"/>
-          <K6 Actid="105" Show="1" id="0" Motid="6"/>
+          <K1 Motid="1" Actid="1" Show="1" id="0"/>
+          <K2 Motid="2" Actid="2" Show="1" id="0"/>
+          <K3 Motid="3" Actid="3" Show="1" id="0"/>
+          <K4 Motid="4" Actid="6" Show="1" id="0"/>
+          <K5 Motid="5" Actid="101" Show="1" id="0"/>
+          <K6 Motid="6" Actid="105" Show="1" id="0"/>
         </K>
         <R id="0">
           <W1 id="0"/>
@@ -7178,7 +7178,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -7286,14 +7286,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen8>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="21" Show="1" id="0" Motid="7"/>
-        <K8 Actid="22" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="21" Show="1" id="0"/>
+        <K8 Motid="8" Actid="22" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -7444,7 +7444,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -7552,14 +7552,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen8>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="101" Show="1" id="0" Motid="7"/>
-        <K8 Actid="105" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="101" Show="1" id="0"/>
+        <K8 Motid="8" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
@@ -7718,7 +7718,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fKX="1" fYLC="1" fXLC="1" fKY="1"/>
+      <SC fKX="1" fKY="1" fYLC="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -7826,14 +7826,14 @@
         <RelativeCoords Speed="5">0</RelativeCoords>
       </Pen8>
       <K>
-        <K1 Actid="1" Show="1" id="0" Motid="1"/>
-        <K2 Actid="2" Show="1" id="0" Motid="2"/>
-        <K3 Actid="3" Show="1" id="0" Motid="3"/>
-        <K4 Actid="4" Show="1" id="0" Motid="4"/>
-        <K5 Actid="5" Show="1" id="0" Motid="5"/>
-        <K6 Actid="6" Show="1" id="0" Motid="6"/>
-        <K7 Actid="101" Show="1" id="0" Motid="7"/>
-        <K8 Actid="105" Show="1" id="0" Motid="8"/>
+        <K1 Motid="1" Actid="1" Show="1" id="0"/>
+        <K2 Motid="2" Actid="2" Show="1" id="0"/>
+        <K3 Motid="3" Actid="3" Show="1" id="0"/>
+        <K4 Motid="4" Actid="4" Show="1" id="0"/>
+        <K5 Motid="5" Actid="5" Show="1" id="0"/>
+        <K6 Motid="6" Actid="6" Show="1" id="0"/>
+        <K7 Motid="7" Actid="101" Show="1" id="0"/>
+        <K8 Motid="8" Actid="105" Show="1" id="0"/>
       </K>
       <R id="0">
         <W1 id="0"/>
