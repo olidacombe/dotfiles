@@ -93,6 +93,29 @@ dyn_uppercase = function(args)
     return sn(nil, { t(args[1]), i(1) })
 end
 
+local function date()
+    return os.date("%Y-%m-%d")
+end
+
+local function get_chezmoi_email()
+    local ok, output = pcall(vim.fn.system, { "chezmoi", "data" })
+    if not ok or vim.v.shell_error ~= 0 then
+        return nil
+    end
+    local ok_json, data = pcall(vim.fn.json_decode, output)
+    if not ok_json or type(data) ~= "table" then
+        return nil
+    end
+    if type(data.email) == "string" and data.email ~= "" then
+        return data.email
+    end
+    return nil
+end
+
+local function email()
+    return get_chezmoi_email()
+end
+
 ls.add_snippets(nil, {
     -- all = {
     --     s("date", {
@@ -102,9 +125,7 @@ ls.add_snippets(nil, {
     -- }},
     all = {
         s("date", {
-            f(function()
-                return os.date("%Y-%m-%d") -- e.g., 2025-07-02
-            end, {}),
+            f(date, {}),
         })
     },
     gitcommit = {
@@ -195,6 +216,23 @@ ls.add_snippets(nil, {
            </details>
         ]],
                 { i(1), i(0) }
+            )
+        ),
+        -- Pandoc Header
+        s(
+            { trig = "pandoc", docstring = "Pandoc header" },
+            fmt(
+                [[
+                ---
+                title: {}
+                author: Oliver Dacombe ({})
+                date: {}
+                ---
+            ]], {
+                    i(1),
+                    f(email, {}),
+                    f(date, {}),
+                }
             )
         ),
     },
