@@ -6,7 +6,7 @@ sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh
 
 ## TODO
 
-+ 4x4x4 nav stack reversal (have right-most key always reference the "right-most" entry)
++ [cmd-enter](https://github.com/openai/codex/discussions/3024#discussioncomment-15002195) send newline (for codex cli)
 + [Pandoc-Emojis-Filter?](https://github.com/masbicudo/Pandoc-Emojis-Filter)
 + [quarto](https://quarto.org/)
 + a `<leader>r` to run a script within markdown bash code block
