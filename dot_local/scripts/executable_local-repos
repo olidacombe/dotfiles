@@ -19,10 +19,11 @@ if [ -f "$REPO_DIRS_CONFIG" ]; then
     export REPO_DIRS
 fi
 
-# speed up with some parallelization
-printf '%s\n' "${REPO_DIRS[@]/#\~/${HOME}}" \
-    | xargs -P "${#REPO_DIRS[@]}" -I{} fd \
+for dir in "${REPO_DIRS[@]/#\~/${HOME}}"; do
+    fd \
     --type d \
     --exclude '**/.terraform/**' \
     -H --print0 \
-    .git {} | xargs -0 dirname
+    .git "$dir" | xargs -0 dirname &
+done
+wait
