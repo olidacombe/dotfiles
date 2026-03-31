@@ -21,7 +21,7 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
     # shellcheck disable=SC2016
-    selected=$({ fzf --bind 'ctrl-r:transform-query(
+    selected=$({ fzf --query '!^r: ' --bind 'ctrl-r:transform-query(
         S={q}
         if [[ "$S" =~ ^! ]]; then
             echo "${S:1}"

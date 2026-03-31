@@ -6,7 +6,8 @@ REPO_DIRS=()
 REPO_DIRS_CONFIG="${HOME}/.config/sessionizer/dirs"
 if [ ! -s "$REPO_DIRS_CONFIG" ]; then
     mkdir -p "$(dirname "$REPO_DIRS_CONFIG")"
-    chezmoi source-path >> "$REPO_DIRS_CONFIG"
+    # chezmoi source-path >> "$REPO_DIRS_CONFIG"
+    echo "~" >> "$REPO_DIRS_CONFIG"
 fi
 if [ -f "$REPO_DIRS_CONFIG" ]; then
     # :'( only bash >= 4.4
@@ -24,6 +25,7 @@ for dir in "${REPO_DIRS[@]/#\~/${HOME}}"; do
     --type d \
     --exclude '**/.terraform/**' \
     -H --print0 \
-    .git "$dir" | xargs -0 dirname &
+    .git "$dir" \
+    | xargs -0 dirname &
 done
 wait
