@@ -1,0 +1,279 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ACTION=${1:-"start"}
+
+SYNC_NAME=${SYNC_NAME:-""}
+LOCAL_DIR=${LOCAL_DIR:-""}
+REMOTE_DIR=${REMOTE_DIR:-""}
+AGENT_RELPATH=${AGENT_RELPATH:-".mutagen/agents"}
+DEBUG=${DEBUG:-""}
+ENV_JSON=${ENV_JSON:-""}
+
+require_command() {
+    if ! command -v "$1" >/dev/null 2>&1; then
+        echo "❌ $1 not found. ${2:-}" >&2
+        exit 1
+    fi
+}
+
+show_usage() {
+    cat <<EOF
+Usage: $0 [start|status|stop]
+
+Environment overrides:
+  SYNC_NAME     (default: git repo name)
+  LOCAL_DIR     (default: git repo root)
+  REMOTE_DIR    (default: auto-detected in /workspaces)
+  AGENT_RELPATH (default: $AGENT_RELPATH)
+EOF
+}
+
+ensure_git_repo() {
+    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "❌ Not inside a git working directory." >&2
+        exit 1
+    fi
+}
+
+git_root() {
+    git rev-parse --show-toplevel 2>/dev/null
+}
+
+git_remote_url() {
+    git remote get-url origin 2>/dev/null
+}
+
+normalize_url() {
+    local url="$1"
+    url="${url#http://}"
+    url="${url#https://}"
+    url="${url#ssh://}"
+    url="${url#git@}"
+    url="${url#ssh@}"
+    url="${url/:/\/}"
+    url="${url%.git}"
+    printf '%s' "${url}" | tr 'A-Z' 'a-z'
+}
+
+debug_log() {
+    if [ -n "${DEBUG}" ]; then
+        printf 'DEBUG: %s\n' "$*" >&2
+    fi
+}
+
+default_sync_name() {
+    local root
+    root="$(git_root)"
+    basename "${root}"
+}
+
+find_remote_dir() {
+    local env_id="$1"
+    local remote_url
+    remote_url="$(git_remote_url)"
+    local target
+    target="$(normalize_url "${remote_url}")"
+    local repo_name
+    repo_name="${remote_url##*/}"
+    repo_name="${repo_name%.git}"
+
+    debug_log "searching remote repo under /workspaces on ${env_id}.ona.environment"
+    ssh -o BatchMode=yes -o ConnectTimeout=10 "${env_id}.ona.environment" "TARGET='${target}' sh -s" <<'EOF' 2>/dev/null
+normalize_url() {
+    url="$1"
+    url="${url#http://}"
+    url="${url#https://}"
+    url="${url#ssh://}"
+    url="${url#git@}"
+    url="${url#ssh@}"
+    url="${url/:/\/}"
+    url="${url%.git}"
+    printf '%s' "${url}" | tr 'A-Z' 'a-z'
+}
+
+repo_name="${TARGET##*/}"
+repo_path="/workspaces/${repo_name}"
+if [ -d "${repo_path}" ]; then
+    echo "${repo_path}"
+    exit 0
+fi
+
+for d in /workspaces/*; do
+    [ -d "${d}/.git" ] || continue
+    r="$(git -C "${d}" remote get-url origin 2>/dev/null || true)"
+    [ -n "${r}" ] || continue
+    rn="$(normalize_url "${r}")"
+    if [ "${rn}" = "${TARGET}" ]; then
+        echo "${d}"
+        exit 0
+    fi
+done
+exit 1
+EOF
+}
+
+get_env_checkout_location() {
+    local env_id="$1"
+    if [ -z "${ENV_JSON}" ]; then
+        return 0
+    fi
+
+    jq -r --arg id "${env_id}" '.[] | select(.id == $id) | (.spec.content.initializer.specs[0].git.checkoutLocation // "")' <<<"${ENV_JSON}" 2>/dev/null | head -n 1
+}
+
+get_env_id() {
+    local remote_url
+    remote_url="$(git_remote_url)"
+    if [ -z "${remote_url}" ]; then
+        echo "❌ No git remote named 'origin' found." >&2
+        exit 1
+    fi
+    debug_log "origin remote: ${remote_url}"
+    debug_log "origin normalized: $(normalize_url "${remote_url}")"
+
+    if [ -z "${ENV_JSON}" ]; then
+        return 0
+    fi
+
+    local target
+    target="$(normalize_url "${remote_url}")"
+
+    local records
+    records="$(jq -r '.[] | [.id, (.spec.content.initializer.specs[0].git.remoteUri // ""), (.status.phase // .phase // .status // "")] | @tsv' <<<"${ENV_JSON}" 2>/dev/null || true)"
+    if [ -z "${records}" ]; then
+        return 0
+    fi
+
+    while IFS=$'\t' read -r env_id remote_uri phase; do
+        [ -n "${remote_uri}" ] || continue
+        local normalized
+        normalized="$(normalize_url "${remote_uri}")"
+        local phase_lc
+        phase_lc="$(printf '%s' "${phase}" | tr 'A-Z' 'a-z')"
+        debug_log "parsed env_id=${env_id} remote=${remote_uri} normalized=${normalized} phase=${phase_lc}"
+        if [ "${phase_lc}" != "running" ] && [ "${phase_lc}" != "environment_phase_running" ]; then
+            continue
+        fi
+        if [ "${normalized}" = "${target}" ]; then
+            printf '%s\n' "${env_id}"
+            break
+        fi
+    done <<<"${records}"
+}
+
+install_agent_if_needed() {
+    local env_id="$1"
+    local mutagen_ver
+    mutagen_ver="$(mutagen version)"
+
+    local agents_tar
+    agents_tar="$(brew --cellar mutagen 2>/dev/null)/${mutagen_ver}/libexec/mutagen-agents.tar.gz"
+
+    local remote_agent
+    remote_agent="${REMOTE_DIR}/${AGENT_RELPATH}/${mutagen_ver}/mutagen-agent"
+
+    echo "Checking for Mutagen agent on remote..."
+    if ssh "${env_id}.ona.environment" "test -f ${remote_agent} && test -x ${remote_agent}" 2>/dev/null; then
+        return 0
+    fi
+
+    if [ ! -f "${agents_tar}" ]; then
+        echo "❌ mutagen-agents.tar.gz not found at ${agents_tar}" >&2
+        exit 1
+    fi
+
+    echo "  Installing agent to remote:${remote_agent}"
+    local tmp_agent
+    tmp_agent="$(mktemp /tmp/.mutagen-agent-upload.XXXXXX)"
+    tar xzf "${agents_tar}" -O linux_amd64 > "${tmp_agent}"
+    chmod +x "${tmp_agent}"
+    ssh "${env_id}.ona.environment" "mkdir -p $(dirname "${remote_agent}")"
+    scp -p "${tmp_agent}" "${env_id}.ona.environment:${remote_agent}"
+    rm -f "${tmp_agent}"
+    echo "  ✅ Agent installed"
+}
+
+sync_start() {
+    require_command ona
+    # should be taken care of by rest of dotfiles, on different platforms
+    # require_command mutagen "brew install mutagen-io/mutagen/mutagen"
+    require_command jq "brew install jq"
+
+    ensure_git_repo
+
+    if [ -z "${LOCAL_DIR}" ]; then
+        LOCAL_DIR="$(git_root)"
+    fi
+    if [ -z "${SYNC_NAME}" ]; then
+        SYNC_NAME="$(default_sync_name)"
+    fi
+
+    ENV_JSON="$(ona environment list -r -o json 2>/dev/null || true)"
+
+    local env_id
+    env_id="$(get_env_id)"
+    debug_log "ENV_ID: ${env_id}"
+    if [ -z "${env_id}" ]; then
+        echo "❌ No running Ona environment found matching git remote 'origin'." >&2
+        echo "   Make sure 'ona environment list' shows it." >&2
+        ona environment list
+        exit 1
+    fi
+
+    if [ -z "${REMOTE_DIR}" ]; then
+        REMOTE_DIR="$(get_env_checkout_location "${env_id}" || true)"
+        if [ -z "${REMOTE_DIR}" ]; then
+            REMOTE_DIR="$(find_remote_dir "${env_id}" || true)"
+        fi
+        if [ -z "${REMOTE_DIR}" ]; then
+            echo "❌ Unable to find matching repo on remote in /workspaces." >&2
+            echo "   Set REMOTE_DIR to the repo path on the Ona environment." >&2
+            exit 1
+        fi
+    fi
+
+    ona environment ssh-config 2>/dev/null || true
+    mkdir -p "${LOCAL_DIR}"
+
+    install_agent_if_needed "${env_id}"
+
+    echo "Starting Mutagen sync: ${LOCAL_DIR} <-> ${env_id}:${REMOTE_DIR}"
+    mutagen sync create \
+        "${LOCAL_DIR}" \
+        "${env_id}.ona.environment:${REMOTE_DIR}" \
+        --name "${SYNC_NAME}" \
+        --ignore ".git" \
+        --ignore ".mutagen*"
+    echo "✅ Sync running. Edit locally in ${LOCAL_DIR}"
+    echo "   Monitor: $0 status"
+    echo "   Stop:    $0 stop"
+}
+
+sync_status() {
+    require_command mutagen
+    mutagen sync monitor "${SYNC_NAME}"
+}
+
+sync_stop() {
+    require_command mutagen
+    mutagen sync terminate "${SYNC_NAME}"
+    echo "✅ Sync stopped."
+}
+
+case "${ACTION}" in
+    start)
+        sync_start
+        ;;
+    status)
+        sync_status
+        ;;
+    stop)
+        sync_stop
+        ;;
+    *)
+        show_usage
+        exit 1
+        ;;
+esac
