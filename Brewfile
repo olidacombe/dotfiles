@@ -84,6 +84,7 @@ brew "luarocks"
 brew "metal-cli"
 brew "mongosh"
 brew "mtr"
+brew "mutagen-io/mutagen/mutagen"
 brew "mysql-client"
 # ng docker-like cli for mac
 # brew "nerdctl"
