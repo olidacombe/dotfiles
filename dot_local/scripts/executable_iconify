@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ $# -lt 2 ]]; then
+    echo "Usage: $0 <prefix> <command> [args...]" >&2
+    exit 1
+fi
+
+PREFIX="$1"
+shift
+
+"$@" | while IFS= read -r line; do
+    echo "${PREFIX}${line}"
+done
