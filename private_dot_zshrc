@@ -274,5 +274,10 @@ if [ -f "${HOME}/export-esp.sh" ]; then . "${HOME}/export-esp.sh"; fi
 
 if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then . ${HOME}/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
+# TODO - sort out compaudit complaints
+# Completions
+# fpath=(~/.zsh/completions $fpath)
+# autoload -U compinit && compinit
+
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
