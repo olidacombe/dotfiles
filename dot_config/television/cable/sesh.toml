@@ -5,7 +5,7 @@ requirements = [ "sesh", "fd",]
 
 [source]
 # command = [ "sesh list --icons", "sesh list -t --icons", "sesh list -c --icons", "sesh list -z --icons", "fd -H -d 2 -t d -E .Trash . ~",]
-command = [ "iconify \"📁 \" local-repos", "sesh list -c --icons", "sesh list -t --icons", ]
+command = [ "sesh list -t --icons", "sesh list -c --icons", "iconify \"📁 \" local-repos", ]
 ansi = true
 output = "{strip_ansi|split: :1..|join: }"
 
