@@ -69,6 +69,17 @@ default_sync_name() {
     basename "${root}"
 }
 
+normalize_remote_dir() {
+    local dir="$1"
+    if [ -z "${dir}" ]; then
+        return 0
+    fi
+    if [[ "${dir}" != /* ]]; then
+        dir="/workspaces/${dir}"
+    fi
+    printf '%s' "${dir}"
+}
+
 find_remote_dir() {
     local env_id="$1"
     local remote_url
@@ -227,6 +238,7 @@ sync_start() {
         if [ -z "${REMOTE_DIR}" ]; then
             REMOTE_DIR="$(find_remote_dir "${env_id}" || true)"
         fi
+        REMOTE_DIR="$(normalize_remote_dir "${REMOTE_DIR}")"
         if [ -z "${REMOTE_DIR}" ]; then
             echo "❌ Unable to find matching repo on remote in /workspaces." >&2
             echo "   Set REMOTE_DIR to the repo path on the Ona environment." >&2
