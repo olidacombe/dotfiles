@@ -207,10 +207,10 @@ install_agent_if_needed() {
 }
 
 sync_start() {
-    require_command ona
     # should be taken care of by rest of dotfiles, on different platforms
+    # require_command ona
     # require_command mutagen "brew install mutagen-io/mutagen/mutagen"
-    require_command jq "brew install jq"
+    # require_command jq "brew install jq"
 
     ensure_git_repo
 
@@ -265,11 +265,19 @@ sync_start() {
 
 sync_status() {
     require_command mutagen
+    ensure_git_repo
+    if [ -z "${SYNC_NAME}" ]; then
+        SYNC_NAME="$(default_sync_name)"
+    fi
     mutagen sync monitor "${SYNC_NAME}"
 }
 
 sync_stop() {
     require_command mutagen
+    ensure_git_repo
+    if [ -z "${SYNC_NAME}" ]; then
+        SYNC_NAME="$(default_sync_name)"
+    fi
     mutagen sync terminate "${SYNC_NAME}"
     echo "✅ Sync stopped."
 }
