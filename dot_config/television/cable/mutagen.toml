@@ -24,5 +24,5 @@ mode = "execute"
 
 [actions.kill]
 description = "Kill mutagen sync"
-command = "mutagen sync terminate '{}'"
+command = "mutagen sync terminate {split: :0..|join: }"
 mode = "execute"
