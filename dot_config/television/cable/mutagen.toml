@@ -1,0 +1,28 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+[metadata]
+name = "mutagen"
+description = "mutagen sync manager"
+requirements = [ "mutagen", ]
+
+[source]
+command = [ "mutagen sync list --template='{{ json . }}' | jq -r '.[].name'", ]
+ansi = true
+output = "{strip_ansi|split: :0..|join: }"
+
+[preview]
+command = "mutagen sync list '{strip_ansi}'"
+
+[keybindings]
+enter = "actions:monitor"
+ctrl-d = [ "actions:kill", "reload_source", ]
+
+[actions.monitor]
+description = "Monitor mutagen sync"
+command = "mutagen sync monitor '{strip_ansi|split: :0..|join: }'"
+mode = "execute"
+
+[actions.kill]
+description = "Kill mutagen sync"
+command = "mutagen sync terminate '{strip_ansi|split: :0..|join: }'"
+mode = "fork"
