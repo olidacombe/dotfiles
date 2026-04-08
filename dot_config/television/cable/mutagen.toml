@@ -25,4 +25,4 @@ mode = "execute"
 [actions.kill]
 description = "Kill mutagen sync"
 command = "mutagen sync terminate '{strip_ansi|split: :0..|join: }'"
-mode = "fork"
+mode = "execute"
