@@ -1,7 +1,10 @@
 cowsay
+fd
 figlet
 fzf
 ripgrep
+sesh-bin
+television
 tmux
 yq
 zsh
