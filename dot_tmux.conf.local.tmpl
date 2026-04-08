@@ -434,12 +434,22 @@ bind-key -T {{ $keyTable }} "S-F5" run-shell "tpoon 4"
 bind-key -T {{ $keyTable }} "S-F6" run-shell "tpoon 3"
 bind-key -T {{ $keyTable }} "S-F7" run-shell "tpoon 2"
 bind-key -T {{ $keyTable }} "S-F8" run-shell "tpoon 1"
+# TODO dedupe the above S-F* when I get all my Charys changed
+bind-key -T {{ $keyTable }} "C-M-S-s" run-shell "tpoon 4"
+bind-key -T {{ $keyTable }} "C-M-S-a" run-shell "tpoon 3"
+bind-key -T {{ $keyTable }} "C-M-S-w" run-shell "tpoon 2"
+bind-key -T {{ $keyTable }} "C-M-S-d" run-shell "tpoon 1"
 {{- end }}
 bind-key -n "M->" new-window -b -t :0 -c "#{pane_current_path}"
 bind -n "S-F9" run-shell 'tmux list-windows -F "##{window_index}" | tail -4 | tac | sed -n 4p | xargs -I{} tmux select-window -t :{}'
 bind -n "S-F10" run-shell 'tmux list-windows -F "##{window_index}" | tail -4 | tac | sed -n 3p | xargs -I{} tmux select-window -t :{}'
 bind -n "S-F11" run-shell 'tmux list-windows -F "##{window_index}" | tail -4 | tac | sed -n 2p | xargs -I{} tmux select-window -t :{}'
 bind -n "S-F12" run-shell 'tmux list-windows -F "##{window_index}" | tail -4 | tac | sed -n 1p | xargs -I{} tmux select-window -t :{}'
+# TODO dedupe the above S-F* when I get all my Charys changed
+bind -n "C-M-#" run-shell 'tmux list-windows -F "##{window_index}" | tail -4 | tac | sed -n 4p | xargs -I{} tmux select-window -t :{}'
+bind -n "C-M-@" run-shell 'tmux list-windows -F "##{window_index}" | tail -4 | tac | sed -n 3p | xargs -I{} tmux select-window -t :{}'
+bind -n "C-M-!" run-shell 'tmux list-windows -F "##{window_index}" | tail -4 | tac | sed -n 2p | xargs -I{} tmux select-window -t :{}'
+bind -n "C-M-)" run-shell 'tmux list-windows -F "##{window_index}" | tail -4 | tac | sed -n 1p | xargs -I{} tmux select-window -t :{}'
 
 # quickly shuffle windows
 bind-key -n S-left swap-window -t -1 \; select-window -t -1
