@@ -19,7 +19,7 @@ ctrl-d = [ "actions:kill", "reload_source", ]
 
 [actions.monitor]
 description = "Monitor mutagen sync"
-command = "mutagen sync monitor '{}'"
+command = "mutagen sync monitor '{}' -l"
 mode = "execute"
 
 [actions.kill]
