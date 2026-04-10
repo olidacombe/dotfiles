@@ -269,7 +269,7 @@ sync_status() {
     if [ -z "${SYNC_NAME}" ]; then
         SYNC_NAME="$(default_sync_name)"
     fi
-    mutagen sync monitor "${SYNC_NAME}"
+    mutagen sync monitor "${SYNC_NAME}" -l
 }
 
 sync_stop() {
