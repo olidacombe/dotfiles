@@ -1,6 +1,5 @@
-tap "nikitabobko/tap"
-cask "nikitabobko/tap/aerospace"
 # tap "1password/tap"
+brew "nikitabobko/tap/aerospace"
 tap "aws/tap"
 tap "common-fate/granted"
 tap "equinix/homebrew-tap"
