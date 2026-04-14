@@ -1,0 +1,19 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+[metadata]
+name = "pdf"
+description = "Find PDFs under the current directory"
+requirements = [ "fd", ]
+
+[source]
+command = [ "fd -uu -e pdf .", ]
+ansi = false
+output = "{}"
+
+[keybindings]
+enter = "actions:open"
+
+[actions.open]
+description = "Open selected PDF"
+command = "open '{}'"
+mode = "fork"
