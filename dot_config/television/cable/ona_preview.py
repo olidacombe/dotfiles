@@ -48,6 +48,9 @@ dc_sync = dc.get("devcontainerconfigInSync")
 failures = e.get("status", {}).get("failureMessage", [])
 af_fail = e.get("status", {}).get("automationsFile", {}).get("failureMessage", "")
 
+env_name = e.get("name", "")
+if env_name:
+    print(f"  Name:        {env_name}")
 print(f"  Status:      {status}")
 print(f"  ID:          {e['id']}")
 print()

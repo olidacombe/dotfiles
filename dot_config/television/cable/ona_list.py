@@ -24,11 +24,14 @@ for e in json.load(sys.stdin):
         .get("specs", [{}])[0]
         .get("git", {})
     )
-    name = git.get("checkoutLocation") or e.get("name") or eid[:12]
+    checkout = git.get("checkoutLocation", "")
     branch = e.get("status", {}).get("content", {}).get("git", {}).get("branch", "")
     remote = git.get("remoteUri", "")
     repo = remote.split("/")[-1].replace(".git", "") if remote else ""
-    label = repo or name
+
+    # Prefer the user-set name, fall back to repo name or checkout dir
+    env_name = e.get("name", "")
+    label = env_name or repo or checkout or eid[:12]
     if branch and branch not in ("main", "master"):
         label += " @ " + branch
 

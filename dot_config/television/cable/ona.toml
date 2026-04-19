@@ -6,7 +6,7 @@ description = "Ona environment manager"
 requirements = ["ona", "python3"]
 
 [source]
-command = "ona environment list --format json 2>/dev/null | python3 ~/.config/television/cable/ona_list.py"
+command = "ona environment list --all --format json 2>/dev/null | python3 ~/.config/television/cable/ona_list.py"
 display = "{split:\t:1}  ({split:\t:2})"
 output = "{split:\t:0}"
 watch = 5.0
