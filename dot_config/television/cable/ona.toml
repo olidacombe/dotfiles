@@ -22,10 +22,10 @@ padding = { left = 1, right = 1 }
 
 [keybindings]
 enter = "actions:ssh"
-ctrl-r = "actions:start"
-ctrl-s = "actions:stop"
+ctrl-r = ["actions:start", "reload_source"]
+ctrl-q = ["actions:stop","reload_source"]
 ctrl-g = "actions:logs"
-ctrl-d = "actions:delete"
+ctrl-d = ["actions:delete","reload_source"]
 ctrl-o = "actions:open"
 
 [actions.ssh]
@@ -35,12 +35,12 @@ mode = "execute"
 
 [actions.start]
 description = "Start environment"
-command = "ona environment start '{split:\t:0}'"
+command = "ona environment start '{split:\t:0}' && sleep 1"
 mode = "fork"
 
 [actions.stop]
 description = "Stop environment"
-command = "ona environment stop '{split:\t:0}'"
+command = "ona environment stop '{split:\t:0}' && sleep 1"
 mode = "fork"
 
 [actions.logs]
@@ -50,10 +50,10 @@ mode = "execute"
 
 [actions.delete]
 description = "Delete environment"
-command = "ona environment delete '{split:\t:0}'"
+command = "ona environment delete '{split:\t:0}' && sleep 1"
 mode = "fork"
 
 [actions.open]
 description = "Open in browser"
 command = "ona environment open '{split:\t:0}'"
-mode = "fork"
+mode = "execute"
