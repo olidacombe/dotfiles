@@ -1,0 +1,59 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+[metadata]
+name = "ona"
+description = "Ona environment manager"
+requirements = ["ona", "python3"]
+
+[source]
+command = "ona environment list --format json 2>/dev/null | python3 ~/.config/television/cable/ona_list.py"
+display = "{split:\t:1}  ({split:\t:2})"
+output = "{split:\t:0}"
+watch = 5.0
+
+[preview]
+command = "ona environment get '{split:\t:0}' --format json 2>/dev/null | python3 ~/.config/television/cable/ona_preview.py"
+
+[ui]
+input_header = "Ona Environments"
+[ui.preview_panel]
+size = 55
+padding = { left = 1, right = 1 }
+
+[keybindings]
+enter = "actions:ssh"
+ctrl-r = "actions:start"
+ctrl-s = "actions:stop"
+ctrl-g = "actions:logs"
+ctrl-d = "actions:delete"
+ctrl-o = "actions:open"
+
+[actions.ssh]
+description = "SSH into environment"
+command = "ona environment ssh '{split:\t:0}'"
+mode = "execute"
+
+[actions.start]
+description = "Start environment"
+command = "ona environment start '{split:\t:0}'"
+mode = "fork"
+
+[actions.stop]
+description = "Stop environment"
+command = "ona environment stop '{split:\t:0}'"
+mode = "fork"
+
+[actions.logs]
+description = "Tail environment logs"
+command = "ona environment logs '{split:\t:0}'"
+mode = "execute"
+
+[actions.delete]
+description = "Delete environment"
+command = "ona environment delete '{split:\t:0}'"
+mode = "fork"
+
+[actions.open]
+description = "Open in browser"
+command = "ona environment open '{split:\t:0}'"
+mode = "fork"
