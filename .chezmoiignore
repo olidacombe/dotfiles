@@ -9,6 +9,7 @@ archinstall/
 {{ if ne .chezmoi.os "darwin" }}
 Library
 .XPPen
+.config/aerospace
 {{ end }}
 {{ if ne .chezmoi.os "linux" }}
 .config/GIMP
