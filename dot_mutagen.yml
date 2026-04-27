@@ -4,3 +4,4 @@ sync:
       vcs: true
       paths:
         - "**/.venv"
+        - "**/.DS_Store"
