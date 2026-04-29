@@ -1,8 +1,8 @@
-; GIMP 3.0 Startup Script - Auto Create 7680x4800 Black Image
+; GIMP 3.2 Startup Script - Auto Create 7680x4800 Black Image
 ; Place this file in your GIMP scripts folder:
-; - Linux: ~/.config/GIMP/3.0/scripts/
-; - Windows: %APPDATA%\GIMP\3.0\scripts\
-; - macOS: ~/Library/Application Support/GIMP/3.0/scripts/
+; - Linux: ~/.config/GIMP/3.2/scripts/
+; - Windows: %APPDATA%\GIMP\3.2\scripts\
+; - macOS: ~/Library/Application Support/GIMP/3.2/scripts/
 ; Name it something like: auto-create-black-image.scm
 
 ; TODO
@@ -19,7 +19,7 @@
          ; Create new RGB image
          (img (car (gimp-image-new width height 0))) ; 0 for RGB
          
-         ; Create new layer - GIMP 3.0 syntax
+         ; Create new layer - GIMP 3.2 syntax
          (bglayer (car (gimp-layer-new img
                                       "Background"  ; layer name
                                       width
@@ -28,7 +28,7 @@
                                       100          ; opacity
                                       0)))         ; normal mode
 
-         ; Create new layer - GIMP 3.0 syntax
+         ; Create new layer - GIMP 3.2 syntax
          (fglayer (car (gimp-layer-new img
                                       "Slide 1"  ; layer name
                                       width
