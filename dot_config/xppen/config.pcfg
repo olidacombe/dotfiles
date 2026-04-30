@@ -887,15 +887,15 @@
       <SelectID>0</SelectID>
       <K id="1">
         <K1 Motid="1" Show="1" Actid="110" id="0"/>
-        <K2 Motid="2" Show="1" Actid="111" id="1">1|Ctrl+Alt+G|Ctrl+Alt+G|29:37+56:64+34:42</K2>
-        <K3 Motid="3" Show="1" Actid="24" id="1">1|Ctrl+Alt+C|Ctrl+Alt+C|29:37+56:64+46:54</K3>
+        <K2 Motid="2" Show="1" Actid="111" id="1">1|Ctrl+Alt+Shift+G|Ctrl+Alt+Shift+G|29:37+56:64+42:50+34:42</K2>
+        <K3 Motid="3" Show="1" Actid="24" id="1">1|Alt+Ctrl+Shift+C|Alt+Ctrl+Shift+C|56:64+29:37+42:50+46:54</K3>
         <K4 Motid="4" Show="1" Actid="201" id="1">1|K|K|37:45</K4>
         <K5 Motid="5" Show="1" Actid="204" id="1">1|P|P|25:33</K5>
-        <K6 Motid="6" Show="1" Actid="3" id="1">1|Alt+Ctrl+H|Alt+Ctrl+H|56:64+29:37+35:43</K6>
-        <K7 Motid="7" Show="1" Actid="5" id="1">1|Ctrl+Alt+Shift+C|Ctrl+Alt+Shift+C|29:37+56:64+42:50+46:54</K7>
+        <K6 Motid="6" Show="1" Actid="3" id="1">1|Ctrl+Alt+H,Ctrl+Shift+J|Ctrl+Alt+H,Ctrl+Shift+J|29:37+56:64+35:43,29:105+42:62+36:44</K6>
+        <K7 Motid="7" Show="1" Actid="5" id="1">1|Ctrl+Alt+C|Ctrl+Alt+C|29:37+56:64+46:54</K7>
         <K8 Motid="8" Show="1" Actid="6" id="0"/>
         <K9 Motid="9" Show="1" Actid="4" id="0"/>
-        <K10 Motid="10" Show="1" Actid="8" id="1">1|Ctrl+Alt+Shift+G|Ctrl+Alt+Shift+G|29:37+56:64+42:50+34:42</K10>
+        <K10 Motid="10" Show="1" Actid="8" id="1">1|Ctrl+Alt+G|Ctrl+Alt+G|29:37+56:64+34:42</K10>
         <K11 Motid="11" Show="1" Actid="105" id="0"/>
       </K>
       <K_1 id="0">
@@ -1071,7 +1071,7 @@
         <DevicePenType>5</DevicePenType>
         <PenBtn0 ClickMode="0" Actid="27" id="0"/>
         <PenBtn1 Actid="207" id="0"/>
-        <PenBtn2 Actid="209" id="0"/>
+        <PenBtn2 Actid="209" id="1">1|Space|Space|57:65</PenBtn2>
         <P0>0</P0>
         <P1X>0.5</P1X>
         <P1Y>0.5</P1Y>
