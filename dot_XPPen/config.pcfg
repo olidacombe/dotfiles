@@ -28,7 +28,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -302,7 +302,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -544,7 +544,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -1016,7 +1016,7 @@
           <K3 Show="1" id="1" Actid="24" Motid="3">1|Option+Control+Shift+C|Option+Control+Shift+C|16777251:58+16777249:59+16777248:56+67:8</K3>
           <K4 Show="1" id="1" Actid="201" Motid="4">1|K|K|75:40</K4>
           <K5 Show="1" id="1" Actid="204" Motid="5">1|P|P|80:35</K5>
-          <K6 Show="1" id="1" Actid="3" Motid="6">1|Option+Control+H|Option+Control+H|16777251:58+16777249:59+72:4</K6>
+          <K6 Show="1" id="1" Actid="3" Motid="6">1|Control+Option+H,Command+Shift+J|Control+Option+H,Command+Shift+J|16777249:59+16777251:58+72:4,16777250:55+16777248:56+74:38</K6>
           <K7 Show="1" id="1" Actid="5" Motid="7">1|Option+Control+C|Option+Control+C|16777251:58+16777249:59+67:8</K7>
           <K8 Show="1" id="0" Actid="6" Motid="8"/>
           <K9 Show="1" id="0" Actid="4" Motid="9"/>
@@ -1095,11 +1095,11 @@
         <TW>1187</TW>
         <TH>742</TH>
       </TabletPannel>
-      <DisableInfo>0</DisableInfo>
+      <DisableInfo>1</DisableInfo>
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="0.993378" fXLC="1.00524" fKX="0.997802" fKY="1.00091"/>
+      <SC fYLC="0.993378" fKX="0.997802" fKY="1.00091" fXLC="1.00524"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -1438,7 +1438,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -1664,7 +1664,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3528,7 +3528,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3627,7 +3627,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3679,7 +3679,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3754,7 +3754,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3809,7 +3809,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -3932,7 +3932,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -4019,7 +4019,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -4074,7 +4074,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -4155,7 +4155,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -4258,7 +4258,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -4575,7 +4575,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -4897,7 +4897,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -5148,7 +5148,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -5203,7 +5203,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -5261,7 +5261,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -5515,7 +5515,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -5771,7 +5771,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -6024,7 +6024,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -6277,7 +6277,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -6371,7 +6371,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -6773,7 +6773,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -7015,7 +7015,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -7254,7 +7254,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -7337,7 +7337,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -7603,7 +7603,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
@@ -7877,7 +7877,7 @@
       <DisableQuickKey>0</DisableQuickKey>
       <DisablePressure>0</DisablePressure>
       <DisableSlope>0</DisableSlope>
-      <SC fYLC="1" fXLC="1" fKX="1" fKY="1"/>
+      <SC fYLC="1" fKX="1" fKY="1" fXLC="1"/>
     </Common>
     <CommonAPP>
       <Pen>
