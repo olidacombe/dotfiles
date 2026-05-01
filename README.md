@@ -6,6 +6,7 @@ sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh
 
 ## TODO
 
++ Brewfile - auto-check for dead formulae
 + [cmd-enter](https://github.com/openai/codex/discussions/3024#discussioncomment-15002195) send newline (for codex cli)
 + [Pandoc-Emojis-Filter?](https://github.com/masbicudo/Pandoc-Emojis-Filter)
 + [quarto](https://quarto.org/)
