@@ -58,10 +58,12 @@ on-mode-changed = []
     1 = 'main'
     2 = 'main'
     3 = 'main'
-    4 = 'secondary'
-    5 = 'secondary'
-    6 = 'secondary'
-    7 = 'secondary'
+    4 = ['^LG ULTRAFINE \(1\)$', 'secondary']
+    5 = ['^LG ULTRAFINE \(1\)$', 'secondary']
+    6 = ['^LG ULTRAFINE \(1\)$', 'secondary']
+    7 = ['^LG ULTRAFINE \(1\)$', 'secondary']
+    8 = '^MD140FH$'
+    9 = '^MD140FH$'
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -242,3 +244,4 @@ on-mode-changed = []
     8 = ['move-node-to-workspace 8', 'mode main']
     9 = ['move-node-to-workspace 9', 'mode main']
     0 = ['move-node-to-workspace 10', 'mode main']
+    esc = ['mode main']
