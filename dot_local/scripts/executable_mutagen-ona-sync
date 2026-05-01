@@ -52,7 +52,9 @@ normalize_url() {
     url="${url#ssh://}"
     url="${url#git@}"
     url="${url#ssh@}"
-    url="${url/:/\/}"
+    case "${url}" in
+        *:*) url="${url%%:*}/${url#*:}" ;;
+    esac
     url="${url%.git}"
     printf '%s' "${url}" | tr 'A-Z' 'a-z'
 }
@@ -99,7 +101,9 @@ normalize_url() {
     url="${url#ssh://}"
     url="${url#git@}"
     url="${url#ssh@}"
-    url="${url/:/\/}"
+    case "${url}" in
+        *:*) url="${url%%:*}/${url#*:}" ;;
+    esac
     url="${url%.git}"
     printf '%s' "${url}" | tr 'A-Z' 'a-z'
 }
