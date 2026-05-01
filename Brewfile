@@ -1,3 +1,4 @@
+tap "nikitabobko/tap"
 # tap "1password/tap"
 brew "nikitabobko/tap/aerospace"
 tap "aws/tap"
@@ -171,11 +172,15 @@ brew "zoxide"
 # cask "1password-cli"
 cask "bloomrpc"
 cask "font-fira-code-nerd-font"
-cask "font-twitter-color-emoji"
+# banned at work
+# cask "font-twitter-color-emoji"
 # cask "gcc-arm-embedded"
-cask "insomnia"
-cask "key-codes"
-cask "mactex"
+# banned at work
+# cask "insomnia"
+# banned at work
+# cask "key-codes"
+# banned at work
+# cask "mactex"
 cask "quarto"
 # cask "openscad"
 # cask "vagrant"
