@@ -1,4 +1,5 @@
 background = #000000
+background-opacity = 0.8
 confirm-close-surface = false
 window-decoration = none
 # keybind = super+equal=reset_font_size
