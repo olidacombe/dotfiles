@@ -74,7 +74,6 @@ brew "k3d"
 brew "k9s"
 brew "kcat"
 brew "kdoctor"
-brew "kpoof"
 brew "kubectx"
 brew "kustomize"
 # linux vms on mac
