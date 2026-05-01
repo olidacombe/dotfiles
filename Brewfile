@@ -49,7 +49,7 @@ brew "fzf"
 brew "gh"
 brew "git"
 brew "git-lfs"
-brew "gitpod-io/tap/gitpod"
+brew "gitpod-io/tap/ona"
 # we already install gpg2
 # brew "gnupg"
 brew "helm"
