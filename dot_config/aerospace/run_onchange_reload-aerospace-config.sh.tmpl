@@ -4,4 +4,6 @@
 
 set -euo pipefail
 
-aerospace reload-config || true
+if command -v aerospace &> /dev/null; then
+    aerospace reload-config
+else
