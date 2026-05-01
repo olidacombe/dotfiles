@@ -219,14 +219,6 @@ fi
 rustup default || rustup default stable
 rustup component add rust-analyzer
 
-#  ▄ .▄ ▄▄▄· .▄▄ · ▄ •▄ ▄▄▄ .▄▄▌  ▄▄▌  
-# ██▪▐█▐█ ▀█ ▐█ ▀. █▌▄▌▪▀▄.▀·██•  ██•  
-# ██▀▐█▄█▀▀█ ▄▀▀▀█▄▐▀▀▄·▐▀▀▪▄██▪  ██▪  
-# ██▌▐▀▐█ ▪▐▌▐█▄▪▐█▐█.█▌▐█▄▄▌▐█▌▐▌▐█▌▐▌
-# ▀▀▀ · ▀  ▀  ▀▀▀▀ ·▀  ▀ ▀▀▀ .▀▀▀ .▀▀▀ 
-command -v ghc &> /dev/null && echo haskell found || curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-
-
  #      ___           ___           ___           ___           ___     
  #     /\  \         /\  \         /\  \         /\  \         /\  \    
  #    /::\  \       /::\  \       /::\  \       /::\  \       /::\  \   
@@ -268,6 +260,13 @@ if command -v nvm &> /dev/null; then
     # TODO replace all with `bun`?
     strip_comment npm_globals | xargs npm i -g & disown
 fi
+
+#  ▄ .▄ ▄▄▄· .▄▄ · ▄ •▄ ▄▄▄ .▄▄▌  ▄▄▌  
+# ██▪▐█▐█ ▀█ ▐█ ▀. █▌▄▌▪▀▄.▀·██•  ██•  
+# ██▀▐█▄█▀▀█ ▄▀▀▀█▄▐▀▀▄·▐▀▀▪▄██▪  ██▪  
+# ██▌▐▀▐█ ▪▐▌▐█▄▪▐█▐█.█▌▐█▄▄▌▐█▌▐▌▐█▌▐▌
+# ▀▀▀ · ▀  ▀  ▀▀▀▀ ·▀  ▀ ▀▀▀ .▀▀▀ .▀▀▀ 
+command -v ghc &> /dev/null && echo haskell found || curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 
 # let's leave it here for the moment
 if is_gitpod && [ -f "/etc/resolv.conf.bak"]; then
