@@ -105,3 +105,23 @@ vim.keymap.set("n", "<leader>rb", ":MarkdownRunBashBlock<CR>", {
     nowait = true,
     silent = true,
 })
+
+local function open_first_slack_link()
+    local line = vim.api.nvim_get_current_line()
+
+    for _, url in line:gmatch("%[([^%]]+)%]%((https?://[^%)]+)%)") do
+        if url:match("^https://[%w%-]+%.slack%.com/") then
+            vim.ui.open(url)
+            return
+        end
+    end
+
+    vim.notify("No Slack markdown link found on this line")
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.keymap.set("n", "gs", open_first_slack_link, { desc = "open first slack link", buffer = true })
+    end,
+})
