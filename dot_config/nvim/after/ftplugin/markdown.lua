@@ -111,7 +111,9 @@ local function open_first_slack_link()
 
     for _, url in line:gmatch("%[([^%]]+)%]%((https?://[^%)]+)%)") do
         if url:match("^https://[%w%-]+%.slack%.com/") then
-            vim.ui.open(url)
+            -- convert to a native slack:// url
+            local slack_url = url:gsub("^https://", "slack://")
+            vim.ui.open(slack_url)
             return
         end
     end
