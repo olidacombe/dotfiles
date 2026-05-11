@@ -65,6 +65,11 @@ on-mode-changed = []
     8 = '^MD140FH$'
     9 = '^MD140FH$'
 
+[[on-window-detected]]
+    if.window-title-regex-substring = 'Blackboard'
+    check-further-callbacks = true
+    run = ['move-node-to-workspace 8']#, 'macos-native-fullscreen']#, 'move-node-to-workspace 8']  # The callback itself
+
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
@@ -219,6 +224,7 @@ on-mode-changed = []
     esc = ['reload-config', 'mode main']
     r = ['flatten-workspace-tree', 'mode main'] # reset layout
     f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+    l = ['macos-native-fullscreen'] # fu[l]lscreen
     backspace = ['close-all-windows-but-current', 'mode main']
     m = 'mode move'
 
