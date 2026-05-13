@@ -7,6 +7,38 @@ See where mappings come from (all prefixed with `<leader>` in this example):
 :verbose nmap <leader>
 ```
 
+## Slack Links
+
+The Markdown `gs` mapping opens the first Slack archive link on the current line in
+the Slack desktop app. Workspace team IDs are private/local config and should not
+be committed here.
+
+Populate `${XDG_CONFIG_HOME:-~/.config}/slack/config.toml`:
+
+```toml
+[team_ids]
+example-workspace = "T12345678"
+```
+
+Use the workspace subdomain from `https://example-workspace.slack.com/...` as the
+key.
+
+To find the team ID, open the workspace in Slack's web app. Slack documents the
+loaded URL format as `https://app.slack.com/client/TXXXXXXX/CXXXXXXX`; the
+workspace ID is the string beginning with `T`.
+
+If you already have a Slack token for the workspace, Slack's `auth.test` API also
+returns `team_id`:
+
+```sh
+curl -sS -H "Authorization: Bearer $SLACK_TOKEN" https://slack.com/api/auth.test | jq -r '.team_id'
+```
+
+References:
+
++ [Locate your Slack URL or ID](https://slack.com/help/articles/221769328-Locate-your-Slack-URL-or-ID)
++ [`auth.test` method](https://docs.slack.dev/reference/methods/auth.test/)
+
 # Font
 
 I like [FiraCode](https://github.com/tonsky/FiraCode), but for [powerlevel10k](https://github.com/romkatv/powerlevel10k#fonts) you'll probably want the [NerdFonts version](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode).

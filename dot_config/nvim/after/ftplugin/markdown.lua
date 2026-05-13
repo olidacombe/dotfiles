@@ -106,19 +106,78 @@ vim.keymap.set("n", "<leader>rb", ":MarkdownRunBashBlock<CR>", {
     silent = true,
 })
 
-local function open_first_slack_link()
-    local line = vim.api.nvim_get_current_line()
+local function get_slack_config_path()
+    if vim.env.XDG_CONFIG_HOME and vim.env.XDG_CONFIG_HOME ~= "" then
+        return vim.env.XDG_CONFIG_HOME .. "/slack/config.toml"
+    end
 
-    for _, url in line:gmatch("%[([^%]]+)%]%((https?://[^%)]+)%)") do
-        if url:match("^https://[%w%-]+%.slack%.com/") then
-            -- convert to a native slack:// url
-            local slack_url = url:gsub("^https://", "slack://")
-            vim.ui.open(slack_url)
-            return
+    return vim.fn.expand("~/.config/slack/config.toml")
+end
+
+local function load_slack_team_ids()
+    local ok, lines = pcall(vim.fn.readfile, get_slack_config_path())
+    if not ok then
+        return {}
+    end
+
+    local team_ids = {}
+    local section = nil
+
+    for _, line in ipairs(lines) do
+        local trimmed = line:match("^%s*(.-)%s*$")
+        local next_section = trimmed:match("^%[([%w_.-]+)%]$")
+
+        if next_section then
+            section = next_section
+        elseif section == "team_ids" then
+            local workspace, team_id = trimmed:match('^([%w_-]+)%s*=%s*"([^"]+)"%s*$')
+            if workspace and team_id then
+                team_ids[workspace] = team_id
+            end
         end
     end
 
-    vim.notify("No Slack markdown link found on this line")
+    return team_ids
+end
+
+local function slack_archive_url_to_deep_link(url)
+    local workspace, channel_id, timestamp = url:match("^https://([%w%-]+)%.slack%.com/archives/([^/]+)/p(%d+)")
+    if not workspace then
+        return nil, "Not a Slack archive URL"
+    end
+
+    local team_id = load_slack_team_ids()[workspace]
+    if not team_id then
+        return nil, ("No Slack team id configured for %s in %s"):format(workspace, get_slack_config_path())
+    end
+
+    local seconds = timestamp:sub(1, 10)
+    local microseconds = timestamp:sub(11)
+    if #seconds ~= 10 or microseconds == "" then
+        return nil, "Could not parse Slack message timestamp"
+    end
+
+    return ("slack://channel?team=%s&id=%s&message=%s.%s"):format(team_id, channel_id, seconds, microseconds)
+end
+
+local function open_first_slack_link()
+    local line = vim.api.nvim_get_current_line()
+    local error_message = nil
+
+    for _, url in line:gmatch("%[([^%]]+)%]%((https?://[^%)]+)%)") do
+        if url:match("^https://[%w%-]+%.slack%.com/") then
+            local slack_url, err = slack_archive_url_to_deep_link(url)
+            if slack_url then
+                vim.notify("Opening " .. slack_url)
+                vim.ui.open(slack_url)
+                return
+            end
+
+            error_message = err
+        end
+    end
+
+    vim.notify(error_message or "No Slack markdown archive link found on this line", vim.log.levels.WARN)
 end
 
 local function open_first_markdown_link()
