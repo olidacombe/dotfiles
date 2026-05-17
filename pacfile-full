@@ -23,6 +23,7 @@ kicad-library
 kicad-library-3d
 kubectl
 kubectx
+libwacom
 lsof
 luarocks
 moreutils
@@ -44,6 +45,7 @@ python-pipx
 qt6-multimedia-ffmpeg
 qt6-svg
 qt6-virtualkeyboard
+rsync
 sddm
 strace
 texlive-binextra
