@@ -62,8 +62,8 @@ on-mode-changed = []
     5 = ['^LG ULTRAFINE \(1\)$', 'secondary']
     6 = ['^LG ULTRAFINE \(1\)$', 'secondary']
     7 = ['^LG ULTRAFINE \(1\)$', 'secondary']
-    8 = '^MD140FH$'
-    9 = '^MD140FH$'
+    8 = ['^Wacom DTH135$', '^MD140FH$']
+    9 = ['^Wacom DTH135$', '^MD140FH$']
 
 [[on-window-detected]]
     if.window-title-regex-substring = 'Blackboard'
