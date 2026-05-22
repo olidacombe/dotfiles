@@ -120,6 +120,7 @@ cmp.setup({
         ["<C-N>"] = cmp.config.disable,
         -- Stop enter from triggering things
         ["<CR>"] = cmp.config.disable,
+        ['<C-y>'] = cmp.config.mapping.confirm({ select = true }),
     }),
     sources = {
         { name = "copilot", group_index = 2 },
