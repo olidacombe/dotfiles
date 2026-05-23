@@ -97,6 +97,12 @@ hl.device({
     sensitivity = -0.5,
 })
 
+-- Disable touch on the Wacom Movink 13, until I figure out how to map it only to gestures like pan/zoom/rotate.
+hl.device({
+    name = "wacom-co.-ltd.-wacom-movink-13-touchscreen",
+    enabled = false,
+})
+
 -- Workspace rules
 hl.workspace_rule({ workspace = "10", default_name = "0", monitor = "DP-1", default = true })
 hl.workspace_rule({ workspace = "1", monitor = "DP-1" })
@@ -163,26 +169,34 @@ hl.window_rule({
     no_initial_focus = true,
 })
 
--- Keybindings
--- FIXME
--- hl.bind("ALT + SPACE", hl.dsp.submap("leader"))
---
--- -- leader submap
--- hl.bind("escape", hl.dsp.submap("reset"), { submap = "leader" })
--- hl.bind("M", hl.dsp.submap("move"), { submap = "leader" })
---
--- -- move submap
--- hl.bind("escape", hl.dsp.submap("reset"), { submap = "move" })
--- hl.bind("0", hl.dsp.window.move({ workspace = 10 }), { submap = "move" })
--- hl.bind("1", hl.dsp.window.move({ workspace = 1 }), { submap = "move" })
--- hl.bind("2", hl.dsp.window.move({ workspace = 2 }), { submap = "move" })
--- hl.bind("3", hl.dsp.window.move({ workspace = 3 }), { submap = "move" })
--- hl.bind("4", hl.dsp.window.move({ workspace = 4 }), { submap = "move" })
--- hl.bind("5", hl.dsp.window.move({ workspace = 5 }), { submap = "move" })
--- hl.bind("6", hl.dsp.window.move({ workspace = 6 }), { submap = "move" })
--- hl.bind("7", hl.dsp.window.move({ workspace = 7 }), { submap = "move" })
--- hl.bind("8", hl.dsp.window.move({ workspace = "drawing" }), { submap = "move" })
--- hl.bind("9", hl.dsp.window.move({ workspace = "xppen" }), { submap = "move" })
+--  ██                              ██                  ██   ██
+-- ░██                             ░██                 ░██  ██           ██   ██
+-- ░██        █████   ██████       ░██  █████  ██████  ░██ ██    █████  ░░██ ██
+-- ░██       ██░░░██ ░░░░░░██   ██████ ██░░░██░░██░░█  ░████    ██░░░██  ░░███
+-- ░██      ░███████  ███████  ██░░░██░███████ ░██ ░   ░██░██  ░███████   ░██
+-- ░██      ░██░░░░  ██░░░░██ ░██  ░██░██░░░░  ░██     ░██░░██ ░██░░░░    ██
+-- ░████████░░██████░░████████░░██████░░██████░███     ░██ ░░██░░██████  ██
+-- ░░░░░░░░  ░░░░░░  ░░░░░░░░  ░░░░░░  ░░░░░░ ░░░      ░░   ░░  ░░░░░░  ░░
+
+hl.bind("ALT + SPACE", hl.dsp.submap("leader"))
+hl.define_submap("leader", function()
+    hl.bind("escape", hl.dsp.submap("reset"))
+    hl.bind("M", hl.dsp.submap("move"))
+end)
+
+hl.define_submap("move", "reset", function()
+    hl.bind("escape", hl.dsp.submap("reset"))
+    hl.bind("0", hl.dsp.window.move({ workspace = 10 }))
+    hl.bind("1", hl.dsp.window.move({ workspace = 1 }))
+    hl.bind("2", hl.dsp.window.move({ workspace = 2 }))
+    hl.bind("3", hl.dsp.window.move({ workspace = 3 }))
+    hl.bind("4", hl.dsp.window.move({ workspace = 4 }))
+    hl.bind("5", hl.dsp.window.move({ workspace = 5 }))
+    hl.bind("6", hl.dsp.window.move({ workspace = 6 }))
+    hl.bind("7", hl.dsp.window.move({ workspace = 7 }))
+    hl.bind("8", hl.dsp.window.move({ workspace = "drawing" }))
+    -- hl.bind("9", hl.dsp.window.move({ workspace = "xppen" })),
+end)
 
 -- Normal keybinds
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
