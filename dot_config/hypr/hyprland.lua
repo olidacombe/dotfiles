@@ -97,10 +97,10 @@ hl.device({
     sensitivity = -0.5,
 })
 
--- Disable touch on the Wacom Movink 13, until I figure out how to map it only to gestures like pan/zoom/rotate.
 hl.device({
     name = "wacom-co.-ltd.-wacom-movink-13-touchscreen",
-    enabled = false,
+    output = "DP-2",
+    enabled = true,
 })
 
 -- Workspace rules
