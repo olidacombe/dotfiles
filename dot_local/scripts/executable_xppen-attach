@@ -4,4 +4,5 @@ set -euo pipefail
 
 export HYPRLAND_INSTANCE_SIGNATURE="$(ls "/run/user/$(id -u)/hypr" | head -1)"
 
-hyprctl dispatch exec /usr/lib/pentablet/PenTablet
+# probably I will remove the whole xppen ecosystem
+# hyprctl dispatch exec /usr/lib/pentablet/PenTablet

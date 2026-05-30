@@ -124,16 +124,6 @@ hl.workspace_rule({
     monitor =
     "DP-2"
 })
-hl.workspace_rule({
-    workspace = "name:xppen",
-    no_rounding = true,
-    decorate = false,
-    gaps_in = 0,
-    gaps_out = 0,
-    no_border = true,
-    monitor =
-    "DP-2"
-})
 
 -- Window rules
 hl.window_rule({
@@ -151,10 +141,6 @@ hl.window_rule({
 hl.window_rule({
     match = { class = "^krita$" },
     opacity = "1.0 override",
-})
-hl.window_rule({
-    match = { class = "^PenTablet$" },
-    workspace = "name:xppen",
 })
 hl.window_rule({
     match = { class = ".*" },
@@ -195,7 +181,6 @@ hl.define_submap("move", "reset", function()
     hl.bind("6", hl.dsp.window.move({ workspace = 6 }))
     hl.bind("7", hl.dsp.window.move({ workspace = 7 }))
     hl.bind("8", hl.dsp.window.move({ workspace = "drawing" }))
-    -- hl.bind("9", hl.dsp.window.move({ workspace = "xppen" })),
 end)
 
 -- Normal keybinds
@@ -239,7 +224,6 @@ hl.bind("ALT + 5", hl.dsp.focus({ workspace = 5 }))
 hl.bind("ALT + 6", hl.dsp.focus({ workspace = 6 }))
 hl.bind("ALT + 7", hl.dsp.focus({ workspace = 7 }))
 hl.bind("ALT + 8", hl.dsp.focus({ workspace = "drawing" }))
-hl.bind("ALT + 9", hl.dsp.focus({ workspace = "xppen" }))
 
 -- Special workspace (scratchpad)
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
