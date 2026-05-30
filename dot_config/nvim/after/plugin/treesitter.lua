@@ -39,17 +39,6 @@ require("nvim-treesitter").setup({
 
 require("nvim-treesitter").install({ "c", "javascript", "lua", "make", "rust", "toml", "typescript" })
 
--- fix command window bug caused by using <cr> for incremental selection
--- https://github.com/nvim-treesitter/nvim-treesitter/issues/2634
-vim.api.nvim_create_augroup("cmdwin_treesitter", { clear = true })
--- FIXME!!!
--- vim.api.nvim_create_autocmd("CmdwinEnter", {
---     pattern = "*",
---     command = "TSBufDisable incremental_selection",
---     group = "cmdwin_treesitter",
---     desc = "Disable treesitter's incremental selection in Command-line window",
--- })
-
 -- ___  _    ____ _ _ ____ ____ ____ _  _ __ _ ___
 -- |--' |___ |--|  Y  |__, |--< [__] |__| | \| |__>
 --
@@ -63,6 +52,10 @@ require("nvim-treesitter").setup({
 vim.keymap.set("n", "<leader>S", "<cmd>InspectTree<cr>", { desc = "Treesitter Playground" })
 
 vim.keymap.set('n', '<CR>', function()
+    if vim.fn.getcmdwintype() ~= '' then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<CR>', true, false, true), 'n', false)
+        return
+    end
     require('od.treesitter').init_selection()
 end, { desc = 'Init treesitter selection' })
 
