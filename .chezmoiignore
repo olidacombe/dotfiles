@@ -10,10 +10,10 @@ archinstall/
 Library
 .XPPen
 .config/aerospace
-.config/hypr/hyprland.lua
 {{ end }}
 {{ if ne .chezmoi.os "linux" }}
 .config/GIMP
 .config/xppen
+.config/hypr
 .local/scripts/xppen*
 {{ end }}
