@@ -188,7 +188,14 @@ local function open_first_slack_link()
         if url:match("^https://[%w%-]+%.slack%.com/") then
             local slack_url, err = slack_archive_url_to_deep_link(url)
             if slack_url then
-                vim.notify("Opening " .. slack_url)
+                local copied, copy_error = pcall(vim.fn.setreg, "+", slack_url)
+                if copied then
+                    vim.notify("Copied and opening " .. slack_url)
+                else
+                    vim.notify("Opening " .. slack_url .. "\nCould not copy to clipboard: " .. copy_error,
+                        vim.log.levels.WARN)
+                end
+
                 vim.ui.open(slack_url)
                 return
             end
