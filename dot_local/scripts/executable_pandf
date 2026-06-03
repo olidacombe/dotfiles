@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+TMP_ROOT="${TMPDIR:-/tmp}"
+PANDOC_HEADER="$(mktemp "${TMP_ROOT%/}/pandf-header.XXXXXX")"
+
+cleanup() {
+    rm -f "$PANDOC_HEADER"
+}
+trap cleanup EXIT
+
+cat > "$PANDOC_HEADER" <<'EOF'
+% Pandoc PDF table tuning.
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{ltablex}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+
+% Emoji support - register Apple Color Emoji as a fallback so LuaLaTeX renders
+% characters the main font lacks (e.g. ✅ ❌ ☘️).
+\directlua{luaotfload.add_fallback("emojifallback",{"Apple Color Emoji:mode=node;"})}
+\setmainfont{Latin Modern Roman}[RawFeature={fallback=emojifallback}]
+EOF
+
+pandoc -s --pdf-engine=lualatex \
+    -H "$PANDOC_HEADER" \
+    -V colorlinks=true \
+    -V linkcolor=blue \
+    -V urlcolor=red \
+    -V toccolor=gray \
+    "$@"
