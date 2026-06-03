@@ -2,15 +2,7 @@
 
 set -euo pipefail
 
-TMP_ROOT="${TMPDIR:-/tmp}"
-PANDOC_HEADER="$(mktemp "${TMP_ROOT%/}/pandf-header.XXXXXX")"
-
-cleanup() {
-    rm -f "$PANDOC_HEADER"
-}
-trap cleanup EXIT
-
-cat > "$PANDOC_HEADER" <<'EOF'
+PANDOC_HEADER="$(cat <<'EOF'
 % Pandoc PDF table tuning.
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -25,9 +17,10 @@ cat > "$PANDOC_HEADER" <<'EOF'
 \directlua{luaotfload.add_fallback("emojifallback",{"Apple Color Emoji:mode=node;"})}
 \setmainfont{Latin Modern Roman}[RawFeature={fallback=emojifallback}]
 EOF
+)"
 
 pandoc -s --pdf-engine=lualatex \
-    -H "$PANDOC_HEADER" \
+    -H <(printf '%s\n' "$PANDOC_HEADER") \
     -V colorlinks=true \
     -V linkcolor=blue \
     -V urlcolor=red \
