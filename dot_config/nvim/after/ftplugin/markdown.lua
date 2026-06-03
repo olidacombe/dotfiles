@@ -77,6 +77,26 @@ vim.keymap.set({ "n", "v" }, "<leader>jt", ":JiraTable<CR>", {
     silent = true,
 })
 
+local function complete_checkbox()
+    local line = vim.api.nvim_get_current_line()
+    local updated, replacements = line:gsub("⬜", "✅", 1)
+
+    if replacements == 0 then
+        vim.notify("No unchecked box on this line", vim.log.levels.WARN)
+        return
+    end
+
+    vim.api.nvim_set_current_line(updated)
+end
+
+vim.keymap.set("n", "<leader>cc", complete_checkbox, {
+    desc = "Complete checkbox",
+    noremap = true,
+    nowait = true,
+    silent = true,
+    buffer = true,
+})
+
 vim.keymap.set("n", "<leader>A", "<Nop>", {
     desc = "AWS"
 })
