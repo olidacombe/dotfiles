@@ -11,6 +11,56 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- vim.keymap.set("n", "<Tab>", ":tabn<CR>")
 vim.keymap.set("n", "<S-Tab>", ":tabp<CR>")
 
+-- /\\     /\\/\\\\\\\    /\\
+-- /\\     /\\/\\    /\\  /\\
+-- /\\     /\\/\\    /\\  /\\
+-- /\\     /\\/\ /\\      /\\
+-- /\\     /\\/\\  /\\    /\\
+-- /\\     /\\/\\    /\\  /\\
+--   /\\\\\   /\\      /\\/\\
+--
+-- /\\\\\\\\                               /\\
+-- /\\                                     /\\ /\
+-- /\\      /\\ /\\     /\\\   /\\         /\\   /\\ /\\     /\\
+-- /\\\\\\   /\\  /\\ /\\    /\\  /\\  /\\ /\\/\\ /\\  /\\ /\\  /\\
+-- /\\       /\\  /\\/\\    /\\    /\\/\   /\\/\\ /\\  /\\/\\   /\\
+-- /\\       /\\  /\\ /\\    /\\  /\\ /\   /\\/\\ /\\  /\\ /\\  /\\
+-- /\\\\\\\\/\\\  /\\   /\\\   /\\     /\\ /\\/\\/\\\  /\\     /\\
+--                                                          /\\
+vim.keymap.set("n", "<leader>ud", function()
+    local line = vim.api.nvim_get_current_line()
+    vim.api.nvim_set_current_line(vim.uri_decode(line))
+end, { desc = "URL decode line" })
+vim.keymap.set("n", "<leader>ue", function()
+    local line = vim.api.nvim_get_current_line()
+    vim.api.nvim_set_current_line(vim.uri_encode(line))
+end, { desc = "URL encode line" })
+
+vim.keymap.set("x", "<leader>ud", function()
+    local old = vim.fn.getreg('"')
+    local old_type = vim.fn.getregtype('"')
+
+    vim.cmd([[normal! "zy]])
+    local decoded = vim.uri_decode(vim.fn.getreg("z"))
+    vim.fn.setreg("z", decoded)
+
+    vim.cmd([[normal! gv"zp]])
+
+    vim.fn.setreg('"', old, old_type)
+end, { silent = true, desc = "URL decode selection" })
+vim.keymap.set("x", "<leader>ue", function()
+    local old = vim.fn.getreg('"')
+    local old_type = vim.fn.getregtype('"')
+
+    vim.cmd([[normal! "zy]])
+    local encoded = vim.uri_encode(vim.fn.getreg("z"))
+    vim.fn.setreg("z", encoded)
+
+    vim.cmd([[normal! gv"zp]])
+
+    vim.fn.setreg('"', old, old_type)
+end, { silent = true, desc = "URL encode selection" })
+
 local od_buffer = require("od.buffer")
 
 -- FIXME: These are basically not working, except <Down> 🤔
