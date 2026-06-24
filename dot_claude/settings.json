@@ -1,0 +1,6 @@
+{
+  "theme": "dark",
+  "permissions": {
+    "allow": ["Edit", "Write", "Bash(git add:*)", "Bash(git commit:*)"]
+  }
+}
