@@ -102,6 +102,9 @@ export NVM_COMPLETION=true
 if [ -d "${HOME}/.local/scripts" ]; then
    export PATH="${PATH}:${HOME}/.local/scripts"
 fi
+if [ -d "${HOME}/.local/bin" ]; then
+   export PATH="${PATH}:${HOME}/.local/bin"
+fi
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/

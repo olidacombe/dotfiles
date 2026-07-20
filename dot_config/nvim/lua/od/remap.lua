@@ -162,8 +162,8 @@ vim.keymap.set("n", "-", function()
 end, { desc = "Edit current dir" })
 
 -- Sort
-vim.keymap.set("n", "<leader><leader>S", ":% ! sort<CR>", { desc = "Sort the whole file" })
-vim.keymap.set("v", "<leader>S", ":'<,'>sort<CR>", { desc = "Sort Selection" })
+vim.keymap.set("n", "<leader><leader>S", ":% ! sort i<CR>", { desc = "Sort the whole file" })
+vim.keymap.set("v", "<leader>S", ":'<,'>sort i<CR>", { desc = "Sort Selection" })
 
 vim.keymap.set("n", "<leader>x", function()
     od_buffer.bd_ft("checkhealth")
