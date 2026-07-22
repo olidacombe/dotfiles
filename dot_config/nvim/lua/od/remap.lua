@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader><leader>p", function()
     local pos = vim.api.nvim_win_get_cursor(0)
-    vim.cmd("% ! prettier --stdin-filepath " .. vim.fn.expand("%"))
+    vim.cmd("% ! prettier --stdin-filepath %")
     pcall(vim.api.nvim_win_set_cursor, 0, pos)
 end, { desc = "Prettier the whole file" })
 
