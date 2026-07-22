@@ -17,4 +17,16 @@ function M.os_cb(callbacks)
     if cb then cb() end
 end
 
+-- cursor-stashing wrapper for a function.
+-- The cursor position is restored after the function is called,
+-- even if it errors.
+function M.stash_cursor(f)
+    return function(...)
+        local cursor = vim.api.nvim_win_get_cursor(0)
+        local ok, err = pcall(f, ...)
+        pcall(vim.api.nvim_win_set_cursor, 0, cursor)
+        if not ok then error(err, 2) end
+    end
+end
+
 return M

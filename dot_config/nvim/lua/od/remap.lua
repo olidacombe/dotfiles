@@ -1,10 +1,8 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader><leader>p", function()
-    local pos = vim.api.nvim_win_get_cursor(0)
+vim.keymap.set("n", "<leader><leader>p", require("utils").stash_cursor(function()
     vim.cmd("% ! prettier --stdin-filepath %")
-    pcall(vim.api.nvim_win_set_cursor, 0, pos)
-end, { desc = "Prettier the whole file" })
+end), { desc = "Prettier the whole file" })
 
 -- Slide visual selections around
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
