@@ -220,3 +220,34 @@ end
 
 vim.keymap.set("n", "gs", open_first_slack_link, { desc = "open first slack link", buffer = true })
 vim.keymap.set("n", "gl", open_first_markdown_link, { desc = "open first link", buffer = true })
+
+local function wrap_selection_as_markdown_link()
+    -- '< and '> are only set on manual visual-mode exit; read live positions instead
+    local anchor = vim.fn.getpos("v")
+    local cursor = vim.fn.getpos(".")
+
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
+
+    local start_col  = math.min(anchor[3], cursor[3])
+    local end_col    = math.max(anchor[3], cursor[3])
+    local start_line = math.min(anchor[2], cursor[2])
+
+    local line       = vim.api.nvim_buf_get_lines(0, start_line - 1, start_line, false)[1]
+    if not line then return end
+
+    local selected_text = line:sub(start_col, end_col)
+    local new_line = line:sub(1, start_col - 1) .. "[" .. selected_text .. "]()" .. line:sub(end_col + 1)
+    vim.api.nvim_buf_set_lines(0, start_line - 1, start_line, false, { new_line })
+
+    -- ')' is at 0-indexed col: start_col (1-indexed) + #text + 2
+    vim.api.nvim_win_set_cursor(0, { start_line, start_col + #selected_text + 2 })
+    vim.cmd("startinsert")
+end
+
+vim.keymap.set("v", "ml", wrap_selection_as_markdown_link, {
+    desc = "Wrap selection as markdown link",
+    noremap = true,
+    nowait = true,
+    silent = true,
+    buffer = true,
+})
