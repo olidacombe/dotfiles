@@ -227,6 +227,7 @@ on-mode-changed = []
     l = ['mode main', 'macos-native-fullscreen'] # fu[l]lscreen
     backspace = ['close-all-windows-but-current', 'mode main']
     m = 'mode move'
+    alt-3 = ['exec-and-forget osascript -e "tell application \"System Events\" to keystroke \"#\""', 'mode main'] # type # on laptop keyboard
 
     # apps
     t = ['exec-and-forget open -n /System/Volumes/Data/Applications/Ghostty.app', 'mode main']
