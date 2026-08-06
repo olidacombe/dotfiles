@@ -23,11 +23,13 @@ kicad-library
 kicad-library-3d
 kubectl
 kubectx
+libmtp
 libwacom
 lsof
 luarocks
 moreutils
 mosh
+mtpfs
 multipath-tools
 navi
 net-tools
@@ -36,6 +38,7 @@ nvm
 obsidian # hmmm not sure yet
 openbsd-netcat
 pandoc-cli
+podman
 ponysay
 protobuf
 pv
@@ -53,13 +56,14 @@ texlive-fontsextra
 texlive-fontsrecommended
 texlive-latexextra
 tree
+udiskie
 usbutils
 vim # provides xxd
 whois
 zoxide
 
 # zmk deps
-arm-none-eabi-gcc
+# arm-none-eabi-gcc
 ccache
 cmake
 dfu-util
