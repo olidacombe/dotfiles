@@ -228,10 +228,31 @@ ls.add_snippets(nil, {
                 author: Oliver Dacombe ({})
                 date: {}
                 ---
+
             ]], {
                     i(1),
                     f(email, {}),
                     f(date, {}),
+                }
+            )
+        ),
+        -- Blog header
+        s(
+            { trig = "blog", docstring = "Blog header" },
+            fmt(
+                [[
+                +++
+                title = "{}"
+                date = "{}"
+                tags = ["{}"]
+                description = "{}"
+                +++
+
+            ]], {
+                    i(1),
+                    f(date, {}),
+                    i(2),
+                    i(3),
                 }
             )
         ),
