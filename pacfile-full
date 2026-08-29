@@ -11,6 +11,7 @@ direnv
 docker
 docker-buildx
 fd
+freecad
 gimp
 github-cli
 go
@@ -36,6 +37,7 @@ net-tools
 nmap
 nvm
 obsidian # hmmm not sure yet
+openscad
 openbsd-netcat
 pandoc-cli
 podman
