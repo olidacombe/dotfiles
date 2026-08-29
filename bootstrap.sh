@@ -242,24 +242,11 @@ else
     strip_comment crates-{core,full}.txt
 fi | xargs cargo binstall & disown
 
-# :::.    :::.:::      .::..        :   
-# `;;;;,  `;;;';;,   ,;;;' ;;,.    ;;;  
-#   [[[[[. '[[ \[[  .[[/   [[[[, ,[[[[, 
-#   $$$ "Y$c$$  Y$c.$$"    $$$$$$$$"$$$ 
-#   888    Y88   Y88P      888 Y88" 888o
-#   MMM     YM    MP       MMM  M'  "MMM
-if [ "$OS" = "$LINUX" ] && ! command -v nvm &> /dev/null; then
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-fi
-
 # Node
-[[ -f "${HOME}/.nvm/nvm.sh" ]] && . "${HOME}/.nvm/nvm.sh"
-if command -v nvm &> /dev/null; then
-    # install node if we don't have it
-    command -v node &> /dev/null || nvm install node
-    # TODO replace all with `bun`?
-    strip_comment npm_globals | xargs npm i -g & disown
-fi
+# install node if we don't have it
+command -v node &> /dev/null || mise use -g node@lts
+# TODO replace all with `bun`?
+strip_comment npm_globals | xargs npm i -g & disown
 
 #  ▄ .▄ ▄▄▄· .▄▄ · ▄ •▄ ▄▄▄ .▄▄▌  ▄▄▌  
 # ██▪▐█▐█ ▀█ ▐█ ▀. █▌▄▌▪▀▄.▀·██•  ██•  

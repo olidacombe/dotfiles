@@ -28,6 +28,7 @@ libmtp
 libwacom
 lsof
 luarocks
+mise
 moreutils
 mosh
 mtpfs
@@ -35,7 +36,6 @@ multipath-tools
 navi
 net-tools
 nmap
-nvm
 obsidian # hmmm not sure yet
 openscad
 openbsd-netcat
