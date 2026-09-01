@@ -127,22 +127,22 @@ hl.workspace_rule({
 })
 
 -- Window rules
-hl.window_rule({
-    match = { class = "^gimp$" },
-    workspace = "name:drawing",
-})
-hl.window_rule({
-    match = { class = "^gimp$" },
-    opacity = "1.0 override",
-})
-hl.window_rule({
-    match = { class = "^krita$" },
-    workspace = "name:drawing",
-})
-hl.window_rule({
-    match = { class = "^krita$" },
-    opacity = "1.0 override",
-})
+
+function drawing_class(matcher)
+    hl.window_rule({
+        match = { class = matcher },
+        workspace = "name:drawing",
+    })
+    hl.window_rule({
+        match = { class = matcher },
+        opacity = "1.0 override",
+    })
+end
+
+drawing_class("^gimp$")
+drawing_class("^krita$")
+drawing_class("^org\\.freecad\\.FreeCAD$")
+
 hl.window_rule({
     match = { class = ".*" },
     suppress_event = "maximize",
