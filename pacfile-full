@@ -10,6 +10,7 @@ cmake
 direnv
 docker
 docker-buildx
+evtest
 fd
 freecad
 gimp
@@ -24,6 +25,7 @@ kicad-library
 kicad-library-3d
 kubectl
 kubectx
+libinput-tools
 libmtp
 libwacom
 lsof
