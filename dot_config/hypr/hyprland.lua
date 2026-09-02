@@ -104,11 +104,6 @@ hl.device({
     enabled = true,
 })
 
-hl.device({
-    name = "wacom-movink-13-finger",
-    tap_to_click = false
-})
-
 -- Workspace rules
 hl.workspace_rule({ workspace = "10", default_name = "0", monitor = "DP-1", default = true })
 hl.workspace_rule({ workspace = "1", monitor = "DP-1" })
