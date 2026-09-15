@@ -3,9 +3,28 @@ local run_with_fidget = require("od.command").run_with_fidget
 
 -- Normal mode mappings
 local mappings = {
-    { "b", group = "Buffer" },
-    { "bc", "<Cmd>bd!<CR>", desc = "Close current buffer" },
+    { "b",  group = "Buffer" },
+    { "bc", "<Cmd>bd!<CR>",        desc = "Close current buffer" },
     { "bD", "<Cmd>%bd|e#|bd#<CR>", desc = "Delete all buffers" },
+    { "p",  group = "Path" },
+    {
+        "pr",
+        function()
+            local path = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.")
+            vim.fn.setreg("+", path)
+            vim.notify("Copied relative path: " .. path)
+        end,
+        desc = "Copy Relative Path",
+    },
+    {
+        "pa",
+        function()
+            local path = vim.fn.resolve(vim.fn.expand("%:p"))
+            vim.fn.setreg("+", path)
+            vim.notify("Copied full path: " .. path)
+        end,
+        desc = "Copy Full Path",
+    },
     { "g", group = "Git" },
     { "gp", "<cmd>G! pull<cr>", desc = "﬇ pull" },
     { "gp", function() run_with_fidget({ "git", "pull" }, { title = "git pull" }) end, desc = "﬇ pull" },
