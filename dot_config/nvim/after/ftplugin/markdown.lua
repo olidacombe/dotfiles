@@ -244,6 +244,31 @@ local function wrap_selection_as_markdown_link()
     vim.cmd("startinsert")
 end
 
+local function bulletize_lines(start_line, end_line)
+    local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+
+    for i, line in ipairs(lines) do
+        local indent, rest = line:match("^(%s*)(.*)$")
+        if rest ~= "" and not line:match("^%s*%- ") then
+            lines[i] = indent .. "- " .. rest
+        end
+    end
+
+    vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, lines)
+end
+
+vim.api.nvim_create_user_command("MarkdownBulletize", function(opts)
+    bulletize_lines(opts.line1, opts.line2)
+end, { range = true })
+
+vim.keymap.set("v", "-", ":MarkdownBulletize<CR>", {
+    desc = "Make selected lines a list",
+    noremap = true,
+    nowait = true,
+    silent = true,
+    buffer = true,
+})
+
 vim.keymap.set("v", "ml", wrap_selection_as_markdown_link, {
     desc = "Wrap selection as markdown link",
     noremap = true,
