@@ -15,5 +15,5 @@ enter = "actions:open"
 
 [actions.open]
 description = "Open selected PDF"
-command = "open '{}'"
+command = "open {}"
 mode = "execute"
