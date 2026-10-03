@@ -165,12 +165,30 @@ hl.window_rule({
 -- ░████████░░██████░░████████░░██████░░██████░███     ░██ ░░██░░██████  ██
 -- ░░░░░░░░  ░░░░░░  ░░░░░░░░  ░░░░░░  ░░░░░░ ░░░      ░░   ░░  ░░░░░░  ░░
 
+function move_to_workspace(target_workspace)
+    return function()
+        hl.dispatch(hl.dsp.window.move({ workspace = target_workspace }))
+        -- we're done
+        hl.dispatch(hl.dsp.submap("reset"))
+    end
+end
+
 hl.bind("ALT + SPACE", hl.dsp.submap("leader"))
 hl.define_submap("leader", function()
     hl.bind("escape", hl.dsp.submap("reset"))
-    hl.bind("M", hl.dsp.submap("move"))
+    hl.bind("0", move_to_workspace(10))
+    hl.bind("1", move_to_workspace(1))
+    hl.bind("2", move_to_workspace(2))
+    hl.bind("3", move_to_workspace(3))
+    hl.bind("4", move_to_workspace(4))
+    hl.bind("5", move_to_workspace(5))
+    hl.bind("6", move_to_workspace(6))
+    hl.bind("7", move_to_workspace(7))
+    hl.bind("8", move_to_workspace("drawing"))
+    -- hl.bind("M", hl.dsp.submap("move"))
 end)
 
+-- TODO kill
 hl.define_submap("move", "reset", function()
     hl.bind("escape", hl.dsp.submap("reset"))
     hl.bind("0", hl.dsp.window.move({ workspace = 10 }))
