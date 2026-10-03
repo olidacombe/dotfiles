@@ -18,9 +18,8 @@ f12 = "actions:edit"
 ctrl-up = "actions:goto_parent_dir"
 
 [actions.open]
-# TODO split this out for linux variant
-description = "MacOS Open"
-command = "open '{}'"
+description = "Open with default application"
+command = "{{ if eq .chezmoi.os "darwin" }}open{{ else }}xdg-open{{ end }} '{}'"
 mode = "execute"
 
 [actions.edit]
