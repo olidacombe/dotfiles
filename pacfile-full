@@ -39,8 +39,8 @@ navi
 net-tools
 nmap
 obsidian # hmmm not sure yet
-openscad
 openbsd-netcat
+openscad
 pandoc-cli
 podman
 ponysay
@@ -55,6 +55,7 @@ qt6-virtualkeyboard
 rsync
 sddm
 strace
+tailscale
 texlive-binextra
 texlive-fontsextra
 texlive-fontsrecommended
