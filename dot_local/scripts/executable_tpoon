@@ -13,7 +13,7 @@ STACK="${HOME}/.local/tpoon"
 touch "$STACK"
 
 function get_current_session() {
-    tmux ls | grep '(attached)$' | awk -F: '{ print $1 }'
+    tmux ls | grep '(attached)$' | awk -F: '{ print $1 }' || true
 }
 
 # boot any non-existent sessions off the stack
@@ -26,18 +26,29 @@ function clean_stack() {
         if [ -n "${SESSION_SET[$session]+x}" ]; then
             echo "$session"
         fi
-    done < "$STACK" | sponge "$STACK"
+    done < "$STACK" | awk '!seen[$0]++' | sponge "$STACK"
 }
 
 clean_stack
 
+# NOTE: more than one session can be attached at once (e.g. a second
+# machine attached to another session), so get_current_session may return
+# multiple lines. Push and dedupe each line individually.
 function push() {
-    local NEW
-    NEW="$(get_current_session)"
-    while read -r session; do
-        [[ "$session" == "$NEW" ]] && return
-    done < "$STACK"
-    echo "$NEW" >> "$STACK"
+    local new session found
+    get_current_session | while read -r new; do
+        found=0
+        while read -r session; do
+            if [[ "$session" == "$new" ]]; then
+                found=1
+                break
+            fi
+        done < "$STACK"
+        if (( found )); then
+            continue
+        fi
+        echo "$new" >> "$STACK"
+    done
 }
 
 function switch() {

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Gate for hypridle's suspend listener: skip `systemctl suspend` while a
+# coding-agent session is active, so long-running agent work isn't killed
+# by a suspend mid-task.
+#
+# Called from hypridle.conf:
+#   on-timeout = ~/.local/scripts/suspend-if-no-agent
+#
+# If a check passes, hypridle will re-arm after the next real input activity,
+# so suspend is simply deferred until you're idle again *without* an agent.
+
+set -u
+
+agent_active() {
+    pgrep -x pi >/dev/null      && return 0   # pi coding agent (exact name match)
+    pgrep -x claude >/dev/null  && return 0   # Claude Code
+    return 1
+}
+
+if agent_active; then
+    logger -t hypridle-gate 'agent session active, skipping suspend'
+    exit 0
+fi
+
+systemctl suspend
