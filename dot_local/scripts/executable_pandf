@@ -19,6 +19,8 @@ PANDOC_HEADER="$(cat <<'EOF'
 EOF
 )"
 
+export MERMAID_BIN="${MERMAID_BIN:-mmdc-compat}"
+
 pandoc -s --pdf-engine=lualatex \
     -H <(printf '%s\n' "$PANDOC_HEADER") \
     -V colorlinks=true \

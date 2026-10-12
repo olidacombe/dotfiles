@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# diagram.lua passes --pdfFit, which mermaid-cli 11+ removed (PDFs fit by default).
+args=()
+for a in "$@"; do [[ $a == --pdfFit ]] || args+=("$a"); done
+exec mmdc "${args[@]}"
