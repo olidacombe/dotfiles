@@ -1,0 +1,20 @@
+[metadata]
+name = "markdown"
+description = "Find Markdown files, render the selection to PDF and open it"
+requirements = ["fd", "bat", "pandoc"]
+
+[source]
+command = ["fd -t f -e md -e markdown"]
+
+[preview]
+command = "bat -n --color=always '{}'"
+env = { BAT_THEME = "ansi" }
+
+[keybindings]
+enter = "actions:pdf"
+
+[actions.pdf]
+description = "Render to PDF with pandf and open it"
+command = '''f='{}'; out="${f%.*}.pdf"; pandf --lua-filter ~/.pandoc/ext/diagram/diagram.lua --toc -o "$out" "$f" && {{ if eq .chezmoi.os "darwin" }}open{{ else }}xdg-open{{ end }} "$out"'''
+shell = "bash"
+mode = "execute"
