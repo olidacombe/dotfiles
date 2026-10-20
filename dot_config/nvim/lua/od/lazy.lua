@@ -207,6 +207,12 @@ local plugins = {
         },
     },
 
+    -- Git-Worktree
+    {
+        "ThePrimeagen/git-worktree.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" }
+    },
+
     -- Harpoon
     {
         "ThePrimeagen/harpoon",
