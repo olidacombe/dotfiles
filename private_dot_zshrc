@@ -119,7 +119,7 @@ plugins=(
     evalcache
 	fzf
 	gcloud
-	github
+	gh
 	golang
 	ipfs
     jenv
