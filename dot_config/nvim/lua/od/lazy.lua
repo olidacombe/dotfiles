@@ -216,8 +216,8 @@ local plugins = {
 
     -- Hop
     {
-        "phaazon/hop.nvim",
-        branch = "v2",
+        "Borber/hop.nvim",
+        -- branch = "v2",
     },
 
     -- LSP status UI
