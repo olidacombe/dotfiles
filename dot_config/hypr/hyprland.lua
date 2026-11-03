@@ -7,6 +7,11 @@ local menu = "wofi --show drun"
 local mainMod = "SUPER"
 local hyper = "SUPER + CTRL + ALT"
 
+-- *arr services (full-screen app mode on ws 2,3,4)
+local sonarr = browser .. " --app=http://localhost:8989"
+local radarr = browser .. " --app=http://localhost:7878"
+local prowlarr = browser .. " --app=http://localhost:9696"
+
 -- Monitors
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
 hl.monitor({ output = "DP-1", mode = "2560x1440", position = "2560x0", scale = 1 })
@@ -21,6 +26,10 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("swayosd-server")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
     hl.exec_cmd("udiskie")
+    -- *arr services (auto-start in fullscreen app mode on ws 2/3/4)
+    hl.exec_cmd(sonarr)
+    hl.exec_cmd(radarr)
+    hl.exec_cmd(prowlarr)
 end)
 
 -- Environment variables
@@ -151,6 +160,22 @@ hl.window_rule({
     match = { class = "^audio\\..*" },
     workspace = "audio",
 })
+-- *arr UIs: fullscreen app mode on dedicated workspaces
+hl.window_rule({
+    match = { title = ".*Sonarr.*" },
+    workspace = 2,
+    fullscreen = true,
+})
+hl.window_rule({
+    match = { title = ".*Radarr.*" },
+    workspace = 3,
+    fullscreen = true,
+})
+hl.window_rule({
+    match = { title = ".*Prowlarr.*" },
+    workspace = 4,
+    fullscreen = true,
+})
 hl.window_rule({
     match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false },
     no_initial_focus = true,
@@ -244,6 +269,11 @@ hl.bind("ALT + 5", hl.dsp.focus({ workspace = 5 }))
 hl.bind("ALT + 6", hl.dsp.focus({ workspace = 6 }))
 hl.bind("ALT + 7", hl.dsp.focus({ workspace = 7 }))
 hl.bind("ALT + 8", hl.dsp.focus({ workspace = "drawing" }))
+
+-- Quick switch to *arr workspaces (ctrl-2/3/4)
+hl.bind("CTRL + 2", hl.dsp.focus({ workspace = 2 }))
+hl.bind("CTRL + 3", hl.dsp.focus({ workspace = 3 }))
+hl.bind("CTRL + 4", hl.dsp.focus({ workspace = 4 }))
 
 -- Special workspace (scratchpad)
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
