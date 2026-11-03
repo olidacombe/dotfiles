@@ -105,26 +105,26 @@ hl.device({
 })
 
 -- Workspace rules
-hl.workspace_rule({ workspace = "10", default_name = "0", monitor = "DP-1", default = true })
-hl.workspace_rule({ workspace = "1", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "2", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "3", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "4", monitor = "HDMI-A-1", default = true })
-hl.workspace_rule({ workspace = "5", monitor = "HDMI-A-1" })
-hl.workspace_rule({ workspace = "6", monitor = "HDMI-A-1" })
-hl.workspace_rule({ workspace = "7", monitor = "HDMI-A-1" })
-hl.workspace_rule({ workspace = "8", monitor = "DP-2" })
-hl.workspace_rule({ workspace = "9", monitor = "DP-2" })
-hl.workspace_rule({
-    workspace = "name:drawing",
-    no_rounding = true,
-    decorate = false,
-    gaps_in = 0,
-    gaps_out = 0,
-    no_border = true,
-    monitor =
-    "DP-2"
-})
+-- hl.workspace_rule({ workspace = "10", default_name = "0", monitor = "DP-1", default = true })
+-- hl.workspace_rule({ workspace = "1", monitor = "DP-1" })
+-- hl.workspace_rule({ workspace = "2", monitor = "DP-1" })
+-- hl.workspace_rule({ workspace = "3", monitor = "DP-1" })
+-- hl.workspace_rule({ workspace = "4", monitor = "HDMI-A-1", default = true })
+-- hl.workspace_rule({ workspace = "5", monitor = "HDMI-A-1" })
+-- hl.workspace_rule({ workspace = "6", monitor = "HDMI-A-1" })
+-- hl.workspace_rule({ workspace = "7", monitor = "HDMI-A-1" })
+-- hl.workspace_rule({ workspace = "8", monitor = "DP-2" })
+-- hl.workspace_rule({ workspace = "9", monitor = "DP-2" })
+-- hl.workspace_rule({
+--     workspace = "name:drawing",
+--     no_rounding = true,
+--     decorate = false,
+--     gaps_in = 0,
+--     gaps_out = 0,
+--     no_border = true,
+--     monitor =
+--     "DP-2"
+-- })
 
 -- Window rules
 
@@ -221,6 +221,7 @@ hl.bind(hyper .. " + W", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scr
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))
+hl.bind("CTRL + SPACE", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + Apostrophe", hl.dsp.exec_cmd("[float] alacritty -e bluetuith"))
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/scripts/hyprland-audio-workspace.sh"))
