@@ -1,0 +1,78 @@
+# Config managed by chezmoi — edit ~/.local/share/chezmoi/dot_config/mise instead.
+#
+# lazy-mise: this is the hand-maintained global config. The fragments in `conf.d/`
+# next to it are GENERATED from pacfile-*, aptfile-*, yayfile-*, crates-*.txt,
+# npm_globals and Brewfile:
+#
+#   10-core.toml       eager tools  -> `mise install`
+#   20-packages.toml   host packages -> `mise bootstrap packages apply`
+#   50-lazy.toml       lazy tools   -> installed on first use, or
+#                                      `mise install --include-lazy`
+#
+# mise loads `conf.d/*.toml` in alphabetical order *before* this file, so anything
+# re-declared here wins over the generated fragment — that is the escape hatch for
+# "this machine wants it eagerly / pinned to another version". `config.local.toml`
+# (which mise loads after this file and chezmoi does not manage) is the place for
+# per-machine tweaks that should not be committed.
+#
+# A tool may only be declared once per merge: declaring it in `conf.d/50-lazy.toml`
+# AND here makes this file's entry win, including its options.
+
+[tools]
+# Runtimes the generated `cargo:` / `npm:` / `pypi:` entries declare as `depends`.
+# mise's rust core tool installs rustup for you, so bootstrap.sh no longer needs
+# the curl \| sh dance; the `os` filter keeps these off a machine that does not
+# want them, and they are declared EAGERLY because `depends` is an ordering
+# requirement, not an auto-install: invoking a lazy tool whose dependency is not
+# installed yet fails with "failed to resolve configured install dependency
+# 'rust@stable' for ..." instead of installing rust first. If a machine should
+# build against a system toolchain, drop both the runtime here and the `depends`
+# list on the source file (mise/tools emits it from each entry's "depends").
+node = { version = "26", os = ["linux", "darwin"] }
+rust = { version = "stable", os = ["linux", "darwin"] }
+python = { version = "3", os = ["linux", "darwin"] }
+
+# Carried over from the hand-written ~/.config/mise/config.toml so this file can
+# replace it without uninstalling anything. All three are good lazy candidates —
+# flip them to `{ version = "latest", lazy = true }` (with `lazy_bins` for the
+# cargo: one) once you are happy with the generated lists.
+"cargo:speedtest-tui" = { version = "latest", lazy_bins = ["speedtest-tui"] }
+"npm:cline" = { version = "latest", depends = ["node"], lazy_bins = ["cline"] }
+micromamba = "latest"
+
+[settings]
+# Shims are what makes a lazy tool installable on first use, and what makes this
+# config work for programs that never read ~/.zshrc (editors, systemd units,
+# `mise exec` children). They are on by default — there is no `enable_shims`
+# setting, and an unknown key in this table makes mise fail to parse the whole
+# file, so check `mise settings ls` after editing.
+
+# Auto-install a tool whose shim cannot resolve a version yet (on by default,
+# pinned here because lazy-mise leans on it).
+not_found_auto_install = true
+
+# Resolve version requests live instead of requiring a mise.lock: every lazy tool
+# resolves its own version the first time it runs.
+lockfile = false
+
+# Parallel downloads/installs.
+jobs = 8
+
+[tasks.bootstrap-packages]
+description = "Install the host packages generated into conf.d/20-packages.toml"
+# `apply` installs what is missing and removes anything declared `state = "absent"`.
+# The generated file only ever adds, and mise skips a manager this machine does
+# not have, so the darwin/linux entries ignore each other. Preview with
+# `mise bootstrap plan`; bootstrap.sh reaches it via MISE_PACKAGES=1.
+run = "mise bootstrap packages apply --yes"
+
+[tasks.warm-tools]
+description = "Install every lazy tool now instead of on first use"
+# the old up-front behaviour, off the critical path: `mise run warm-tools & disown`
+run = "mise install --include-lazy"
+
+[bootstrap]
+# Only `[bootstrap.packages]` is generated today (conf.d/20-packages.toml).
+# `mise bootstrap` as a whole is not wired into bootstrap.sh yet because it is a
+# destructive command class; run the parts you want by hand. Nothing declares
+# removals, so the generated package list only ever adds.

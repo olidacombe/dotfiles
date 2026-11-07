@@ -14,6 +14,57 @@ function strip_comment() {
     cat "$@" | sed -e 's/#.*//' | awk NF
 }
 
+# mise is the one piece of this setup that cannot be lazy: it is what installs
+# everything else on first use. Installs itself into `~/.local/bin` when the
+# package manager has not provided it.
+function ensure_mise() {
+    command -v mise &> /dev/null && return 0
+    echo "installing mise"
+    curl -fsSL https://mise.run | sh
+    export PATH="${HOME}/.local/bin:${PATH}"
+    command -v mise &> /dev/null || err "mise installed but not on PATH — check ~/.zshenv"
+}
+
+# Lazy tool shims arrived in mise 2026.9.0 (`mise --version` prints e.g.
+# "2026.11.3 linux-x64 (2026-11-07)"). Shell arithmetic, not awk: a numeric-vs-strnum
+# compare in awk falls back to string order, so a version it cannot read looks new.
+function mise_has_lazy() {
+    local version year rest month
+    version=$(mise --version 2>/dev/null | awk '{ print $1 }')
+    year=${version%%.*}
+    rest=${version#*.}
+    month=${rest%%.*}
+    case "${year}${month}" in
+        '' | *[!0-9]*) return 1 ;;   # unreadable version: don't gamble on it
+    esac
+    [ "$year" -gt 2026 ] || { [ "$year" -eq 2026 ] && [ "$month" -ge 9 ]; }
+}
+
+# lazy-mise: install the eager core set (conf.d/10-core.toml) and publish
+# bootstrap shims for the rest (conf.d/50-lazy.toml), which install themselves
+# the first time you run them. Set MISE_WARM=1 to also fetch the lazy set in the
+# background — same effect as the old up-front install, staggered off the critical
+# path instead of blocking it.
+function mise_bootstrap() {
+    ensure_mise
+    if ! mise_has_lazy; then
+        echo "mise $(mise --version) is too old for lazy tool shims (need >= 2026.9.0), updating"
+        mise self-update || err "mise self-update failed"
+    fi
+    # chezmoi may have just written ~/.config/mise; make sure mise sees it and the shims
+    mise reshim
+    # later steps in this script (and anything they spawn) should see mise's tools,
+    # and a non-interactive bootstrap never sources ~/.zshrc, so add both dirs here
+    export PATH="$(dirname "$(mise which mise 2>/dev/null || command -v mise)"):${HOME}/.local/share/mise/shims:${HOME}/.local/bin:${PATH}"
+    mise install || echo "WARN mise install had failures (see \`mise ls\`)"
+    if [ "${MISE_WARM:-}" = "1" ]; then
+        echo "warming lazy tools in the background (mise install --include-lazy)"
+        mise install --include-lazy --jobs "${MISE_JOBS:-4}" & disown
+    else
+        echo "lazy tools will install on first use — \`mise install --include-lazy\` to warm now"
+    fi
+}
+
 function pac_install() {
 	sudo pacman -Sy --noconfirm "$@"
 }
@@ -122,6 +173,14 @@ if ! is_gitpod; then
     echo "$GPG_KEYS"
 fi
 
+# Set USE_MISE=0 to restore the pre-mise rust/crates/npm installs (rustup +
+# cargo-binstall + npm -g). The mise path covers the same software, declared in
+# ~/.config/mise by chezmoi, with the rarely-used part deferred to first use.
+# Default: mise.
+function use_mise() {
+    [ "${USE_MISE:-1}" = "1" ]
+}
+
 function quit() {
         echo "$*"
         exit 0
@@ -150,6 +209,22 @@ else
         fi
 fi
 pushd "$(chezmoi source-path)"
+
+# `mise run bootstrap-packages` installs everything in conf.d/20-packages.toml,
+# i.e. the non-dev-tool packages, without any package-manager-specific shell code.
+# Experimental: it is not the default path yet because `bootstrap packages apply`
+# is a destructive command class and AUR builds are slow, so bootstrap.sh keeps
+# driving pacman/yay/apt/brew directly. Try it with MISE_PACKAGES=1; it needs
+# mise before the package step, hence ensure_mise here rather than later.
+if [ "${MISE_PACKAGES:-}" = "1" ] && command -v mise &>/dev/null; then
+    ensure_mise
+    if mise tasks ls 2>/dev/null | grep -q '^bootstrap-packages'; then
+        echo "installing host packages via \`mise run bootstrap-packages\`"
+        mise run bootstrap-packages
+    else
+        echo "WARN no bootstrap-packages task found — is ~/.config/mise applied?"
+    fi
+fi
 
 if [ "$OS" = "$MACOS" ]; then
 	echo running \`brew bundle\`
@@ -195,7 +270,7 @@ if [ "$OS" = "$LINUX" ]; then
 fi
 
 # we have neovim by now, so pre-install plugins...
-nvim --headless "+Lazy! install" +qa & disown
+command -v nvim &> /dev/null && nvim --headless "+Lazy! install" +qa & disown
 
 # Setup fzf a bit more
 # $(brew --prefix)/opt/fzf/install
@@ -212,12 +287,16 @@ git remote -v | grep "${GH_USER}/dotfiles" || quit "we're not, time to \`chezmoi
 # | ) \ \__| (___) |/\____) |   | |   
 # |/   \__/(_______)\_______)   )_(   
 #                                     
+# mise's rust core tool installs rustup itself, so this block is only for the
+# pre-mise path (see `mise_bootstrap` / README "lazy-mise").
+function legacy_rust() {
 command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 if [ -f "${HOME}/.cargo/env" ]; then
     . ${HOME}/.cargo/env
 fi
 rustup default || rustup default stable
 rustup component add rust-analyzer
+}
 
  #      ___           ___           ___           ___           ___     
  #     /\  \         /\  \         /\  \         /\  \         /\  \    
@@ -234,6 +313,7 @@ rustup component add rust-analyzer
  #  This is SUPER GOOD: https://nickgerace.dev/post/how-to-manage-rust-tools-and-applications/
  #  get current list with `cargo install --list | rg -o "^\S*\S" > crates.txt`
  
+function legacy_crates_and_npm() {
 cargo install cargo-binstall
 
 if is_gitpod; then
@@ -247,6 +327,28 @@ fi | xargs cargo binstall & disown
 command -v node &> /dev/null || mise use -g node@lts
 # TODO replace all with `bun`?
 strip_comment npm_globals | xargs npm i -g & disown
+}
+
+#  _                              _       _
+# | |                            (_)     | |
+# | |     __ _ _ __ ___  ___ _ __ _ _ __ | |_
+# | |    / _` | '_ ` _ \/ __| '__| | '_ \| __|
+# | |___| (_| | | | | | \__ \ |  | | | | | |_
+# |_____|\__,_|_| |_| |_|___/_|  |_|_| |_|\__|
+#
+# `crates-*.txt` and `npm_globals` are both rendered into ~/.config/mise by
+# chezmoi, so mise covers them — and `cargo:` entries resolve through
+# cargo-binstall, so prebuilt binaries where they exist instead of compiling.
+# The lazy set then installs itself on first use.
+if use_mise; then
+    mise_bootstrap
+else
+    legacy_rust
+    legacy_crates_and_npm
+    # legacy mode deliberately skips `mise install`: the generated config declares
+    # the same crates/npm packages, and installing both would fight over them.
+    command -v mise &> /dev/null && mise reshim
+fi
 
 #  ▄ .▄ ▄▄▄· .▄▄ · ▄ •▄ ▄▄▄ .▄▄▌  ▄▄▌  
 # ██▪▐█▐█ ▀█ ▐█ ▀. █▌▄▌▪▀▄.▀·██•  ██•  

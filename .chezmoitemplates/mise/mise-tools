@@ -1,0 +1,146 @@
+# mise-tools — names that chezmoi ports into mise's `[tools]` instead of the
+# native package manager.
+#
+# This file is the single knob that decides where a piece of software comes from:
+#   listed here  -> rendered into conf.d/10-core.toml or conf.d/50-lazy.toml
+#   not here     -> rendered into conf.d/20-packages.toml as `[bootstrap.packages]`
+#
+# Names are matched against the *unqualified* name of an entry in your list
+# files, i.e. after stripping inline comments, `repo/` qualifiers and `@version`
+# arguments — see the top of `.chezmoitemplates/mise/names` for the exact rules:
+#   pacfile-full   -> "btop"
+#   yayfile-full   -> "extra/hypridle" -> "hypridle"
+#   Brewfile       -> brew "python@3.10" -> "python"
+#   crates-*.txt   -> "git-delta"        (installed as cargo:git-delta)
+#   npm_globals    -> "@mermaid-js/mermaid-cli"
+#
+# A listed name is only good if mise can really install it — check with
+#   mise registry | rg -i "^<name>\b"   /   mise latest <backend>:<name>
+# and give anything with a `:` backend its executable names in `bins`.
+#
+# `cargo-watch` in this file means `cargo:cargo-watch` when it comes from a
+# crates-*.txt line — the prefix comes from the source file, see mise/tools.
+#
+# Deliberately NOT ported (system-owned, needed by other packages, or a service):
+#   mise itself (bootstrap must install it first)   zsh (it is the login shell)
+#   base-devel, cmake, ninja, git, make, …          go (build dep of go: tools)
+#   python-pip*, jdk-openjdk, protobuf (libs)       libmtp, mtpfs, fuse3
+#   sddm, tailscale, mpd, udiskie (services)        vim (provides xxd for scripts)
+#   gimp, kicad, freecad, openscad, obsidian (GUI)  fonts, texlive, qt6-*
+#   neovim-nightly-bin / sesh-bin (AUR -bin builds)
+
+# --- interactive / shell tooling (startup-sensitive: see eager-tools) ---
+fd
+fzf
+ripgrep
+television
+tmux
+yq
+jq
+bat
+eza
+dust
+delta
+d2
+navi
+btop
+just
+hyperfine
+zoxide
+direnv
+
+# --- editors / formatters / linters / docs ---
+stylua
+taplo
+shellcheck
+yamlfmt
+yamllint
+mdbook
+jless
+fx
+sd
+tree-sitter-cli
+protoc
+pre-commit
+
+# --- runtimes and their package managers ---
+node
+python
+rust
+bun
+deno
+uv
+pipx
+pnpm
+yarn
+platformio
+
+# --- k8s / cloud / infra ---
+kubectl
+kubectx
+kubens
+helm
+k9s
+kustomize
+stern
+trivy
+operator-sdk
+kube-linter
+popeye
+chart-testing
+flux
+jfrog-cli
+awscli
+granted
+glab
+# both spellings appear in the lists (pacfile's github-cli, Brewfile's gh)
+github-cli
+gh
+
+# --- crates from crates-*.txt (the file's `cargo:` prefix applies) ---
+# List the crate name. Where mise's registry has a prebuilt build, `routes` maps
+# it to `registry:<name>` so mise does not compile it — those are listed here too,
+# because a name missing from this file falls through to [bootstrap.packages].
+cargo-apk
+cargo-audit
+cargo-binstall
+cargo-edit
+cargo-espflash
+cargo-expand
+cargo-generate
+cargo-insta
+cargo-make
+cargo-mutants
+cargo-nextest
+cargo-pio
+cargo-rdme
+cargo-udeps
+cargo-warehouse
+cargo-watch
+cargo-workspaces
+commache
+cross
+dgira
+du-dust
+espmonitor
+espup
+flamegraph
+flamelens
+git-delta
+hardpass
+jira-terminal
+lemmeknow
+refalizer
+slint-lsp
+speedtest-tui
+terrabastard
+
+# --- npm_globals (installed through the `npm:` backend) ---
+@mermaid-js/mermaid-cli
+eslint
+opencode-ai
+prettier
+cline
+
+# --- already in your hand-written global config ---
+micromamba

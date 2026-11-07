@@ -1,0 +1,39 @@
+{{/*
+  mise/entry — normalise one line of a package-list file to its unqualified
+  package name, or "" when the line is not a package entry.
+
+    {{ $name := includeTemplate "mise/entry" (dict "line" $line) }}
+
+  Rules (shared by mise/names, mise/tools and mise/packages so their filters line
+  up with each other):
+    * trim; "" for blank lines, `#` comments, `{{` template lines and Brewfile `tap …`
+    * strip a trailing inline comment:   btop # monitor            -> btop
+    * unwrap a Brewfile quoted argument: brew "neovim", args: ["HEAD"] -> neovim
+    * drop a `repo/…/` qualifier:        extra/hypridle            -> hypridle
+    * drop a `@version` argument:        python@3.10               -> python
+    * keep an npm scope:                 @mermaid-js/mermaid-cli   -> @mermaid-js/mermaid-cli
+
+  Callers take the final path segment themselves
+  (`trim (last (splitList "/" $name))`) when they need the scope-less form, which
+  is what `only`/`skip` sets compare on.
+
+  Why `includeTemplate` and not `include`: chezmoi's `include` takes exactly one
+  argument (a source path) and returns rendered text, and Go's `template` action
+  cannot be used in an assignment (`{{ $x := template … }}` is a parse error).
+  `includeTemplate <name> <data>` is Go's own action, returns text, and chezmoi
+  parses every file under .chezmoitemplates recursively — so a short name like
+  "mise/entry" resolves without hard-coding the source directory anywhere.
+*/}}
+{{- $q := `"` -}}
+{{- $line := trim (default "" (index . "line")) -}}
+{{- if and $line (not (hasPrefix "#" $line)) (not (hasPrefix "{{" $line)) (ne (trim (first (splitList " " $line))) "tap") -}}
+{{- $name := trim (first (splitList "#" $line)) -}}
+{{- if contains $q $name -}}{{ $name = trim (index (splitList $q $name) 1) }}{{ end -}}
+{{- if hasPrefix "@" $name -}}
+{{- $rest := trimPrefix "@" $name -}}
+{{- if contains "@" $rest -}}{{ $rest = trim (first (splitList "@" $rest)) }}{{ end -}}
+{{- printf "@%s" $rest -}}
+{{- else -}}
+{{- trim (first (splitList "@" (trim (last (splitList "/" $name))))) -}}
+{{- end -}}
+{{- end -}}

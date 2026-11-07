@@ -4,10 +4,31 @@
 sh -c "$(curl -fsLS https://github.com/olidacombe/dotfiles/raw/main/bootstrap.sh)"
 ```
 
+## lazy-mise
+
+Dev tools are managed by [mise](https://mise.jdx.dev), declared in
+`~/.config/mise` by chezmoi from the `pacfile-*`, `aptfile-*`, `yayfile-*`,
+`crates-*.txt`, `npm_globals` and `Brewfile` lists. `mise install` fetches only
+the eager core set; the rest of the `*-full` lists are marked `lazy = true` and
+install themselves the first time you run them (mise ≥ 2026.9.0 publishes a
+bootstrap shim for each). Design notes and the routing lists live in
+[`MISE.md`](MISE.md).
+
+```zsh
+mise install                    # eager core only
+mise install --include-lazy     # or: mise run warm-tools (& disown)
+mise ls                         # (lazy) = installs on first use, (missing) = not installed
+mise reshim                     # after editing the generated conf.d fragments
+mise bootstrap status           # host packages from [bootstrap.packages]
+USE_MISE=0 ./bootstrap.sh       # pre-mise rustup/cargo-binstall/npm -g path
+MISE_PACKAGES=1 ./bootstrap.sh  # let `mise run bootstrap-packages` do the packages
+```
+
 ## TODO
 
-+ [direnv -> mise](https://mise.jdx.dev/direnv.html)
++ [direnv -> mise](https://mise.jdx.dev/direnv.html) — mise now installs direnv and node/python/rust, so the `[direnv]` hook in mise can replace the oh-my-zsh direnv plugin + `~/.config/zsh/directories`
 + Brewfile - auto-check for dead formulae
++ port the remaining `*-full` names worth putting in mise (`.chezmoitemplates/mise/mise-tools`)
 + [cmd-enter](https://github.com/openai/codex/discussions/3024#discussioncomment-15002195) send newline (for codex cli)
 + [Pandoc-Emojis-Filter?](https://github.com/masbicudo/Pandoc-Emojis-Filter)
 + [quarto](https://quarto.org/)

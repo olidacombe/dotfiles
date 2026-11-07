@@ -1,0 +1,131 @@
+{{/*
+  mise/tools — render mise `[tools]` entries from your existing list files.
+
+    {{ $ported := includeTemplate "mise/names" (dict "mode" "ported" "files" (list "pacfile-core" "crates-core.txt")) }}
+    {{ includeTemplate "mise/tools" (dict
+         "lazy"    true
+         "entries" (list (dict "file" "pacfile-full" "prefix" "")
+                         (dict "file" "crates-full.txt" "prefix" "cargo:")
+                         (dict "file" "npm_globals" "prefix" "npm:"))
+         "only"    $ported) }}
+
+  Params
+    entries  list of { file, prefix, depends } — `prefix` is the mise backend: "" for
+             the mise registry, or "cargo:", "npm:", "pypi:", "ubi:", …; `depends`
+             is a list of tools mise must install first (emit `depends` for `npm:`
+             and `cargo:` entries so a bare machine gets node/cargo before them);
+             `os` is a list of .chezmoi.os values the entry applies to, useful when a
+             name only makes sense on one machine (it becomes the tool's `os` option,
+             so mise will not even offer it elsewhere)
+    only     newline-separated unqualified names to KEEP (mise/names mode=ported);
+             empty keeps everything in the file
+    skip     newline-separated unqualified names to DROP, applied after `only`
+    lazy     true  -> `{ version = "latest", lazy = true … }`
+             false -> `"latest"` (a bare `mise install` fetches these)
+
+  Lines are normalised with `mise/entry`, and `only`/`skip` compare on its final
+  path segment, so `cargo:git-delta` filters as `git-delta` and
+  `npm:@mermaid-js/mermaid-cli` as `mermaid-cli`.
+
+  `.chezmoitemplates/mise/routes` may replace the emitted key: a route value
+  containing `:` is used verbatim (letting a `cargo:`-prefixed file emit
+  `pypi:platformio`); `registry:<name>` drops the file's prefix entirely (use it
+  when mise's registry has a prebuilt build of a crate, e.g. `stylua`); a plain
+  name replaces only the tool name and keeps the prefix (`tree-sitter-cli` ->
+  `tree-sitter`).
+
+  For prefixed entries `lazy_bins` comes from .chezmoitemplates/mise/bins;
+  registry entries (empty prefix) need none — mise knows their `bins`.
+
+  Two declarations of the same *command* would fight over one shim (`cargo:git-delta`
+  and registry `delta` both publish `delta`), so entries are deduplicated by
+  command identity — `bins` name if present, otherwise the unqualified name — and
+  the FIRST file to claim it wins. Order `entries` accordingly: unprefixed
+  (registry) sources first, then core files, then full files.
+*/}}
+{{/* `index . "key"` everywhere an argument is optional: Go templates error on a
+     missing map key, so `default "" .skip` would abort before defaulting. */}}
+{{- $lazy := default false (index . "lazy") -}}
+{{- $only := trim (trim (default "" (index . "only"))) -}}
+{{- $skip := trim (trim (default "" (index . "skip"))) -}}
+{{- $q := `"` -}}
+{{- $bins := dict -}}
+{{- range $_, $line := splitList "\n" (trim (trim (include ".chezmoitemplates/mise/bins"))) -}}
+{{- $line := trim $line -}}
+{{- if and $line (not (hasPrefix "#" $line)) (contains "=" $line) -}}
+{{- $_ := set $bins (trim (first (splitList "=" $line))) (trim (last (splitList "=" $line))) -}}
+{{- end -}}
+{{- end -}}
+{{- $routes := dict -}}
+{{- range $_, $line := splitList "\n" (trim (trim (include ".chezmoitemplates/mise/routes"))) -}}
+{{- $line := trim $line -}}
+{{- if and $line (not (hasPrefix "#" $line)) (contains "=" $line) -}}
+{{- $_ := set $routes (trim (first (splitList "=" $line))) (trim (last (splitList "=" $line))) -}}
+{{- end -}}
+{{- end -}}
+{{- $seen := dict -}}
+{{- $out := list -}}
+{{- range $_, $e := default (list) (index . "entries") -}}
+{{- $raw := trim (trim (include (index $e "file"))) -}}
+{{- $filePrefix := default "" (index $e "prefix") -}}
+{{- $fileDepends := default (list) (index $e "depends") -}}
+{{- $fileOs := default (list) (index $e "os") -}}
+{{- if $raw -}}
+{{- range $_, $line := splitList "\n" $raw -}}
+{{- $name := includeTemplate "mise/entry" (dict "line" $line) -}}
+{{- $short := $name -}}
+{{- if $name -}}{{ $short = trim (last (splitList "/" $name)) }}{{ end -}}
+{{- $keep := false -}}
+{{- $key := $name -}}
+{{- $prefix := $filePrefix -}}
+{{- if $name -}}
+{{- $keep = true -}}
+{{- if $only -}}{{ $keep = contains (printf "\n%s\n" $short) (printf "\n%s\n" $only) }}{{ end -}}
+{{- if and $keep $skip -}}{{ $keep = not (contains (printf "\n%s\n" $short) (printf "\n%s\n" $skip)) }}{{ end -}}
+{{- $routed := "" -}}
+{{- if hasKey $routes $name -}}{{ $routed = index $routes $name }}{{ else if hasKey $routes $short -}}{{ $routed = index $routes $short }}{{ end -}}
+{{- if $routed -}}
+{{- if hasPrefix "registry:" $routed -}}{{ $key = trimPrefix "registry:" $routed -}}{{ $prefix = "" -}}
+{{- else if contains ":" $routed -}}{{ $key = $routed -}}{{ $prefix = "" -}}
+{{- else -}}{{ $key = $routed -}}{{ end -}}
+{{- end -}}
+{{- end -}}
+{{- $full := printf "%s%s" $prefix $key -}}
+{{- $exe := "" -}}
+{{- if and $prefix (hasKey $bins $short) -}}{{ $exe = index $bins $short }}{{ end -}}
+{{- if and (not $prefix) (hasKey $bins $key) -}}{{ $exe = index $bins $key }}{{ end -}}
+{{- $id := $short -}}
+{{- if $exe -}}{{ $id = trim (first (splitList "," $exe)) }}{{ end -}}
+{{- if and $keep (hasKey $seen $id) -}}{{ $keep = false }}{{ end -}}
+{{- if and $keep $id -}}{{ $_ := set $seen $id true }}{{ end -}}
+{{- if $keep -}}
+{{- $tok := printf "%s%s%s" $q $full $q -}}
+{{- $dep := "" -}}
+{{- if $fileDepends -}}
+{{- $dq := list -}}
+{{- range $_, $d := $fileDepends -}}{{ $dq = append $dq (printf "%s%s%s" $q $d $q) }}{{- end -}}
+{{- $dep = printf ", depends = [%s]" (join ", " $dq) -}}
+{{- end -}}
+{{- if $fileOs -}}
+{{- $oq := list -}}
+{{- range $_, $o := $fileOs -}}{{ $oq = append $oq (printf "%s%s%s" $q $o $q) }}{{- end -}}
+{{- $dep = printf "%s, os = [%s]" $dep (join ", " $oq) -}}
+{{- end -}}
+{{- if $lazy -}}
+{{- if $exe -}}
+{{- $quoted := list -}}
+{{- range $_, $b := splitList "," $exe -}}{{ $quoted = append $quoted (printf "%s%s%s" $q (trim $b) $q) }}{{- end -}}
+{{- $out = append $out (printf "%s = { version = %slatest%s, lazy = true%s, lazy_bins = [%s] }" $tok $q $q $dep (join ", " $quoted)) -}}
+{{- else -}}
+{{- $out = append $out (printf "%s = { version = %slatest%s, lazy = true%s }" $tok $q $q $dep) -}}
+{{- end -}}
+{{- else if $dep -}}
+{{- $out = append $out (printf "%s = { version = %slatest%s%s }" $tok $q $q $dep) -}}
+{{- else -}}
+{{- $out = append $out (printf "%s = %slatest%s" $tok $q $q) -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- if $out }}{{ sortAlpha (uniq $out) | join "\n" }}{{ end -}}

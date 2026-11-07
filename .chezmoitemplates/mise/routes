@@ -1,0 +1,32 @@
+# mise/routes — the mise `[tools]` key for a name that chezmoi ports.
+#
+# Format: <name in your list files> = <mise key>
+#
+# By default a ported entry becomes `<prefix from its file><name>` (see the
+# `prefix` of each source file in `dot_config/mise/config.toml.tmpl`), e.g.
+# `crates-full.txt` -> `cargo:cargo-watch`, `pacfile-full` -> `btop`. Use a route
+# when that default is wrong. Two shapes of value are understood:
+#
+#   name          -> a bare name: the file's backend prefix still applies
+#                    (tree-sitter-cli -> tree-sitter, so pacfile-full yields `tree-sitter`)
+#   backend:spec    -> a fully qualified key, used verbatim
+#                      (platformio -> pypi:platformio, so crates-full.txt yields `pypi:platformio`)
+#   registry:<name> -> a mise registry tool: the file's prefix is dropped
+#                      (stylua -> registry:stylua, so crates-full.txt yields plain `stylua`)
+#
+# A value with no backend prefix must exist in mise's registry — check with
+# `mise registry | rg -i "<name>"` (or `mise latest <name>`). A value that DOES
+# introduce a prefix needs an executable in `bins`, or mise skips its lazy shim.
+
+tree-sitter-cli = tree-sitter
+github-cli = gh
+flux = flux2
+platformio = pypi:platformio
+chart-testing = helm-ct
+
+# crates that mise's registry also serves as prebuilt binaries — install those
+# instead of compiling them with the `cargo:` backend
+stylua = registry:stylua
+cargo-make = registry:cargo-make
+cargo-binstall = registry:cargo-binstall
+cargo-insta = registry:cargo-insta

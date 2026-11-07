@@ -1,0 +1,15 @@
+# mise/declared — tools that `dot_config/mise/config.toml` declares itself.
+#
+# The generated fragments skip these so a tool is never declared twice: mise
+# merges `[tools]` per tool and the higher-precedence file wins (config.toml
+# beats conf.d/*), so a duplicate would only confuse `mise ls`. Add a name here
+# when you move it out of the list files into the hand-maintained config.
+#
+# node/rust/python are the runtimes `depends` points at, and must stay eager:
+# a lazy tool's dependency is never installed for you (mise errors instead).
+node
+rust
+python
+speedtest-tui
+cline
+micromamba

@@ -1,0 +1,64 @@
+# mise/bins — executable names for lazy tools whose backend has no registry
+# `bins` metadata.
+#
+# mise can only create a "bootstrap shim" (the stub that installs a lazy tool on
+# first use) if it knows the command name. Registry tools (fd, btop, kubectl, …)
+# get that for free. Anything declared with an explicit backend — `cargo:`,
+# `npm:`, `pypi:`, `conda:`, `ubi:`, `github:` — must state it here, or mise logs:
+#
+#   mise WARN  Skipping invalid lazy shim declaration: lazy tool cargo:cargo-watch
+#              has no registry bin metadata; set lazy_bins explicitly
+#
+# Format: <package-or-crate>=<exe>[,<exe>…]  (exes are what you type, not crates)
+# The key is the entry's unqualified name — the part after the last `/` — so
+# `npm:@mermaid-js/mermaid-cli` is keyed as `mermaid-cli`.
+#
+# Find them for a new entry with:  tar -xO <crate>.crate */Cargo.toml | rg '^\[\[bin\]\]' -A2
+# or, for npm:                      npm view <pkg> bin
+
+# --- crates-*.txt: cargo: backend (verified against the crate manifests) ---
+cargo-edit=cargo-add, cargo-rm, cargo-set-version, cargo-upgrade
+cargo-insta=cargo-insta
+cargo-rdme=cargo-rdme
+cargo-watch=cargo-watch
+cargo-apk=cargo-apk
+cargo-audit=cargo-audit
+cargo-binstall=cargo-binstall
+cargo-espflash=cargo-espflash
+cargo-expand=cargo-expand
+cargo-generate=cargo-generate
+cargo-make=cargo-make, makers
+cargo-mutants=cargo-mutants
+cargo-nextest=cargo-nextest
+cargo-pio=cargo-pio
+cargo-udeps=cargo-udeps
+cargo-warehouse=cargo-warehouse
+cargo-workspaces=cargo-workspaces, cargo-ws
+cross=cross, cross-util
+dgira=dgira
+du-dust=dust
+espmonitor=espmonitor
+espup=espup
+flamegraph=cargo-flamegraph, flamegraph
+flamelens=flamelens
+git-delta=delta
+hardpass=hardpass
+jira-terminal=jira-terminal
+lemmeknow=lemmeknow
+platformio=platformio
+refalizer=refalizer
+slint-lsp=slint-lsp
+speedtest-tui=speedtest-tui
+terrabastard=terrabastard
+
+# --- npm_globals / global config: npm: backend ---
+mermaid-cli=mmdc
+eslint=eslint
+opencode-ai=opencode
+prettier=prettier
+cline=cline
+
+# --- registry tools that need no entry, kept here as a reminder ---
+# mise's registry resolves `bins` for these itself:
+#   fd, fzf, ripgrep, television, tmux, yq, jq, bat, eza, dust, delta, d2, navi,
+#   btop, just, stylua, taplo, shellcheck, tree-sitter, git-lfs, k9s, helm, …

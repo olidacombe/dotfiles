@@ -1,0 +1,14 @@
+# Tool names that must NEVER be marked `lazy = true`.
+#
+# A lazy tool only installs when its shim is first invoked, so anything your
+# shell, editor, or window manager runs during startup has to be installed up
+# front — otherwise the first prompt blocks on a download (or the command
+# quietly goes missing). The `10-core.toml` file is generated eagerly; these
+# names are additionally excluded from `50-lazy.toml` so a `*-full` list can
+# never make a startup dependency lazy.
+fd
+fzf
+tmux
+zoxide
+direnv
+ripgrep

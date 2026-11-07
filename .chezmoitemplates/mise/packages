@@ -1,0 +1,56 @@
+{{/*
+  mise/packages — render mise `[bootstrap.packages]` entries: the software
+  lazy-mise does NOT install as a dev tool, so `mise bootstrap` can take over
+  the package-manager blocks of bootstrap.sh without losing anything.
+
+    {{ $native := includeTemplate "mise/names" (dict "mode" "native" "files" (list "pacfile-core" "Brewfile")) }}
+    {{ includeTemplate "mise/packages" (dict
+         "only" $native
+         "spec" (dict "file" "pacfile-core" "manager" "pacman" "os" (list "linux"))) }}
+
+  Params
+    spec   list of { file, manager, os, casks }
+             manager  pacman | apt | aur | brew | brew-cask | dnf | zypper | …
+                      (mise built-ins: apk apt aur brew brew-cask choco flatpak
+                       flatpak-user macos-app mas scoop snap winget zypper)
+             os       list of .chezmoi.os values the file applies to; emitted as
+                      the entry's `os` option so one file serves every machine
+             casks    for a Brewfile: true keeps only `cask "…"` lines,
+                      false/absent keeps only `brew "…"` lines. Files without
+                      quoted lines emit all of them.
+    only   newline-separated unqualified names to KEEP (mise/names mode=native);
+           empty keeps everything in the file
+    skip   newline-separated names to DROP
+
+  Lines are normalised with `mise/entry`, so `only` from mise/names lines up.
+  Output, one line per package:
+
+    "pacman:btop" = { version = "latest", os = ["linux"] }
+*/}}
+{{- $only := trim (trim (default "" (index . "only"))) -}}
+{{- $skip := trim (trim (default "" (index . "skip"))) -}}
+{{- $q := `"` -}}
+{{- $out := list -}}
+{{- range $_, $e := default (list) (index . "spec") -}}
+{{- $raw := trim (trim (include (index $e "file"))) -}}
+{{- $oslist := default (list) (index $e "os") -}}
+{{- $wantCasks := default false (index $e "casks") -}}
+{{- $caskMarker := printf "cask %s" $q -}}
+{{- if $raw -}}
+{{- range $_, $line := splitList "\n" $raw -}}
+{{- $name := includeTemplate "mise/entry" (dict "line" $line) -}}
+{{- if and $name (eq (contains $caskMarker (trim $line)) $wantCasks) -}}
+{{- $short := trim (last (splitList "/" $name)) -}}
+{{- $keep := true -}}
+{{- if $only -}}{{ $keep = contains (printf "\n%s\n" $short) (printf "\n%s\n" $only) }}{{ end -}}
+{{- if and $keep $skip -}}{{ $keep = not (contains (printf "\n%s\n" $short) (printf "\n%s\n" $skip)) }}{{ end -}}
+{{- if $keep -}}
+{{- $os := list -}}
+{{- range $_, $o := $oslist -}}{{ $os = append $os (printf "%s%s%s" $q $o $q) }}{{- end -}}
+{{- $out = append $out (printf "%s%s:%s%s = { version = %slatest%s, os = [%s] }" $q (index $e "manager") $name $q $q $q (join ", " $os)) -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- if $out }}{{ sortAlpha (uniq $out) | join "\n" }}{{ end -}}

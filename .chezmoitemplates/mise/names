@@ -1,0 +1,75 @@
+{{/*
+  mise/names — the one bit of shared logic behind lazy-mise: which entries of a
+  list file does chezmoi hand to mise's `[tools]`, and which stay with the native
+  package manager?
+
+    {{ $ported := includeTemplate "mise/names" (dict "mode" "ported" "files" (list "pacfile-core" "pacfile-full")) }}
+
+  Params (all optional except `files` for the modes that read them)
+    mode   ported | native | all | eager | declared   (default: ported)
+    files  list of repo-root files to read (unused by `all` and `declared`)
+
+  Modes
+    ported    unqualified names in `files` that mise should install as dev tools
+    native    names in `files` that stay with the native package manager
+    all       every name listed in .chezmoitemplates/mise/mise-tools, as written
+    eager     ported names that shell/editor startup needs present immediately
+    declared  names dot_config/mise/config.toml owns by hand (never emit twice)
+
+  Every line goes through `mise/entry`, so names are compared in the same
+  normalised form everywhere: `ported` and `eager` report the *final path segment*
+  (`cargo:git-delta` -> `git-delta`, `npm:@mermaid-js/mermaid-cli` ->
+  `mermaid-cli`) which is exactly the key mise/tools filters on, while `native`
+  reports the full entry. A name counts as ported when mise-tools lists it either
+  as the normalised name or as that final segment, so either spelling works there.
+  Output: sorted, unique, newline-separated, or empty.
+
+  NOTE: chezmoi helpers like this one are only ever called with a `dict` —
+  Go's `template`/`includeTemplate` propagate the caller's data too, and a
+  `.chezmoi` *struct* has no fields named `mode`/`files`, so optional arguments
+  are read with `index . "key"` (missing key → ""), never `default x .key`.
+*/}}
+{{- $mode := default "ported" (index . "mode") -}}
+{{- $files := default (list) (index . "files") -}}
+{{- if eq $mode "all" -}}{{ $files = list ".chezmoitemplates/mise/mise-tools" }}{{ end -}}
+{{- if eq $mode "declared" -}}{{ $files = list ".chezmoitemplates/mise/declared" }}{{ end -}}
+{{- $match := dict -}}
+{{- if or (eq $mode "ported") (eq $mode "native") (eq $mode "eager") -}}
+{{- range $_, $line := splitList "\n" (trim (trim (include ".chezmoitemplates/mise/mise-tools"))) -}}
+{{- $name := trim $line -}}
+{{- if and $name (not (hasPrefix "#" $name)) (not (hasPrefix "{{" $name)) -}}
+{{- $_ := set $match $name true -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- $eager := dict -}}
+{{- range $_, $line := splitList "\n" (trim (trim (include ".chezmoitemplates/mise/eager-tools"))) -}}
+{{- $name := trim $line -}}
+{{- if and $name (not (hasPrefix "#" $name)) (not (hasPrefix "{{" $name)) -}}
+{{- $_ := set $eager $name true -}}
+{{- end -}}
+{{- end -}}
+{{- $out := list -}}
+{{- range $_, $f := $files -}}
+{{- $raw := trim (trim (include $f)) -}}
+{{- if $raw -}}
+{{- range $_, $line := splitList "\n" $raw -}}
+{{- $name := includeTemplate "mise/entry" (dict "line" $line) -}}
+{{- if $name -}}
+{{- $short := trim (last (splitList "/" $name)) -}}
+{{- $hit := or (hasKey $match $name) (hasKey $match $short) -}}
+{{- if eq $mode "all" -}}
+{{- $out = append $out $short -}}
+{{- else if eq $mode "declared" -}}
+{{- $out = append $out $short -}}
+{{- else if $hit -}}
+{{- if eq $mode "ported" -}}{{ $out = append $out $short }}{{ end -}}
+{{- if and (eq $mode "eager") (hasKey $eager $short) -}}{{ $out = append $out $short }}{{ end -}}
+{{- else if eq $mode "native" -}}
+{{- $out = append $out $name -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- if $out }}{{ sortAlpha (uniq $out) | join "\n" }}{{ end -}}
