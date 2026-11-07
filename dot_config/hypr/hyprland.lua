@@ -11,6 +11,7 @@ local hyper = "SUPER + CTRL + ALT"
 local sonarr = browser .. " --app=http://localhost:8989"
 local radarr = browser .. " --app=http://localhost:7878"
 local prowlarr = browser .. " --app=http://localhost:9696"
+local jellyfin = browser .. " --app=http://localhost:8096"
 
 -- Monitors
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
@@ -21,15 +22,27 @@ hl.monitor({ output = "DP-2", mode = "1920x1080", position = "480x1440", scale =
 -- Autostart
 hl.on("hyprland.start", function()
     hl.exec_cmd("waybar")
-    hl.exec_cmd("hypridle")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("swayosd-server")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
     hl.exec_cmd("udiskie")
-    -- *arr services (auto-start in fullscreen app mode on ws 2/3/4)
+    -- *arr + jellyfin services (auto-start in fullscreen app mode)
     hl.exec_cmd(sonarr)
     hl.exec_cmd(radarr)
     hl.exec_cmd(prowlarr)
+    hl.exec_cmd(jellyfin)
+
+    -- Delayed moves (window rules can miss due to dynamic titles from SPAs)
+    -- Sonarr -> ws 2, Radarr -> ws 3, Prowlarr -> ws 4, Jellyfin -> ws 1
+    hl.exec_cmd("sleep 4 && hyprctl dispatch movetoworkspace 2,title:Sonarr")
+    hl.exec_cmd("sleep 4 && hyprctl dispatch movetoworkspace 3,title:Radarr")
+    hl.exec_cmd("sleep 4 && hyprctl dispatch movetoworkspace 4,title:'Indexers - Prowlarr'")
+    hl.exec_cmd("sleep 4 && hyprctl dispatch movetoworkspace 1,title:504489665a7b")
+    -- Also force fullscreen on the target workspaces
+    hl.exec_cmd("sleep 5 && hyprctl dispatch fullscreen 1 workspace:2")
+    hl.exec_cmd("sleep 5 && hyprctl dispatch fullscreen 1 workspace:3")
+    hl.exec_cmd("sleep 5 && hyprctl dispatch fullscreen 1 workspace:4")
+    hl.exec_cmd("sleep 5 && hyprctl dispatch fullscreen 1 workspace:1")
 end)
 
 -- Environment variables
@@ -160,20 +173,44 @@ hl.window_rule({
     match = { class = "^audio\\..*" },
     workspace = "audio",
 })
--- *arr UIs: fullscreen app mode on dedicated workspaces
+
+
+hl.on("window.title", function(w)
+    if w == nil then return end
+    local title_map = {
+        Radarr = 2,
+        Sonarr = 3,
+        Jellyfin = 1,
+        Prowlarr = 4
+    }
+    local target = title_map[w.title]
+
+    if target ~= nil then
+        hl.dispatch(hl.dsp.window.move({ window = w, workspace = target }))
+    end
+end)
+-- Media/*arr UIs: fullscreen app mode on dedicated workspaces
+-- Note: matches on window title (set by the web UI). Also requires the backend services to be running on the ports.
 hl.window_rule({
-    match = { title = ".*Sonarr.*" },
+    match = { class = "brave-localhost__-Default", title = "Sonarr" },
     workspace = 2,
     fullscreen = true,
 })
 hl.window_rule({
-    match = { title = ".*Radarr.*" },
+    match = { class = "brave-localhost__-Default", title = "Radarr" },
     workspace = 3,
     fullscreen = true,
 })
 hl.window_rule({
-    match = { title = ".*Prowlarr.*" },
+    match = { class = "brave-localhost__-Default", title = "Prowlarr" },
     workspace = 4,
+    fullscreen = true,
+})
+-- Jellyfin on workspace 1 (fullscreen app mode)
+-- Note: Jellyfin title can be a hash or "Jellyfin"; we rely on delayed dispatch for reliability
+hl.window_rule({
+    match = { class = "brave-localhost__-Default", title = "Jellyfin" },
+    workspace = 1,
     fullscreen = true,
 })
 hl.window_rule({
@@ -231,7 +268,9 @@ end)
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + W", hl.dsp.window.close())
-hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd("wlogout -b 3 -T 400 -B 400 -L 700 -R 700"))
+hl.bind("CTRL + SHIFT + E", hl.dsp.exec_cmd("wlogout -b 3 -T 400 -B 400 -L 700 -R 700"))
+-- Useful during dev of hyprland startup behaviour
+hl.bind("CTRL + SHIFT + X", hl.dsp.exit())
 hl.bind(mainMod .. " + CTRL + Q", hl.dsp.exec_cmd("hyprlock"))
 
 -- screenshot
