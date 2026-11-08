@@ -1,7 +1,7 @@
 -- Hyprland Lua configuration
 -- See https://wiki.hypr.land/Configuring/
 
-local browser = "brave --ozone-platform=wayland"
+local browser = "brave --ozone-platform=wayland --disable-features=WaylandWpColorManagerV1"
 local terminal = "ghostty"
 local menu = "wofi --show drun"
 local mainMod = "SUPER"
@@ -173,7 +173,7 @@ hl.on("window.title", function(w)
 
     if target ~= nil then
         hl.dispatch(hl.dsp.window.move({ window = w, workspace = target, follow = false }))
-        hl.dispatch(hl.dsp.window.fullscreen({ window = w, action = "set", layout_aware = false }))
+        hl.dispatch(hl.dsp.window.fullscreen({ window = w, action = "set" }))
         -- hl.dispatch(hl.dsp.focus({ workspace = 1 }))
     end
 end)
