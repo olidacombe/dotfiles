@@ -14,10 +14,9 @@ local prowlarr = browser .. " --app=http://localhost:9696"
 local jellyfin = browser .. " --app=http://localhost:8096"
 
 -- Monitors
+-- TV
+hl.monitor({ output = "HDMI-A-2", scale = 2, bitdepth = 10 })
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
-hl.monitor({ output = "DP-1", mode = "2560x1440", position = "2560x0", scale = 1 })
-hl.monitor({ output = "HDMI-A-1", mode = "2560x1440", position = "0x0", scale = 1 })
-hl.monitor({ output = "DP-2", mode = "1920x1080", position = "480x1440", scale = 1 })
 
 -- Autostart
 hl.on("hyprland.start", function()
@@ -31,18 +30,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd(radarr)
     hl.exec_cmd(prowlarr)
     hl.exec_cmd(jellyfin)
-
-    -- Delayed moves (window rules can miss due to dynamic titles from SPAs)
-    -- Sonarr -> ws 2, Radarr -> ws 3, Prowlarr -> ws 4, Jellyfin -> ws 1
-    hl.exec_cmd("sleep 4 && hyprctl dispatch movetoworkspace 2,title:Sonarr")
-    hl.exec_cmd("sleep 4 && hyprctl dispatch movetoworkspace 3,title:Radarr")
-    hl.exec_cmd("sleep 4 && hyprctl dispatch movetoworkspace 4,title:'Indexers - Prowlarr'")
-    hl.exec_cmd("sleep 4 && hyprctl dispatch movetoworkspace 1,title:504489665a7b")
-    -- Also force fullscreen on the target workspaces
-    hl.exec_cmd("sleep 5 && hyprctl dispatch fullscreen 1 workspace:2")
-    hl.exec_cmd("sleep 5 && hyprctl dispatch fullscreen 1 workspace:3")
-    hl.exec_cmd("sleep 5 && hyprctl dispatch fullscreen 1 workspace:4")
-    hl.exec_cmd("sleep 5 && hyprctl dispatch fullscreen 1 workspace:1")
 end)
 
 -- Environment variables
@@ -174,45 +161,23 @@ hl.window_rule({
     workspace = "audio",
 })
 
-
 hl.on("window.title", function(w)
     if w == nil then return end
     local title_map = {
+        Jellyfin = 1,
         Radarr = 2,
         Sonarr = 3,
-        Jellyfin = 1,
-        Prowlarr = 4
+        ["Indexers - Prowlarr"] = 4,
     }
     local target = title_map[w.title]
 
     if target ~= nil then
-        hl.dispatch(hl.dsp.window.move({ window = w, workspace = target }))
+        hl.dispatch(hl.dsp.window.move({ window = w, workspace = target, follow = false }))
+        hl.dispatch(hl.dsp.window.fullscreen({ window = w, action = "set", layout_aware = false }))
+        -- hl.dispatch(hl.dsp.focus({ workspace = 1 }))
     end
 end)
--- Media/*arr UIs: fullscreen app mode on dedicated workspaces
--- Note: matches on window title (set by the web UI). Also requires the backend services to be running on the ports.
-hl.window_rule({
-    match = { class = "brave-localhost__-Default", title = "Sonarr" },
-    workspace = 2,
-    fullscreen = true,
-})
-hl.window_rule({
-    match = { class = "brave-localhost__-Default", title = "Radarr" },
-    workspace = 3,
-    fullscreen = true,
-})
-hl.window_rule({
-    match = { class = "brave-localhost__-Default", title = "Prowlarr" },
-    workspace = 4,
-    fullscreen = true,
-})
--- Jellyfin on workspace 1 (fullscreen app mode)
--- Note: Jellyfin title can be a hash or "Jellyfin"; we rely on delayed dispatch for reliability
-hl.window_rule({
-    match = { class = "brave-localhost__-Default", title = "Jellyfin" },
-    workspace = 1,
-    fullscreen = true,
-})
+
 hl.window_rule({
     match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false },
     no_initial_focus = true,
