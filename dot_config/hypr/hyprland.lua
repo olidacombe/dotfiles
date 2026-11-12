@@ -8,10 +8,10 @@ local mainMod = "SUPER"
 local hyper = "SUPER + CTRL + ALT"
 
 -- *arr services (full-screen app mode on ws 2,3,4)
-local sonarr = browser .. " --app=http://localhost:8989"
-local radarr = browser .. " --app=http://localhost:7878"
-local prowlarr = browser .. " --app=http://localhost:9696"
-local jellyfin = browser .. " --app=http://localhost:8096"
+local sonarr = browser .. " --app=http://friend:8989"
+local radarr = browser .. " --app=http://friend:7878"
+local prowlarr = browser .. " --app=http://friend:9696"
+local jellyfin = browser .. " --app=http://friend:8096"
 
 -- Monitors
 -- TV
