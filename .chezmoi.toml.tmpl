@@ -1,19 +1,25 @@
+{{- /* bootstrap.sh exports BOOTSTRAP_* so `chezmoi init` asks nothing; otherwise
+       prompt once and remember the answers. */ -}}
+{{- $gitpod := env "GITPOD_GIT_USER_EMAIL" -}}
+{{- $email := or (env "BOOTSTRAP_EMAIL") $gitpod -}}
+{{- if not $email -}}
+{{-   $email = promptStringOnce . "email" "email" -}}
+{{- end -}}
+{{- $gpgSigningKey := "" -}}
+{{- if not $gitpod -}}
+{{-   $gpgSigningKey = env "BOOTSTRAP_GPG_KEY" -}}
+{{-   if not $gpgSigningKey -}}
+{{-     $gpgSigningKey = promptStringOnce . "gpg.signing.key" "GPG signing key (blank for none)" "" -}}
+{{-   end -}}
+{{- end -}}
+{{- $gitTemplateDir := or (env "BOOTSTRAP_GIT_TEMPLATE_DIR") (dig "git" "templateDir" "" .) -}}
 [data]
     configDir = "{{ .chezmoi.homeDir }}/.config"
     scriptsDir = "{{ .chezmoi.homeDir }}/.local/scripts"
-{{- if env "GITPOD_GIT_USER_EMAIL" -}}
-    email = {{ env "GITPOD_GIT_USER_EMAIL" | quote }}
-{{- else -}}
-{{- $email := promptString "email" -}}
-{{- $gpgSigningKey := promptString "GPG Signing Key" }}
     email = {{ $email | quote }}
+{{- if $gpgSigningKey }}
 [data.gpg.signing]
     key = {{ $gpgSigningKey | quote }}
 {{- end }}
 [data.git]
-{{- if env "GITPOD_GIT_USER_EMAIL" }}
-    templateDir = ""
-{{ else }}
-{{- $gitTemplateDir := promptString "git templateDir (optional)" "" }}
     templateDir = {{ $gitTemplateDir | quote }}
-{{ end -}}

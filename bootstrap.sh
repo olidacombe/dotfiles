@@ -66,7 +66,7 @@ function mise_bootstrap() {
 }
 
 function pac_install() {
-	sudo pacman -Sy --noconfirm "$@"
+	sudo pacman -Sy --needed --noconfirm "$@"
 }
 
 function apt_install() {
@@ -115,11 +115,11 @@ function install_yay() {
      ▐░▌     ▐░▌       ▐░▌     ▐░▌     
       ▀       ▀         ▀       ▀      
 EOF
-    sudo pacman -S --needed git base-devel
+    sudo pacman -S --needed --noconfirm git base-devel
     YAYDIR="$(mktemp -d)"
     git clone https://aur.archlinux.org/yay.git "$YAYDIR"
     pushd "$YAYDIR"
-    makepkg -si
+    makepkg -si --noconfirm
     popd
     rm -rf "$YAYDIR"
 }
@@ -152,6 +152,14 @@ function setup_sddm_theme() {
     echo "[General]\nInputMethod=qtvirtualkeyboard" | sudo tee /etc/sddm.conf.d/virtualkbd.conf
 }
 
+# Ask for the sudo password once, up front, and keep the ticket alive until we exit.
+if sudo -v; then
+    while true; do sudo -n true; sleep 50; kill -0 "$$" || exit; done 2>/dev/null &
+fi
+export DEBIAN_FRONTEND=noninteractive
+export NONINTERACTIVE=1                     # homebrew installer
+export BOOTSTRAP_HASKELL_NONINTERACTIVE=1   # ghcup installer
+
 if uname -a | grep -i linux; then
     export INSTALLER=$(linux_installer)
 	export OS="$LINUX"
@@ -162,16 +170,48 @@ else
 	export OS="$MACOS"
 fi
 
-if ! is_gitpod; then
-    # helpful https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0
-    command -v gpg &> /dev/null && echo gpg found || $INSTALLER gpg2
-    if [ "$OS" = "$MACOS" ]; then
-        $INSTALLER pinentry-mac
+# Identity is resolved once here and handed to chezmoi via BOOTSTRAP_* env vars
+# (read by .chezmoi.toml.tmpl), so nothing asks for it twice. Override any of
+# BOOTSTRAP_NAME / BOOTSTRAP_EMAIL / BOOTSTRAP_GPG_KEY to skip detection entirely.
+export BOOTSTRAP_NAME="${BOOTSTRAP_NAME:-Oli Dacombe}"
+
+function gpg_secret_fpr() {
+    gpg --list-secret-keys --with-colons "$@" 2>/dev/null | awk -F: '/^fpr:/ { print $10; exit }'
+}
+
+function resolve_email() {
+    [ -n "${BOOTSTRAP_EMAIL:-}" ] && return 0
+    BOOTSTRAP_EMAIL="$(git config --global user.email 2>/dev/null || true)"
+    if [ -z "$BOOTSTRAP_EMAIL" ] && [ -n "${BOOTSTRAP_GPG_KEY:-}" ]; then
+        BOOTSTRAP_EMAIL="$(gpg --list-secret-keys --with-colons "$BOOTSTRAP_GPG_KEY" \
+            | awk -F: '/^uid:/ { print $10; exit }' | sed -n 's/.*<\(.*\)>.*/\1/p')"
     fi
-    export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
-    [ -z "$GPG_KEYS" ] && gpg --full-generate-key && export GPG_KEYS="$(gpg --list-secret-keys --keyid-format=long)"
-    echo "$GPG_KEYS"
-fi
+    while [ -z "$BOOTSTRAP_EMAIL" ]; do
+        read -r "BOOTSTRAP_EMAIL?email: "
+    done
+}
+
+function bootstrap_gpg() {
+    # helpful https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0
+    command -v gpg &> /dev/null && echo gpg found || $INSTALLER gnupg
+    if [ "$OS" = "$MACOS" ]; then
+        command -v pinentry-mac &> /dev/null || $INSTALLER pinentry-mac
+    fi
+    BOOTSTRAP_GPG_KEY="${BOOTSTRAP_GPG_KEY:-$(gpg_secret_fpr)}"
+    resolve_email
+    if [ -z "$BOOTSTRAP_GPG_KEY" ]; then
+        echo "generating GPG key for ${BOOTSTRAP_NAME} <${BOOTSTRAP_EMAIL}>"
+        echo "  passphrase: use your login password so pam-gnupg can unlock it at login"
+        gpg --batch --quick-generate-key "${BOOTSTRAP_NAME} <${BOOTSTRAP_EMAIL}>" ed25519 sign,cert never
+        BOOTSTRAP_GPG_KEY="$(gpg_secret_fpr "$BOOTSTRAP_EMAIL")"
+        # encryption subkey: its keygrip is what ~/.pam-gnupg wants
+        gpg --batch --quick-add-key "$BOOTSTRAP_GPG_KEY" cv25519 encr never
+    fi
+    echo "using GPG key ${BOOTSTRAP_GPG_KEY} for ${BOOTSTRAP_EMAIL}"
+    export BOOTSTRAP_EMAIL BOOTSTRAP_GPG_KEY
+}
+
+is_gitpod || bootstrap_gpg
 
 # Set USE_MISE=0 to restore the pre-mise rust/crates/npm installs (rustup +
 # cargo-binstall + npm -g). The mise path covers the same software, declared in
@@ -237,11 +277,12 @@ else
             fi
             if is_gitpod; then
                 pac_install $( strip_comment pacfile-core )
-                yes | yay -qS $( strip_comment yayfile-core ) <<< "A\nN\n"
+                yay -S --needed --noconfirm --answerclean None --answerdiff None --answeredit None $( strip_comment yayfile-core )
             else
                 pac_install $( strip_comment pacfile-{core,full} )
                 # FIXME
-                yes | yay -qS $( strip_comment yayfile-{core,full} ) <<< "A\nN\n" || true # I didn't figure out why this is failing
+                yay -S --needed --noconfirm --answerclean None --answerdiff None --answeredit None \
+                    $( strip_comment yayfile-{core,full} ) || echo "WARN some AUR packages failed"
                 setup_pam
                 setup_sddm_theme
             fi
@@ -265,7 +306,7 @@ else
 fi
 
 # Force default shell in linux
-if [ "$OS" = "$LINUX" ]; then
+if [ "$OS" = "$LINUX" ] && [ "$(getent passwd "$(whoami)" | cut -d: -f7)" != "$(which zsh)" ]; then
     sudo usermod --shell "$(which zsh)" "$(whoami)"
 fi
 
@@ -290,7 +331,7 @@ git remote -v | grep "${GH_USER}/dotfiles" || quit "we're not, time to \`chezmoi
 # mise's rust core tool installs rustup itself, so this block is only for the
 # pre-mise path (see `mise_bootstrap` / README "lazy-mise").
 function legacy_rust() {
-command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+command -v rustc &> /dev/null && echo rust found || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 if [ -f "${HOME}/.cargo/env" ]; then
     . ${HOME}/.cargo/env
 fi
@@ -358,7 +399,7 @@ fi
 command -v ghc &> /dev/null && echo haskell found || curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 
 # let's leave it here for the moment
-if is_gitpod && [ -f "/etc/resolv.conf.bak"]; then
+if is_gitpod && [ -f "/etc/resolv.conf.bak" ]; then
     sudo mv /etc/resolv.conf{.bak,}
 fi
 exit 0
