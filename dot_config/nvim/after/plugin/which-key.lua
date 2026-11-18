@@ -29,6 +29,7 @@ local mappings = {
     { "gp", "<cmd>G! pull<cr>", desc = "﬇ pull" },
     { "gp", function() run_with_fidget({ "git", "pull" }, { title = "git pull" }) end, desc = "﬇ pull" },
     { "gC", require("od.git").git_checkout_new_branch, desc = "Create Branch" },
+    { "gT", require("od.git").git_new_worktree, desc = "Create Worktree" },
     {
         "gl",
         function()

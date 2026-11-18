@@ -43,18 +43,19 @@ local normal_mappings = {
         end,
         desc = '"Rg - ish"',
     },
-    { "fj", "<cmd>Telescope jira<cr>",         desc = "Jira" },
-    { "fk", builtin.keymaps,                   desc = "Keymaps" },
-    { "fb", builtin.current_buffer_fuzzy_find, desc = "Within buffer" },
-    { "fB", builtin.buffers,                   desc = "Buffers" },
-    { "fh", builtin.help_tags,                 desc = "Help" },
-    { "fm", "<cmd>Telescope makemapper<cr>",   desc = "Make Targets" },
-    { "fs", builtin.lsp_document_symbols,      desc = "Document Symbols" },
-    { "fS", builtin.lsp_workspace_symbols,     desc = "Workspace Symbols" },
-    { "fq", builtin.quickfix,                  desc = "Quickfix" },
-    { 'f"', builtin.registers,                 desc = "Registers" },
-    { "gb", builtin.git_branches,              desc = "Branch" },
-    { "gc", builtin.git_commits,               desc = "Commits" },
+    { "fj", "<cmd>Telescope jira<cr>",                       desc = "Jira" },
+    { "fk", builtin.keymaps,                                 desc = "Keymaps" },
+    { "fb", builtin.current_buffer_fuzzy_find,               desc = "Within buffer" },
+    { "fB", builtin.buffers,                                 desc = "Buffers" },
+    { "fh", builtin.help_tags,                               desc = "Help" },
+    { "fm", "<cmd>Telescope makemapper<cr>",                 desc = "Make Targets" },
+    { "fs", builtin.lsp_document_symbols,                    desc = "Document Symbols" },
+    { "fS", builtin.lsp_workspace_symbols,                   desc = "Workspace Symbols" },
+    { "fq", builtin.quickfix,                                desc = "Quickfix" },
+    { 'f"', builtin.registers,                               desc = "Registers" },
+    { "gb", builtin.git_branches,                            desc = "Branch" },
+    { "gc", builtin.git_commits,                             desc = "Commits" },
+    { "gt", telescope.extensions.git_worktree.git_worktrees, desc = "Worktrees" },
 }
 
 register_normal(normal_mappings)
@@ -132,6 +133,7 @@ telescope.setup({
 })
 
 telescope.load_extension("fzf")
+telescope.load_extension("git_worktree")
 telescope.load_extension("harpoon")
 telescope.load_extension("jira")
 telescope.load_extension("makemapper")
