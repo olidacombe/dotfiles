@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := build-and-test
-.PHONY: build-and-test
+.PHONY: build-and-test test burn e2e e2e-build e2e-install e2e-pre e2e-bootstrap e2e-post e2e-shell e2e-stop
 
 BUILD_DIR := ./archiso
 
@@ -13,6 +13,30 @@ build-and-test:
 
 test:
 	@./build-and-test.sh $(BUILD_DIR)
+
+# Unattended end-to-end test (see e2e/run.sh). Uses the latest ISO if it has the
+# e2e hook, otherwise builds one (sudo for mkarchiso).
+e2e:
+	@./e2e/run.sh all
+
+e2e-build:
+	@./e2e/run.sh build
+
+e2e-install:
+	@./e2e/run.sh install
+
+e2e-pre:
+	@./e2e/run.sh pre
+
+e2e-bootstrap:
+	@./e2e/run.sh bootstrap
+
+e2e-post:
+	@./e2e/run.sh post
+
+# make e2e-shell [SNAPSHOT=installed|bootstrapped]
+e2e-shell:
+	@./e2e/run.sh shell $(SNAPSHOT)
 
 burn:
 	export SOURCE_IMG="$$( \
@@ -35,3 +59,6 @@ burn:
 	pv -s "$$SIZE" "$$SOURCE_IMG" | sudo dd of="$$DISK" bs=4M iflag=fullblock oflag=direct conv=fsync; \
 	sync ; \
 	echo "Burn complete."
+
+e2e-stop:
+	@./e2e/run.sh stop

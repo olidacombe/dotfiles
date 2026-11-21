@@ -47,11 +47,20 @@ function get_password() {
 
 if [ $REBUILD ]
 then
-    # Prompt with default = $USER
-    read -p "Enter name for arch super user [${USER}]: " USERNAME
-    # If empty, fall back to $USER
-    USERNAME=${USERNAME:-$USER}
-    PASSWORD="$(get_password)"
+    # Non-interactive when ARCH_USER / ARCH_PASSWORD_HASH are set (used by e2e).
+    if [ -n "${ARCH_USER:-}" ]; then
+        USERNAME="$ARCH_USER"
+    else
+        # Prompt with default = $USER
+        read -p "Enter name for arch super user [${USER}]: " USERNAME
+        # If empty, fall back to $USER
+        USERNAME=${USERNAME:-$USER}
+    fi
+    if [ -n "${ARCH_PASSWORD_HASH:-}" ]; then
+        PASSWORD="$ARCH_PASSWORD_HASH"
+    else
+        PASSWORD="$(get_password)"
+    fi
 
 	echo "Making a clean build!"
 	`rm -rf "${ARCHISO_FOLDER}" 2>/dev/null` || (
@@ -81,22 +90,25 @@ EOF
         < user_configuration.json \
         > "${ARCHISO_FOLDER}/airootfs/root/user_configuration.json"
 
-	( cd "${ARCHISO_FOLDER}/"; sudo mkarchiso -v -w work/ -o out/ ./; )
+	( cd "${ARCHISO_FOLDER}/"; sudo mkarchiso -v -w work/ -o out/ ./; ) || exit 1
 fi
+
+[ -n "${NO_BOOT:-}" ] && exit 0
 
 if [ ! -f "./test.qcow2" ];
 then
 	qemu-img create -f qcow2 ./test.qcow2 200G
 fi
 
-sudo -E qemu-system-x86_64 \
+[ -f ./test-OVMF_VARS.fd ] || cp /usr/share/edk2/x64/OVMF_VARS.4m.fd ./test-OVMF_VARS.fd
+
+qemu-system-x86_64 \
         -cpu host \
         -enable-kvm \
         -machine q35,accel=kvm \
-        -device intel-iommu \
-        -m 8192 \
+        -m 8192 -smp 4 \
         -drive if=pflash,format=raw,readonly=on,file=/usr/share/ovmf/x64/OVMF_CODE.4m.fd  \
-        -drive if=pflash,format=raw,readonly=on,file=/usr/share/ovmf/x64/OVMF_VARS.4m.fd \
+        -drive if=pflash,format=raw,file=./test-OVMF_VARS.fd \
         -device virtio-scsi-pci,bus=pcie.0,id=scsi0 \
             -device scsi-hd,drive=hdd0,bus=scsi0.0,id=scsi0.0,bootindex=2 \
                 -drive file=./test.qcow2,if=none,format=qcow2,discard=unmap,aio=native,cache=none,id=hdd0 \

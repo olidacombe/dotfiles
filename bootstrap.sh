@@ -245,7 +245,8 @@ else
             [ -z "$GET_CHEZMOI" ] && err "error fetching \`chezmoi\` install script, if it's a cert trust error, consider \`brew install curl\` first?"
             # workaround because the apply below calls some `run_*` scripts that expect chezmoi to be in PATH
             export PATH="${HOME}/bin:${PATH}"
-            sh -c "$GET_CHEZMOI" -- init --apply olidacombe || err "chezmoi install failed"
+            # BOOTSTRAP_REPO lets archinstall/e2e point chezmoi at a local snapshot.
+            sh -c "$GET_CHEZMOI" -- init --apply "${BOOTSTRAP_REPO:-olidacombe}" || err "chezmoi install failed"
         fi
 fi
 pushd "$(chezmoi source-path)"
